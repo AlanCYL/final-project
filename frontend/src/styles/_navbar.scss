@@ -1,0 +1,38 @@
+.head {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem 0rem;
+  .logo {
+    img {
+      width: 10rem;
+    }
+  }
+
+  .navBar {
+    height: 2rem;
+
+    ul {
+      display: flex;
+    
+      li {
+        margin-right: 5rem;
+
+      }
+      li:hover {
+        border-bottom: 5px solid #ffb901;
+        border-radius: 5%;
+      }
+    }
+  }
+
+  .icon {
+    img {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+  }
+}
+

@@ -1,0 +1,30 @@
+//Color List:
+$primary:       #FFB901 ;
+$secondary:     #FFEECF ;
+$info:          #1E2188 ;
+$danger:        #EF8062 ;
+
+$fontColor: #4f4f4f;
+
+
+// 設定margin.padding寬高:
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.2,
+  5: $spacer * 3,
+  6: $spacer * 5,
+  7: $spacer * 7,
+  8: $spacer * 9,
+) !default;
+
+//字體間距
+
+
+
+
+/* bootstrap */
+@import "~bootstrap/scss/bootstrap.scss";
