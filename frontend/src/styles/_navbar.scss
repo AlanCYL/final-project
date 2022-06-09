@@ -1,4 +1,10 @@
 .head {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: 0.2s;
+  overflow: auto;
+  background-color: white;
   .logo {
     img {
       width: 10rem;
