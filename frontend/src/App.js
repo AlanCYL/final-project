@@ -1,17 +1,15 @@
-import Nav from './components/Navbar/NavbarDesktop'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import MemberLogin from './pages/MemberLogin'
-import './App.css'
+// import Nav from './components/Navbar/NavbarDesktop'
+// import Footer from './components/Footer/Footer'
+// import MemberLogin from './pages/MemberLogin'
+import ShopLogin from './pages/ShopLogin'
 function App() {
   return (
     <>
-      <Nav />
-      <div className="container">
-        <Header />
-        <MemberLogin />
-      </div>
-      <Footer />
+      {/* <Nav /> */}
+      {/* <MemberLogin /> */}
+      <ShopLogin />
+
+      {/* <Footer /> */}
     </>
   )
 }

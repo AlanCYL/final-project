@@ -24,8 +24,8 @@ function ShopLogin() {
           </div>
         </div>
         <div className="col-md-12 col-lg-5 ms-5">
-          <div className="form-size mt-7">
-            <h2 className="text-center">店家登入</h2>
+          <div className="form-size mt-7 ms-3">
+            <h2 className="text-center mb-5">店家登入</h2>
             <Login />
           </div>
         </div>

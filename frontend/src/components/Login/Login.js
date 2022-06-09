@@ -6,7 +6,7 @@ function Login() {
         {/* Email帳號 */}
         <div className="mb-4">
           <label className="form-label" for="">
-            帳號
+            <h5>帳號</h5>
           </label>
           <input type="email" className="form-control form-control-lg" />
         </div>
@@ -14,7 +14,7 @@ function Login() {
         {/* 密碼 */}
         <div className="mb-4">
           <label className="form-label" for="">
-            密碼
+            <h5>密碼</h5>
           </label>
           <input type="password" className="form-control form-control-lg" />
         </div>
