@@ -6,7 +6,6 @@ $danger:        #EF8062 ;
 
 $fontColor: #4f4f4f;
 
-
 // 設定margin.padding寬高:
 $spacer: 1rem !default;
 $spacers: (
@@ -24,7 +23,8 @@ $spacers: (
 //字體間距
 
 
-
+//陰影調整
+// $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";
