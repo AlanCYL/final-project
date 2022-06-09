@@ -1,22 +1,27 @@
-.footer {
- 
+footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 2.3rem;
-  height: 250px;
- 
-div{
-  div {
+  // height: 330px;
+
+  // img {
+  //   width: 10rem;
+  // }
+
+  a {
+    min-width: 107px;
     text-align: center;
-    margin: 0rem 2rem;
-    
-   p{
-     font-size: 14px;
-     font-weight: 300;
-   }
+    font-weight: 700;
+    font-size: 17px;
+    color: #4f4f4f;
+    text-decoration: none;
+    padding-bottom: 10px;
   }
-}
-  
+  h5{
+    text-align: center;
+  }
+  .footor_end{
+    border-top: solid 1px #c9a344;
+  }
 }
