@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <>
-      <footer className="bg-primary">
+      <footer className="bg-primary mt-auto">
         {/* footer link */}
         <div className="container pt-5">
           {/* footer 最外 分兩欄  左logo + 右連結 */}
@@ -66,7 +66,7 @@ const Footer = () => {
           </div>
         </div>
         {/* footer © */}
-        <div className="footor_end container d-md-flex pt-4 mt-4">
+        <div className="footer_end container d-md-flex pt-4 mt-4">
           <div className="d-flex flex-column flex-md-row mb-4">
             <p className="me-3">Unii is a final project for mfee25</p>
             <p>© 2022 mfee25-Team1, All rights reserved.</p>

@@ -1,11 +1,11 @@
 .video-box {
-    height: 80vh;  
-    width: 50vw;
+    height: 70vh;  
+    max-width: 100vw;
     z-index: -100;
-  .video {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    .video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
   }
 }
 .over-lay{
@@ -17,5 +17,6 @@
   width: 100%;
   background-color: white;
   opacity: 0.5;
-  box-shadow: 10rem 10rem 5rem 5rem white inset;
+  overflow-x: hidden;
+
 }

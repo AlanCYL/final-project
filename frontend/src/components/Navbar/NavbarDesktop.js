@@ -40,6 +40,7 @@ const NavbarDesktop = () => {
           <img src={require('../../image/navbar/map.png')} alt="" />
         </div>
       </div>
+      <div className='header-space'></div>
     </>
   )
 }
