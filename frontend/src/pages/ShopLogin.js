@@ -2,7 +2,7 @@ import React from 'react'
 import shoploginvideo from '../image/login/shoploginvideo.mp4'
 import NavbarShop from '../components/Navbar/NavbarShop'
 // import Nav from '../components/Navbar/NavbarDesktop'
-import Login from '../components/Login/Login'
+import ShopLoginForm from '../components/ShopLogin/ShopLoginForm'
 import Footer from '../components/Footer/Footer'
 function ShopLogin() {
   return (
@@ -25,8 +25,7 @@ function ShopLogin() {
         </div>
         <div className="col-md-12 col-lg-5 ms-5">
           <div className="form-size mt-7 ms-3">
-            <h2 className="text-center mb-5">店家登入</h2>
-            <Login />
+            <ShopLoginForm />
           </div>
         </div>
       </div>
