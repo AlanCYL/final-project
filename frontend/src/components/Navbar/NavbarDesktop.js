@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const NavbarDesktop = () => {
   return (
     <>
-      <header className="sticky-top">
+      <header className="sticky-top shadow">
         <div className="head d-flex justify-content-around align-items-center py-3 ">
           <div className="logo">
             <img src={require('../../image/navbar/logo.png')} alt="" />
