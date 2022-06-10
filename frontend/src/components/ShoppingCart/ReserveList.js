@@ -5,10 +5,21 @@ import List from './List'
 const ReserveList = () => {
   return (
     <>
-      <Header />
-      <div className="d-flex container">
-        <Side />
-        <List />
+      <div className=" container my-6">
+        <Header />
+        <div className="d-flex">
+          <Side />
+          <div className="ms-5">
+            <div className="w-75 ms-8">
+              <img
+                className="w-75 my-5"
+                src={require('../../image/shoppingCart/icongroup04.png')}
+                alt=""
+              />
+            </div>
+            <List />
+          </div>
+        </div>
       </div>
     </>
   )
