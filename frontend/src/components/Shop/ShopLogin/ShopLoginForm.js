@@ -6,7 +6,7 @@ function ShopLoginForm(props) {
       <form>
         {/* Email帳號 */}
         <div className="mb-4">
-          <label className="form-label" for="">
+          <label className="form-label" htmlFor="">
             <h5>帳號</h5>
           </label>
           <input type="email" className="form-control form-control-lg" />
@@ -14,7 +14,7 @@ function ShopLoginForm(props) {
 
         {/* 密碼 */}
         <div className="mb-4">
-          <label className="form-label" for="">
+          <label className="form-label" htmlFor="">
             <h5>密碼</h5>
           </label>
           <input type="password" className="form-control form-control-lg" />
@@ -24,7 +24,7 @@ function ShopLoginForm(props) {
           <a href="/">忘記密碼</a>
           <div className="form-check">
             <input className="form-check-input" type="checkbox" value="" />
-            <label className="form-check-label" for="">
+            <label className="form-check-label" htmlFor="">
               記住我
             </label>
           </div>
