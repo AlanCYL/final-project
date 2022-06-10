@@ -96,7 +96,7 @@ const List = () => {
           </table>
         </div>
         {/* button */}
-        <div className="d-flex justify-content-between">
+        {/* <div className="d-flex justify-content-between">
           <a type="button" className="bg-info text-white px-4 py-2 ms-6 mt-4">
             想看更多
           </a>
@@ -106,7 +106,7 @@ const List = () => {
           >
             前往訂位
           </a>
-        </div>
+        </div> */}
       </div>
     </>
   )
