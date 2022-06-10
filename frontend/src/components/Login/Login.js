@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../../styles/_login.scss'
 
 const Login = () => {
@@ -39,6 +39,7 @@ const Login = () => {
                 />
                 記住我
               </label>
+
               <a href="/#">忘記密碼?</a>
             </div>
             <div className="d-grid">
@@ -47,23 +48,6 @@ const Login = () => {
                 type="submit"
               >
                 登入
-              </button>
-            </div>
-            <hr className="my-4" />
-            <div className="d-grid mb-2">
-              <button
-                className="btn btn-google btn-login text-uppercase fw-bold bg-danger"
-                type="submit"
-              >
-                <i className="fab fa-google me-2"></i> 以Google帳號登入
-              </button>
-            </div>
-            <div className="d-grid">
-              <button
-                className="btn btn-facebook btn-login bg-info text-uppercase fw-bold"
-                type="submit"
-              >
-                <i className="fab fa-facebook-f me-2"></i> 以Facebook帳號登入
               </button>
             </div>
           </form>
