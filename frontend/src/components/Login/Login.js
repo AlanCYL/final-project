@@ -1,65 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/_login.scss'
 
 const Login = () => {
   return (
     <>
-      <div class="card border-0 shadow rounded-3 my-5">
-        <div class="card-body p-4 p-sm-5">
-          <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
+      <div className="card border-0 shadow rounded-3 my-5">
+        <div className="card-body p-4 p-sm-5">
+          <img src={require('../../image/navbar/logo.png')} alt="" />
+          <h3 className="card-title text-center mb-3">登入會員</h3>
           <form>
-            <div class="form-floating mb-3">
+            <div className="form-floating mb-3">
               <input
                 type="email"
-                class="form-control"
-                id="floatingInput"
+                className="form-control"
                 placeholder="name@example.com"
               />
-              <label for="floatingInput">Email address</label>
+              <label for="floatingInput">身分證字號(帳號)</label>
             </div>
-            <div class="form-floating mb-3">
+            <div className="form-floating mb-3">
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="floatingPassword"
                 placeholder="Password"
               />
-              <label for="floatingPassword">Password</label>
+              <label for="floatingPassword">密碼</label>
             </div>
-            <div class="form-check mb-3">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="rememberPasswordCheck"
-              />
-              <label class="form-check-label" for="rememberPasswordCheck">
-                Remember password
+            <div className="form-check mb-3">
+              <label
+                className="form-check-label me-5"
+                for="rememberPasswordCheck"
+              >
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="rememberPasswordCheck"
+                />
+                記住我
               </label>
+              <a href="/#">忘記密碼?</a>
             </div>
-            <div class="d-grid">
+            <div className="d-grid">
               <button
-                class="btn btn-primary btn-login text-uppercase fw-bold"
+                className="btn btn-primary btn-login text-uppercase fw-bold fs-5 "
                 type="submit"
               >
-                Sign in
+                登入
               </button>
             </div>
-            <hr class="my-4" />
-            <div class="d-grid mb-2">
+            <hr className="my-4" />
+            <div className="d-grid mb-2">
               <button
-                class="btn btn-google btn-login text-uppercase fw-bold"
+                className="btn btn-google btn-login text-uppercase fw-bold bg-danger"
                 type="submit"
               >
-                <i class="fab fa-google me-2"></i> Sign in with Google
+                <i className="fab fa-google me-2"></i> 以Google帳號登入
               </button>
             </div>
-            <div class="d-grid">
+            <div className="d-grid">
               <button
-                class="btn btn-facebook btn-login text-uppercase fw-bold"
+                className="btn btn-facebook btn-login bg-info text-uppercase fw-bold"
                 type="submit"
               >
-                <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
+                <i className="fab fa-facebook-f me-2"></i> 以Facebook帳號登入
               </button>
             </div>
           </form>
