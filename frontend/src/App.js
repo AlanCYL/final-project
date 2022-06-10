@@ -1,13 +1,13 @@
 // import Nav from './components/Navbar/NavbarDesktop'
 // import Footer from './components/Footer/Footer'
 // import MemberLogin from './pages/MemberLogin'
-import ShopLogin from './pages/ShopLogin'
+import Shop from './pages/Shop'
 function App() {
   return (
     <>
       {/* <Nav /> */}
       {/* <MemberLogin /> */}
-      <ShopLogin />
+      <Shop />
 
       {/* <Footer /> */}
     </>

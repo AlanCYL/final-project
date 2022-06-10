@@ -24,7 +24,8 @@ $spacers: (
 
 
 //陰影調整
-// $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$black:#000;
+$box-shadow:0 .5rem 0.75rem rgba(116, 85, 9, 0.363);
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";
