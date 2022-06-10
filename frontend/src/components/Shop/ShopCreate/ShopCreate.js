@@ -1,4 +1,6 @@
 function ShopCreate() {
-  return <></>
+  return <>
+    
+  </>
 }
 export default ShopCreate
