@@ -10,11 +10,16 @@
 
 .content {
     z-index: 1;
+    margin: 250px;
 
     h2,
     h5 {
         color: white;
     }
+    // .video-viewpoint{
+    //     width: 800px;
+    //     height: 800px;
+    // }
 
     .btn {
         font-size: 1.5rem;
@@ -23,4 +28,8 @@
         width: 230px;
         height: 50px;    
     }
+    // video{
+    //     position: absolute;
+    //     z-index: -99;
+    // }
 }

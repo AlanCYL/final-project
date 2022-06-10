@@ -10,17 +10,14 @@
 // 商品
 
 // 購物車
-
-// 會員
-
+@import './styles/list';
+@import './styles/side'; // 會員
 // 登入登出
-
 // 店家登入
+@import './styles/_navbarshop.scss';
 @import './styles/_shoplogin.scss';
-    //左邊欄位元件
-@import './styles/_shoploginform.scss'
-
-// 飲食日誌
+//左邊欄位元件
+@import './styles/_shoploginform.scss'; // 飲食日誌
 
 // 設定第三方登出按鈕用
 
