@@ -1,8 +1,8 @@
 import React from 'react'
 import shoploginvideo from '../../../image/shop/shoploginvideo.mp4'
-import ShopLoginForm from './ShopLoginForm'
+import ShopLoginForm from './LoginForm'
 
-function ShopLogin() {
+function Login() {
   return (
     <>
       <div className="container-fluid d-flex">
@@ -27,4 +27,4 @@ function ShopLogin() {
   )
 }
 
-export default ShopLogin
+export default Login

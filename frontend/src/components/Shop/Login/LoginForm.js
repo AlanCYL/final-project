@@ -1,5 +1,5 @@
 import React from 'react'
-function ShopLoginForm(props) {
+function LoginForm(props) {
   return (
     <>
       <h2 className="text-center mb-5">店家登入</h2>
@@ -41,4 +41,4 @@ function ShopLoginForm(props) {
   )
 }
 
-export default ShopLoginForm
+export default LoginForm

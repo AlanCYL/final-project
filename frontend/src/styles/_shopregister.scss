@@ -1,3 +1,4 @@
+
 .banner {
     img {
         max-width: 100%;
@@ -20,7 +21,15 @@ label {
         font-weight: 900;
     }
 }
-
-p {
+textarea {
+    resize : none;
+    height: 150px;
+  }
+.photoinfo{
+    font-size: 1rem;
+    font-weight: 300;
     color: #A7A5A5;
+}
+.line{
+    border: #FFB901 1px solid;
 }
