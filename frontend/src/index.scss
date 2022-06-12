@@ -3,6 +3,10 @@
 
 @import './styles/_global.scss';
 
+//會員
+@import './styles/_memberLogin.scss';
+@import './styles/_login.scss';
+
 // 靜態頁面
 @import './styles/_navbar.scss';
 @import './styles/header';
