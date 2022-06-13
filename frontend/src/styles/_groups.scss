@@ -1,0 +1,49 @@
+.groups {
+    h3 {
+        border-left: 8px solid #1E2188;
+        font-weight: 900;
+
+    }
+
+    .slider {
+        width: 100%;
+        white-space: nowrap;
+        overflow: scroll;
+        scroll-behavior: smooth;
+    }
+
+    .slider::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .slider-icon {
+        color: #FFB901;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .slider-icon .left {
+        left: 0;
+    }
+
+
+}
+
+.slider-icon:hover {
+    opacity: 60%;
+
+}
+.group-fliter{
+    height: 500px;
+    width: 100%;
+    .pic{
+        width: 800px;
+    }
+    
+
+}
+.all{
+    width: 100%;
+    height: 1000px;
+}
