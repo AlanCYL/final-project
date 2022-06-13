@@ -9,7 +9,7 @@ function Shop() {
       <NavbarShop />
       {/* <Login /> */}
       <Register />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
