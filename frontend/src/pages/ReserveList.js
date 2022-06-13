@@ -9,9 +9,9 @@ const ReserveList = () => {
         <div className="d-flex">
           <Side />
           <div>
-            <div className="w-75 ms-8">
+            <div className="w-75 ms-8 ">
               <img
-                className="w-100"
+                className="w-100 pb-5"
                 src={require('../image/shoppingCart/icongroup04.png')}
                 alt=""
               />
