@@ -1,16 +1,16 @@
-// import Nav from './components/Navbar/NavbarDesktop'
-// import Footer from './components/Footer/Footer'
+import Nav from './components/Navbar/NavbarDesktop'
+import Footer from './components/Footer/Footer'
 // import MemberLogin from './pages/MemberLogin'
-import Shop from './pages/Shop'
-// import ReserveList from './components/ShoppingCart/ReserveList'
+// import Shop from './pages/Shop'
+import FinishReserveList from './pages/FinishReserveList'
 function App() {
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       {/* <MemberLogin /> */}
-      <Shop />
-      {/* <ReserveList /> */}
-      {/* <Footer /> */}
+      {/* <Shop /> */}
+      <FinishReserveList />
+      <Footer />
     </>
   )
 }
