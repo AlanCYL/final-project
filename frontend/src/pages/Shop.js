@@ -18,7 +18,6 @@ function Shop() {
             <Login />
           </Route>
         </Switch>
-        <Footer />
       </>
     </Router>
   )
