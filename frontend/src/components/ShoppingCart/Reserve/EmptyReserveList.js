@@ -4,7 +4,7 @@ import Header from '../../Header/Header'
 const EmptyReserveList = () => {
   return (
     <>
-      <div className=" container my-6">
+      <div className=" container mb-6">
         <Header />
         <div className="d-flex justify-content-center">
           <div>

@@ -10,7 +10,7 @@ const ShoppingCart = () => {
           <Route path="/shoppingCart">
             <ReserveCart />
           </Route>
-          <Route path="/shoppingCart></Route">
+          <Route path="/shoppingCart/PayCart">
             <PayCart />
           </Route>
         </Switch>

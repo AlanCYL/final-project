@@ -8,24 +8,9 @@ const MemberLogin = () => {
       <div className="video-box">
         <div className="container top-50 start-50 translate-middle">
           {/* 註冊 */}
-          {/* <div className="d-flex text-center align-items-center">
-            <div className="w-75 mx-auto">
-              <Register />
-            </div>
-          </div> */}
-
+          <Register />
           {/* 登入 */}
-          <div className="d-flex text-center align-items-center">
-            <div className="w-50 mx-4 text-nowrap">
-              <h2 className="text-info">還不是會員嗎?</h2>
-              <button className="btn btn-primary">
-                快來註冊吧 <i className="fa-solid fa-paper-plane text-info"></i>
-              </button>
-            </div>
-            <div className="w-50 mx-4">
-              <Login />
-            </div>
-          </div>
+          {/* <Login /> */}
         </div>
         <div className="over-lay" />
         <video

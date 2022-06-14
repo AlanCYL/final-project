@@ -36,7 +36,7 @@ function App() {
         <Route path="/groups">
           <Groups />
         </Route>
-        <Route path="/reserveList">
+        <Route path="/shoppingCart">
           <ShoppingCart />
         </Route>
         <Route path="*">
