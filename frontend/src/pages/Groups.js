@@ -1,9 +1,6 @@
 import React from 'react'
-// import bannertest01 from '../image/groups/bannertest01.jpg'
 import bannertest02 from '../image/groups/bannertest02.jpg'
-import fliterpic from '../image/groups/fliterpic.png'
 import FamousGroups from '../components/Group/FamousGroups'
-import Filter from '../components/Group/Filter'
 import GroupPages from '../components/Group/GroupPages'
 import Carousel from 'react-bootstrap/Carousel'
 
@@ -47,21 +44,11 @@ function Groups() {
         <h3 className="ps-4">熱門開團</h3>
         <FamousGroups />
       </div>
-      {/* 篩選 */}
+      {/* 頁面*/}
       <div className="container-fluid mb-9">
-        <div className="container-fluid bg-secondary group-fliter">
-          <div className="pic ps-8 ms-4">
-            <img className="img-fluid mt-6 ms-4" src={fliterpic} alt="" />
-          </div>
-          <div>
-            <Filter />
-          </div>
-        </div>
-      </div>
-      {/* 其他團 */}
-      <div className="container mb-8">
         <GroupPages />
       </div>
+
     </>
   )
 }

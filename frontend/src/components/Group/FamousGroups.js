@@ -24,7 +24,7 @@ function FamousGroups(props) {
         <div className="slider">
           {cardSlider.map((v, i) => {
             return (
-              <div className="d-inline-block p-4">
+              <div key={i} className="d-inline-block p-4">
                 <Card />
               </div>
             )

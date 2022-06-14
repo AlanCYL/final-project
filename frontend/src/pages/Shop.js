@@ -1,25 +1,19 @@
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 import NavbarShop from '../components/Navbar/NavbarShop'
-import Login from '../components/Shop/Login/Login'
-import Register from '../components/Shop/Register/Register'
-import Footer from '../components/Footer/Footer'
+import Login from '../components/Shop/Login'
+import Register from '../components/Shop/Register'
 
 function Shop() {
+  const [isShopLogin, setIsShopLogin] = useState(true)
   return (
-    <Router>
-      <>
-        <NavbarShop />
-        <Switch>
-          <Route path="/shop/Register">
-            <Register />
-          </Route>
-          <Route path="">
-            <Login />
-          </Route>
-        </Switch>
-      </>
-    </Router>
+    <>
+      <NavbarShop />
+      {isShopLogin ? (
+        <Login isShopLogin={isShopLogin} setIsShopLogin={setIsShopLogin} />
+      ) : (
+        <Register isShopLogin={isShopLogin} setIsShopLogin={setIsShopLogin} />
+      )}
+    </>
   )
 }
 

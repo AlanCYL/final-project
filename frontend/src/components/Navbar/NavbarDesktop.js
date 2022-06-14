@@ -24,7 +24,7 @@ const NavbarDesktop = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/group">
+                <Link to="/groups">
                   <h5>立即參團</h5>
                 </Link>
               </li>
