@@ -2,6 +2,7 @@ import React from 'react'
 import Login from '../components/Login/Login'
 import Register from '../components/Login/Register'
 import share from '../image/login/share.mp4'
+import '../styles/_memberLogin.scss'
 const MemberLogin = () => {
   return (
     <>

@@ -4,7 +4,6 @@
 @import './styles/_global.scss';
 
 //會員
-@import './styles/_memberLogin.scss';
 @import './styles/_login.scss';
 @import './styles/_profile.scss';
 
@@ -19,8 +18,8 @@
 // 購物車
 @import './styles/list';
 @import './styles/side';
-@import './styles/card';
-// 會員
+// @import './styles/card';
+
 // 登入登出
 // 店家登入
 @import './styles/_shoplogin.scss';
@@ -30,3 +29,5 @@
 // 設定第三方登出按鈕用
 
 //這個scss請幫我保留在最下面
+
+@import './styles/_memberLogin.scss';

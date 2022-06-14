@@ -18,7 +18,7 @@ const NavbarDesktop = () => {
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/group">
                   <h5>立即參團</h5>
                 </Link>
               </li>
@@ -28,7 +28,7 @@ const NavbarDesktop = () => {
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/shop">
                   <h5>店家登入/註冊</h5>
                 </Link>
               </li>
@@ -37,7 +37,9 @@ const NavbarDesktop = () => {
 
           <div className="icon">
             <img src={require('../../image/navbar/shop.png')} alt="" />
-            <img src={require('../../image/navbar/login.png')} alt="" />
+            <Link to="/login">
+              <img src={require('../../image/navbar/login.png')} alt="" />
+            </Link>
             <img src={require('../../image/navbar/map.png')} alt="" />
           </div>
         </div>
