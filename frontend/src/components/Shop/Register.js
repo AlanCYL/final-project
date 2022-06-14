@@ -163,9 +163,10 @@ function Register(props) {
             <h5 className="text-center mt-5">
               有註冊過的店家由此
               <a
-                href="/"
-                onClick={() => {
-                  setIsShopLogin(false)
+                href="/#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setIsShopLogin(true)
                 }}
               >
                 立即登入

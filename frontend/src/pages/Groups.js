@@ -1,6 +1,7 @@
 import React from 'react'
 import bannertest02 from '../image/groups/bannertest02.jpg'
 import FamousGroups from '../components/Group/FamousGroups'
+import Recommend from '../components/Group/Recommend'
 import GroupPages from '../components/Group/GroupPages'
 import Carousel from 'react-bootstrap/Carousel'
 
@@ -44,11 +45,15 @@ function Groups() {
         <h3 className="ps-4">熱門開團</h3>
         <FamousGroups />
       </div>
-      {/* 頁面*/}
-      <div className="container-fluid mb-9">
+      {/* 開團頁面*/}
+      <div className="container-fluid mb-6">
         <GroupPages />
       </div>
-
+      {/* 為你推薦 */}
+      <div className="container groups mb-6">
+        <h3 className="ps-4">為你推薦</h3>
+        <Recommend />
+      </div>
     </>
   )
 }

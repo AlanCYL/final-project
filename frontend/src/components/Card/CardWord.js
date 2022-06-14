@@ -1,15 +1,10 @@
 import React from 'react'
 
-const Card = () => {
+const CardWord = () => {
   return (
     <>
-      <div className="little-card shadow-sm bg-white rounded">
-        <img
-          className="w-100 h-50 rounded-top"
-          src={require('../../image/shoppingCart/card/TimHoWan.png')}
-          alt=""
-        />
-        <div className="p-3">
+      <div className=" bg-white rounded">
+        <div className="p-3 shadow-sm">
           <div className="d-flex justify-content-between">
             <h4>添好運</h4>
             <span class="badge rounded-pill bg-primary">港式</span>
@@ -28,7 +23,6 @@ const Card = () => {
           </div>
           <div className="d-flex justify-content-between">
             <p className="progress-text mt-1">剩下3天</p>
-            <p className="progress-text mt-1">目標人數:10人</p>
           </div>
         </div>
       </div>
@@ -36,4 +30,4 @@ const Card = () => {
   )
 }
 
-export default Card
+export default CardWord
