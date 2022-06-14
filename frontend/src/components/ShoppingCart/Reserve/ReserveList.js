@@ -1,5 +1,5 @@
-import Header from '../components/Header/Header'
-import Side from '../components/ShoppingCart/Side'
+import Header from '../../Header/Header'
+import Side from '../Side'
 
 const ReserveList = () => {
   return (
@@ -12,7 +12,7 @@ const ReserveList = () => {
             <div className="w-75 ms-8 ">
               <img
                 className="w-100 pb-5"
-                src={require('../image/shoppingCart/icongroup04.png')}
+                src={require('../../../image/shoppingCart/icongroup04.png')}
                 alt=""
               />
             </div>
@@ -42,7 +42,7 @@ const ReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>
@@ -53,7 +53,7 @@ const ReserveList = () => {
                       <td className="py-5">
                         <img
                           className="delete"
-                          src={require('../image/shoppingCart/delete.png')}
+                          src={require('../../../image/shoppingCart/delete.png')}
                           alt=""
                         />
                       </td>
@@ -66,7 +66,7 @@ const ReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>
@@ -77,7 +77,7 @@ const ReserveList = () => {
                       <td className="py-5">
                         <img
                           className="delete"
-                          src={require('../image/shoppingCart/delete.png')}
+                          src={require('../../../image/shoppingCart/delete.png')}
                           alt=""
                         />
                       </td>
@@ -90,7 +90,7 @@ const ReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>
@@ -101,7 +101,7 @@ const ReserveList = () => {
                       <td className="py-5">
                         <img
                           className="delete"
-                          src={require('../image/shoppingCart/delete.png')}
+                          src={require('../../../image/shoppingCart/delete.png')}
                           alt=""
                         />
                       </td>
