@@ -40,7 +40,9 @@ const NavbarDesktop = () => {
           </div>
 
           <div className="icon">
-            <img src={require('../../image/navbar/shop.png')} alt="" />
+            <Link to="/ShoppingCart">
+              <img src={require('../../image/navbar/shop.png')} alt="" />
+            </Link>
             <Link to="/login">
               <img src={require('../../image/navbar/login.png')} alt="" />
             </Link>
