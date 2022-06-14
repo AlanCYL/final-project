@@ -24,12 +24,6 @@ function App() {
         <Route path="/memberCenter">
           <MemberCenter />
         </Route>
-        {/* <Route path="/shop/login">
-          <Shop />
-        </Route>
-        <Route path="/shop/register">
-          <Shop />
-        </Route> */}
         <Route path="/shop">
           <Shop />
         </Route>
