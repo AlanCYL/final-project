@@ -26,7 +26,7 @@ function App() {
         <Route path="/shop">
           <Shop />
         </Route>
-        <Route path="/group">
+        <Route path="/groups">
           <Groups />
         </Route>
         <Route path="/reserveList">
