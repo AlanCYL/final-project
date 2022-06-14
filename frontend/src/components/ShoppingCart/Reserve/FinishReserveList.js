@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header/Header'
+import Header from '../../Header/Header'
 
 const FinishReserveList = () => {
   return (
@@ -12,7 +12,7 @@ const FinishReserveList = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5 me-5"
-                src={require('../image/shoppingCart/icongroup06.png')}
+                src={require('../../../image/shoppingCart/icongroup06.png')}
                 alt=""
               />
             </div>
@@ -21,7 +21,7 @@ const FinishReserveList = () => {
               <div className="mt-8 mb-5">
                 <img
                   style={{ width: '100px' }}
-                  src={require('../image/shoppingCart/finish.png')}
+                  src={require('../../../image/shoppingCart/finish.png')}
                   alt=""
                 />
               </div>

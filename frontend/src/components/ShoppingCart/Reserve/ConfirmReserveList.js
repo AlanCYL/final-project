@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header/Header'
+import Header from '../../Header/Header'
 
 const ConfirmReserveList = () => {
   return (
@@ -12,7 +12,7 @@ const ConfirmReserveList = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../image/shoppingCart/icongroup05.png')}
+                src={require('../../../image/shoppingCart/icongroup05.png')}
                 alt=""
               />
             </div>
@@ -34,7 +34,7 @@ const ConfirmReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>
@@ -48,7 +48,7 @@ const ConfirmReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>
@@ -62,7 +62,7 @@ const ConfirmReserveList = () => {
                       <td>
                         <img
                           className="logo py-4"
-                          src={require('../image/shoppingCart/d.png')}
+                          src={require('../../../image/shoppingCart/d.png')}
                           alt=""
                         />
                       </td>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header/Header'
+import Header from '../../Header/Header'
 
 const PayList = () => {
   return (
@@ -12,7 +12,7 @@ const PayList = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../image/shoppingCart/icongroup01.png')}
+                src={require('../../../image/shoppingCart/icongroup01.png')}
                 alt=""
               />
             </div>
@@ -31,7 +31,7 @@ const PayList = () => {
                 <td>
                   <img
                     style={{ width: '90px' }}
-                    src={require('../image/shoppingCart/dSquare.png')}
+                    src={require('../../../image/shoppingCart/dSquare.png')}
                     alt=""
                   />
                 </td>
@@ -50,7 +50,7 @@ const PayList = () => {
                 <td>
                   <img
                     style={{ width: '90px' }}
-                    src={require('../image/shoppingCart/dSquare.png')}
+                    src={require('../../../image/shoppingCart/dSquare.png')}
                     alt=""
                   />
                 </td>
@@ -72,7 +72,7 @@ const PayList = () => {
               <div className="d-flex mb-2">
                 <img
                   style={({ width: '20px' }, { height: '20px' })}
-                  src={require('../image/shoppingCart/sale.png')}
+                  src={require('../../../image/shoppingCart/sale.png')}
                   alt=""
                 />
                 <h6 className="ms-1">折價卷</h6>

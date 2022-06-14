@@ -4,7 +4,7 @@ const Card = () => {
   return (
     <>
       <div className="d-flex justify-content-center p-3">
-        <div className="card shadow mb-5 bg-white rounded">
+        <div className="little-card shadow mb-5 bg-white rounded">
           <img
             className="w-100 h-50 rounded-top"
             src={require('../../image/shoppingCart/card/TimHoWan.png')}
