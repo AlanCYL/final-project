@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const NavbarDesktop = () => {
+  const location = useLocation()
+
+  if (location.pathname === '/shop') return <></>
+
   return (
     <>
       <header className="sticky-top shadow">
