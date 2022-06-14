@@ -3,7 +3,7 @@ import React from 'react'
 const Profile = () => {
   return (
     <>
-      <div className="rounded-circle overflow-hidden border border-3 border-info rounded-2 avatar mx-auto mb-3">
+      <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
         <img
           alt="10x10"
           src={require('../../image/memberProfile/female_pic2.png')}

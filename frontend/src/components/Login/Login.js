@@ -1,14 +1,21 @@
 import React from 'react'
 
-const Login = () => {
+const Login = (props) => {
+  const { isLoginPage, setIsLoginPage } = props
   return (
     <>
       <div className="d-flex text-center align-items-center">
         <div className="w-50 mx-4 text-nowrap">
           <h2 className="text-info">還不是會員嗎?</h2>
-          <button className="btn btn-primary">
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setIsLoginPage(false)
+            }}
+          >
             快來註冊吧 <i className="fa-solid fa-paper-plane text-info"></i>
           </button>
+          {/* <h5 className='mt-3 text-white member_slogon'>與我們一同用美味的餐點，讓大家因「吃」相遇</h5> */}
         </div>
         <div className="w-50 mx-4">
           <div className="card border-0 shadow rounded-3 my-5">

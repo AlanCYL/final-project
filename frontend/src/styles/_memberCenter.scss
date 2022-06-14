@@ -1,0 +1,13 @@
+.sidebar{
+    &:hover{
+        color: white;
+        background: $primary;
+    }
+}
+.sidebarActive {
+  color: white;
+  background: $primary;
+  &:hover {
+  color: white;
+  }
+}

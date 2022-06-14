@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Register = () => {
+const Register = (props) => {
+  const { isLoginPage, setIsLoginPage } = props
   return (
     <>
       <div className="d-flex text-center align-items-center">
@@ -61,7 +62,7 @@ const Register = () => {
                     id="floatingBirthday"
                     placeholder="floatingBirthday"
                   />
-                  <label for="floatingBirthday">出生年月日</label>
+                  <label for="floatingBirthday">出生日期</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -102,7 +103,15 @@ const Register = () => {
                   >
                     登入
                   </button>
-                  <a href="">已經有帳號了嗎?按我登入</a>
+                  <a
+                    href="/#"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setIsLoginPage(true)
+                    }}
+                  >
+                    已經有帳號了嗎?按我登入
+                  </a>
                 </div>
               </form>
             </div>
