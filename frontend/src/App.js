@@ -5,7 +5,7 @@ import Footer from './components/Footer/Footer'
 import Home from './pages/Home'
 import MemberLogin from './pages/MemberLogin'
 import Shop from './pages/Shop'
-import ReserveList from './pages/ReserveList'
+import ShoppingCart from './pages/ShoppingCart'
 import MemberCenter from './pages/MemberCenter'
 import Groups from './pages/Groups'
 import NotFoundPage from './pages/NotFoundPage'
@@ -31,7 +31,7 @@ function App() {
           <Groups />
         </Route>
         <Route path="/reserveList">
-          <ReserveList />
+          <ShoppingCart />
         </Route>
         <Route path="*">
           <NotFoundPage />
