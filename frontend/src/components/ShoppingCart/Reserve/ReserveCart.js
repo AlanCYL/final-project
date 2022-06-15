@@ -9,10 +9,10 @@ const ReserveCart = () => {
     <>
       <Router>
         <Switch>
-          <Route path="/shoppingCart">
+          <Route path="/shoppingCart/EmptyReserveList">
             <EmptyReserveList />
           </Route>
-          <Route path="/shoppingCart/ReserveList">
+          <Route path="/shoppingCart">
             <ReserveList />
           </Route>
           <Route path="/shoppingCart/ConfirmReserveList">

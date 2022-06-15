@@ -18,14 +18,14 @@ const EmptyReserveList = () => {
             </div>
             {/* List */}
             <div className="d-flex flex-column align-items-center">
-              {/* <div>
+              <div>
                 <img
                   className="me-3"
                   style={{ width: '200px' }}
-                  src={require('../../../image/shoppingCart/cart1.png')}
+                  src={require('../../../image/shoppingCart/cart2.png')}
                   alt=""
                 />
-              </div> */}
+              </div>
               <h4 className="mt-5">您的購物車中沒有商品</h4>
               <button className="mt-4 bg-primary px-5 py-2 rounded ">
                 參團去
