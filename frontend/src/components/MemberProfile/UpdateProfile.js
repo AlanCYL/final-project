@@ -1,23 +1,27 @@
 import React from 'react'
+import { BsFillCameraFill } from 'react-icons/bs'
 
 const UpdateProfile = () => {
   return (
     <>
       <div className="container">
         <div className="row justify-content-around">
-          <div className="col-3 text-center">
-            <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
+          <div className="col-md-3 text-center">
+            <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3 position-relative avatar_pic_div_bg">
+              <div className="avatar_pic_div position-absolute top-50 start-50 translate-middle">
+                <BsFillCameraFill />
+              </div>
               <img
                 alt="10x10"
                 src={require('../../image/memberProfile/female_pic2.png')}
-                className="position-absolute top-50 start-50 translate-middle"
+                className="position-absolute top-50 start-50 translate-middle "
               />
             </div>
             <div className="mb-4 text-nowrap">
               <p>LV.4 鑽石會員</p>
             </div>
           </div>
-          <div className="col-7">
+          <div className="col-auto col-md-7">
             <form>
               {/* 姓名 */}
               <label htmlFor="" className="form-label mb-1">
@@ -62,26 +66,37 @@ const UpdateProfile = () => {
                 placeholder="0912345678"
                 className="form-control mb-2"
               />
-              {/*  */}
+              {/* 出生年月日 */}
               <label htmlFor="" className="form-label mb-1 mt-2">
-                
+                出生日期
+              </label>
+
+              <input
+                type="date"
+                value="2020-01-01"
+                className="form-control mb-3"
+                disabled
+              />
+              {/* email */}
+              <label htmlFor="" className="form-label mb-1 mt-2">
+                電子郵件
               </label>
 
               <input
                 type="password"
-                placeholder="請填寫8位以上至少一個英文或數字"
+                placeholder="test@unii.com"
                 className="form-control mb-3"
               />
-              {/* 確認密碼 */}
-              <label htmlFor="" className="form-label mb-1 mt-2">
-                確認密碼 <span>*</span>
-              </label>
 
-              <input
-                type="password"
-                placeholder="請再次填寫確認密碼"
-                className="form-control mb-3"
-              />
+              {/* button group */}
+              <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3 ">
+                <button className="btn btn-danger me-md-2 h5" type="button">
+                  取消
+                </button>
+                <button className="btn btn-primary h5" type="button">
+                  確認
+                </button>
+              </div>
             </form>
           </div>
         </div>
