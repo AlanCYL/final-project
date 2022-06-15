@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../Header/Header'
 import { BsFillCaretDownFill } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
 
 const ConfirmPay = () => {
+  const [credit, setCredit] = useState('')
   return (
     <>
       <div className=" container my-6">
@@ -190,11 +191,120 @@ const ConfirmPay = () => {
               </Form>
             </div>
 
+            {/* functionPay */}
+            <div className="bg-secondary p-4">
+              <div>
+                <Form.Check
+                  label="ATM轉帳/銀行臨櫃匯款"
+                  name="group1"
+                  type="radio"
+                  id={`radio-1`}
+                />
+                <div className="ms-6 mt-3">
+                  <p>
+                    將您的款項直接匯入我們的帳號，點選您的訂單編號會有付款說明。
+                  </p>
+                  <p>匯款完成後請至『匯款回報』填寫表單，才會完成訂單呦！</p>
+                </div>
+              </div>
+              <div className="pt-4">
+                <Form.Check
+                  label="信用卡支付"
+                  name="group1"
+                  type="radio"
+                  id={`radio-2`}
+                />
+                {/* credit-card */}
+                <div className="d-flex justify-content-end me-5">
+                  <div class="credit-card">
+                    <div class="card__front card__part">
+                      <img
+                        class="card__front-square card__square"
+                        src={require('../../../image/shoppingCart/card/ic.png')}
+                      />
+                      <img
+                        class="card__front-logo card__logo"
+                        src={require('../../../image/shoppingCart/card/master.png')}
+                      />
+                      <p class="card_numer">1234 5678 7890 6258</p>
+                      <div class="card__space-75">
+                        <span class="card__label">Card holder</span>
+                        <p class="card__info">Unii </p>
+                      </div>
+                      <div class="card__space-25">
+                        <span class="card__label">Expires</span>
+                        <p class="card__info">10/25</p>
+                      </div>
+                    </div>
+
+                    <div class="card__back card__part">
+                      <div class="card__black-line"></div>
+                      <div class="card__back-content">
+                        <div class="card__secret">
+                          <p class="card__secret--last">450</p>
+                        </div>
+
+                        <img
+                          class="card__back-logo card__logo"
+                          src={require('../../../image/shoppingCart/card/master.png')}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex mt-5">
+                <h6>卡片號碼：</h6>
+                <div>
+                  <input
+                    className="credit-number mx-3"
+                    type="text"
+                    maxLength="4"
+                  />
+                  -
+                  <input
+                    className="credit-number mx-2"
+                    type="text"
+                    maxLength="4"
+                  />
+                  -
+                  <input
+                    className="credit-number mx-2"
+                    type="text"
+                    maxLength="4"
+                  />
+                  -
+                  <input
+                    className="credit-number mx-2"
+                    type="text"
+                    maxLength="4"
+                  />
+                </div>
+              </div>
+              <div className="d-flex mt-5">
+                <h6>到期日期：</h6>
+                <div>
+                  <input className="credit-date mx-3" type="text" />月
+                  <input className="credit-date mx-3" type="text" />年
+                </div>
+              </div>
+              <div className="d-flex mt-5">
+                <h6>安全碼：</h6>
+                <div className="m-13">
+                  <input className="credit-date mx-4" type="text" />
+                  末三碼
+                </div>
+              </div>
+            </div>
+            {/* button */}
+            <button className="px-4 py-2  mt-5 ms-6 bg-info text-light">
+              重選付款項目
+            </button>
             <button
               className="px-4 py-2  mt-5 bg-primary text-light"
-              style={{ marginLeft: '19rem' }}
+              style={{ marginLeft: '19rem', width: '140px' }}
             >
-              前往結帳
+              送出
             </button>
           </div>
         </div>
