@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = (props) => {
   const { isLoginPage, setIsLoginPage } = props
@@ -57,12 +58,12 @@ const Login = (props) => {
                   <a href="/#">忘記密碼?</a>
                 </div>
                 <div className="d-grid">
-                  <button
-                    className="btn btn-primary btn-login text-uppercase fw-bold fs-5 "
-                    type="submit"
+                  <Link
+                    to="/memberCenter"
+                    className="btn btn-primary btn-login text-uppercase fw-bold fs-5"
                   >
                     登入
-                  </button>
+                  </Link>
                 </div>
               </form>
             </div>
