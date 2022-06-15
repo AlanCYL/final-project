@@ -8,6 +8,7 @@ import Shop from './pages/Shop'
 import ShoppingCart from './pages/ShoppingCart'
 import MemberCenter from './pages/MemberCenter'
 import Groups from './pages/Groups'
+import GroupDetail from './pages/GroupDetail'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path="/groups">
           <Groups />
+        </Route>
+        <Route path="/groupDetail">
+          <GroupDetail />
         </Route>
         <Route path="/shoppingCart">
           <ShoppingCart />
