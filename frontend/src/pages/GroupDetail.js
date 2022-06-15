@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import GroupdetailPage from '../components/Groupdetail/GroupdetailPage'
+import GroupdetailPage from '../components/GroupDetail/GroupdetailPage'
 
 function GroupDetail() {
   return (
