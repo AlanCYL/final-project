@@ -10,14 +10,14 @@ const Profile = () => {
           className="position-absolute top-50 start-50 translate-middle"
         />
       </div>
-      <div className="mb-3">
+      <div className="mb-3 text-center">
         <img
           src={require('../../image/memberProfile/line.png')}
           alt=""
           width={250}
         />
       </div>
-      <div className="my_context">
+      <div className="my_context text-center">
         <div className="mb-4">
           <p>小明</p>
         </div>
