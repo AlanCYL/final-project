@@ -3,7 +3,7 @@ import React from 'react'
 const CardWord = () => {
   return (
     <>
-      <div className="p-3 shadow-sm">
+      <div className="p-3 shadow-sm main-hover">
         <div className="d-flex justify-content-between">
           <h4>添好運</h4>
           <span class="cate badge rounded-pill bg-primary">港式</span>
