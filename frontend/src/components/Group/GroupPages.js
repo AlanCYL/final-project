@@ -96,7 +96,7 @@ function GroupPages() {
       </div>
       {/* 商品頁 */}
       <div className="mt-9 ">
-        <div className="container d-flex mt-6">
+        <div className="container d-flex mt-6 justify-content-center">
           <div className="ms-5">
             <Card />
           </div>
@@ -110,7 +110,7 @@ function GroupPages() {
             <Card />
           </div>
         </div>
-        <div className="container d-flex mt-6">
+        <div className="container d-flex mt-6 justify-content-center">
           <div className="ms-5">
             <Card />
           </div>

@@ -3,7 +3,7 @@ import React from 'react'
 const Card = () => {
   return (
     <>
-      <div className="little-card shadow-sm bg-white rounded">
+      <div className="little-card shadow-sm bg-white rounded main-hover">
         <img
           className="w-100 h-50 rounded-top"
           src={require('../../image/shoppingCart/card/TimHoWan.png')}
