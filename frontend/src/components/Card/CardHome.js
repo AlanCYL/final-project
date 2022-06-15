@@ -7,7 +7,7 @@ function CardHome() {
         <div className="row">
           <div className="col-5 ">
             <img
-              className="img-fluid"
+              className="img-fluid h-100"
               src={require('../../image/home/logo/Kangyaolife.jpg')}
               alt=""
             />

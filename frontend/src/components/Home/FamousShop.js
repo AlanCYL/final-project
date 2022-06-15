@@ -1,5 +1,5 @@
 import React from 'react'
-import CardWord from '../../image/home/logo/Kangyaolife'
+// import CardWord from '../../image/home/logo/Kangyaolife'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 //左右按鈕
 function FamousShop(props) {
@@ -25,7 +25,13 @@ function FamousShop(props) {
           {cardWordSlider.map((v, i) => {
             return (
               <div key={i} className="d-inline-block p-4">
-                <CardWord />
+                <div className="shop-box">
+                  <img
+                    className="img-fluid"
+                    src={require('../../image/home/logo/Kangyaolife.jpg')}
+                    alt=""
+                  />
+                </div>
               </div>
             )
           })}
