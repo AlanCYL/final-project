@@ -1,6 +1,7 @@
 import React from 'react'
 import Profile from '../components/MemberProfile/Profile'
 import UpdateProfile from '../components/MemberProfile/UpdateProfile'
+import { Badge } from 'react-bootstrap'
 const MemberCenter = () => {
   return (
     <>
@@ -26,6 +27,9 @@ const MemberCenter = () => {
               <li className="my-3">
                 <a href="" className="list-group-item sidebar  border-0 h5">
                   收藏店家
+                  <Badge className="ms-3" bg="danger" pill>
+                    5
+                  </Badge>
                 </a>
               </li>
             </ul>
