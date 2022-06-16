@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
+import GroupdetailPage from '../components/Groupdetail/GroupdetailPage'
 
 function GroupDetail() {
   return (
@@ -40,7 +39,9 @@ function GroupDetail() {
           </div>
           <div className="col-3">
             <div className="container ps-2">
-              <h3 className="px-3 mb-5 text-info">已達成開團目標</h3>
+              <h3 className="px-3 mb-5 text-info borderTitle">
+                已達成開團目標
+              </h3>
               <div className="mt-4 mb-1">
                 <div className="Gtitle d-flex align-items-center ">
                   <img src={require('../image/groupdetail/icon7.png')} alt="" />
@@ -64,26 +65,18 @@ function GroupDetail() {
               </div>
               <div className="ms-auto mt-5">
                 <Link to="/ShoppingCart">
-                  <button type="button" className="btn btn-info">
+                  <button type="button" className="add-group btn btn-info">
                     我要參團
                   </button>
                 </Link>
               </div>
             </div>
           </div>
+          {/* 頁面切換 */}
+          <div className="px-8 mt-5 container ">
+            <GroupdetailPage />
+          </div>
         </div>
-      </div>
-      <div className="ms-9 container">
-        <Tabs
-          defaultActiveKey="home"
-          transition={false}
-          id="noanim-tab-example"
-          className="mb-3"
-        >
-          <Tab eventKey="home" title="Home"></Tab>
-          <Tab eventKey="profile" title="Profile"></Tab>
-          <Tab eventKey="contact" title="Contact" disabled></Tab>
-        </Tabs>
       </div>
     </>
   )
