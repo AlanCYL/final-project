@@ -12,6 +12,7 @@ import GroupDetail from './pages/GroupDetail'
 import NotFoundPage from './pages/NotFoundPage'
 import ShopBackstage from './pages/ShopBackstage'
 import ShopList from './pages/ShopList'
+import ShopListDetail from './pages/ShopListDetail'
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route path="/shopList">
           <ShopList />
+        </Route>
+        <Route path="/shopListDetail">
+          <ShopListDetail />
         </Route>
         <Route path="*">
           <NotFoundPage />
