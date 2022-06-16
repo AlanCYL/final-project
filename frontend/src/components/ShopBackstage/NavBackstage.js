@@ -12,7 +12,7 @@ const BackstageNav = () => {
           <Row>
             <Col sm={3} className="bg-secondary py-3 pe-0">
               <Nav variant="pills" className="flex-column">
-                <h3 className="text-center my-4">鼎泰豐後台管理</h3>
+                <h4 className="text-center my-4">鼎泰豐後台管理</h4>
                 <Nav.Item>
                   <Nav.Link eventKey="first" className="text-center py-4">
                     基本資料
@@ -40,7 +40,7 @@ const BackstageNav = () => {
                 </Nav.Item>
               </Nav>
             </Col>
-            <Col sm={9}>
+            <Col sm={6} className="mx-auto my-5">
               <Tab.Content>
                 <Tab.Pane eventKey="first">{/* < 基本資料 /> */}</Tab.Pane>
                 <Tab.Pane eventKey="second">
