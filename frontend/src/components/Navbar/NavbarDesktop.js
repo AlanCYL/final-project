@@ -30,7 +30,7 @@ const NavbarDesktop = () => {
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/shopList">
                   <h5>店家列表</h5>
                 </Link>
               </li>

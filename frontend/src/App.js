@@ -11,6 +11,7 @@ import Groups from './pages/Groups'
 import GroupDetail from './pages/GroupDetail'
 import NotFoundPage from './pages/NotFoundPage'
 import ShopBackstage from './pages/ShopBackstage'
+import ShopList from './pages/ShopList'
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/shopBackstage">
           <ShopBackstage />
+        </Route>
+        <Route path="/shopList">
+          <ShopList />
         </Route>
         <Route path="*">
           <NotFoundPage />

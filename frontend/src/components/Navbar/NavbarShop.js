@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function NavbarShop() {
   return (
     <>
-      <header className="sticky-top shadow">
+      <header className="sticky-top shadow bg-white">
         <div className="head d-flex justify-content-start align-items-center py-3 ps-4 container">
           <div className="logo">
             <Link to="/">
