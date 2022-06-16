@@ -1,10 +1,14 @@
 import React from 'react'
-import BackstageNav from '../components/ShopBackstage/BackstageNav'
+import NavBackstage from '../components/ShopBackstage/NavBackstage'
+import Opengroup from '../components/ShopBackstage/Opengroup'
 
 const ShopBackstage = () => {
   return (
     <>
-      <BackstageNav />
+      <div className="d-flex">
+        <NavBackstage />
+        {/* <Opengroup /> */}
+      </div>
     </>
   )
 }
