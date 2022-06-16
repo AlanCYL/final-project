@@ -1,31 +1,58 @@
 import React from 'react'
 import Header from '../../Header/Header'
+import Card from '../../../components/Card/Card'
 
 const FinishPay = () => {
   return (
     <>
-      <div className=" container my-6">
+      <div className=" container my-6 ">
         <Header />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mb-8">
           <div>
             <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../../../image/shoppingCart/icongroup01.png')}
+                src={require('../../../image/shoppingCart/icongroup03.png')}
                 alt=""
               />
             </div>
             {/* List */}
-            <div className="bg-secondary p-4 "></div>
-            {/* sale */}
-
-            <button
-              className="px-4 py-2  mt-5 bg-primary text-light"
-              style={{ marginLeft: '19rem' }}
-            >
-              前往結帳
-            </button>
+            <div className="bg-secondary p-4 d-flex flex-column align-items-center h-50">
+              <div className="mt-4">
+                <img
+                  style={{ width: '80px' }}
+                  src={require('../../../image/shoppingCart/nike.png')}
+                  alt=""
+                />
+              </div>
+              <h4 className="mt-5">結帳完成</h4>
+            </div>
+            {/* reconmand */}
+            <div className="d-flex mt-6 justify-content-center">
+              <div
+                style={{ width: '30px', height: '20px' }}
+                className="bg-primary"
+              ></div>
+              <h5 className="mx-2" style={{ marginTop: '-2px' }}>
+                推薦開團
+              </h5>
+              <div
+                style={{ width: '30px', height: '20px' }}
+                className="bg-primary"
+              ></div>
+            </div>
+            <div className="d-flex mt-4 ">
+              <div className="me-4 ">
+                <Card />
+              </div>
+              <div className="me-4">
+                <Card />
+              </div>
+              <div className="me-4">
+                <Card />
+              </div>
+            </div>
           </div>
         </div>
       </div>
