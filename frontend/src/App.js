@@ -10,6 +10,7 @@ import MemberCenter from './pages/MemberCenter'
 import Groups from './pages/Groups'
 import GroupDetail from './pages/GroupDetail'
 import NotFoundPage from './pages/NotFoundPage'
+import ShopBackstage from './pages/ShopBackstage'
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/shoppingCart">
           <ShoppingCart />
+        </Route>
+        <Route path="/ShopBackstage">
+          <ShopBackstage />
         </Route>
         <Route path="*">
           <NotFoundPage />

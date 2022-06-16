@@ -14,9 +14,6 @@
 @import './styles/_memberCenter.scss';
 @import './styles/_updateProfile.scss';
 
-
-
-
 // 靜態頁面
 @import './styles/_navbar.scss';
 @import './styles/header';
@@ -33,8 +30,11 @@
 @import './styles/side';
 // @import './styles/card';
 
+//店家後台
+@import './styles/shopback';
+
 // 登入登出
-// 店家登入
+
 @import './styles/_shoplogin.scss';
 
 //店家註冊
