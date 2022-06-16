@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import GroupdetailPage from '../components/GroupDetail/GroupdetailPage'
+// import GroupdetailPage from '../components/GroupDetail/GroupdetailPage'
 
 function GroupDetail() {
   return (
@@ -74,7 +74,7 @@ function GroupDetail() {
           </div>
           {/* 頁面切換 */}
           <div className="px-8 mt-5 container ">
-            <GroupdetailPage />
+            {/* <GroupdetailPage /> */}
           </div>
         </div>
       </div>
