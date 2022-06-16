@@ -1,8 +1,9 @@
 import React from 'react'
 import Profile from '../components/MemberProfile/Profile'
-import UpdateProfile from '../components/MemberProfile/UpdateProfile'
 import { Badge } from 'react-bootstrap'
-import MyBooking from '../components/MemberProfile/MyBooking'
+import UpdateProfile from '../components/MemberProfile/UpdateProfile'
+import MyBooking from '../components/MemberProfile/MyBooking/MyBooking'
+import Coupon from '../components/MemberProfile/Coupon/Coupon'
 import Col from 'react-bootstrap/Col'
 import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
@@ -45,7 +46,9 @@ const MemberCenter = () => {
                 <Tab.Pane eventKey="second">
                   <MyBooking />
                 </Tab.Pane>
-                <Tab.Pane eventKey="third">123</Tab.Pane>
+                <Tab.Pane eventKey="third">
+                  <Coupon />
+                </Tab.Pane>
                 <Tab.Pane eventKey="fourth">123</Tab.Pane>
               </Tab.Content>
             </Col>

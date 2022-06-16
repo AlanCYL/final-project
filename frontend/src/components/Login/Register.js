@@ -101,7 +101,7 @@ const Register = (props) => {
                     className="btn btn-primary btn-login text-uppercase fw-bold fs-5 "
                     type="submit"
                   >
-                    登入
+                    註冊
                   </button>
                   <a
                     href="/#"
