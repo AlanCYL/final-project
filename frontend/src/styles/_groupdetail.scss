@@ -1,0 +1,28 @@
+.groupdetail {
+    .img-box {
+        width: 760px;
+        height: 400px;
+        background-color: bisque;
+        overflow: hidden;
+    }
+
+    .Gtitle {
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+
+        }
+    }
+
+    h3 {
+        border-left: 8px solid #1E2188;
+        font-weight: 900;
+
+    }
+    button{
+        width: 100%;
+    }
+    // hr{
+    //     border: 1.5px solid;
+    // }
+}

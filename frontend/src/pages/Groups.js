@@ -42,7 +42,7 @@ function Groups() {
       </Carousel>
       {/* 熱門開團 */}
       <div className="container groups mb-6">
-        <h3 className="ps-4">熱門開團</h3>
+        <h3 className=" titleH3 ps-4">熱門開團</h3>
         <FamousGroups />
       </div>
       {/* 開團頁面*/}
