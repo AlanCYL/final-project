@@ -1,13 +1,14 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 const MyCoupon = () => {
   return (
     <>
       <div class="container">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between gy-3">
           {/* 卡片 */}
-          <div class="col-md-5 me-1">
+          <div class="col-md-5 mx-3">
             <div class="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
@@ -18,14 +19,16 @@ const MyCoupon = () => {
               </div>
               <div className="col-auto p-0 text-center mx-2">
                 <h3 className="text-danger">$200</h3>
-                <Button variant="danger" className="py-1">
-                  <h5 className="text-nowrap text-white">去使用</h5>
-                </Button>
+                <Link to="/groups">
+                  <Button variant="danger" className="py-1">
+                    <h5 className="text-nowrap text-white">去使用</h5>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
           {/* 卡片 */}
-          <div class="col-md-5 me-1">
+          <div class="col-md-5 mx-3">
             <div class="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
@@ -36,14 +39,16 @@ const MyCoupon = () => {
               </div>
               <div className="col-auto p-0 text-center mx-2">
                 <h3 className="text-danger">$200</h3>
-                <Button variant="danger" className="py-1" disabled>
-                  <h5 className="text-nowrap text-white">去使用</h5>
-                </Button>
+                <Link to="/groups">
+                  <Button variant="danger" className="py-1">
+                    <h5 className="text-nowrap text-white">去使用</h5>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
-                    {/* 卡片 */}
-                    <div class="col-md-5 me-1">
+          {/* 卡片 */}
+          <div class="col-md-5 mx-3">
             <div class="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
@@ -54,9 +59,11 @@ const MyCoupon = () => {
               </div>
               <div className="col-auto p-0 text-center mx-2">
                 <h3 className="text-danger">$200</h3>
-                <Button variant="danger" className="py-1" disabled>
-                  <h5 className="text-nowrap text-white">去使用</h5>
-                </Button>
+                <Link to="/groups">
+                  <Button variant="danger" className="py-1">
+                    <h5 className="text-nowrap text-white">去使用</h5>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

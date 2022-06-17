@@ -4,6 +4,7 @@ import { Badge } from 'react-bootstrap'
 import UpdateProfile from '../components/MemberProfile/UpdateProfile'
 import MyBooking from '../components/MemberProfile/MyBooking/MyBooking'
 import Coupon from '../components/MemberProfile/Coupon/Coupon'
+import Favorite from '../components/MemberProfile/Favorite'
 import Col from 'react-bootstrap/Col'
 import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
@@ -49,7 +50,9 @@ const MemberCenter = () => {
                 <Tab.Pane eventKey="third">
                   <Coupon />
                 </Tab.Pane>
-                <Tab.Pane eventKey="fourth">123</Tab.Pane>
+                <Tab.Pane eventKey="fourth">
+                  <Favorite />
+                </Tab.Pane>
               </Tab.Content>
             </Col>
           </Row>
