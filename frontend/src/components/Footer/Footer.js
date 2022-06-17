@@ -44,10 +44,10 @@ const Footer = () => {
                     <div className="col-12 col-md-6">
                       <h5 className="mb-4">幫助</h5>
                       <ul className="list-group">
+                        <a href="/shopBackstage">店家後台</a>
                         <a href="/">加入會員</a>
                         <a href="/">加入店家</a>
                         <a href="/">退訂政策</a>
-                        <a href="/">常見問題</a>
                       </ul>
                     </div>
                     <div className="col-12 col-md-6">

@@ -7,7 +7,7 @@ const NavbarDesktop = () => {
   if (location.pathname === '/shop') return <></>
   if (location.pathname === '/shop/Register') return <></>
   if (location.pathname === '/shop/Login') return <></>
-  if (location.pathname === '/ShopBackstage') return <></>
+  if (location.pathname === '/shopBackstage') return <></>
 
   return (
     <>

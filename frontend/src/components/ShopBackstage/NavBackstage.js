@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
 import Tab from 'react-bootstrap/Tab'
 import Opengroup from './Opengroup'
+import ShopProfile from './ShopProfile'
 
 const BackstageNav = () => {
   return (
@@ -42,7 +43,9 @@ const BackstageNav = () => {
             </Col>
             <Col sm={6} className="mx-auto my-5">
               <Tab.Content>
-                <Tab.Pane eventKey="first">{/* < 基本資料 /> */}</Tab.Pane>
+                <Tab.Pane eventKey="first">
+                  <ShopProfile />
+                </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <Opengroup />
                 </Tab.Pane>
