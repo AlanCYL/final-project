@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 const Opengroup = () => {
   const goPath = useHistory()
@@ -39,6 +40,18 @@ const Opengroup = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>價格</Form.Label>
           <Form.Control type="text" placeholder="請輸入價格" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>選擇菜色：</Form.Label>
+          {/* map動態產生 */}
+          <InputGroup className="mb-3 bg-secondary">
+            <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+            <h6 className="mt-2 ms-3">小籠包</h6>
+          </InputGroup>
+          <InputGroup className="mb-3 bg-secondary">
+            <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+            <h6 className="mt-2 ms-3">小籠包</h6>
+          </InputGroup>
         </Form.Group>
         <div className="d-flex justify-content-end ">
           <Button
