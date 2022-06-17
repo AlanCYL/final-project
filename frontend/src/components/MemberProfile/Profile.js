@@ -6,7 +6,7 @@ const Profile = () => {
       <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
         <img
           alt="10x10"
-          src={require('../../image/memberProfile/female_pic2.png')}
+          src={require('../../image/memberProfile/1.png')}
           className="position-absolute top-50 start-50 translate-middle"
         />
       </div>

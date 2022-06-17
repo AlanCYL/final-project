@@ -1,19 +1,79 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
+import Overlay from 'react-bootstrap/Overlay'
+import Popover from 'react-bootstrap/Popover'
 import { BsFillCameraFill } from 'react-icons/bs'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const UpdateProfile = () => {
+  const [show, setShow] = useState(false)
+  const [target, setTarget] = useState(null)
+  const ref = useRef(null)
+
+  const handleClick = (event) => {
+    setShow(!show)
+    setTarget(event.target)
+  }
   return (
     <>
+      <div ref={ref}>
+        <Overlay
+          show={show}
+          target={target}
+          placement="bottom"
+          container={ref}
+          containerPadding={20}
+        >
+          <Popover id="popover-contained">
+            <Popover.Body>
+              <Container className="change_pic g-2">
+                <Row className="g-2 mb-2">
+                  <Col>
+                    <img
+                      src={require('../../image/memberProfile/1.png')}
+                      alt=""
+                    />
+                  </Col>
+                  <Col>
+                    <img
+                      src={require('../../image/memberProfile/2.png')}
+                      alt=""
+                    />
+                  </Col>
+                </Row>
+                <Row className="g-2">
+                  <Col>
+                    <img
+                      src={require('../../image/memberProfile/3.png')}
+                      alt=""
+                    />
+                  </Col>
+                  <Col>
+                    <img
+                      src={require('../../image/memberProfile/4.png')}
+                      alt=""
+                    />
+                  </Col>
+                </Row>
+              </Container>
+            </Popover.Body>
+          </Popover>
+        </Overlay>
+      </div>
       <div className="container">
         <div className="row justify-content-around">
           <div className="col-md-3 text-center">
-            <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3 position-relative avatar_pic_div_bg">
+            <div
+              className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3 position-relative avatar_pic_div_bg"
+              onClick={handleClick}
+            >
               <div className="avatar_pic_div position-absolute top-50 start-50 translate-middle">
                 <BsFillCameraFill />
               </div>
               <img
                 alt="10x10"
-                src={require('../../image/memberProfile/female_pic2.png')}
+                src={require('../../image/memberProfile/1.png')}
                 className="position-absolute top-50 start-50 translate-middle "
               />
             </div>

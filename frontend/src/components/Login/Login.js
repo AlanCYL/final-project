@@ -1,8 +1,15 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
 
 const Login = (props) => {
   const { isLoginPage, setIsLoginPage } = props
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
   return (
     <>
       <div className="d-flex text-center align-items-center">
@@ -54,8 +61,16 @@ const Login = (props) => {
                     />
                     記住我
                   </label>
-
-                  <a href="/#">忘記密碼?</a>
+                  {/* Modal */}
+                  <a
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleShow()
+                    }}
+                  >
+                    忘記密碼?
+                  </a>
                 </div>
                 <div className="d-grid">
                   <Link
@@ -70,6 +85,42 @@ const Login = (props) => {
           </div>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        backdropClassName="bg-white rounded"
+        contentClassName="shadow-lg border-0"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>忘記密碼</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>
+                <h5>
+                  請輸入您註冊時所填寫的電子信箱，我們會立即發送密碼重新設定信到您的E-mail信箱。
+                </h5>
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="text-white"
+            variant="primary"
+            onClick={handleClose}
+          >
+            送出
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }
