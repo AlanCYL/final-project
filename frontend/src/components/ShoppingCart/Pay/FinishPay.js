@@ -43,13 +43,13 @@ const FinishPay = () => {
               ></div>
             </div>
             <div className="d-flex mt-4 ">
-              <div className="me-4 ">
+              <div className="me-4 mb-8">
                 <Card />
               </div>
-              <div className="me-4">
+              <div className="me-4 mb-8">
                 <Card />
               </div>
-              <div className="me-4">
+              <div className="me-4 mb-8">
                 <Card />
               </div>
             </div>

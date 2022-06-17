@@ -1,12 +1,14 @@
 import React from 'react'
 import Header from '../../Header/Header'
+import Side from '../Side'
 
 const ConfirmReserveList = () => {
   return (
     <>
       <div className=" container my-6">
         <Header />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex ">
+          <Side />
           <div>
             <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
               <img
@@ -75,20 +77,6 @@ const ConfirmReserveList = () => {
                 </table>
               </div>
               {/* button */}
-              <div className="d-flex justify-content-between">
-                <a
-                  type="button"
-                  className="bg-info text-white px-4 py-2 ms-6 mt-4"
-                >
-                  返回購物車
-                </a>
-                <a
-                  type="button"
-                  className="bg-primary text-white px-4 py-2 me-5 mt-4"
-                >
-                  確定訂位
-                </a>
-              </div>
             </div>
           </div>
         </div>

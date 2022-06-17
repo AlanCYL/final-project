@@ -7,10 +7,10 @@ const ShoppingCart = () => {
     <>
       <Router>
         <Switch>
-          <Route path="/shoppingCart/ReserveCart">
+          <Route path="/shoppingCart">
             <ReserveCart />
           </Route>
-          <Route path="/shoppingCart">
+          <Route path="/shoppingCart/PayCart">
             <PayCart />
           </Route>
         </Switch>

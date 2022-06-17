@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../../Header/Header'
+import Card from '../../Card/Card'
 
 const FinishReserveList = () => {
   return (
@@ -45,17 +46,30 @@ const FinishReserveList = () => {
             </div>
           </div>
         </div>
-        {/*  */}
-        <div className="d-flex justify-content-around mt-4">
-          <a type="button" className="bg-info text-white px-4 py-2 ms-6 mt-4">
-            取消訂位
-          </a>
-          <a
-            type="button"
-            className="bg-primary text-white px-4 py-2 me-5 mt-4"
-          >
-            前往結帳
-          </a>
+        {/* reconmand */}
+        <div className="d-flex mt-6 justify-content-center">
+          <div
+            style={{ width: '30px', height: '20px' }}
+            className="bg-primary"
+          ></div>
+          <h5 className="mx-2" style={{ marginTop: '-2px' }}>
+            推薦開團
+          </h5>
+          <div
+            style={{ width: '30px', height: '20px' }}
+            className="bg-primary"
+          ></div>
+        </div>
+        <div className="d-flex mt-4 justify-content-center">
+          <div className="me-4 ">
+            <Card />
+          </div>
+          <div className="me-4 ">
+            <Card />
+          </div>
+          <div className="me-4 ">
+            <Card />
+          </div>
         </div>
       </div>
     </>

@@ -97,12 +97,7 @@ const PayList = () => {
                 <h6>NT$2080</h6>
               </div>
             </div>
-            <button
-              className="px-4 py-2  mt-5 bg-primary text-light"
-              style={{ marginLeft: '19rem' }}
-            >
-              前往結帳
-            </button>
+            {/* button */}
           </div>
         </div>
       </div>

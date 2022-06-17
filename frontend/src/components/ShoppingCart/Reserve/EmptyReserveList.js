@@ -1,4 +1,5 @@
 import React from 'react'
+import Side from '../Side'
 import Header from '../../Header/Header'
 
 const EmptyReserveList = () => {
@@ -6,13 +7,14 @@ const EmptyReserveList = () => {
     <>
       <div className=" container mb-6">
         <Header />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex">
+          <Side />
           <div>
             <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../../../image/shoppingCart/icongroup06.png')}
+                src={require('../../../image/shoppingCart/icongroup01.png')}
                 alt=""
               />
             </div>
@@ -27,9 +29,7 @@ const EmptyReserveList = () => {
                 />
               </div>
               <h4 className="mt-5">您的購物車中沒有商品</h4>
-              <button className="mt-4 bg-primary px-5 py-2 rounded ">
-                參團去
-              </button>
+              {/* button */}
             </div>
           </div>
         </div>

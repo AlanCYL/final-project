@@ -297,15 +297,6 @@ const ConfirmPay = () => {
               </div>
             </div>
             {/* button */}
-            <button className="px-4 py-2  mt-5 ms-6 bg-info text-light">
-              重選付款項目
-            </button>
-            <button
-              className="px-4 py-2  mt-5 bg-primary text-light"
-              style={{ marginLeft: '19rem', width: '140px' }}
-            >
-              送出
-            </button>
           </div>
         </div>
       </div>
