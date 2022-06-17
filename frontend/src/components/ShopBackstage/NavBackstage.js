@@ -3,12 +3,14 @@ import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
 import Tab from 'react-bootstrap/Tab'
 import Opengroup from './Opengroup'
+import GroupList from './GroupList'
+import DishList from './DishList'
 import ShopProfile from './ShopProfile'
 
 const BackstageNav = () => {
   return (
     <>
-      <div className="w-100">
+      <div className="w-100 h-100">
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={3} className="bg-secondary py-3 pe-0">
@@ -36,12 +38,12 @@ const BackstageNav = () => {
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey="fifth" className="text-center py-4">
-                    店家評價
+                    菜色清單
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
-            <Col sm={6} className="mx-auto my-5">
+            <Col sm={7} className="mx-auto my-5">
               <Tab.Content>
                 <Tab.Pane eventKey="first">
                   <ShopProfile />
@@ -49,9 +51,16 @@ const BackstageNav = () => {
                 <Tab.Pane eventKey="second">
                   <Opengroup />
                 </Tab.Pane>
-                <Tab.Pane eventKey="third">{/* <Sonnet /> */}</Tab.Pane>
+                <Tab.Pane
+                  eventKey="third"
+                  style={{ marginLeft: '-50px', marginRight: '-50px' }}
+                >
+                  <GroupList />
+                </Tab.Pane>
                 <Tab.Pane eventKey="forth">{/* <Sonnet /> */}</Tab.Pane>
-                <Tab.Pane eventKey="fifth">{/* <Sonnet /> */}</Tab.Pane>
+                <Tab.Pane eventKey="fifth">
+                  <DishList />
+                </Tab.Pane>
               </Tab.Content>
             </Col>
           </Row>
