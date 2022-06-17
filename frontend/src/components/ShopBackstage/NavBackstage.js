@@ -6,6 +6,7 @@ import Opengroup from './Opengroup'
 import GroupList from './GroupList'
 import DishList from './DishList'
 import ShopProfile from './ShopProfile'
+import OpenDish from './OpenDish'
 
 const BackstageNav = () => {
   return (
@@ -57,7 +58,9 @@ const BackstageNav = () => {
                 >
                   <GroupList />
                 </Tab.Pane>
-                <Tab.Pane eventKey="forth">{/* <Sonnet /> */}</Tab.Pane>
+                <Tab.Pane eventKey="forth">
+                  <OpenDish />
+                </Tab.Pane>
                 <Tab.Pane eventKey="fifth">
                   <DishList />
                 </Tab.Pane>

@@ -12,7 +12,11 @@ const DishList = () => {
           />
 
           <Card.Body>
-            <Card.Title>小籠包</Card.Title>
+            <div className="d-flex align-items-baseline justify-content-between">
+              <Card.Title>小籠包</Card.Title>
+              <p>價格：$100</p>
+            </div>
+
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
@@ -26,7 +30,10 @@ const DishList = () => {
             src={require('../../image/shopBackstage/dish/rice.png')}
           />
           <Card.Body>
-            <Card.Title>炒飯</Card.Title>
+            <div className="d-flex align-items-baseline justify-content-between">
+              <Card.Title>炒飯</Card.Title>
+              <p>價格：$200</p>
+            </div>
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
@@ -40,7 +47,10 @@ const DishList = () => {
             src={require('../../image/shopBackstage/dish/soup.png')}
           />
           <Card.Body>
-            <Card.Title>酸辣湯</Card.Title>
+            <div className="d-flex align-items-baseline justify-content-between">
+              <Card.Title>酸辣湯</Card.Title>
+              <p>價格：$150</p>
+            </div>
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
