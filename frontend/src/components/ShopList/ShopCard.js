@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Heart from './Heart'
 
 function ShopCard() {
   return (
     <>
-      <div class="hover01 ms-6">
+      <div className="hover01 ms-6">
         <div className="zoom-in">
           <Link to="#/">
             <div className="piczoom">
@@ -15,7 +16,10 @@ function ShopCard() {
               />
             </div>
           </Link>
-          <h5 className="mt-3 mx-auto">陶板屋</h5>
+          <div className=" d-flex mt-3">
+            <h5 className="me-auto">陶板屋</h5>
+            <Heart className="ms-auto" />
+          </div>
         </div>
       </div>
     </>
