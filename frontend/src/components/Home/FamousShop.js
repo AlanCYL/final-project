@@ -4,12 +4,12 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 //左右按鈕
 function FamousShop(props) {
   const cardWordSlider = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-  const slideWLeft = () => {
-    let slider = document.querySelector('.sliderw')
+  const slideHomeLeft = () => {
+    let slider = document.querySelector('.sliderHome')
     slider.scrollLeft = slider.scrollLeft + 500
   }
-  const slideWRight = () => {
-    let slider = document.querySelector('.sliderw')
+  const slideHomeRight = () => {
+    let slider = document.querySelector('.sliderHome')
     slider.scrollLeft = slider.scrollLeft - 500
   }
 
@@ -19,27 +19,39 @@ function FamousShop(props) {
         <MdChevronLeft
           className="slider-icon left bg-info"
           size={40}
-          onClick={slideWLeft}
+          onClick={slideHomeLeft}
         />
-        <div className="sliderw">
-          {cardWordSlider.map((v, i) => {
-            return (
-              <div key={i} className="d-inline-block p-4">
-                <div className="shop-box">
-                  <img
-                    className="img-fluid"
-                    src={require('../../image/home/logo/Kangyaolife.jpg')}
-                    alt=""
-                  />
-                </div>
-              </div>
-            )
-          })}
+        <div className="sliderHome d-flex">
+          <img
+            className="pe-3"
+            src={require('../../image/home/logo/Timhowan.jpg')}
+            alt=""
+          />
+          <img
+            className="pe-3"
+            src={require('../../image/home/logo/siammore.jpg')}
+            alt=""
+          />
+          <img
+            className="pe-3"
+            src={require('../../image/home/logo/kfc.jpg')}
+            alt=""
+          />
+          <img
+            className="pe-3"
+            src={require('../../image/home/logo/ippudo.jpg')}
+            alt=""
+          />
+          <img
+            className="pe-3"
+            src={require('../../image/home/logo/Kangyaolife.jpg')}
+            alt=""
+          />
         </div>
         <MdChevronRight
           className="slider-icon right bg-info"
           size={40}
-          onClick={slideWRight}
+          onClick={slideHomeRight}
         />
       </div>
       {/* <div className="w-100 h-100 famous-groups d-flex justify-content-center align-items-center"></div> */}

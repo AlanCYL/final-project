@@ -1,4 +1,4 @@
-.fampus {
+.famous {
 
   h3 {
     border-left: 8px solid #1E2188;
@@ -9,4 +9,26 @@
 
 .shop-box {
   width: 180px;
+}
+
+.sliderHome {
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  
+}
+
+.sliderHome::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-icon {
+  color: #FFB901;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-icon .left {
+  left: 0;
 }
