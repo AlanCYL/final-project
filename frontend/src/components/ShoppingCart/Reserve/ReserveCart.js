@@ -24,15 +24,16 @@ const ReserveCart = () => {
           <>
             <EmptyReserveList />
             <div className="d-flex flex-column align-items-center  w-100">
-              <button
-                className="mb-5 bg-primary px-5 py-2 rounded ms-9"
+              <a
+                type="button"
+                className="mb-5 bg-primary px-5 py-2 rounded ms-9 text-dark"
                 onClick={() => {
                   toggleStep(1)
                   window.scrollTo(0, 0)
                 }}
               >
                 參團去
-              </button>
+              </a>
             </div>
           </>
         ) : (
@@ -103,29 +104,17 @@ const ReserveCart = () => {
         {step === 3 ? (
           <>
             <FinishReserveList />
-            <div className="d-flex justify-content-center mb-5">
-              <div className="d-flex justify-content-around w-75">
-                <a
-                  type="button"
-                  className="bg-info text-white px-4 py-2 mt-4"
-                  onClick={() => {
-                    toggleStep(-3)
-                    window.scrollTo(0, 0)
-                  }}
-                >
-                  返回購物車
-                </a>
-                <a
-                  type="button"
-                  className="bg-primary text-white px-4 py-2 me-5 mt-4"
-                  onClick={() => {
-                    toggleStep(1)
-                    window.scrollTo(0, 0)
-                  }}
-                >
-                  前往結帳
-                </a>
-              </div>
+            <div className="d-flex flex-column align-items-center  w-100">
+              <Link
+                to="/memberCenter"
+                className="mb-5 bg-primary text-white  px-5 py-2 rounded ms-3"
+                onClick={() => {
+                  // toggleStep(1)
+                  window.scrollTo(0, 0)
+                }}
+              >
+                查看我的訂單
+              </Link>
             </div>
           </>
         ) : (

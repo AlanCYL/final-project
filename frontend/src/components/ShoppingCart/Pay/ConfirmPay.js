@@ -15,7 +15,7 @@ const ConfirmPay = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../../../image/shoppingCart/icongroup02.png')}
+                src={require('../../../image/shoppingCart/icongroup05.png')}
                 alt=""
               />
             </div>

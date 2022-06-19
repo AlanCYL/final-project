@@ -13,7 +13,7 @@ const FinishPay = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../../../image/shoppingCart/icongroup03.png')}
+                src={require('../../../image/shoppingCart/icongroup06.png')}
                 alt=""
               />
             </div>

@@ -12,7 +12,7 @@ const ReserveList = () => {
             <div className="w-75 ms-8 ">
               <img
                 className="w-75 pb-5 ms-6"
-                src={require('../../../image/shoppingCart/icongroup04.png')}
+                src={require('../../../image/shoppingCart/icongroup01.png')}
                 alt=""
               />
             </div>

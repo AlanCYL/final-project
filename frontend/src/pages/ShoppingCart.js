@@ -5,16 +5,7 @@ import PayCart from '../components/ShoppingCart/Pay/PayCart'
 const ShoppingCart = () => {
   return (
     <>
-      <Router>
-        <Switch>
-          <Route path="/shoppingCart">
-            <ReserveCart />
-          </Route>
-          <Route path="/shoppingCart/PayCart">
-            <PayCart />
-          </Route>
-        </Switch>
-      </Router>
+      <ReserveCart />
     </>
   )
 }

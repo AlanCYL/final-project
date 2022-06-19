@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-const Opengroup = () => {
+const Opengroup = (props) => {
   const goPath = useHistory()
   return (
     <>
@@ -58,7 +58,9 @@ const Opengroup = () => {
             variant="primary"
             className="w-25 mt-4"
             style={{ height: '40px' }}
-            onClick={() => goPath.push('/ShoppingCart')}
+            onClick={() => {
+              props.groupProps('third')
+            }}
           >
             <h5>送出</h5>
           </Button>
