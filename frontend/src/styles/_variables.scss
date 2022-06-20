@@ -1,3 +1,17 @@
+
+// 設置所有的輸入數字欄位不出現箭頭符號
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 //Color List:
 $primary: #FFB901;
 $secondary: #FFEECF;

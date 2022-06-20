@@ -21,7 +21,7 @@ const UpdateProfile = () => {
         <Overlay
           show={show}
           target={target}
-          placement="bottom"
+          placement="bottom-end"
           container={ref}
           containerPadding={20}
         >

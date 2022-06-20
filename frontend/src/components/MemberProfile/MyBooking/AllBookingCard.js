@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 const AllBookingCard = () => {
   return (
@@ -36,6 +37,9 @@ const AllBookingCard = () => {
                   <p className="progress-text mt-1">剩下3天</p>
                   <p className="progress-text mt-1">目標人數:10人</p>
                 </div>
+                <div className="d-flex justify-content-center">
+                  <Button variant="outline-warning">去付款</Button>
+                </div>
               </div>
             </div>
           </Col>
@@ -66,6 +70,9 @@ const AllBookingCard = () => {
                 <div className="d-flex justify-content-between">
                   <p className="progress-text mt-1">剩下3天</p>
                   <p className="progress-text mt-1">目標人數:10人</p>
+                </div>
+                <div className="d-flex justify-content-center">
+                  <Button variant="outline-warning">查看訂單</Button>
                 </div>
               </div>
             </div>
