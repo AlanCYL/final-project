@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import { Container, Row, Button, Form, Col } from 'react-bootstrap'
 import registerbanner from '../../image/shop/registerbanner.png'
@@ -6,54 +7,47 @@ import { API_URL } from '../../utils/config'
 
 function Register(props) {
   const { isShopLogin, setIsShopLogin } = props
-
-  const [shopMember, setShopMember] = useState({
-    name: '',
-    phone: '',
+  const [shopMember, setshopMember] = useState({
     account: '',
     password: '',
-    description: '',
-    address: '',
-    img: '',
   })
-
-  //錯誤訊息用
-  const [shopMemberError, setShopMemberError] = useState({
-    name: '',
-    phone: '',
+  //錯誤用
+  const [shopErrors, setShopErrors] = useState({
     account: '',
     password: '',
-    description: '',
-    address: '',
-    img: '',
   })
-
   function handleChange(e) {
-    setShopMember({ ...shopMember, [e.target.name]: e.target.value })
+    const newshopMember = {
+      ...shopMember,
+      [e.target.name]: e.target.value,
+    }
+    setshopMember(newshopMember)
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
     console.log(shopMember.name, shopMember.account)
-    // try {
-    //   let response = await axios.post(`${API_URL}/shop/register`, shopMember)
-    //   console.log(response.data)
-    // } catch (e) {
-    //   console.error(e)
-    // }
+    try {
+      let response = await axios.post(`${API_URL}/shop/register`, shopMember)
+      console.log(response.data)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
-  //擋掉泡泡訊息
-  function handleInvalid(e) {
+  const handleInvalid = (e) => {
+    //擋住泡泡訊息出現
     e.preventDefault()
-    console.log(e.target.validationMessage)
-    const newError = {
-      ...shopMemberError,
+    console.log(e.target.validationMessage) //錯誤訊息會在這裡
+    const newShopError = {
+      ...shopErrors,
       [e.target.name]: e.target.validationMessage,
     }
-    setShopMemberError(newError)
+    setShopErrors(newShopError)
   }
-
+  const handleFormChange = (e) => {
+    const newShopError = { ...shopErrors, [e.target.name]: '' }
+  }
   return (
     <>
       <div className="container-fulid banner">
@@ -63,7 +57,11 @@ function Register(props) {
         歡迎您!<span>Unii</span>期待眾多優秀的餐廳加入
       </h3>
       <Container className="mt-5 mb-5">
-        <Form onClick={handleSubmit}>
+        <Form
+          onSubmit={handleSubmit}
+          onInvalid={handleInvalid}
+          onChange={handleFormChange}
+        >
           <Row>
             <Col className="me-auto" md={6}>
               {/* <Form.Group className="mb-3">
@@ -172,19 +170,85 @@ function Register(props) {
                 <div className="px-5 py-3">
                   {['checkbox'].map((type) => (
                     <div key={`${type}`} className="mb-3">
-                      <Form.Check inline label="中式" name="1" type={type} />
-                      <Form.Check inline label="台式" name="2" type={type} />
-                      <Form.Check inline label="港式" name="3" type={type} />
-                      <Form.Check inline label="日式" name="4" type={type} />
-                      <Form.Check inline label="韓式" name="5" type={type} />
-                      <Form.Check inline label="泰式" name="6" type={type} />
-                      <Form.Check inline label="美式" name="7" type={type} />
-                      <Form.Check inline label="法式" name="8" type={type} />
-                      <Form.Check inline label="燒烤" name="9" type={type} />
-                      <Form.Check inline label="火鍋" name="10" type={type} />
-                      <Form.Check inline label="甜點" name="11" type={type} />
-                      <Form.Check inline label="吃到飽" name="12" type={type} />
-                      <Form.Check inline label="咖啡廳" name="13" type={type} />
+                      <Form.Check
+                        inline
+                        label="中式"
+                        name="type_id"
+                        vaiue="1"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="台式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="港式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="日式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="韓式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="泰式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="美式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="法式"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="燒烤"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="火鍋"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="甜點"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="吃到飽"
+                        name="type_id"
+                        type={type}
+                      />
+                      <Form.Check
+                        inline
+                        label="咖啡廳"
+                        name="type_id"
+                        type={type}
+                      />
                     </div>
                   ))}
                 </div>
