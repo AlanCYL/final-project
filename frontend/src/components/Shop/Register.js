@@ -5,6 +5,7 @@ import registerbanner from '../../image/shop/registerbanner.png'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
 
+
 function Register(props) {
   const { isShopLogin, setIsShopLogin } = props
   const [shopMember, setshopMember] = useState({
@@ -89,6 +90,7 @@ function Register(props) {
                   onChange={handleChange}
                   required
                 />
+                {shopErrors.account && shopErrors.account}
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>
@@ -169,7 +171,7 @@ function Register(props) {
                 </Form.Label>
                 <div className="px-5 py-3">
                   {['checkbox'].map((type) => (
-                    <div key={`${type}`} className="mb-3">
+                    <div key={`${type}`} className="mb-2">
                       <Form.Check
                         inline
                         label="中式"
@@ -258,8 +260,8 @@ function Register(props) {
                   店家封面縮圖<span>*</span>
                 </Form.Label>
                 <Form.Control
-                  type="img"
-                  name="confirmPassword"
+                  type="file"
+                  name="img"
                   placeholder="請再次填寫確認密碼"
                   className="mb-4"
                   defaultValue={shopMember.img}
