@@ -30,6 +30,9 @@ const Profile = () => {
         <div className="mb-4">
           <p>2022.05.16 開始加入 Unii</p>
         </div>
+        <div className="mb-4">
+          <button className="btn h6 btn-primary text-white">登出</button>
+        </div>
       </div>
     </>
   )

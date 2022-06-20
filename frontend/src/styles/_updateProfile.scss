@@ -19,10 +19,20 @@
     cursor: pointer;
   }
 }
-.change_pic{
-  img{
+.change_pic {
+  img {
     width: 5rem;
+    height: 5rem;
     border: 1px solid gray;
     cursor: pointer;
   }
+}
+
+.pic-dialog {
+  width: 25% !important;
+  top: 30%;
+  left:-8%;
+}
+.pic_modal-backdrop {
+  background-color: transparent;
 }

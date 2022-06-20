@@ -95,8 +95,8 @@ const Login = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>忘記密碼</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form>
+          <Modal.Body>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>
                 <h5>
@@ -109,17 +109,17 @@ const Login = (props) => {
                 autoFocus
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className="text-white"
-            variant="primary"
-            onClick={handleClose}
-          >
-            送出
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className="text-white"
+              variant="primary"
+              onClick={handleClose}
+            >
+              送出
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   )
