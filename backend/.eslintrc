@@ -1,9 +1,13 @@
 {
-  "extends": ["react-app"],
-  "plugins": ["prettier", "react-hooks"],
-  "rules": {
-    "prettier/prettier": "warn",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  }
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "rules": {}
 }
