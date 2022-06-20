@@ -13,7 +13,7 @@ const FinishReserveList = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5 me-5"
-                src={require('../../../image/shoppingCart/icongroup06.png')}
+                src={require('../../../image/shoppingCart/icongroup03.png')}
                 alt=""
               />
             </div>
@@ -35,12 +35,14 @@ const FinishReserveList = () => {
                 <div className="d-flex mt-4 pb-4 border-bottom">
                   <div className="ms-6">000001</div>
                   <div className="ms-5">鼎泰豐 (2022/06/17)</div>
-                  <div className="ms-5">人數 : 1</div>
+                  <div className="ms-5">價格：$200</div>
+                  <div className="ms-4 text-danger">(已成團)</div>
                 </div>
                 <div className="d-flex mt-4 pb-4 border-bottom">
                   <div className="ms-6">000002</div>
                   <div className="ms-5">夏慕尼 (2022/06/18)</div>
-                  <div className="ms-5">人數 : 1</div>
+                  <div className="ms-5">價格：$200</div>
+                  <div className="ms-4 text-danger">(未成團)</div>
                 </div>
               </div>
             </div>

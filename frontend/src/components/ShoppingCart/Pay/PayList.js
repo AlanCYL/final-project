@@ -12,7 +12,7 @@ const PayList = () => {
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
-                src={require('../../../image/shoppingCart/icongroup01.png')}
+                src={require('../../../image/shoppingCart/icongroup04.png')}
                 alt=""
               />
             </div>
