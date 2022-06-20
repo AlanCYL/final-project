@@ -1,24 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2022 年 06 月 17 日 23:31
--- 伺服器版本： 5.7.34
--- PHP 版本： 8.0.8
+-- 主機： 127.0.0.1
+-- 產生時間： 2022-06-20 09:32:26
+-- 伺服器版本： 10.4.24-MariaDB
+-- PHP 版本： 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- 資料庫： `project`
+-- 資料庫: `project`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +20,10 @@ SET time_zone = "+00:00";
 --
 -- 資料表結構 `coupon`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
   `id` int(30) UNSIGNED NOT NULL,
   `reason` varchar(50) NOT NULL,
@@ -48,7 +45,10 @@ INSERT INTO `coupon` (`id`, `reason`, `price`) VALUES
 --
 -- 資料表結構 `dish`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `dish`;
 CREATE TABLE `dish` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -71,7 +71,10 @@ INSERT INTO `dish` (`id`, `name`, `image`, `description`, `shop_id`) VALUES
 --
 -- 資料表結構 `groups`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(5) UNSIGNED NOT NULL,
   `start_time` date NOT NULL,
@@ -79,10 +82,10 @@ CREATE TABLE `groups` (
   `eating_date` date NOT NULL,
   `eating_time` int(30) NOT NULL,
   `now_num` int(30) NOT NULL,
-  `goal_num` int(30) DEFAULT '0',
+  `goal_num` int(30) DEFAULT 0,
   `price` int(6) UNSIGNED NOT NULL,
   `shop_id` int(20) NOT NULL,
-  `established` int(3) NOT NULL DEFAULT '0'
+  `established` int(3) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -122,7 +125,10 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 --
 -- 資料表結構 `groups_and_dish`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `groups_and_dish`;
 CREATE TABLE `groups_and_dish` (
   `id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
@@ -144,7 +150,10 @@ INSERT INTO `groups_and_dish` (`id`, `groups_id`, `dish_id`) VALUES
 --
 -- 資料表結構 `level_name`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `level_name`;
 CREATE TABLE `level_name` (
   `id` int(2) UNSIGNED NOT NULL,
   `name` varchar(10) NOT NULL
@@ -165,7 +174,10 @@ INSERT INTO `level_name` (`id`, `name`) VALUES
 --
 -- 資料表結構 `orders`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -187,7 +199,10 @@ INSERT INTO `orders` (`id`, `user_id`, `groups_id`, `payable`) VALUES
 --
 -- 資料表結構 `receipt`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `receipt`;
 CREATE TABLE `receipt` (
   `id` int(11) NOT NULL,
   `orders_id` int(11) NOT NULL,
@@ -199,7 +214,10 @@ CREATE TABLE `receipt` (
 --
 -- 資料表結構 `shop`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `shop`;
 CREATE TABLE `shop` (
   `id` int(3) NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -237,7 +255,10 @@ INSERT INTO `shop` (`id`, `name`, `account`, `password`, `phone`, `address`, `de
 --
 -- 資料表結構 `shop_and_type`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `shop_and_type`;
 CREATE TABLE `shop_and_type` (
   `id` int(100) NOT NULL,
   `shop_id` int(100) NOT NULL,
@@ -249,7 +270,10 @@ CREATE TABLE `shop_and_type` (
 --
 -- 資料表結構 `type`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `type`;
 CREATE TABLE `type` (
   `id` int(3) NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -276,7 +300,11 @@ INSERT INTO `type` (`id`, `name`) VALUES
 --
 -- 資料表結構 `user`
 --
+-- 建立時間： 2022-06-18 02:26:28
+-- 最後更新： 2022-06-18 02:26:29
+--
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -286,7 +314,8 @@ CREATE TABLE `user` (
   `phone` varchar(100) NOT NULL,
   `bir` date NOT NULL,
   `mail` varchar(30) NOT NULL,
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `img` int(1) UNSIGNED NOT NULL DEFAULT 1,
+  `level` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -294,33 +323,36 @@ CREATE TABLE `user` (
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `identity_card`, `password`, `nick_name`, `phone`, `bir`, `mail`, `level`, `create_time`) VALUES
-(1, '野比大雄', 'F124596125', '827ccb0eea8a706c4c34a16891f84e', '大雄', '0975136088', '1998-04-14', 'nobita1@doraemon.com', 3, '2022-04-18 20:50:51'),
-(2, '野原新之助', 'H142578953', '827ccb0eea8a706c4c34a16891f84e', '小新', '0978153644', '1978-07-08', 'shin@shin-chan.com', 3, '2022-04-19 09:01:05'),
-(3, '野原美冴', 'A221047856', '827ccb0eea8a706c4c34a16891f84e', '大屁股麻馬', '0932156744', '1980-05-15', 'misae@shin-chan.com', 4, '2022-04-19 13:41:39'),
-(4, '哆啦A夢', 'H154789356', '827ccb0eea8a706c4c34a16891f84e', '小叮噹', '0936157428', '1995-10-23', 'doraemon@doraemon.com', 1, '2022-04-19 13:43:32'),
-(5, '野原廣志', 'Y154769853', '827ccb0eea8a706c4c34a16891f84e', '臭腳丫把拔', '0914758963', '1986-12-25', 'hiroshi@shin-chan.com', 1, '2022-04-19 13:44:42'),
-(6, '源靜香', 'N221698743', '827ccb0eea8a706c4c34a16891f84e', '靜香', '0963258419', '1996-02-18', 'shizuka@doraemon.com', 4, '2022-04-19 13:47:04'),
-(7, '剛田武', 'L126957413', '827ccb0eea8a706c4c34a16891f84e', '胖虎', '0985136489', '1995-06-15', 'takeshi@doraemon.com', 3, '2022-04-19 13:49:06'),
-(8, 'MiuPig', 'H126357489', '827ccb0eea8a706c4c34a16891f84e', '11111', '097514645', '1954-12-31', 'miu@pig.com', 2, '2022-04-19 16:43:36'),
-(9, 'MiuPig', 'F125984653', '827ccb0eea8a706c4c34a16891f84e', '1111111', '097514855', '1985-05-27', 'miu@pig.com', 2, '2022-04-19 16:46:08'),
-(10, 'magggie', 'F125846951', '827ccb0eea8a706c4c34a16891f84e', 'maggie', '0974156388', '1998-06-14', 'miu@pig.com', 2, '2022-04-19 16:50:58'),
-(11, '12345', 'H147523698', '827ccb0eea8a706c4c34a16891f84e', '123', '091456789', '1995-08-08', 'akosakposkapo@gmail.com', 2, '2022-04-20 12:47:25'),
-(12, '12345', 'H124596315', '827ccb0eea8a706c4c34a16891f84e', '12345', '097513544', '1999-01-01', 'miu', 2, '2022-04-20 13:31:08'),
-(13, '陶1S', 'H224591756', '827ccb0eea8a706c4c34a16891f84e', '陶樂比', '0975148566', '1993-09-07', 'taolebe@dreamland.com', 1, '2022-04-21 17:36:12'),
-(14, 'MiuMiu', 'H124695123', '827ccb0eea8a706c4c34a16891f84e', '12345', '0975148522', '1994-05-09', 'miu@pig.com', 1, '2022-04-21 17:56:36');
+INSERT INTO `user` (`id`, `name`, `identity_card`, `password`, `nick_name`, `phone`, `bir`, `mail`, `img`, `level`, `create_time`) VALUES
+(1, '野比大雄', 'F124596125', '827ccb0eea8a706c4c34a16891f84e', '大雄', '0975136088', '1998-04-14', 'nobita1@doraemon.com', 1, 3, '2022-04-18 20:50:51'),
+(2, '野原新之助', 'H142578953', '827ccb0eea8a706c4c34a16891f84e', '小新', '0978153644', '1978-07-08', 'shin@shin-chan.com', 1, 3, '2022-04-19 09:01:05'),
+(3, '野原美冴', 'A221047856', '827ccb0eea8a706c4c34a16891f84e', '大屁股麻馬', '0932156744', '1980-05-15', 'misae@shin-chan.com', 1, 4, '2022-04-19 13:41:39'),
+(4, '哆啦A夢', 'H154789356', '827ccb0eea8a706c4c34a16891f84e', '小叮噹', '0936157428', '1995-10-23', 'doraemon@doraemon.com', 1, 1, '2022-04-19 13:43:32'),
+(5, '野原廣志', 'Y154769853', '827ccb0eea8a706c4c34a16891f84e', '臭腳丫把拔', '0914758963', '1986-12-25', 'hiroshi@shin-chan.com', 1, 1, '2022-04-19 13:44:42'),
+(6, '源靜香', 'N221698743', '827ccb0eea8a706c4c34a16891f84e', '靜香', '0963258419', '1996-02-18', 'shizuka@doraemon.com', 1, 4, '2022-04-19 13:47:04'),
+(7, '剛田武', 'L126957413', '827ccb0eea8a706c4c34a16891f84e', '胖虎', '0985136489', '1995-06-15', 'takeshi@doraemon.com', 1, 3, '2022-04-19 13:49:06'),
+(8, 'MiuPig', 'H126357489', '827ccb0eea8a706c4c34a16891f84e', '11111', '097514645', '1954-12-31', 'miu@pig.com', 1, 2, '2022-04-19 16:43:36'),
+(9, 'MiuPig', 'F125984653', '827ccb0eea8a706c4c34a16891f84e', '1111111', '097514855', '1985-05-27', 'miu@pig.com', 1, 2, '2022-04-19 16:46:08'),
+(10, 'magggie', 'F125846951', '827ccb0eea8a706c4c34a16891f84e', 'maggie', '0974156388', '1998-06-14', 'miu@pig.com', 1, 2, '2022-04-19 16:50:58'),
+(11, '12345', 'H147523698', '827ccb0eea8a706c4c34a16891f84e', '123', '091456789', '1995-08-08', 'akosakposkapo@gmail.com', 1, 2, '2022-04-20 12:47:25'),
+(12, '12345', 'H124596315', '827ccb0eea8a706c4c34a16891f84e', '12345', '097513544', '1999-01-01', 'miu', 1, 2, '2022-04-20 13:31:08'),
+(13, '陶1S', 'H224591756', '827ccb0eea8a706c4c34a16891f84e', '陶樂比', '0975148566', '1993-09-07', 'taolebe@dreamland.com', 1, 1, '2022-04-21 17:36:12'),
+(14, 'MiuMiu', 'H124695123', '827ccb0eea8a706c4c34a16891f84e', '12345', '0975148522', '1994-05-09', 'miu@pig.com', 1, 1, '2022-04-21 17:56:36');
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `user_and_coupon`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `user_and_coupon`;
 CREATE TABLE `user_and_coupon` (
   `id` int(30) NOT NULL,
   `coupon_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
-  `valid` tinyint(2) NOT NULL DEFAULT '1'
+  `valid` tinyint(2) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -342,7 +374,10 @@ INSERT INTO `user_and_coupon` (`id`, `coupon_id`, `user_id`, `valid`) VALUES
 --
 -- 資料表結構 `user_shop`
 --
+-- 建立時間： 2022-06-18 02:24:14
+--
 
+DROP TABLE IF EXISTS `user_shop`;
 CREATE TABLE `user_shop` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -519,7 +554,3 @@ ALTER TABLE `user_and_coupon`
 ALTER TABLE `user_shop`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
