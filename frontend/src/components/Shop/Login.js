@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container, Row, Button, Form, Col } from 'react-bootstrap'
 import shoploginvideo from '../../image/shop/shoploginvideo.mp4'
 
 function Login(props) {
@@ -24,6 +25,7 @@ function Login(props) {
           </video>
           {/* <div className="video-viewpoint position-relative"></div> */}
         </div>
+        <Col lg></Col>
         <div className="col-md-12 col-lg-5">
           <div className="form-size mt-7 ms-6">
             <h2 className="text-center mb-5">店家登入</h2>
@@ -33,7 +35,11 @@ function Login(props) {
                 <label className="form-label" htmlFor="">
                   <h5>帳號</h5>
                 </label>
-                <input type="email" className="form-control form-control-lg" />
+                <input
+                  type="email"
+                  className="form-control form-control-lg"
+                  required
+                />
               </div>
 
               {/* 密碼 */}
@@ -44,6 +50,7 @@ function Login(props) {
                 <input
                   type="password"
                   className="form-control form-control-lg"
+                  required
                 />
               </div>
 

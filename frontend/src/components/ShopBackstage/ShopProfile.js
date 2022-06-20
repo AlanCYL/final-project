@@ -12,7 +12,7 @@ function ShopProfile() {
               <Col className="mt-4 ms-auto col-4 ">
                 <div className="img-box ms-auto mt-3">
                   <img
-                    src={require('../../image/home/logo/Dintaifung.jpg')}
+                    src={require('../../image/shopList/DinTaiFung-1.jpg')}
                     alt=""
                   />
                 </div>
