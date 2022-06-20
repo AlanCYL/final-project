@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 const BackstageNav = (props) => {
   console.log(props)
-  const [selectedKey, setSelectedKey] = useState('third')
+  const [selectedKey, setSelectedKey] = useState('first')
   function handleGroupProps(key) {
     window.scrollTo(0, 0)
     setSelectedKey(key)
