@@ -32,6 +32,10 @@ app.get('/', (request, respond, next) => {
 const shopRegister = require('./routers/shopRegister');
 app.use('/api/shop', shopRegister);
 
+//shoBackstage
+const ShopBackstage = require('./routers/shopBackstage');
+app.use('/api/shopbackstage', ShopBackstage);
+
 //===============================================================以下是錯誤處理
 //404
 app.use((req, res, next) => {
