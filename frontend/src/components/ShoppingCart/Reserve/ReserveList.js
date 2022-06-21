@@ -25,7 +25,15 @@ const ReserveList = (props) => {
         console.log(e)
       })
   }, [])
-
+  function getEatTimeString(i) {
+    if (data[i].eating_time === 1) {
+      return '午餐12:00'
+    } else if (data[i].eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
   return (
     <>
       <div className=" container my-6">
@@ -70,7 +78,7 @@ const ReserveList = (props) => {
                           />
                         </td>
                         <td className="py-5">
-                          {data[i].eating_date} {data[i].eating_time}
+                          {data[i].eating_date} {getEatTimeString(i)}
                         </td>
                         <td className="py-5">{data[i].now_num}</td>
                         <td className="py-5">{data[i].goal_num}</td>
