@@ -39,19 +39,27 @@ const uploader = multer({
   },
 });
 router.post('/register', uploader.single('img'), async (request, respond, next) => {
-  console.log('上傳圖片', request.file);
+  // console.log('上傳圖片', request.file);
 
   //存入資料庫
   let img = request.file ? request.file.filename : '';
-  let [result] = await pool.execute('INSERT INTO shop (name,phone,account,password,description,img) VALUES (?, ?, ?, ?, ?,?)', [
+  let [result] = await pool.execute('INSERT INTO shop (name,phone,account,password,description,img,address) VALUES (?, ?, ?, ?, ?,?,?)', [
     request.body.name,
     request.body.phone,
     request.body.account,
     request.body.password,
     request.body.description,
+    request.body.address,
     img,
   ]);
+
+  for (let i = 0; i < request.body.type_id.length; i++) {
+    let [cate] = await pool.execute('INSERT INTO shop_and_type (type_id) VALUES (?)', [request.body.type_id[i]]);
+    console.log('存入的資料:', cate);
+  }
+
   console.log('存入的資料:', result);
+
   respond.json({ result: 'ok' });
 });
 module.exports = router;
