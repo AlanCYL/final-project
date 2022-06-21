@@ -10,6 +10,7 @@ let pool = mysql
     database: process.env.DB_NAME,
     //為了pool 新增參數 設定上限10條連線
     connectionLimit: 10,
+    dateStrings: true,
   })
   .promise();
 

@@ -18,6 +18,7 @@ app.use(express.json());
 
 //nodejs內建套件用來處理路徑
 const path = require('path');
+
 //處理靜態資料 不指定網址 ex.使用者上傳圖片 http://localhost:3001/shopImg/DinTaiFung-1.jpg
 app.use(express.static(path.join(__dirname, 'assets')));
 
@@ -39,6 +40,10 @@ app.use('/api/shopbackstage', ShopBackstage);
 //shoppingcart
 const shoppingCart = require('./routers/shoppingCart');
 app.use('/api/shoppingCart', shoppingCart);
+
+//memberRegister & Login
+const memberRegister = require('./routers/memberRegister');
+app.use('/api/member', memberRegister);
 
 //===============================================================以下是錯誤處理
 //404
