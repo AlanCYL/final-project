@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter as Link } from 'react-router-dom'
 import EmptyReserveList from './EmptyReserveList'
 import ReserveList from './ReserveList'
 import ConfirmReserveList from './ConfirmReserveList'
@@ -12,6 +12,7 @@ import { API_URL } from '../../../utils/config'
 const ReserveCart = () => {
   const [step, setStep] = useState(0)
   const [inputVal, setInputVal] = useState('')
+  // 會員加入購物車，要抓到會員的id
   const [user, setUser] = useState(1)
   useEffect(() => {
     fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
@@ -33,9 +34,6 @@ const ReserveCart = () => {
   function toggleStep(val) {
     setStep(step + val)
   }
-  function submit() {
-    console.log(inputVal)
-  }
 
   return (
     <>
@@ -48,7 +46,7 @@ const ReserveCart = () => {
                 type="button"
                 className="mb-5 bg-primary px-5 py-2 rounded ms-9 text-dark"
                 onClick={() => {
-                  toggleStep(1)
+                  toggleStep(2)
                   window.scrollTo(0, 0)
                 }}
               >
@@ -61,7 +59,7 @@ const ReserveCart = () => {
         )}
         {step === 1 ? (
           <>
-            <ReserveList />
+            <ReserveList userID={user} />
             <div className="d-flex justify-content-end">
               <div className="d-flex justify-content-between w-75">
                 <a

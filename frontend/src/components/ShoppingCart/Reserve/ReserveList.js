@@ -1,7 +1,31 @@
 import Header from '../../Header/Header'
 import Side from '../Side'
+import axios from 'axios'
+import { API_URL } from '../../../utils/config'
+import { useEffect, useState } from 'react'
 
-const ReserveList = () => {
+const ReserveList = (props) => {
+  // console.log(props)
+  // const { userID } = props
+
+  const [data, setData] = useState([])
+  // const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
+  useEffect(() => {
+    fetch(`${API_URL}/shoppingcart/reservelist?userID=${props.userID}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        /*接到response data後要做的事情*/
+        //console.log(res.result[0])
+        setData(res.result)
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
+
   return (
     <>
       <div className=" container my-6">
@@ -22,90 +46,44 @@ const ReserveList = () => {
                 <table class="table">
                   <thead class="">
                     <tr>
-                      <th>
-                        全選
-                        <input type="checkbox" />
-                      </th>
+                      <th></th>
                       <th>開團店家</th>
                       <th>參團時間</th>
+                      <th>現在人數</th>
+                      <th>目標人數</th>
                       <th>價格</th>
-                      <th>人數</th>
-                      <th>小計</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="tr-hover">
-                      <td className="py-5">
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        <img
-                          className="logo py-4"
-                          src={require('../../../image/shoppingCart/d.png')}
-                          alt=""
-                        />
-                      </td>
-                      <td className="py-5">2022/06/17 中午12:00</td>
-                      <td className="py-5">$1280</td>
-                      <td className="py-5">1</td>
-                      <td className="py-5">NT$1280</td>
-                      <td className="py-5">
-                        <img
-                          className="delete"
-                          src={require('../../../image/shoppingCart/delete.png')}
-                          alt=""
-                        />
-                      </td>
-                    </tr>
-
-                    <tr className="tr-hover">
-                      <td className="py-5">
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        <img
-                          className="logo py-4"
-                          src={require('../../../image/shoppingCart/d.png')}
-                          alt=""
-                        />
-                      </td>
-                      <td className="py-5">2022/06/17 中午12:00</td>
-                      <td className="py-5">$1280</td>
-                      <td className="py-5">1</td>
-                      <td className="py-5">NT$1280</td>
-                      <td className="py-5">
-                        <img
-                          className="delete"
-                          src={require('../../../image/shoppingCart/delete.png')}
-                          alt=""
-                        />
-                      </td>
-                    </tr>
-
-                    <tr className="tr-hover">
-                      <td className="py-5">
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        <img
-                          className="logo py-4"
-                          src={require('../../../image/shoppingCart/d.png')}
-                          alt=""
-                        />
-                      </td>
-                      <td className="py-5">2022/06/17 中午12:00</td>
-                      <td className="py-5">$1280</td>
-                      <td className="py-5">1</td>
-                      <td className="py-5">NT$1280</td>
-                      <td className="py-5">
-                        <img
-                          className="delete"
-                          src={require('../../../image/shoppingCart/delete.png')}
-                          alt=""
-                        />
-                      </td>
-                    </tr>
+                    {/* map */}
+                    {data.map((item, i) => (
+                      <tr className="tr-hover">
+                        <td className="py-5">
+                          <input type="checkbox" />
+                        </td>
+                        <td>
+                          <img
+                            className="logo py-4"
+                            src={require('../../../image/shoppingCart/d.png')}
+                            alt=""
+                          />
+                        </td>
+                        <td className="py-5">
+                          {data[i].eating_date} {data[i].eating_time}
+                        </td>
+                        <td className="py-5">{data[i].now_num}</td>
+                        <td className="py-5">{data[i].goal_num}</td>
+                        <td className="py-5">${data[i].price}</td>
+                        <td className="py-5">
+                          <img
+                            className="delete"
+                            src={require('../../../image/shoppingCart/delete.png')}
+                            alt=""
+                          />
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

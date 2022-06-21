@@ -8,6 +8,8 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 
 const Opengroup = (props) => {
+  // console.log(props)
+  const { data } = props
   // const goPath = useHistory()
   const [group, setGroup] = useState({
     startTime: '',
@@ -16,6 +18,7 @@ const Opengroup = (props) => {
     eatingTime: '',
     goalNum: '',
     price: '',
+    shopid: `${data[0].id}`,
   })
   const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
   const [dish, setDish] = useState([])
@@ -42,6 +45,16 @@ const Opengroup = (props) => {
         params
       )
       console.log(response.data)
+      setGroup({
+        startTime: '',
+        endTime: '',
+        eatingDate: '',
+        eatingTime: '',
+        goalNum: '',
+        price: '',
+      })
+      setDish([])
+      props.groupProps('third')
     } catch (e) {
       console.error(e)
     }
@@ -59,7 +72,7 @@ const Opengroup = (props) => {
             class="border border-dark"
             style={{ height: '40px', paddingLeft: '10px', paddingTop: '5px' }}
           >
-            鼎泰豐
+            {data ? data[0].name : ''}
           </div>
         </Form.Group>
 

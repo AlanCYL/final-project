@@ -1,11 +1,39 @@
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import axios from 'axios'
+import { API_URL } from '../../utils/config'
 
-const OpenDish = () => {
-  const goPath = useHistory()
+const OpenDish = (props) => {
+  // const goPath = useHistory()
+  const [upDish, setUpDish] = useState({
+    dishName: '',
+    dishPrice: '',
+    dishDes: '',
+    dishImg: '',
+  })
+  async function dishSubmit(e) {
+    e.preventDefault()
+    try {
+      // const params = upDish
+      let response = await axios.post(
+        `${API_URL}/shopbackstage/opendish`,
+        upDish
+      )
+      console.log(response.data)
+      setUpDish({
+        dishName: '',
+        dishPrice: '',
+        dishDes: '',
+        dishImg: '',
+      })
+      props.groupProps('fifth')
+    } catch (e) {
+      console.error(e)
+    }
+  }
   return (
     <>
       <Form>
@@ -21,11 +49,23 @@ const OpenDish = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>菜色名稱</Form.Label>
-          <Form.Control type="text" placeholder="請輸入菜色名稱" />
+          <Form.Control
+            type="text"
+            placeholder="請輸入菜色名稱"
+            value={upDish.dishName}
+            onChange={(e) => setUpDish({ ...upDish, dishName: e.target.value })}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>菜色價格</Form.Label>
-          <Form.Control type="text" placeholder="Password" />
+          <Form.Control
+            type="text"
+            placeholder="請輸入菜色價格"
+            value={upDish.dishPrice}
+            onChange={(e) =>
+              setUpDish({ ...upDish, dishPrice: e.target.value })
+            }
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>菜色描述</Form.Label>
@@ -34,16 +74,31 @@ const OpenDish = () => {
               as="textarea"
               placeholder="Leave a comment here"
               style={{ height: '100px' }}
+              value={upDish.dishDes}
+              onChange={(e) =>
+                setUpDish({ ...upDish, dishDes: e.target.value })
+              }
             />
           </FloatingLabel>
+        </Form.Group>
+        <Form.Group controlId="formFileMultiple" className="mb-3">
+          <Form.Label>上傳照片</Form.Label>
+          <Form.Control
+            type="file"
+            multiple
+            value={upDish.dishImg}
+            onChange={(e) => setUpDish({ ...upDish, dishImg: e.target.value })}
+            //
+          />
         </Form.Group>
 
         <div className="d-flex justify-content-end ">
           <Button
+            type="submit"
             variant="primary"
             className="w-25 mt-4"
             style={{ height: '40px' }}
-            onClick={() => goPath.push('/ShoppingCart')}
+            onClick={dishSubmit}
           >
             <h5>送出</h5>
           </Button>

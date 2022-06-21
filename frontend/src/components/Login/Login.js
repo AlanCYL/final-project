@@ -37,7 +37,7 @@ const Login = (props) => {
                     className="form-control"
                     placeholder="name@example.com"
                   />
-                  <label for="floatingInput">身分證字號(帳號)</label>
+                  <label htmlFor="floatingInput">身分證字號(帳號)</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -46,12 +46,12 @@ const Login = (props) => {
                     id="floatingPassword"
                     placeholder="Password"
                   />
-                  <label for="floatingPassword">密碼</label>
+                  <label htmlFor="floatingPassword">密碼</label>
                 </div>
                 <div className="form-check mb-3">
                   <label
                     className="form-check-label me-5"
-                    for="rememberPasswordCheck"
+                    htmlFor="rememberPasswordCheck"
                   >
                     <input
                       className="form-check-input"

@@ -7,7 +7,8 @@ import GroupList from './GroupList'
 import DishList from './DishList'
 import ShopProfile from './ShopProfile'
 import OpenDish from './OpenDish'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { API_URL } from '../../utils/config'
 
 const BackstageNav = (props) => {
   console.log(props)
@@ -16,6 +17,22 @@ const BackstageNav = (props) => {
     window.scrollTo(0, 0)
     setSelectedKey(key)
   }
+  const [shopID, setShopID] = useState(1)
+  const [data, setData] = useState('')
+  useEffect(() => {
+    fetch(`${API_URL}/shopbackstage/search?shopID=${shopID}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        /*接到response data後要做的事情*/
+        setData(res.result)
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
   return (
     <>
       <div className="w-100 h-100">
@@ -77,7 +94,7 @@ const BackstageNav = (props) => {
                   <ShopProfile />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <Opengroup groupProps={handleGroupProps} />
+                  <Opengroup groupProps={handleGroupProps} data={data} />
                 </Tab.Pane>
                 <Tab.Pane
                   eventKey="third"
@@ -86,7 +103,7 @@ const BackstageNav = (props) => {
                   <GroupList />
                 </Tab.Pane>
                 <Tab.Pane eventKey="forth">
-                  <OpenDish />
+                  <OpenDish groupProps={handleGroupProps} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fifth">
                   <DishList />
