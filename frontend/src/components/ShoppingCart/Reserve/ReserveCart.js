@@ -7,16 +7,36 @@ import PayList from '../Pay/PayList'
 import ConfirmPay from '../Pay/ConfirmPay'
 import FinishPay from '../Pay/FinishPay'
 import React, { useEffect, useState } from 'react'
+import { API_URL } from '../../../utils/config'
 
 const ReserveCart = () => {
   const [step, setStep] = useState(0)
   const [inputVal, setInputVal] = useState('')
+  const [user, setUser] = useState(1)
+  useEffect(() => {
+    fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
+      .then((res) => res.json())
+      .then((res) => {
+        /*接到response data後要做的事情*/
+        if (res.result.length === 0) {
+          setStep(0)
+        } else {
+          setStep(1)
+        }
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
+
   function toggleStep(val) {
     setStep(step + val)
   }
   function submit() {
     console.log(inputVal)
   }
+
   return (
     <>
       <div>

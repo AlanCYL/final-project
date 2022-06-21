@@ -36,6 +36,10 @@ app.use('/api/shop', shopRegister);
 const ShopBackstage = require('./routers/shopBackstage');
 app.use('/api/shopbackstage', ShopBackstage);
 
+//shoppingcart
+const shoppingCart = require('./routers/shoppingCart');
+app.use('/api/shoppingCart', shoppingCart);
+
 //===============================================================以下是錯誤處理
 //404
 app.use((req, res, next) => {
