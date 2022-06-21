@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
+import { useEffect } from 'react'
+import Swal from 'sweetalert2'
 
 const Register = (props) => {
   const { isLoginPage, setIsLoginPage } = props
@@ -21,32 +23,89 @@ const Register = (props) => {
     bir: '',
     mail: '',
   })
+
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value })
   }
+  useEffect(() => {
+    if (member.password !== member.re_password) {
+      setPasswordCheck(true)
+    } else {
+      setPasswordCheck(false)
+    }
+  }, [member.re_password, member.password])
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget
     event.preventDefault()
 
+    if (member.password !== member.re_password) {
+      event.preventDefault()
+      event.stopPropagation()
+      setPasswordCheck(true)
+      Swal.fire({
+        icon: 'error',
+        title: '密碼不一致',
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      return
+    }
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
       setValidated(true)
-      return
-    } else if (member.password !== member.re_password) {
-      event.preventDefault()
-      event.stopPropagation()
-      setPasswordCheck(true)
-      console.log(123)
+      Swal.fire({
+        icon: 'error',
+        title: '請確認輸入資料是否正確',
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
       return
     }
 
     try {
       let response = await axios.post(`${API_URL}/member/register`, member)
       console.log(response.data)
+      Swal.fire({
+        icon: 'success',
+        title: '註冊成功，快去參團吧!',
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      await setTimeout(setIsLoginPage(true), 1500)
     } catch (e) {
-      console.error(e)
+      // console.log(e.response.data.error)
+      Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
     }
   }
   return (
@@ -61,7 +120,7 @@ const Register = (props) => {
                 <Row className="mb-3">
                   <Form.Group as={Col} md="3" controlId="validationName">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="name"
                       label="會員姓名"
                       className="mb-3"
                     >
@@ -77,7 +136,7 @@ const Register = (props) => {
                   </Form.Group>
                   <Form.Group as={Col} md="3" controlId="validationId">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="identity_card"
                       label="身分證字號"
                       className="mb-3"
                     >
@@ -93,7 +152,7 @@ const Register = (props) => {
                   </Form.Group>
                   <Form.Group as={Col} md="3" controlId="validationNickname">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="nick_name"
                       label="暱稱"
                       className="mb-3"
                     >
@@ -109,7 +168,7 @@ const Register = (props) => {
                   </Form.Group>
                   <Form.Group as={Col} md="3" controlId="validationBirthday">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="bir"
                       label="生日"
                       className="mb-3"
                     >
@@ -127,7 +186,7 @@ const Register = (props) => {
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6" controlId="validationPassword">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="password"
                       label="會員密碼"
                       className="mb-3"
                     >
@@ -144,11 +203,12 @@ const Register = (props) => {
 
                   <Form.Group as={Col} md="6" controlId="validationRePassword">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="re_password"
                       label="請再次輸入密碼"
                       className="mb-3"
                     >
                       <Form.Control
+                        controlId="re_password_check"
                         required
                         type="password"
                         placeholder="請再次輸入密碼"
@@ -166,7 +226,7 @@ const Register = (props) => {
                 <Row className="mb-3 justify-content-around">
                   <Form.Group as={Col} md="4" controlId="validationTel">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="phone"
                       label="連絡電話"
                       className="mb-3"
                     >
@@ -183,7 +243,7 @@ const Register = (props) => {
 
                   <Form.Group as={Col} md="8" controlId="validationEmail">
                     <FloatingLabel
-                      controlId="floatingInput"
+                      controlId="mail"
                       label="請輸入電子郵件"
                       className="mb-3"
                     >
