@@ -53,12 +53,18 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
     img,
   ]);
 
+  //抓shop最後一筆資料
+  const [newShop] = await pool.execute('select id from shop order by id desc limit 1');
+
+  console.log('最後一筆id:', newShop); //[ { id: 15 } ]
+  console.log(newShop[0].id);
+
   for (let i = 0; i < request.body.type_id.length; i++) {
-    let [cate] = await pool.execute('INSERT INTO shop_and_type (type_id) VALUES (?)', [request.body.type_id[i]]);
-    console.log('存入的資料:', cate);
+    let [cate] = await pool.execute('INSERT INTO shop_and_type (shop_id,type_id) VALUES (?,?)', [newShop[0].id, request.body.type_id[i]]);
+    // console.log('存入的資料:', cate);
   }
 
-  console.log('存入的資料:', result);
+  // console.log('存入的資料:', result);
 
   respond.json({ result: 'ok' });
 });
