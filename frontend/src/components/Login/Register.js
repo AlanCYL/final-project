@@ -27,6 +27,7 @@ const Register = (props) => {
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget
+    event.preventDefault()
 
     if (form.checkValidity() === false) {
       event.preventDefault()
