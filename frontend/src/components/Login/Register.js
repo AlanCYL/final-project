@@ -2,22 +2,42 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import axios from 'axios'
+import { API_URL } from '../../utils/config'
 
 const Register = (props) => {
   const { isLoginPage, setIsLoginPage } = props
   const [validated, setValidated] = useState(false)
+  const [member, setMember] = useState({
+    name: '',
+    identity_card: '',
+    password: '',
+    nick_name: '',
+    phone: '',
+    bir: '',
+    mail: '',
+  })
+  function handleChange(e) {
+    setMember({ ...member, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
+    event.preventDefault()
 
-    setValidated(true)
+    if (form.checkValidity() === false) {
+      event.stopPropagation()
+      setValidated(true)
+      return
+    }
+    try {
+      let response = await axios.post(`${API_URL}/member/register`, member)
+      console.log(response.data)
+    } catch (e) {
+      console.error(e)
+    }
   }
   return (
     <>
@@ -39,6 +59,9 @@ const Register = (props) => {
                         required
                         type="text"
                         placeholder="會員姓名"
+                        name="name"
+                        value={member.name}
+                        onChange={handleChange}
                       />
                     </FloatingLabel>
                   </Form.Group>
@@ -52,6 +75,9 @@ const Register = (props) => {
                         required
                         type="text"
                         placeholder="身分證字號"
+                        name="identity_card"
+                        value={member.identity_card}
+                        onChange={handleChange}
                       />
                     </FloatingLabel>
                   </Form.Group>
@@ -61,7 +87,14 @@ const Register = (props) => {
                       label="暱稱"
                       className="mb-3"
                     >
-                      <Form.Control required type="text" placeholder="暱稱" />
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="暱稱"
+                        name="nick_name"
+                        value={member.nick_name}
+                        onChange={handleChange}
+                      />
                     </FloatingLabel>
                   </Form.Group>
                   <Form.Group as={Col} md="3" controlId="validationBirthday">
@@ -70,7 +103,14 @@ const Register = (props) => {
                       label="生日"
                       className="mb-3"
                     >
-                      <Form.Control required type="date" placeholder="生日" />
+                      <Form.Control
+                        required
+                        type="date"
+                        placeholder="生日"
+                        name="bir"
+                        value={member.bir}
+                        onChange={handleChange}
+                      />
                     </FloatingLabel>
                   </Form.Group>
                 </Row>
@@ -85,6 +125,9 @@ const Register = (props) => {
                         required
                         type="password"
                         placeholder="會員密碼"
+                        name="password"
+                        value={member.password}
+                        onChange={handleChange}
                       />
                     </FloatingLabel>
                   </Form.Group>
@@ -94,7 +137,6 @@ const Register = (props) => {
                       controlId="floatingInput"
                       label="請再次輸入密碼"
                       className="mb-3"
-                      hasValidation
                     >
                       <Form.Control
                         required
@@ -114,7 +156,14 @@ const Register = (props) => {
                       label="連絡電話"
                       className="mb-3"
                     >
-                      <Form.Control required type="number" placeholder="生日" />
+                      <Form.Control
+                        required
+                        type="number"
+                        placeholder="請輸入連絡電話"
+                        name="phone"
+                        value={member.phone}
+                        onChange={handleChange}
+                      />
                     </FloatingLabel>
                   </Form.Group>
 
@@ -123,12 +172,14 @@ const Register = (props) => {
                       controlId="floatingInput"
                       label="請輸入電子郵件"
                       className="mb-3"
-                      hasValidation
                     >
                       <Form.Control
                         required
                         type="email"
                         placeholder="請輸入電子郵件"
+                        name="mail"
+                        value={member.mail}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         電子郵件格式不正確
@@ -157,111 +208,6 @@ const Register = (props) => {
               >
                 已經有帳號了嗎?按我登入
               </a>
-              {/* form表單內容 */}
-              {/* <form>
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="floatingUserName"
-                    placeholder="userName"
-                  />
-                  <label for="floatingUserName">會員姓名</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput">身分證字號(帳號)</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="floatingPassword"
-                    placeholder="Password"
-                  />
-                  <label for="floatingPassword">密碼</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="floatingRepeatPassword"
-                    placeholder="RepeatPassword"
-                  />
-                  <label for="floatingRepeatPassword">再輸入一次密碼</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="floatingEmail"
-                    placeholder="floatingEmail"
-                  />
-                  <label for="floatingEmail">輸入電子信箱</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="floatingBirthday"
-                    placeholder="floatingBirthday"
-                  />
-                  <label for="floatingBirthday">出生日期</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="floatingTelephone"
-                    placeholder="telephone"
-                  />
-                  <label for="floatingTelephone">連絡電話</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="floatingNickname"
-                    placeholder="nickname"
-                  />
-                  <label for="floatingNickname">暱稱</label>
-                </div>
-                <div className="form-check mb-3">
-                  <label
-                    className="form-check-label"
-                    for="agreeServiceContract"
-                  >
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="agreeServiceContract"
-                    />
-                    同意 <a href="">服務條款</a>
-                  </label>
-                </div>
-                <div className="d-grid mb-3">
-                  <button
-                    className="btn btn-primary btn-login text-uppercase fw-bold fs-5 "
-                    type="submit"
-                  >
-                    註冊
-                  </button>
-                  <a
-                    href="/#"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setIsLoginPage(true)
-                    }}
-                  >
-                    已經有帳號了嗎?按我登入
-                  </a>
-                </div>
-              </form> */}
             </div>
           </div>
         </div>
