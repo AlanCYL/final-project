@@ -10,10 +10,12 @@ import { API_URL } from '../../utils/config'
 const Register = (props) => {
   const { isLoginPage, setIsLoginPage } = props
   const [validated, setValidated] = useState(false)
+  const [passwordCheck, setPasswordCheck] = useState(false)
   const [member, setMember] = useState({
     name: '',
     identity_card: '',
     password: '',
+    re_password: '',
     nick_name: '',
     phone: '',
     bir: '',
@@ -25,13 +27,20 @@ const Register = (props) => {
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget
-    event.preventDefault()
 
     if (form.checkValidity() === false) {
+      event.preventDefault()
       event.stopPropagation()
       setValidated(true)
       return
+    } else if (member.password !== member.re_password) {
+      event.preventDefault()
+      event.stopPropagation()
+      setPasswordCheck(true)
+      console.log(123)
+      return
     }
+
     try {
       let response = await axios.post(`${API_URL}/member/register`, member)
       console.log(response.data)
@@ -142,6 +151,10 @@ const Register = (props) => {
                         required
                         type="password"
                         placeholder="請再次輸入密碼"
+                        name="re_password"
+                        value={member.re_password}
+                        onChange={handleChange}
+                        isInvalid={passwordCheck}
                       />
                       <Form.Control.Feedback type="invalid">
                         密碼不一致
