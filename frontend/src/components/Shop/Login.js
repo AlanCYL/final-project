@@ -13,7 +13,7 @@ function Login(props) {
   })
   const [validated, setValidated] = useState(false)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget
     if (form.checkValidity() === false) {
       event.preventDefault()
@@ -22,6 +22,7 @@ function Login(props) {
 
     setValidated(true)
   }
+
   function handleChange(e) {
     const newshopMember = {
       ...shopMember,

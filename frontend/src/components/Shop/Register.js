@@ -31,7 +31,7 @@ function Register(props) {
     setshopMember(newshopMember)
   }
 
-  //餐廳用
+  //餐廳用checked
   function handleCheck(e) {
     if (shopMember.type_id.includes(e.target.value)) {
       setshopMember({
