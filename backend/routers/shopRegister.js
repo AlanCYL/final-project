@@ -103,8 +103,8 @@ router.post('/login', async (request, respond, next) => {
   }
   // console.log('登入店家', LoginShopMember);
   //TODO:密碼符合 寫入session
-  let returnShopMember = { name: LoginShopMember.name };
-  console.log('登入店家名字', returnShopMember);
+  let returnShopMember = { id: LoginShopMember.id, name: LoginShopMember.name };
+  console.log('登入店家id和名字', returnShopMember);
   request.session.LoginShopMember = returnShopMember;
   //TODO:回復資料給前端
 

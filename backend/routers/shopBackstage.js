@@ -21,6 +21,17 @@ const uploader = multer({
   storage: storage,
 });
 
+//店家後臺主頁
+router.get('/', async (request, respond, next) => {
+  if (request.session.LoginShopMember) {
+    // 表示登入過
+    return respond.json(request.session.LoginShopMember);
+  } else {
+    // 表示尚未登入
+    return respond.status(403).json({ code: 2001, error: '尚未登入' });
+  }
+});
+
 router.get('/search', async (req, res, next) => {
   const shopID = req.query.shopID;
   let [data, fields] = await pool.execute(`SELECT * from shop WHERE id=${shopID}`);
