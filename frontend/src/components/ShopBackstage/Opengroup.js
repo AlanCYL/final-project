@@ -18,7 +18,7 @@ const Opengroup = (props) => {
     eatingTime: '',
     goalNum: '',
     price: '',
-    shopid: `${data[0].id}`,
+    shopid: '',
   })
   const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
   const [dish, setDish] = useState([])
@@ -52,6 +52,7 @@ const Opengroup = (props) => {
         eatingTime: '',
         goalNum: '',
         price: '',
+        shopid: `${data[0].id}`,
       })
       setDish([])
       props.groupProps('third')
