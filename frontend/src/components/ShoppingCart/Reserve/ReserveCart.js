@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter as Link } from 'react-router-dom'
 import EmptyReserveList from './EmptyReserveList'
 import ReserveList from './ReserveList'
 import ConfirmReserveList from './ConfirmReserveList'
@@ -34,9 +34,6 @@ const ReserveCart = () => {
   function toggleStep(val) {
     setStep(step + val)
   }
-  function submit() {
-    console.log(inputVal)
-  }
 
   return (
     <>
@@ -62,7 +59,7 @@ const ReserveCart = () => {
         )}
         {step === 1 ? (
           <>
-            <ReserveList />
+            <ReserveList userID={user} />
             <div className="d-flex justify-content-end">
               <div className="d-flex justify-content-between w-75">
                 <a

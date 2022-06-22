@@ -1,18 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2022-06-20 09:32:26
--- 伺服器版本： 10.4.24-MariaDB
--- PHP 版本： 8.1.4
+-- 主機： localhost:8889
+-- 產生時間： 2022 年 06 月 22 日 05:41
+-- 伺服器版本： 5.7.34
+-- PHP 版本： 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- 資料庫: `project`
+-- 資料庫： `project`
 --
 
 -- --------------------------------------------------------
@@ -20,10 +26,7 @@ SET time_zone = "+00:00";
 --
 -- 資料表結構 `coupon`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
   `id` int(30) UNSIGNED NOT NULL,
   `reason` varchar(50) NOT NULL,
@@ -45,10 +48,7 @@ INSERT INTO `coupon` (`id`, `reason`, `price`) VALUES
 --
 -- 資料表結構 `dish`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `dish`;
 CREATE TABLE `dish` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -71,10 +71,7 @@ INSERT INTO `dish` (`id`, `name`, `image`, `description`, `shop_id`) VALUES
 --
 -- 資料表結構 `groups`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(5) UNSIGNED NOT NULL,
   `start_time` date NOT NULL,
@@ -82,10 +79,10 @@ CREATE TABLE `groups` (
   `eating_date` date NOT NULL,
   `eating_time` int(30) NOT NULL,
   `now_num` int(30) NOT NULL,
-  `goal_num` int(30) DEFAULT 0,
+  `goal_num` int(30) DEFAULT '0',
   `price` int(6) UNSIGNED NOT NULL,
   `shop_id` int(20) NOT NULL,
-  `established` int(3) NOT NULL DEFAULT 0
+  `established` int(3) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -93,7 +90,7 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_time`, `now_num`, `goal_num`, `price`, `shop_id`, `established`) VALUES
-(1, '2022-04-01', '2022-04-10', '2022-04-15', 1, 2, 0, 350, 2, 0),
+(1, '2022-04-01', '2022-04-10', '2022-04-15', 1, 2, 5, 350, 2, 0),
 (2, '2022-04-02', '2022-04-15', '2022-04-19', 1, 3, 6, 200, 2, 0),
 (3, '2022-04-20', '2022-04-20', '2022-04-30', 2, 7, 6, 100, 3, 0),
 (4, '2022-04-11', '2022-04-16', '2022-04-19', 3, 4, 10, 1500, 4, 0),
@@ -125,10 +122,7 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 --
 -- 資料表結構 `groups_and_dish`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `groups_and_dish`;
 CREATE TABLE `groups_and_dish` (
   `id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
@@ -150,10 +144,7 @@ INSERT INTO `groups_and_dish` (`id`, `groups_id`, `dish_id`) VALUES
 --
 -- 資料表結構 `level_name`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `level_name`;
 CREATE TABLE `level_name` (
   `id` int(2) UNSIGNED NOT NULL,
   `name` varchar(10) NOT NULL
@@ -174,10 +165,7 @@ INSERT INTO `level_name` (`id`, `name`) VALUES
 --
 -- 資料表結構 `orders`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -199,10 +187,7 @@ INSERT INTO `orders` (`id`, `user_id`, `groups_id`, `payable`) VALUES
 --
 -- 資料表結構 `receipt`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `receipt`;
 CREATE TABLE `receipt` (
   `id` int(11) NOT NULL,
   `orders_id` int(11) NOT NULL,
@@ -214,10 +199,7 @@ CREATE TABLE `receipt` (
 --
 -- 資料表結構 `shop`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `shop`;
 CREATE TABLE `shop` (
   `id` int(3) NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -253,12 +235,32 @@ INSERT INTO `shop` (`id`, `name`, `account`, `password`, `phone`, `address`, `de
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `shop_and_type`
---
--- 建立時間： 2022-06-18 02:24:14
+-- 資料表結構 `shoppingcart`
 --
 
-DROP TABLE IF EXISTS `shop_and_type`;
+CREATE TABLE `shoppingcart` (
+  `id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
+  `group_id` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `shoppingcart`
+--
+
+INSERT INTO `shoppingcart` (`id`, `user_id`, `group_id`) VALUES
+(1, 1, 1),
+(2, 3, 2),
+(3, 2, 1),
+(4, 3, 1),
+(5, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `shop_and_type`
+--
+
 CREATE TABLE `shop_and_type` (
   `id` int(100) NOT NULL,
   `shop_id` int(100) NOT NULL,
@@ -270,10 +272,7 @@ CREATE TABLE `shop_and_type` (
 --
 -- 資料表結構 `type`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `type`;
 CREATE TABLE `type` (
   `id` int(3) NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -300,11 +299,7 @@ INSERT INTO `type` (`id`, `name`) VALUES
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2022-06-18 02:26:28
--- 最後更新： 2022-06-18 02:26:29
---
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -314,8 +309,8 @@ CREATE TABLE `user` (
   `phone` varchar(100) NOT NULL,
   `bir` date NOT NULL,
   `mail` varchar(30) NOT NULL,
-  `img` int(1) UNSIGNED NOT NULL DEFAULT 1,
-  `level` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `img` int(1) UNSIGNED NOT NULL DEFAULT '1',
+  `level` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -344,15 +339,12 @@ INSERT INTO `user` (`id`, `name`, `identity_card`, `password`, `nick_name`, `pho
 --
 -- 資料表結構 `user_and_coupon`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `user_and_coupon`;
 CREATE TABLE `user_and_coupon` (
   `id` int(30) NOT NULL,
   `coupon_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
-  `valid` tinyint(2) NOT NULL DEFAULT 1
+  `valid` tinyint(2) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -374,10 +366,7 @@ INSERT INTO `user_and_coupon` (`id`, `coupon_id`, `user_id`, `valid`) VALUES
 --
 -- 資料表結構 `user_shop`
 --
--- 建立時間： 2022-06-18 02:24:14
---
 
-DROP TABLE IF EXISTS `user_shop`;
 CREATE TABLE `user_shop` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -438,6 +427,12 @@ ALTER TABLE `receipt`
 -- 資料表索引 `shop`
 --
 ALTER TABLE `shop`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `shoppingcart`
+--
+ALTER TABLE `shoppingcart`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -525,6 +520,12 @@ ALTER TABLE `shop`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shoppingcart`
+--
+ALTER TABLE `shoppingcart`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shop_and_type`
 --
 ALTER TABLE `shop_and_type`
@@ -554,3 +555,7 @@ ALTER TABLE `user_and_coupon`
 ALTER TABLE `user_shop`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
