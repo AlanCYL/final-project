@@ -54,6 +54,6 @@ router.post('/login', async (req, res, next) => {
   };
   req.session.member = returnMember;
   //回覆資料給前端
-  res.json({ code: 0, member: returnMember });
+  res.json({ code: 0, member: returnMember, result: '登入成功' });
 });
 module.exports = router;
