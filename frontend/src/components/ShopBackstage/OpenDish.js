@@ -12,22 +12,34 @@ const OpenDish = (props) => {
     dishName: '',
     dishPrice: '',
     dishDes: '',
-    dishImg: '',
+    photo: '',
   })
+
+  function handlePhoto(e) {
+    setUpDish({ ...upDish, photo: e.target.files[0] })
+  }
+
   async function dishSubmit(e) {
     e.preventDefault()
     try {
       // const params = upDish
-      let response = await axios.post(
-        `${API_URL}/shopbackstage/opendish`,
-        upDish
-      )
+      // let response = await axios.post(
+      //   `${API_URL}/shopbackstage/opendish`,
+      //   upDish
+      // )
+      // console.log(response.data)
+      let formData = new FormData()
+      formData.append('name', upDish.dishName)
+      formData.append('price', upDish.dishPrice)
+      formData.append('description', upDish.dishDes)
+      formData.append('photo', upDish.photo)
+      let response = axios.post(`${API_URL}/shopbackstage/opendish`, formData)
       console.log(response.data)
       setUpDish({
         dishName: '',
         dishPrice: '',
         dishDes: '',
-        dishImg: '',
+        photo: '',
       })
       props.groupProps('fifth')
     } catch (e) {
@@ -85,9 +97,10 @@ const OpenDish = (props) => {
           <Form.Label>上傳照片</Form.Label>
           <Form.Control
             type="file"
+            id="photo"
+            name="photo"
             multiple
-            value={upDish.dishImg}
-            onChange={(e) => setUpDish({ ...upDish, dishImg: e.target.value })}
+            onChange={handlePhoto}
             //
           />
         </Form.Group>
