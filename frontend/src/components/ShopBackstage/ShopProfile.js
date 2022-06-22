@@ -9,20 +9,15 @@ function ShopProfile() {
           <h3 className="mb-5">店家基本資料修改</h3>
           <Form>
             <Row>
-              <Col className="mt-4 ms-auto col-4 ">
-                <div className="img-box ms-auto mt-3">
+              <Col className="mt-4 ms-auto col-4 " md={5}>
+                <div className="img-box ms-auto mt-3 w-100">
                   <img
                     src={require('../../image/shopList/DinTaiFung-1.jpg')}
                     alt=""
                   />
                 </div>
               </Col>
-              <Col>
-                <Form.Group className="mb-3">
-                  <Form.Label>負責人姓名</Form.Label>
-                  <Form.Control type="text" value={'xxx'} disabled />
-                </Form.Group>
-
+              <Col md={7}>
                 <Form.Group className="mb-3">
                   <Form.Label>店家名稱</Form.Label>
                   <Form.Control type="text" value={'鼎泰豐'} disabled />
@@ -32,6 +27,14 @@ function ShopProfile() {
                   <Form.Label>店家類別</Form.Label>
                   <Form.Control type="text" value={'中式'} disabled />
                 </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>店家帳號</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={'dintaifung@test.com'}
+                    disabled
+                  />
+                </Form.Group>
               </Col>
             </Row>
 
@@ -40,22 +43,8 @@ function ShopProfile() {
               <Form.Control type="tel" value={'02-8772-0528'} />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>店家電子信箱</Form.Label>
-              <Form.Control
-                type="text"
-                value={'dintaifung@test.com'}
-                disabled
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>密碼</Form.Label>
-              <Form.Control type="password" value={1234566} />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>再次確認密碼</Form.Label>
               <Form.Control type="password" value={1234566} />
             </Form.Group>
 

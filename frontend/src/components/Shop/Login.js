@@ -14,6 +14,14 @@ function Login(props) {
   const [validated, setValidated] = useState(false)
   const [error, setError] = useState('')
 
+  function handleChange(e) {
+    const newshopMember = {
+      ...shopMember,
+      [e.target.name]: e.target.value,
+    }
+    setshopMember(newshopMember)
+  }
+
   async function handleSubmit(e) {
     const form = e.currentTarget
     e.preventDefault()
@@ -23,19 +31,16 @@ function Login(props) {
     }
     setValidated(true)
     try {
-      let response = await axios.post(`${API_URL}/shop/login`, shopMember)
+      //跨源寫cookie
+      let response = await axios.post(`${API_URL}/shop/login`, shopMember, {
+        // 如果想要跨源讀寫 cookie
+        withCredentials: true,
+      })
       console.log('登入成功', response.data)
     } catch (e) {
       setError(e.response.data.error)
       console.error('登入失敗', e.response.data)
     }
-  }
-  function handleChange(e) {
-    const newshopMember = {
-      ...shopMember,
-      [e.target.name]: e.target.value,
-    }
-    setshopMember(newshopMember)
   }
 
   return (
