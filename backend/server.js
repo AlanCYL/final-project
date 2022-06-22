@@ -8,7 +8,7 @@ const path = require('path');
 // 環境變數
 require('dotenv').config();
 
-//session
+//啟用session
 const expressSession = require('express-session');
 let FileStore = require('session-file-store')(expressSession);
 app.use(

@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
     cb(null, newFilename);
   },
 });
-//圖片重新命名
 const uploader = multer({
   // 設定儲存的位置
   storage: storage,
@@ -85,25 +84,30 @@ router.post('/login', async (request, respond, next) => {
 
   //確認有無帳號
   //確認 email 有沒有註冊過
-  let [shopMember] = await pool.execute('SELECT id, account,password FROM shop WHERE account = ?', [request.body.account]);
+  let [shopMember] = await pool.execute('SELECT * FROM shop WHERE account = ?', [request.body.account]);
   if (shopMember.length === 0) {
     // 這個 email 沒有註冊過 就回復錯誤
-    return respond.status(400).json({ code: 3003, error: '查無此帳號' });
+    return respond.status(400).json({ code: 3003, error: '帳號或密碼錯誤' });
   }
   // 如果程式碼能執行到這裡，表示 members 裡至少有一個資料
   // 把這個會員資料拿出來
   console.log('有符合的資料', shopMember[0]); //有符合的資料 { id: 15, account: 'dintaifung@test.com', password: '151515' }
+  let LoginShopMember = shopMember[0];
   let nowShopMember = shopMember[0].password; //使用者輸入的密碼
   let dataShopMember = request.body.password; //資料庫的密碼
 
-  //TODO:如果有 確認密碼
+  //如果有 確認密碼
   if (nowShopMember !== dataShopMember) {
     // 如果密碼不符合，回覆登入錯誤
     return respond.status(401).json({ code: 3004, error: '帳號或密碼錯誤' });
   }
+  // console.log('登入店家', LoginShopMember);
   //TODO:密碼符合 寫入session
+  let returnShopMember = { name: LoginShopMember.name };
+  console.log('登入店家名字', returnShopMember);
+  request.session.LoginShopMember = returnShopMember;
   //TODO:回復資料給前端
 
-  respond.json({ result: 'ok' });
+  respond.json({ code: 0, LoginShopMember: returnShopMember });
 });
 module.exports = router;
