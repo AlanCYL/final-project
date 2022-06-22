@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
 
@@ -21,6 +21,21 @@ const Opengroup = (props) => {
     shopid: '',
   })
   const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
+  // const [checkList, setCheckList] = useState([])
+  // useEffect(() => {
+  //   fetch(`${API_URL}/shopbackstage/checklist?shopID=1`, {
+  //     method: 'GET',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setCheckList(res.result)
+  //     })
+  //     .catch((e) => {
+  //       /*發生錯誤時要做的事情*/
+  //       console.log(e)
+  //     })
+  // }, [])
+
   const [dish, setDish] = useState([])
 
   function checkValue(e) {

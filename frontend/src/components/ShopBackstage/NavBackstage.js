@@ -103,10 +103,10 @@ const BackstageNav = (props) => {
                   <GroupList />
                 </Tab.Pane>
                 <Tab.Pane eventKey="forth">
-                  <OpenDish groupProps={handleGroupProps} />
+                  <OpenDish groupProps={handleGroupProps} data={data} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fifth">
-                  <DishList />
+                  <DishList groupProps={handleGroupProps} shop={data} />
                 </Tab.Pane>
               </Tab.Content>
             </Col>
