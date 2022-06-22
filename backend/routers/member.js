@@ -4,6 +4,14 @@ const router = express.Router();
 //db連線模組
 const pool = require('../utils/db');
 
+// /api/member/logout
+router.get('/logout', async (req, res, next) => {
+  console.log(req.session);
+  req.session.destroy();
+  res.clearCookie('connect.sid'); // clean up!
+  return res.json({ msg: '登出成功' });
+});
+
 // /api/member/register
 router.post('/register', async (req, res, next) => {
   console.log('註冊的資料', req.body);
@@ -50,10 +58,19 @@ router.post('/login', async (req, res, next) => {
   let returnMember = {
     identity_card: member.identity_card,
     password: member.password,
-    photo: member.photo,
   };
   req.session.member = returnMember;
+  console.log(req.session);
   //回覆資料給前端
   res.json({ code: 0, member: returnMember, result: '登入成功' });
+});
+
+// /api/member/profile
+router.get('/profile/:identity_card', async (req, res, next) => {
+  console.log('註冊的資料', req.body);
+
+  let [members] = await pool.execute('SELECT * FROM user WHERE identity_card = ?', [req.identity_card]);
+  console.log(members);
+  res.json({ result: 'ok' });
 });
 module.exports = router;
