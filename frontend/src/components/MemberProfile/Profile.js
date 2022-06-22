@@ -1,16 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
 import { useHistory } from 'react-router-dom'
+import { useLogin } from '../../context/LoginStatus'
 
 const Profile = () => {
   const history = useHistory()
-
+  const { member, setMember } = useLogin()
+  // console.log(member);
+  useEffect(() => {
+    ;(async () => {
+      try {
+        let response = await axios.get(`${API_URL}/member/profile`, {
+          params: {
+            member,
+          },
+        })
+        console.log(response.data)
+      } catch (e) {
+        console.log(e.response.data.error)
+      }
+    })()
+  }, [])
   const logout = async () => {
     try {
-      let response = await axios.get(`${API_URL}/member/logout`)
+      let response = await axios.get(`${API_URL}/member/logout`, {
+        withCredentials: true,
+      })
       console.log(response.data.msg)
+
       Swal.fire({
         icon: 'success',
         title: response.data.msg,
@@ -59,7 +78,12 @@ const Profile = () => {
           <p>2022.05.16 開始加入 Unii</p>
         </div>
         <div className="mb-4">
-          <button className="btn h6 btn-primary text-white" onClick={logout}>
+          <button
+            className="btn h6 btn-primary text-white"
+            onClick={() => {
+              logout()
+            }}
+          >
             登出
           </button>
         </div>

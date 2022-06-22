@@ -8,6 +8,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
 import Swal from 'sweetalert2'
+import { useLogin } from '../../context/LoginStatus'
 
 const Login = (props) => {
   const { isLoginPage, setIsLoginPage } = props
@@ -17,10 +18,7 @@ const Login = (props) => {
   const handleShow = () => setShow(true)
   const [validated, setValidated] = useState(false)
 
-  const [member, setMember] = useState({
-    identity_card: '',
-    password: '',
-  })
+  const { member, setMember } = useLogin()
 
   const history = useHistory()
 
@@ -69,7 +67,6 @@ const Login = (props) => {
         },
       })
       history.push('/memberCenter')
-      
     } catch (e) {
       console.log(e.response.data.error)
       Swal.fire({
