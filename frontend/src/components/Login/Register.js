@@ -79,7 +79,7 @@ const Register = (props) => {
     try {
       let response = await axios.post(`${API_URL}/member/register`, member)
       console.log(response.data)
-      Swal.fire({
+      await Swal.fire({
         icon: 'success',
         title: '註冊成功，快去參團吧!',
         showConfirmButton: false,
@@ -91,7 +91,7 @@ const Register = (props) => {
           popup: 'shadow-sm',
         },
       })
-      await setTimeout(setIsLoginPage(true), 1500)
+      setIsLoginPage(true)
     } catch (e) {
       // console.log(e.response.data.error)
       Swal.fire({
