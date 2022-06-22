@@ -22,6 +22,9 @@ const path = require('path');
 //處理靜態資料 不指定網址 ex.使用者上傳圖片 http://localhost:3001/shopImg/DinTaiFung-1.jpg
 app.use(express.static(path.join(__dirname, 'assets')));
 
+// 啟用 session
+const expressSession = require('express-session');
+
 //===============================================================以上是模組引用
 
 //首頁

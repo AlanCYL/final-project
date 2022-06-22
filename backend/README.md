@@ -6,6 +6,7 @@
 - 跨源存取: npm i cors
 - 驗證用: npm i express-validator
 - 上傳圖片用: npm i multer
+- session: npm i express-session
 
 ## 已使用的內建套件
 - path
