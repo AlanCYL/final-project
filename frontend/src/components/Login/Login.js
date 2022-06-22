@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import React, { useState, history } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -21,6 +21,9 @@ const Login = (props) => {
     identity_card: '',
     password: '',
   })
+
+  const history = useHistory()
+
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value })
   }
@@ -65,7 +68,8 @@ const Login = (props) => {
           popup: 'shadow-sm',
         },
       })
-      window.location.replace('/memberCenter')
+      history.push('/memberCenter')
+      
     } catch (e) {
       console.log(e.response.data.error)
       Swal.fire({

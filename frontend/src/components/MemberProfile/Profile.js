@@ -1,6 +1,34 @@
 import React from 'react'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { API_URL } from '../../utils/config'
+import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
+  const history = useHistory()
+
+  const logout = async () => {
+    try {
+      let response = await axios.get(`${API_URL}/member/logout`)
+      console.log(response.data.msg)
+      Swal.fire({
+        icon: 'success',
+        title: response.data.msg,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      history.push('/login')
+    } catch (e) {
+      console.log(e.response.data.error)
+    }
+  }
+
   return (
     <>
       <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
@@ -31,7 +59,9 @@ const Profile = () => {
           <p>2022.05.16 開始加入 Unii</p>
         </div>
         <div className="mb-4">
-          <button className="btn h6 btn-primary text-white">登出</button>
+          <button className="btn h6 btn-primary text-white" onClick={logout}>
+            登出
+          </button>
         </div>
       </div>
     </>

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 const MyCoupon = () => {
   return (
     <>
-      <div class="container">
-        <div class="row justify-content-between gy-3">
+      <div className="container">
+        <div className="row justify-content-between gy-3">
           {/* 卡片 */}
-          <div class="col-md-5 mx-3">
-            <div class="alert alert-coupon row justify-content-around pe-md-5">
+          <div className="col-md-5 mx-3">
+            <div className="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
                 <p>
@@ -28,8 +28,8 @@ const MyCoupon = () => {
             </div>
           </div>
           {/* 卡片 */}
-          <div class="col-md-5 mx-3">
-            <div class="alert alert-coupon row justify-content-around pe-md-5">
+          <div className="col-md-5 mx-3">
+            <div className="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
                 <p>
@@ -48,8 +48,8 @@ const MyCoupon = () => {
             </div>
           </div>
           {/* 卡片 */}
-          <div class="col-md-5 mx-3">
-            <div class="alert alert-coupon row justify-content-around pe-md-5">
+          <div className="col-md-5 mx-3">
+            <div className="alert alert-coupon row justify-content-around pe-md-5">
               <div className="col-auto col-md-7">
                 <h4 className="text-info">優惠券</h4>
                 <p>
