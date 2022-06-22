@@ -5,6 +5,9 @@ const app = express();
 //nodejs內建套件用來處理路徑
 const path = require('path');
 
+// 環境變數
+require('dotenv').config();
+
 //session
 const expressSession = require('express-session');
 let FileStore = require('session-file-store')(expressSession);
@@ -23,9 +26,6 @@ app.use(
 const cors = require('cors');
 app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
 
-// 環境變數
-require('dotenv').config();
-
 //db連線模組
 const pool = require('./utils/db');
 const mysql = require('mysql2');
@@ -33,7 +33,6 @@ const mysql = require('mysql2');
 //一定要放- ->才能解析req.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 //處理靜態資料 不指定網址 ex.使用者上傳圖片 http://localhost:3001/shopImg/DinTaiFung-1.jpg
 app.use(express.static(path.join(__dirname, 'assets')));
