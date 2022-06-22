@@ -38,8 +38,18 @@ const uploader = multer({
     fileSize: 200 * 1024,
   },
 });
+
+//註冊
 router.post('/register', uploader.single('img'), async (request, respond, next) => {
+  console.log(request.body);
   // console.log('上傳圖片', request.file);
+
+  //確認 email 有沒有註冊過
+  let [shopMember] = await pool.execute('SELECT id, account FROM shop WHERE account = ?', [request.body.account]);
+  if (shopMember.length !== 0) {
+    // 這個 email 有註冊過
+    return respond.status(400).json({ code: 3002, error: '這個帳號已經註冊過' });
+  }
 
   //存入資料庫
   let img = request.file ? request.file.filename : '';
@@ -65,6 +75,35 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
   }
 
   // console.log('存入的資料:', result);
+
+  respond.json({ result: 'ok' });
+});
+
+//登入
+router.post('/login', async (request, respond, next) => {
+  //確認資料有收到
+  console.log('確認有拿到資料', request.body);
+
+  //確認有無帳號
+  //確認 email 有沒有註冊過
+  let [shopMember] = await pool.execute('SELECT id, account,password FROM shop WHERE account = ?', [request.body.account]);
+  if (shopMember.length === 0) {
+    // 這個 email 沒有註冊過 就回復錯誤
+    return respond.status(400).json({ code: 3003, error: '查無此帳號' });
+  }
+  // 如果程式碼能執行到這裡，表示 members 裡至少有一個資料
+  // 把這個會員資料拿出來
+  console.log('有符合的資料', shopMember[0]); //有符合的資料 { id: 15, account: 'dintaifung@test.com', password: '151515' }
+  let nowShopMember = shopMember[0].password; //使用者輸入的密碼
+  let dataShopMember = request.body.password; //資料庫的密碼
+
+  //TODO:如果有 確認密碼
+  if (nowShopMember !== dataShopMember) {
+    // 如果密碼不符合，回覆登入錯誤
+    return respond.status(401).json({ code: 3004, error: '帳號或密碼錯誤' });
+  }
+  //TODO:密碼符合 寫入session
+  //TODO:回復資料給前端
 
   respond.json({ result: 'ok' });
 });

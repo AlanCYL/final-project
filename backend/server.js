@@ -29,7 +29,7 @@ app.get('/', (request, respond, next) => {
   respond.send('首頁');
 });
 
-//shopRegister
+//shopRegister & Login
 const shopRegister = require('./routers/shopRegister');
 app.use('/api/shop', shopRegister);
 
