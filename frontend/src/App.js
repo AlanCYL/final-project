@@ -18,12 +18,34 @@ import { useState } from 'react'
 function App() {
   //存登入會員的資料
   const [member, setMember] = useState({
+    id: '',
     identity_card: '',
     password: '',
   })
-
+  const [memberDetail, setMemberDetail] = useState({
+    name: '',
+    identity_card: '',
+    nick_name: '',
+    phone: '',
+    bir: '',
+    mail: '',
+    img: '',
+    level: '',
+    levelName: '',
+    create_time: '',
+  })
+  const [isLogin, setIsLogin] = useState(false)
   return (
-    <LoginContext.Provider value={{ member, setMember }}>
+    <LoginContext.Provider
+      value={{
+        member,
+        setMember,
+        memberDetail,
+        setMemberDetail,
+        isLogin,
+        setIsLogin,
+      }}
+    >
       <Router>
         <Nav />
         <Switch>

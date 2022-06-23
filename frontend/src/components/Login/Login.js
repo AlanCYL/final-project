@@ -13,12 +13,11 @@ import { useLogin } from '../../context/LoginStatus'
 const Login = (props) => {
   const { isLoginPage, setIsLoginPage } = props
   const [show, setShow] = useState(false)
-
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [validated, setValidated] = useState(false)
 
-  const { member, setMember } = useLogin()
+  const { member, setMember, setIsLogin, isLogin } = useLogin()
 
   const history = useHistory()
 
@@ -47,12 +46,14 @@ const Login = (props) => {
       })
       return
     }
-
+    setIsLogin(true)
+    console.log('123', isLogin)
     try {
       let response = await axios.post(`${API_URL}/member/login`, member, {
         withCredentials: true,
       })
       console.log(response.data)
+
       await Swal.fire({
         icon: 'success',
         title: response.data.result,
@@ -66,6 +67,9 @@ const Login = (props) => {
           popup: 'shadow-sm',
         },
       })
+      setMember({ ...member, id: response.data.member.id })
+      // setIsLogin(true)
+      // console.log('123', isLogin)
       history.push('/memberCenter')
     } catch (e) {
       console.log(e.response.data.error)
@@ -83,6 +87,7 @@ const Login = (props) => {
       })
       setValidated(false)
       setMember({
+        id: '',
         identity_card: '',
         password: '',
       })

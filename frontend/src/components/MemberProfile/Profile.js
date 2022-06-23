@@ -4,25 +4,42 @@ import axios from 'axios'
 import { API_URL } from '../../utils/config'
 import { useHistory } from 'react-router-dom'
 import { useLogin } from '../../context/LoginStatus'
+import { useActivePanel } from '../../context/ActivePanel'
 
 const Profile = () => {
   const history = useHistory()
-  const { member, setMember } = useLogin()
-  // console.log(member);
+  const { member, setMember, setIsLogin } = useLogin()
+  const { memberDetail, setMemberDetail } = useLogin()
+  const { active } = useActivePanel()
   useEffect(() => {
     ;(async () => {
       try {
-        let response = await axios.get(`${API_URL}/member/profile`, {
-          params: {
-            member,
-          },
-        })
+        let response = await axios.post(`${API_URL}/member/profile`, member)
         console.log(response.data)
+        setMember({ ...member, id: response.data.member.id })
+        const newMemberDetail = {
+          ...memberDetail,
+          id: response.data.member.id,
+          name: response.data.member.name,
+          identity_card: response.data.member.identity_card,
+          nick_name: response.data.member.nick_name,
+          phone: response.data.member.phone,
+          bir: response.data.member.bir,
+          mail: response.data.member.mail,
+          img: response.data.member.img,
+          level: response.data.member.level,
+          levelName: response.data.member.levelName,
+          create_time: response.data.member.create_time.split(' '),
+        }
+        setMemberDetail(newMemberDetail)
+        console.log(newMemberDetail.img)
       } catch (e) {
         console.log(e.response.data.error)
       }
     })()
-  }, [])
+  }, [active])
+
+  useEffect(() => {}, [memberDetail])
   const logout = async () => {
     try {
       let response = await axios.get(`${API_URL}/member/logout`, {
@@ -42,6 +59,7 @@ const Profile = () => {
           popup: 'shadow-sm',
         },
       })
+      setIsLogin(false)
       history.push('/login')
     } catch (e) {
       console.log(e.response.data.error)
@@ -53,7 +71,13 @@ const Profile = () => {
       <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
         <img
           alt="10x10"
-          src={require('../../image/memberProfile/1.png')}
+          src={
+            memberDetail.img
+              ? require('../../image/memberProfile/' +
+                  memberDetail.img +
+                  '.png')
+              : require('../../image/memberProfile/1.png')
+          }
           className="position-absolute top-50 start-50 translate-middle"
         />
       </div>
@@ -66,16 +90,18 @@ const Profile = () => {
       </div>
       <div className="my_context text-center">
         <div className="mb-4">
-          <p>小明</p>
+          <p>{memberDetail.nick_name}</p>
         </div>
         <div className="mb-4">
-          <p>LV.4 鑽石會員</p>
+          <p>
+            LV.{memberDetail.level} {memberDetail.levelName}會員
+          </p>
         </div>
         <div className="mb-4">
           <p>尚餘可用的優惠券10張</p>
         </div>
         <div className="mb-4">
-          <p>2022.05.16 開始加入 Unii</p>
+          <p>{memberDetail.create_time[0]} 開始加入 Unii</p>
         </div>
         <div className="mb-4">
           <button

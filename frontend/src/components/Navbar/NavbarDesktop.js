@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useLogin } from '../../context/LoginStatus'
 
 const NavbarDesktop = () => {
   const location = useLocation()
+  const { isLogin } = useLogin()
 
   if (location.pathname === '/shop') return <></>
   if (location.pathname === '/shop/Register') return <></>
@@ -46,9 +48,16 @@ const NavbarDesktop = () => {
             <Link to="/ShoppingCart">
               <img src={require('../../image/navbar/shop.png')} alt="" />
             </Link>
-            <Link to="/login">
-              <img src={require('../../image/navbar/login.png')} alt="" />
-            </Link>
+            {isLogin ? (
+              <Link to="/memberCenter">
+                <img src={require('../../image/navbar/login.png')} alt="" />
+              </Link>
+            ) : (
+              <Link to="/login">
+                <img src={require('../../image/navbar/login.png')} alt="" />
+              </Link>
+            )}
+
             <img src={require('../../image/navbar/map.png')} alt="" />
           </div>
         </div>
