@@ -9,11 +9,13 @@ import { API_URL } from '../../utils/config'
 import Swal from 'sweetalert2'
 
 function Login(props) {
+  //控制header轉換
   const { isShopLogin, setIsShopLogin } = props
   const [shopMember, setshopMember] = useState({
     account: '',
     password: '',
   })
+
   const [validated, setValidated] = useState(false)
   const [error, setError] = useState('')
   const history = useHistory()

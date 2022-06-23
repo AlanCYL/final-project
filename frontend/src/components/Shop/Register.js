@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import { Container, Row, Button, Form, Col, InputGroup } from 'react-bootstrap'
 import registerbanner from '../../image/shop/registerbanner.png'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
 import { AiFillEye } from 'react-icons/ai'
+import Swal from 'sweetalert2'
 
 function Register(props) {
   const { isShopLogin, setIsShopLogin } = props
@@ -18,11 +21,10 @@ function Register(props) {
     img: '',
     address: '',
   })
-  //錯誤用
-  const [shopErrors, setShopErrors] = useState({
-    account: '',
-    password: '',
-  })
+  const [validated, setValidated] = useState(false)
+  const [error, setError] = useState('')
+  const history = useHistory()
+
   function handleChange(e) {
     const newshopMember = {
       ...shopMember,
@@ -72,7 +74,25 @@ function Register(props) {
   const [passwordShown, setPasswordShown] = useState(false)
 
   async function handleSubmit(e) {
+    const form = e.currentTarget
     e.preventDefault()
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      setValidated(true)
+      Swal.fire({
+        icon: 'error',
+        title: '請確認輸入資料是否正確',
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      return
+    }
 
     console.log(`店家名稱:${shopMember.name}`, `店家類別:${shopMember.type_id}`)
     try {
@@ -87,26 +107,41 @@ function Register(props) {
         formData.append('type_id', shopMember.type_id[i])
       }
       formData.append('img', shopMember.img)
-      let response = axios.post(`${API_URL}/shop/register`, formData)
-      console.log(response.data)
+      let response = await axios.post(`${API_URL}/shop/register`, formData)
+      console.log(response.data.result)
+      await Swal.fire({
+        icon: 'success',
+        title: response.data.result,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      history.push('/')
     } catch (e) {
-      console.error(e)
+      setError(e.response.data.error)
+      console.error('請重新註冊', e.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      console.log('錯誤訊息', e.response.data.error)
+      return
     }
   }
-
-  // const handleInvalid = (e) => {
-  //   //擋住泡泡訊息出現
-  //   e.preventDefault()
-  //   console.log(e.target.validationMessage) //錯誤訊息會在這裡
-  //   const newShopError = {
-  //     ...shopErrors,
-  //     [e.target.name]: e.target.validationMessage,
-  //   }
-  //   setShopErrors(newShopError)
-  // }
-  // const handleFormChange = (e) => {
-  //   const newShopError = { ...shopErrors, [e.target.name]: '' }
-  // }
   return (
     <>
       <div className="container-fulid banner">
@@ -116,11 +151,7 @@ function Register(props) {
         歡迎您!<span>Unii</span>期待眾多優秀的餐廳加入
       </h3>
       <Container className="mt-5 mb-5">
-        <Form
-          onSubmit={handleSubmit}
-          // onInvalid={handleInvalid}
-          // onChange={handleFormChange}
-        >
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <Col className="me-auto" md={6}>
               <Form.Group className="mb-3">
@@ -136,6 +167,9 @@ function Register(props) {
                   onChange={handleChange}
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  請填寫此欄位
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>
@@ -150,6 +184,9 @@ function Register(props) {
                   onChange={handleChange}
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  請填寫此欄位
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>
@@ -164,7 +201,9 @@ function Register(props) {
                   onChange={handleChange}
                   required
                 />
-                {shopErrors.account && shopErrors.account}
+                <Form.Control.Feedback type="invalid">
+                  請填寫此欄位
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -183,6 +222,9 @@ function Register(props) {
                     minLength={6}
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    請填寫此欄位
+                  </Form.Control.Feedback>
                   <InputGroup.Text id="inputGroupPrepend">
                     <label className="eye-input ms-auto">
                       <input
@@ -214,10 +256,15 @@ function Register(props) {
                   onChange={handleChange}
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  請填寫此欄位
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="ms-auto" md={5}>
-              <Form.Label>店家說明</Form.Label>
+              <Form.Label>
+                店家說明<span>*</span>
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder="請填寫100字內店家介紹"
@@ -227,6 +274,7 @@ function Register(props) {
                 name="description"
                 onChange={handleChange}
                 maxLength={100}
+                required
               />
               <Form.Group className="mb-3">
                 <Form.Label>
@@ -262,14 +310,21 @@ function Register(props) {
                   className="mb-4"
                   defaultValue={shopMember.img}
                   onChange={handlePhoto}
+                  required
                 />
               </Form.Group>
             </Col>
 
             <div className="d-flex justify-content-end mt-5">
               <div>
-                <input type="checkbox" className="me-2" />
-                <label>同意新會員註冊條款</label>
+                <Form.Group className="mb-3">
+                  <Form.Check
+                    required
+                    label="同意新會員註冊條款"
+                    feedback="請確認新會員註冊條款"
+                    feedbackType="invalid"
+                  />
+                </Form.Group>
                 <Button
                   variant="primary"
                   type="submit"
