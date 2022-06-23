@@ -5,8 +5,8 @@ import { FiLogOut } from 'react-icons/fi'
 function NavbarShopbackstage(props) {
   return (
     <>
-      <header className="sticky-top shadow bg-white">
-        <div className="head d-flex justify-content-start align-items-center py-3 ps-4 container">
+      <header className="sticky-top shadow bg-white ps-7 pe-5">
+        <div className="head d-flex justify-content-start align-items-center py-3 ps-4 container-fluid">
           <div className="logo">
             <Link to="/">
               <img src={require('../../image/navbar/logo.png')} alt="" />

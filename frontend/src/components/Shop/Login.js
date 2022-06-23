@@ -1,9 +1,12 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
+
 import { useState } from 'react'
-import { Container, Row, Button, Form, Col, InputGroup } from 'react-bootstrap'
+import { Button, Form, Col } from 'react-bootstrap'
 import shoploginvideo from '../../image/shop/shoploginvideo.mp4'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
+import Swal from 'sweetalert2'
 
 function Login(props) {
   const { isShopLogin, setIsShopLogin } = props
@@ -13,6 +16,7 @@ function Login(props) {
   })
   const [validated, setValidated] = useState(false)
   const [error, setError] = useState('')
+  const history = useHistory()
 
   function handleChange(e) {
     const newshopMember = {
@@ -25,26 +29,67 @@ function Login(props) {
   async function handleSubmit(e) {
     const form = e.currentTarget
     e.preventDefault()
+
     if (form.checkValidity() === false) {
       e.preventDefault()
-      e.stopPropagation()
+      setValidated(true)
+      Swal.fire({
+        icon: 'error',
+        title: '請確認輸入資料是否正確',
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      return
     }
-    setValidated(true)
     try {
       //跨源寫cookie
       let response = await axios.post(`${API_URL}/shop/login`, shopMember, {
         // 如果想要跨源讀寫 cookie
         withCredentials: true,
       })
-      console.log('登入成功', response.data)
+      console.log('登入成功', response.data.result)
+      await Swal.fire({
+        icon: 'success',
+        title: response.data.result,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      history.push('/shopBackstage')
     } catch (e) {
       setError(e.response.data.error)
       console.error('登入失敗', e.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      return
     }
   }
 
   return (
     <>
+      {/* {error} */}
       <div className="container-fluid d-flex">
         <div className=" col-md-12 col-lg-7  d-flex justify-content-start align-items-center">
           <div className="text-center position-absolute content">
@@ -68,7 +113,7 @@ function Login(props) {
         <div className="col-md-12 col-lg-5">
           <div className="form-size mt-7 ms-6">
             <h2 className="text-center mb-5">店家登入</h2>
-            {error}
+            {/* {error} */}
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Group className="mb-4">
                 <Form.Label>帳號</Form.Label>

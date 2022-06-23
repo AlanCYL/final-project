@@ -5,7 +5,7 @@ function NavbarShop() {
   return (
     <>
       <header className="sticky-top shadow bg-white">
-        <div className="head d-flex justify-content-start align-items-center py-3 ps-4 container">
+        <div className="head d-flex justify-content-start align-items-center py-3 ps-7 container-fluid">
           <div className="logo">
             <Link to="/">
               <img src={require('../../image/navbar/logo.png')} alt="" />
