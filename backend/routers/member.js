@@ -66,11 +66,24 @@ router.post('/login', async (req, res, next) => {
 });
 
 // /api/member/profile
-router.get('/profile/:identity_card', async (req, res, next) => {
+router.post('/profile', async (req, res, next) => {
   console.log('註冊的資料', req.body);
 
-  let [members] = await pool.execute('SELECT * FROM user WHERE identity_card = ?', [req.identity_card]);
-  console.log(members);
-  res.json({ result: 'ok' });
+  let [members] = await pool.execute('SELECT user.*, level_name.name AS levelName FROM user JOIN level_name ON user.level = level_name.id WHERE identity_card = ?', [
+    req.body.identity_card,
+  ]);
+  let member = members[0];
+  console.log(member);
+  res.json({ member });
 });
+
+// /api/member/profile
+router.post('/update', async (req, res, next) => {
+  console.log('更新的資料', req.body);
+
+  let [members] = await pool.execute('UPDATE user SET img = ?, nick_name = ?, phone = ?  WHERE id = ?', [req.body.img, req.body.nick_name, req.body.phone, req.body.id]);
+  console.log(members);
+  res.json({ result: '更新資料成功' });
+});
+
 module.exports = router;
