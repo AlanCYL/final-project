@@ -9,7 +9,6 @@ const ReserveList = (props) => {
   // const { userID } = props
 
   const [data, setData] = useState([])
-  // const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
   useEffect(() => {
     fetch(`${API_URL}/shoppingcart/reservelist?userID=${props.userID}`, {
       method: 'GET',

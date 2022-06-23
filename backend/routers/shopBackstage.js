@@ -55,6 +55,13 @@ router.post('/opengroup', async (req, res, next) => {
   }
   await res.json({ result: 'OK' });
 });
+//團單清單
+router.get('/grouplist', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data] = await pool.execute(`SELECT * FROM groups WHERE shop_id=${shopID}`);
+  // console.log('我要', data);
+  res.json({ result: data });
+});
 //上架菜色
 router.post('/opendish', uploader.single('photo'), async (req, res, next) => {
   console.log('dishName', req.body);

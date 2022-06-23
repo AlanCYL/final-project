@@ -1,7 +1,36 @@
 import Nav from 'react-bootstrap/Nav'
 import Table from 'react-bootstrap/Table'
+import axios from 'axios'
+import { API_URL, IMAGE_URL } from '../../utils/config'
+import { useEffect, useState } from 'react'
 
 function GroupList() {
+  const shopID = localStorage.getItem('shopID')
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch(`${API_URL}/shopbackstage/grouplist?shopID=${shopID}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        /*接到response data後要做的事情*/
+        // console.log(res.result[0])
+        setData(res.result)
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
+  function getEatTimeString(i) {
+    if (data[i].eating_time === 1) {
+      return '午餐12:00'
+    } else if (data[i].eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
   return (
     <>
       <Nav fill variant="tabs" defaultActiveKey="/home">
@@ -36,36 +65,26 @@ function GroupList() {
           </tr>
         </thead>
         <tbody>
-          <tr className="tr-hover">
-            <td className="text-center py-3">12345</td>
-            <td className="text-center py-3">2022/06/17</td>
-            <td className="text-center py-3">2022/06/19</td>
-            <td className="text-center py-3">2022/06/20 18:00</td>
-            <td className="text-center py-3">5</td>
-            <td className="text-center py-3">2</td>
-            <td className="text-center py-3">是</td>
-            <td className="text-center py-3">200</td>
-            <td className="text-center py-3">
-              <a variant="outline-primary" className="group-look py-3">
-                檢視
-              </a>
-            </td>
-          </tr>
-          <tr className="tr-hover">
-            <td className="text-center py-3">12345</td>
-            <td className="text-center py-3">2022/06/17</td>
-            <td className="text-center py-3">2022/06/19</td>
-            <td className="text-center py-3">2022/06/20 18:00</td>
-            <td className="text-center py-3">5</td>
-            <td className="text-center py-3">2</td>
-            <td className="text-center py-3">是</td>
-            <td className="text-center py-3">200</td>
-            <td className="text-center py-3">
-              <a variant="outline-primary" className="group-look py-3">
-                檢視
-              </a>
-            </td>
-          </tr>
+          {/* map */}
+          {data.map((item, i) => (
+            <tr className="tr-hover">
+              <td className="text-center py-3">{data[i].id}</td>
+              <td className="text-center py-3">{data[i].start_time}</td>
+              <td className="text-center py-3">{data[i].end_time}</td>
+              <td className="text-center py-3">
+                {data[i].eating_date} {getEatTimeString(i)}
+              </td>
+              <td className="text-center py-3">{data[i].goal_num}</td>
+              <td className="text-center py-3">{data[i].now_num}</td>
+              <td className="text-center py-3">{data[i].established}</td>
+              <td className="text-center py-3">{data[i].price}</td>
+              <td className="text-center py-3">
+                <a variant="outline-primary" className="group-look py-3">
+                  檢視
+                </a>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </>
