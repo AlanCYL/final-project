@@ -39,7 +39,7 @@ const uploader = multer({
 
 //註冊
 router.post('/register', uploader.single('img'), async (request, respond, next) => {
-  console.log(request.body);
+  console.log('確認有拿到資料', request.body);
   // console.log('上傳圖片', request.file);
 
   //確認 email 有沒有註冊過
@@ -74,7 +74,7 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
 
   // console.log('存入的資料:', result);
 
-  respond.json({ result: 'ok' });
+  respond.json({ result: '歡迎成為Uii開團店家' });
 });
 
 //登入
@@ -102,12 +102,18 @@ router.post('/login', async (request, respond, next) => {
     return respond.status(401).json({ code: 3004, error: '帳號或密碼錯誤' });
   }
   // console.log('登入店家', LoginShopMember);
-  //TODO:密碼符合 寫入session
+  //密碼符合 寫入session
   let returnShopMember = { id: LoginShopMember.id, name: LoginShopMember.name };
   console.log('登入店家id和名字', returnShopMember);
   request.session.LoginShopMember = returnShopMember;
-  //TODO:回復資料給前端
 
+  //回復資料給前端
   respond.json({ code: 0, LoginShopMember: returnShopMember, result: '正前往您的店家後台' });
+});
+
+//店家登出
+router.get('/logout', (request, respond, next) => {
+  request.session.LoginShopMember = null;
+  request.sendStatus(202);
 });
 module.exports = router;
