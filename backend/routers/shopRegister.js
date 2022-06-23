@@ -87,7 +87,7 @@ router.post('/login', async (request, respond, next) => {
   let [shopMember] = await pool.execute('SELECT * FROM shop WHERE account = ?', [request.body.account]);
   if (shopMember.length === 0) {
     // 這個 email 沒有註冊過 就回復錯誤
-    return respond.status(400).json({ code: 3003, error: '帳號或密碼錯誤' });
+    return respond.status(400).json({ code: 3003, error: '您的帳號尚未註冊' });
   }
   // 如果程式碼能執行到這裡，表示 members 裡至少有一個資料
   // 把這個會員資料拿出來
@@ -108,6 +108,6 @@ router.post('/login', async (request, respond, next) => {
   request.session.LoginShopMember = returnShopMember;
   //TODO:回復資料給前端
 
-  respond.json({ code: 0, LoginShopMember: returnShopMember });
+  respond.json({ code: 0, LoginShopMember: returnShopMember, result: '正前往您的店家後台' });
 });
 module.exports = router;
