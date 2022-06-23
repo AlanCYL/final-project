@@ -1,6 +1,5 @@
 import Header from '../../Header/Header'
 import Side from '../Side'
-import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../../../utils/config'
 import { useEffect, useState } from 'react'
 
@@ -24,6 +23,7 @@ const ReserveList = (props) => {
         console.log(e)
       })
   }, [])
+
   function getEatTimeString(i) {
     if (data[i].eating_time === 1) {
       return '午餐12:00'
@@ -33,6 +33,21 @@ const ReserveList = (props) => {
       return '晚餐18:00'
     }
   }
+
+  const [list, setList] = useState([])
+  function checkValue(e) {
+    let currentVal = e.target.value
+    const copyList = JSON.parse(JSON.stringify(list))
+    let index = copyList.indexOf(currentVal)
+    if (index !== -1) {
+      copyList.splice(index, 1)
+    } else {
+      copyList.push(currentVal)
+    }
+    setList(copyList)
+    props.setGroupsFunc(copyList)
+  }
+
   return (
     <>
       <div className=" container my-6">
@@ -65,9 +80,15 @@ const ReserveList = (props) => {
                   <tbody>
                     {/* map */}
                     {data.map((item, i) => (
-                      <tr className="tr-hover">
+                      <tr className="tr-hover" key={i}>
                         <td className="py-5">
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            value={data[i].group_id}
+                            onClick={(e) => {
+                              checkValue(e)
+                            }}
+                          />
                         </td>
                         <td style={{ paddingTop: '14px' }}>
                           <img

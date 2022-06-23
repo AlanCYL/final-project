@@ -45,7 +45,7 @@ app.get('/', (request, respond, next) => {
 });
 
 //shopRegister & Login
-const shopRegister = require('./routers/shopRegister');
+const shopRegister = require('./routers/shop');
 app.use('/api/shop', shopRegister);
 
 //shoBackstage

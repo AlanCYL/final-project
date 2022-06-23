@@ -39,7 +39,7 @@ const uploader = multer({
 
 //註冊
 router.post('/register', uploader.single('img'), async (request, respond, next) => {
-  console.log(request.body);
+  console.log('確認有拿到資料', request.body);
   // console.log('上傳圖片', request.file);
 
   //確認 email 有沒有註冊過
@@ -49,7 +49,13 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
     return respond.status(400).json({ code: 3002, error: '這個帳號已經註冊過' });
   }
 
-  //存入資料庫
+  //確認密碼一致
+  console.log('密碼是否一致', request.body.password, request.body.comfirmPassword);
+  if (request.body.password !== request.body.comfirmPassword) {
+    return respond.status(400).json({ code: 3007, error: '密碼與確認密碼不一致' });
+  }
+
+  //存入shop資料表
   let img = request.file ? '/shopImg/' + request.file.filename : '';
   let [result] = await pool.execute('INSERT INTO shop (name,phone,account,password,description,address,img) VALUES (?, ?, ?, ?, ?,?,?)', [
     request.body.name,
@@ -67,6 +73,7 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
   console.log('最後一筆id:', newShop); //[ { id: 15 } ]
   console.log(newShop[0].id);
 
+  //存入shop_type 資料表
   for (let i = 0; i < request.body.type_id.length; i++) {
     let [cate] = await pool.execute('INSERT INTO shop_and_type (shop_id,type_id) VALUES (?,?)', [newShop[0].id, request.body.type_id[i]]);
     // console.log('存入的資料:', cate);
@@ -74,7 +81,7 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
 
   // console.log('存入的資料:', result);
 
-  respond.json({ result: 'ok' });
+  respond.json({ result: '歡迎成為Uii開團店家' });
 });
 
 //登入
@@ -87,7 +94,7 @@ router.post('/login', async (request, respond, next) => {
   let [shopMember] = await pool.execute('SELECT * FROM shop WHERE account = ?', [request.body.account]);
   if (shopMember.length === 0) {
     // 這個 email 沒有註冊過 就回復錯誤
-    return respond.status(400).json({ code: 3003, error: '帳號或密碼錯誤' });
+    return respond.status(400).json({ code: 3003, error: '您的帳號尚未註冊' });
   }
   // 如果程式碼能執行到這裡，表示 members 裡至少有一個資料
   // 把這個會員資料拿出來
@@ -102,12 +109,18 @@ router.post('/login', async (request, respond, next) => {
     return respond.status(401).json({ code: 3004, error: '帳號或密碼錯誤' });
   }
   // console.log('登入店家', LoginShopMember);
-  //TODO:密碼符合 寫入session
+  //密碼符合 寫入session
   let returnShopMember = { id: LoginShopMember.id, name: LoginShopMember.name };
   console.log('登入店家id和名字', returnShopMember);
   request.session.LoginShopMember = returnShopMember;
-  //TODO:回復資料給前端
 
-  respond.json({ code: 0, LoginShopMember: returnShopMember });
+  //回復資料給前端
+  respond.json({ code: 0, LoginShopMember: returnShopMember, result: '正前往您的店家後台' });
+});
+
+//店家登出
+router.get('/logout', (request, respond, next) => {
+  request.session.LoginShopMember = null;
+  request.sendStatus(202);
 });
 module.exports = router;

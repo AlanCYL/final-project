@@ -1,7 +1,6 @@
 import Nav from 'react-bootstrap/Nav'
 import Table from 'react-bootstrap/Table'
-import axios from 'axios'
-import { API_URL, IMAGE_URL } from '../../utils/config'
+import { API_URL } from '../../utils/config'
 import { useEffect, useState } from 'react'
 
 function GroupList() {
@@ -71,7 +70,7 @@ function GroupList() {
               <td className="text-center py-3">{data[i].id}</td>
               <td className="text-center py-3">{data[i].start_time}</td>
               <td className="text-center py-3">{data[i].end_time}</td>
-              <td className="text-center py-3">
+              <td className="text-start py-3">
                 {data[i].eating_date} {getEatTimeString(i)}
               </td>
               <td className="text-center py-3">{data[i].goal_num}</td>

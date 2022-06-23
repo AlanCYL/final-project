@@ -9,9 +9,12 @@ import FinishPay from '../Pay/FinishPay'
 import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../../utils/config'
 
-const ReserveCart = () => {
+const ReserveCart = (props) => {
+  const { data } = props
   const [step, setStep] = useState(0)
   const [inputVal, setInputVal] = useState('')
+  // 要抓使用者check的groupId
+  const [groups, setGroups] = useState([])
   // 會員加入購物車，要抓到會員的id
   const [user, setUser] = useState(1)
   useEffect(() => {
@@ -30,6 +33,14 @@ const ReserveCart = () => {
         console.log(e)
       })
   }, [])
+
+  // reserveList的checkbox
+  function setGroupsFunc(groups) {
+    const arrOfGroups = groups.map((str) => {
+      return Number(str)
+    })
+    setGroups(arrOfGroups)
+  }
 
   function toggleStep(val) {
     setStep(step + val)
@@ -59,7 +70,7 @@ const ReserveCart = () => {
         )}
         {step === 1 ? (
           <>
-            <ReserveList userID={user} />
+            <ReserveList userID={user} setGroupsFunc={setGroupsFunc} />
             <div className="d-flex justify-content-end">
               <div className="d-flex justify-content-between w-75">
                 <a
@@ -90,7 +101,7 @@ const ReserveCart = () => {
         )}
         {step === 2 ? (
           <>
-            <ConfirmReserveList />
+            <ConfirmReserveList groups={groups} userID={user} />
             <div className="d-flex justify-content-end mb-4">
               <div className="d-flex justify-content-around w-75">
                 <a
