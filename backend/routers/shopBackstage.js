@@ -3,6 +3,7 @@ const router = express.Router();
 
 const pool = require('../utils/db');
 
+//上架菜色圖片
 const multer = require('multer');
 const path = require('path');
 
@@ -10,13 +11,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, '..', 'assets', 'shopbackstage'));
   },
-  // 重新命名使用者上傳的圖片名稱
   filename: function (req, file, cb) {
-    // 剛學習一個新的套件，可以把拿到的物件或變數印出來看看
-    // 看看裡面有沒有放什麼有用的東西
-    // console.log('multer filename', file);
-    // 通常我們會選擇重新命名使用者上傳的圖片名稱
-    // 以避免重複的檔名或是惡意名稱，也比較好管理
     let newFilename = file.originalname;
     cb(null, newFilename);
   },
@@ -33,22 +28,23 @@ router.get('/search', async (req, res, next) => {
 });
 
 //開團先找dish
-// router.get('/checklist', async (req, res, next) => {
-//   const shopID = req.query.shopID;
-//   let [data, fields] = await pool.execute(`SELECT name from dish WHERE shop_id=${shopID}`);
-//   res.json({ result: data });
-// });
+router.get('/checklist', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data, fields] = await pool.execute(`SELECT name from dish WHERE shop_id=${shopID}`);
+  res.json({ result: data });
+});
 //開團
 router.post('/opengroup', async (req, res, next) => {
   console.log('startTime', req.body);
+  const { startTime, endTime, eatingDate, eatingTime, goalNum, price, shopID } = req.body;
   const group = await pool.execute('INSERT INTO groups (start_time, end_time, eating_date, eating_time, goal_num, price, shop_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [
-    req.body.startTime,
-    req.body.endTime,
-    req.body.eatingDate,
-    req.body.eatingTime,
-    req.body.goalNum,
-    req.body.price,
-    req.body.shopid,
+    startTime,
+    endTime,
+    eatingDate,
+    eatingTime,
+    goalNum,
+    price,
+    shopID,
   ]);
 
   const dishArr = req.body.dish;
@@ -63,9 +59,8 @@ router.post('/opengroup', async (req, res, next) => {
 router.post('/opendish', uploader.single('photo'), async (req, res, next) => {
   console.log('dishName', req.body);
   let photo = req.file ? '/shopbackstage/' + req.file.filename : '';
-  // console.log(photo);
-  const { name, price, description } = req.body;
-  const [dish] = await pool.execute('INSERT INTO dish (name, price, description, photo) VALUES (?, ?, ?, ?)', [name, price, description, photo]);
+  const { name, price, description, shop_id } = req.body;
+  const [dish] = await pool.execute('INSERT INTO dish (name, price, description, photo, shop_id) VALUES (?, ?, ?, ?, ?)', [name, price, description, photo, shop_id]);
   // console.log(dish);
   res.json({ result: 'OK' });
 });

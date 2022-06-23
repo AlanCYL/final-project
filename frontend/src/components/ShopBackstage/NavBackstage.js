@@ -10,16 +10,18 @@ import OpenDish from './OpenDish'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../../utils/config'
 
-const BackstageNav = (props) => {
+const NavBackstage = (props) => {
   console.log(props)
   const [selectedKey, setSelectedKey] = useState('first')
   function handleGroupProps(key) {
     window.scrollTo(0, 0)
     setSelectedKey(key)
   }
-  const [shopID, setShopID] = useState(1)
+  // shop登入存在localStorage
+  const [shopID, useShopID] = useState(1)
   const [data, setData] = useState('')
   useEffect(() => {
+    const shopID = localStorage.getItem('shopID')
     fetch(`${API_URL}/shopbackstage/search?shopID=${shopID}`, {
       method: 'GET',
     })
@@ -117,4 +119,4 @@ const BackstageNav = (props) => {
   )
 }
 
-export default BackstageNav
+export default NavBackstage

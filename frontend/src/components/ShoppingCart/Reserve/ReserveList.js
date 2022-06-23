@@ -1,7 +1,7 @@
 import Header from '../../Header/Header'
 import Side from '../Side'
 import axios from 'axios'
-import { API_URL } from '../../../utils/config'
+import { API_URL, IMAGE_URL } from '../../../utils/config'
 import { useEffect, useState } from 'react'
 
 const ReserveList = (props) => {
@@ -70,10 +70,11 @@ const ReserveList = (props) => {
                         <td className="py-5">
                           <input type="checkbox" />
                         </td>
-                        <td>
+                        <td style={{ paddingTop: '14px' }}>
                           <img
+                            style={{ width: '100px', height: '100px' }}
                             className="logo py-4"
-                            src={require('../../../image/shoppingCart/d.png')}
+                            src={`${IMAGE_URL}${data[i].img}`}
                             alt=""
                           />
                         </td>

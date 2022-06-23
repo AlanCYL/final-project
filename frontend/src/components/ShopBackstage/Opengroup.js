@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 
 const Opengroup = (props) => {
+  const shopID = localStorage.getItem('shopID')
   // console.log(props)
   const { data } = props
   // const goPath = useHistory()
@@ -18,23 +19,23 @@ const Opengroup = (props) => {
     eatingTime: '',
     goalNum: '',
     price: '',
-    shopid: '',
+    shopID: `${shopID}`,
   })
-  const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
-  // const [checkList, setCheckList] = useState([])
-  // useEffect(() => {
-  //   fetch(`${API_URL}/shopbackstage/checklist?shopID=1`, {
-  //     method: 'GET',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       setCheckList(res.result)
-  //     })
-  //     .catch((e) => {
-  //       /*發生錯誤時要做的事情*/
-  //       console.log(e)
-  //     })
-  // }, [])
+  // const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
+  const [checkList, setCheckList] = useState([])
+  useEffect(() => {
+    fetch(`${API_URL}/shopbackstage/checklist?shopID=${shopID}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setCheckList(res.result)
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
 
   const [dish, setDish] = useState([])
 
@@ -67,7 +68,6 @@ const Opengroup = (props) => {
         eatingTime: '',
         goalNum: '',
         price: '',
-        shopid: `${data[0].id}`,
       })
       setDish([])
       props.groupProps('third')
@@ -82,7 +82,7 @@ const Opengroup = (props) => {
           e.preventDefault()
         }}
       >
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="name">
           <Form.Label>店家名稱</Form.Label>
           <div
             class="border border-dark"
@@ -92,7 +92,7 @@ const Opengroup = (props) => {
           </div>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="start">
           <Form.Label>開團開始時間</Form.Label>
           <Form.Control
             type="date"
@@ -101,7 +101,7 @@ const Opengroup = (props) => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="end">
           <Form.Label>截止時間</Form.Label>
           <Form.Control
             type="date"
@@ -109,7 +109,7 @@ const Opengroup = (props) => {
             onChange={(e) => setGroup({ ...group, endTime: e.target.value })}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="time">
           <Form.Label>用餐時間</Form.Label>
           <div className="d-flex">
             <Form.Control
@@ -134,7 +134,7 @@ const Opengroup = (props) => {
             </Form.Select>
           </div>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="amount">
           <Form.Label>成團人數</Form.Label>
           <Form.Control
             type="number"
@@ -144,7 +144,7 @@ const Opengroup = (props) => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="price">
           <Form.Label>價格</Form.Label>
           <Form.Control
             type="text"
@@ -153,7 +153,7 @@ const Opengroup = (props) => {
             onChange={(e) => setGroup({ ...group, price: e.target.value })}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="dish">
           <Form.Label>選擇菜色：</Form.Label>
           {/* map動態產生 */}
           {checkList.map((item, i) => (
@@ -165,7 +165,7 @@ const Opengroup = (props) => {
                 }}
                 value={i}
               />
-              <h6 className="mt-2 ms-3">{checkList[i]}</h6>
+              <h6 className="mt-2 ms-3">{item.name}</h6>
             </InputGroup>
           ))}
         </Form.Group>

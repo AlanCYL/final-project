@@ -115,10 +115,7 @@ const ConfirmPay = () => {
             <div className="bg-secondary mt-5">
               <h5 className="p-3">帳單資訊：</h5>
               <Form>
-                <Form.Group
-                  className="mb-3 d-flex mx-3"
-                  controlId="formBasicEmail"
-                >
+                <Form.Group className="mb-3 d-flex mx-3" controlId="name">
                   <h6 className="w-25 ms-4">姓名</h6>
                   <Form.Control
                     className="w-75 me-6"
@@ -126,10 +123,7 @@ const ConfirmPay = () => {
                     placeholder=""
                   />
                 </Form.Group>
-                <Form.Group
-                  className="mb-3 d-flex mx-3"
-                  controlId="formBasicEmail"
-                >
+                <Form.Group className="mb-3 d-flex mx-3" controlId="phone">
                   <h6 className="w-25 ms-4">聯絡電話</h6>
                   <Form.Control
                     className="w-75 me-6"
@@ -137,10 +131,7 @@ const ConfirmPay = () => {
                     placeholder=""
                   />
                 </Form.Group>
-                <Form.Group
-                  className="mb-3 d-flex mx-3"
-                  controlId="formBasicEmail"
-                >
+                <Form.Group className="mb-3 d-flex mx-3" controlId="email">
                   <h6 className="w-25 ms-4">電子郵件</h6>
                   <Form.Control
                     className="w-75 me-6"
@@ -148,10 +139,7 @@ const ConfirmPay = () => {
                     placeholder=""
                   />
                 </Form.Group>
-                <Form.Group
-                  className="mb-3 d-flex mx-3"
-                  controlId="formBasicEmail"
-                >
+                <Form.Group className="mb-3 d-flex mx-3" controlId="addr">
                   <h6 className="w-25 ms-4">地址</h6>
                   <Form.Select
                     style={{ marginLeft: '22px' }}
@@ -175,7 +163,7 @@ const ConfirmPay = () => {
                 </Form.Group>
                 <Form.Group
                   className="mb-3 d-flex me-5 justify-content-center"
-                  controlId="formBasicEmail"
+                  controlId="address"
                 >
                   <Form.Select
                     aria-label="Default select example"

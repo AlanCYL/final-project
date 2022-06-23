@@ -49,12 +49,12 @@ function ShopProfile() {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>密碼</Form.Label>
               <Form.Control type="password" value={1234566} />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>再次確認密碼</Form.Label>
               <Form.Control type="password" value={1234566} />
             </Form.Group>

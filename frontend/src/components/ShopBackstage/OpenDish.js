@@ -7,12 +7,13 @@ import axios from 'axios'
 import { API_URL } from '../../utils/config'
 
 const OpenDish = (props) => {
-  // const goPath = useHistory()
+  const shopID = localStorage.getItem('shopID')
   const [upDish, setUpDish] = useState({
     dishName: '',
     dishPrice: '',
     dishDes: '',
     photo: '',
+    shopID: `${shopID}`,
   })
 
   function handlePhoto(e) {
@@ -28,11 +29,13 @@ const OpenDish = (props) => {
       //   upDish
       // )
       // console.log(response.data)
+
       let formData = new FormData()
       formData.append('name', upDish.dishName)
       formData.append('price', upDish.dishPrice)
       formData.append('description', upDish.dishDes)
       formData.append('photo', upDish.photo)
+      formData.append('shop_id', upDish.shopID)
       let response = axios.post(`${API_URL}/shopbackstage/opendish`, formData)
       console.log(response.data)
       setUpDish({
@@ -49,7 +52,7 @@ const OpenDish = (props) => {
   return (
     <>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="1">
           <Form.Label>上架菜色店家：</Form.Label>
           <div
             class="border border-dark"
@@ -59,7 +62,7 @@ const OpenDish = (props) => {
           </div>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="2">
           <Form.Label>菜色名稱</Form.Label>
           <Form.Control
             type="text"
@@ -68,7 +71,7 @@ const OpenDish = (props) => {
             onChange={(e) => setUpDish({ ...upDish, dishName: e.target.value })}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="3">
           <Form.Label>菜色價格</Form.Label>
           <Form.Control
             type="text"
@@ -79,7 +82,7 @@ const OpenDish = (props) => {
             }
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="4">
           <Form.Label>菜色描述</Form.Label>
           <FloatingLabel controlId="floatingTextarea2" label="">
             <Form.Control
@@ -93,7 +96,7 @@ const OpenDish = (props) => {
             />
           </FloatingLabel>
         </Form.Group>
-        <Form.Group controlId="formFileMultiple" className="mb-3">
+        <Form.Group controlId="5" className="mb-3">
           <Form.Label>上傳照片</Form.Label>
           <Form.Control
             type="file"

@@ -12,7 +12,9 @@ router.get('/search', async (req, res, next) => {
 //reservelist
 router.get('/reservelist', async (req, res, next) => {
   const userID = req.query.userID;
-  let [data] = await pool.execute(`SELECT shoppingcart.*, groups.* FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id WHERE shoppingcart.user_id=${userID}`);
+  let [data] = await pool.execute(
+    `SELECT shoppingcart.*, groups.*, shop.img FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id JOIN shop ON groups.id = shop.id  WHERE shoppingcart.user_id=${userID}`
+  );
   res.json({ result: data });
 });
 module.exports = router;

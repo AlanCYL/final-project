@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios'
-import { API_URL } from '../../utils/config'
+import { API_URL, IMAGE_URL } from '../../utils/config'
 import { BsFillTrashFill } from 'react-icons/bs'
 
 const DishList = (props) => {
-  const { shop } = props
   const [data, setData] = useState([])
   useEffect(() => {
-    fetch(`${API_URL}/shopbackstage/dishlist?shopID=1`, {
+    const shopID = localStorage.getItem('shopID')
+    fetch(`${API_URL}/shopbackstage/dishlist?shopID=${shopID}`, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -34,10 +34,7 @@ const DishList = (props) => {
         {/* map */}
         {data.map((item, i) => (
           <Card style={{ width: '14rem' }} className="mx-2 my-4 ">
-            <Card.Img
-              variant="top"
-              src={require('../../image/shopBackstage/dish/bow.png')}
-            />
+            <Card.Img variant="top" src={`${IMAGE_URL}${data[i].photo}`} />
 
             <Card.Body>
               <div className="d-flex align-items-baseline justify-content-between">
