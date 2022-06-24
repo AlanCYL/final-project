@@ -64,8 +64,13 @@ app.use('/api/shoppingCart', shoppingCart);
 const member = require('./routers/member');
 app.use('/api/member', member);
 
+//session
 const session = require('./routers/session');
 app.use('/api/session', session);
+
+//coupon
+const coupon = require('./routers/coupon');
+app.use('/api/coupon', coupon);
 
 //===============================================================以下是錯誤處理
 //404
