@@ -8,9 +8,10 @@ import { FaHeart } from 'react-icons/fa'
 import { useEffect } from 'react'
 
 const Favorite = () => {
-  useEffect(()=>{
-    
-  })
+  // TODO::
+  // useEffect(()=>{
+
+  // })
 
   return (
     <>
