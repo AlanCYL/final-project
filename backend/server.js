@@ -72,6 +72,10 @@ app.use('/api/session', session);
 const coupon = require('./routers/coupon');
 app.use('/api/coupon', coupon);
 
+//favorite
+const favorite = require('./routers/favorite');
+app.use('/api/favorite', favorite);
+
 //===============================================================以下是錯誤處理
 //404
 app.use((req, res, next) => {
