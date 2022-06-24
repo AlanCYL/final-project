@@ -18,12 +18,12 @@ import axios from 'axios'
 import { API_URL } from './utils/config'
 import { ActivePanelContext } from './context/ActivePanel'
 
-
 function App() {
   //存登入會員的資料
   const [member, setMember] = useState({
     id: '',
     identity_card: '',
+    password: '',
   })
   const [memberDetail, setMemberDetail] = useState({
     name: '',

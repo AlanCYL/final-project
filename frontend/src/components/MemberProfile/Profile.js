@@ -5,12 +5,14 @@ import { API_URL } from '../../utils/config'
 import { useHistory } from 'react-router-dom'
 import { useLogin } from '../../context/LoginStatus'
 import { useActivePanel } from '../../context/ActivePanel'
+import { useCoupon } from '../../context/CouponContext'
 
 const Profile = () => {
   const history = useHistory()
   const { member, setMember, setIsLogin } = useLogin()
   const { memberDetail, setMemberDetail } = useLogin()
   const { active } = useActivePanel()
+  const { countCoupon } = useCoupon()
 
   let getMemberDetail = async () => {
     try {
@@ -103,7 +105,7 @@ const Profile = () => {
           </p>
         </div>
         <div className="mb-4">
-          <p>尚餘可用的優惠券10張</p>
+          <p>尚餘可用的優惠券{countCoupon}張</p>
         </div>
         <div className="mb-4">
           <p>{memberDetail.create_time[0]} 開始加入 Unii</p>

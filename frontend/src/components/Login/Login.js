@@ -47,7 +47,7 @@ const Login = (props) => {
       return
     }
     setIsLogin(true)
-    console.log('123', isLogin)
+    // console.log('123', isLogin)
     try {
       let response = await axios.post(`${API_URL}/member/login`, member, {
         withCredentials: true,
@@ -167,6 +167,7 @@ const Login = (props) => {
                       className="form-check-input"
                       type="checkbox"
                       id="rememberPasswordCheck"
+                      defaultChecked
                     />
                     記住我
                   </label>

@@ -5,7 +5,9 @@ import '../../../styles/_coupon.scss'
 import MyCoupon from './MyCoupon'
 import AvailCoupon from './AvailCoupon'
 
+
 const Coupon = () => {
+
   return (
     <Tabs
       defaultActiveKey="MyCoupon"
