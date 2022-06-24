@@ -88,7 +88,7 @@ const Opengroup = (props) => {
             class="border border-dark"
             style={{ height: '40px', paddingLeft: '10px', paddingTop: '5px' }}
           >
-            {/* {data ? data[0].name : ''} */}
+            {data ? data[0].name : ''}
           </div>
         </Form.Group>
 

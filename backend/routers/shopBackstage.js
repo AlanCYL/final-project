@@ -32,6 +32,7 @@ router.get('/', async (request, respond, next) => {
   }
 });
 
+//查詢shopID的資料
 router.get('/search', async (req, res, next) => {
   const shopID = req.query.shopID;
   let [data, fields] = await pool.execute(`SELECT * from shop WHERE id=${shopID}`);

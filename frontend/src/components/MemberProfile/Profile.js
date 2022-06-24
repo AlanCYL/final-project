@@ -11,33 +11,39 @@ const Profile = () => {
   const { member, setMember, setIsLogin } = useLogin()
   const { memberDetail, setMemberDetail } = useLogin()
   const { active } = useActivePanel()
-  useEffect(() => {
-    ;(async () => {
-      try {
-        let response = await axios.post(`${API_URL}/member/profile`, member)
-        console.log(response.data)
-        setMember({ ...member, id: response.data.member.id })
-        const newMemberDetail = {
-          ...memberDetail,
-          id: response.data.member.id,
-          name: response.data.member.name,
-          identity_card: response.data.member.identity_card,
-          nick_name: response.data.member.nick_name,
-          phone: response.data.member.phone,
-          bir: response.data.member.bir,
-          mail: response.data.member.mail,
-          img: response.data.member.img,
-          level: response.data.member.level,
-          levelName: response.data.member.levelName,
-          create_time: response.data.member.create_time.split(' '),
-        }
-        setMemberDetail(newMemberDetail)
-        console.log(newMemberDetail.img)
-      } catch (e) {
-        console.log(e.response.data.error)
+
+  let getMemberDetail = async () => {
+    try {
+      // console.log('profile')
+      let response = await axios.post(`${API_URL}/member/profile`, member)
+      // console.log(response.data)
+      const newMemberDetail = {
+        ...memberDetail,
+        id: response.data.member.id,
+        name: response.data.member.name,
+        identity_card: response.data.member.identity_card,
+        nick_name: response.data.member.nick_name,
+        phone: response.data.member.phone,
+        bir: response.data.member.bir,
+        mail: response.data.member.mail,
+        img: response.data.member.img,
+        level: response.data.member.level,
+        levelName: response.data.member.levelName,
+        create_time: response.data.member.create_time.split(' '),
       }
-    })()
+      setMemberDetail(newMemberDetail)
+    } catch (e) {
+      // console.log(e.response.data.error)
+    }
+  }
+
+  useEffect(() => {
+    getMemberDetail()
   }, [active])
+
+  useEffect(() => {
+    getMemberDetail()
+  }, [member])
 
   useEffect(() => {}, [memberDetail])
   const logout = async () => {
@@ -45,8 +51,7 @@ const Profile = () => {
       let response = await axios.get(`${API_URL}/member/logout`, {
         withCredentials: true,
       })
-      console.log(response.data.msg)
-
+      // console.log(response.data.msg)
       Swal.fire({
         icon: 'success',
         title: response.data.msg,

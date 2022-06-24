@@ -7,6 +7,7 @@ import axios from 'axios'
 import { API_URL } from '../../utils/config'
 
 const OpenDish = (props) => {
+  const { data } = props
   const shopID = localStorage.getItem('shopID')
   const [upDish, setUpDish] = useState({
     dishName: '',
@@ -58,7 +59,7 @@ const OpenDish = (props) => {
             class="border border-dark"
             style={{ height: '40px', paddingLeft: '10px', paddingTop: '5px' }}
           >
-            鼎泰豐
+            {data ? data[0].name : ''}
           </div>
         </Form.Group>
 

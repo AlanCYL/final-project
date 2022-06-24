@@ -169,7 +169,7 @@ const UpdateProfile = () => {
                 placeholder="0912345678"
                 className="form-control mb-2"
                 name="phone"
-                Value={memberDetail.phone}
+                value={memberDetail.phone}
                 onChange={handleChange}
                 required
               />

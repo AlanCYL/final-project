@@ -56,11 +56,11 @@ router.post('/login', async (req, res, next) => {
 
   //TODO: 密碼符合，就開始寫 session
   let returnMember = {
+    id: member.id,
     identity_card: member.identity_card,
-    password: member.password,
   };
   req.session.member = returnMember;
-  console.log(req.session);
+  // console.log(req.session);
   //回覆資料給前端
   res.json({ code: 0, member: returnMember, result: '登入成功' });
 });
@@ -77,7 +77,7 @@ router.post('/profile', async (req, res, next) => {
   res.json({ member });
 });
 
-// /api/member/profile
+// /api/member/update
 router.post('/update', async (req, res, next) => {
   console.log('更新的資料', req.body);
 

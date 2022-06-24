@@ -13,14 +13,17 @@ import ShopBackstage from './pages/ShopBackstage'
 import ShopList from './pages/ShopList'
 import ShopListDetail from './pages/ShopListDetail'
 import { LoginContext } from './context/LoginStatus'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { API_URL } from './utils/config'
+import { ActivePanelContext } from './context/ActivePanel'
+
 
 function App() {
   //存登入會員的資料
   const [member, setMember] = useState({
     id: '',
     identity_card: '',
-    password: '',
   })
   const [memberDetail, setMemberDetail] = useState({
     name: '',
@@ -35,6 +38,25 @@ function App() {
     create_time: '',
   })
   const [isLogin, setIsLogin] = useState(false)
+  useEffect(() => {
+    ;(async () => {
+      try {
+        let response = await axios.get(`${API_URL}/session/member`, {
+          withCredentials: true,
+        })
+        // console.log(response.data)
+        setIsLogin(true)
+        setMember(response.data)
+      } catch (e) {
+        console.log(e.response.data.error)
+      }
+    })()
+  }, [])
+  useEffect(() => {}, [isLogin])
+
+  //切換Nav的會員中心首頁連向何處
+  const [active, setActive] = useState('basic')
+
   return (
     <LoginContext.Provider
       value={{
@@ -46,45 +68,47 @@ function App() {
         setIsLogin,
       }}
     >
-      <Router>
-        <Nav />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <MemberLogin />
-          </Route>
-          <Route path="/memberCenter">
-            <MemberCenter />
-          </Route>
-          <Route path="/shop">
-            <Shop />
-          </Route>
-          <Route path="/groups">
-            <Groups />
-          </Route>
-          <Route path="/groupDetail">
-            <GroupDetail />
-          </Route>
-          <Route path="/shoppingCart">
-            <ShoppingCart />
-          </Route>
-          <Route path="/shopBackstage">
-            <ShopBackstage />
-          </Route>
-          <Route path="/shopList">
-            <ShopList />
-          </Route>
-          <Route path="/shopListDetail">
-            <ShopListDetail />
-          </Route>
-          <Route path="*">
-            <NotFoundPage />
-          </Route>
-        </Switch>
-        <Footer />
-      </Router>
+      <ActivePanelContext.Provider value={{ active, setActive }}>
+        <Router>
+          <Nav />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <MemberLogin />
+            </Route>
+            <Route path="/memberCenter">
+              <MemberCenter />
+            </Route>
+            <Route path="/shop">
+              <Shop />
+            </Route>
+            <Route path="/groups">
+              <Groups />
+            </Route>
+            <Route path="/groupDetail">
+              <GroupDetail />
+            </Route>
+            <Route path="/shoppingCart">
+              <ShoppingCart />
+            </Route>
+            <Route path="/shopBackstage">
+              <ShopBackstage />
+            </Route>
+            <Route path="/shopList">
+              <ShopList />
+            </Route>
+            <Route path="/shopListDetail">
+              <ShopListDetail />
+            </Route>
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
+      </ActivePanelContext.Provider>
     </LoginContext.Provider>
   )
 }

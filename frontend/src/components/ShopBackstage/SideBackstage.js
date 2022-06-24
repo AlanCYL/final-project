@@ -10,7 +10,7 @@ import OpenDish from './OpenDish'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../../utils/config'
 
-const NavBackstage = (props) => {
+const SideBackstage = (props) => {
   console.log(props)
   const [selectedKey, setSelectedKey] = useState('first')
   function handleGroupProps(key) {
@@ -119,4 +119,4 @@ const NavBackstage = (props) => {
   )
 }
 
-export default NavBackstage
+export default SideBackstage

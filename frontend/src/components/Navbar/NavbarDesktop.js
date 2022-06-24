@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useLogin } from '../../context/LoginStatus'
+import { useActivePanel } from '../../context/ActivePanel'
 
 const NavbarDesktop = () => {
   const location = useLocation()
   const { isLogin } = useLogin()
+  const { setActive } = useActivePanel()
 
   if (location.pathname === '/shop') return <></>
   if (location.pathname === '/shop/Register') return <></>
@@ -49,7 +51,12 @@ const NavbarDesktop = () => {
               <img src={require('../../image/navbar/shop.png')} alt="" />
             </Link>
             {isLogin ? (
-              <Link to="/memberCenter">
+              <Link
+                to="/memberCenter"
+                onClick={() => {
+                  setActive('basic')
+                }}
+              >
                 <img src={require('../../image/navbar/login.png')} alt="" />
               </Link>
             ) : (

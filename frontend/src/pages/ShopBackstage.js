@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBackstage from '../components/ShopBackstage/NavBackstage'
+import SideBackstage from '../components/ShopBackstage/SideBackstage'
 // import Opengroup from '../components/ShopBackstage/Opengroup'
 import NavbarShopbackstage from '../components/Navbar/NavbarShopbackstage'
 import axios from 'axios'
@@ -21,7 +21,7 @@ const ShopBackstage = () => {
     <>
       <NavbarShopbackstage shopBackstage={shopBackstage} />
       <div className="d-flex">
-        <NavBackstage />
+        <SideBackstage />
         {/* <Opengroup /> */}
       </div>
     </>

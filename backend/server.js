@@ -64,6 +64,9 @@ app.use('/api/shoppingCart', shoppingCart);
 const member = require('./routers/member');
 app.use('/api/member', member);
 
+const session = require('./routers/session');
+app.use('/api/session', session);
+
 //===============================================================以下是錯誤處理
 //404
 app.use((req, res, next) => {
