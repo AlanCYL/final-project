@@ -5,7 +5,7 @@ import Heart from './Heart'
 function ShopCard() {
   return (
     <>
-      <div className="hover01 ms-6">
+      <div className="hover01 ps-6 mt-6 ">
         <div className="zoom-in">
           <Link to="#/">
             <div className="piczoom">
