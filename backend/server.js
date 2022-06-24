@@ -44,9 +44,13 @@ app.get('/', (request, respond, next) => {
   respond.send('首頁');
 });
 
+//店家列表
+const shopList = require('./routers/shopList');
+app.use('/api/shoplist', shopList);
+
 //shopRegister & Login
-const shopRegister = require('./routers/shop');
-app.use('/api/shop', shopRegister);
+const shop = require('./routers/shop');
+app.use('/api/shop', shop);
 
 //shoBackstage
 const ShopBackstage = require('./routers/shopBackstage');
