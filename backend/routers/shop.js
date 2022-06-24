@@ -123,4 +123,5 @@ router.get('/logout', (request, respond, next) => {
   request.session.LoginShopMember = null;
   request.sendStatus(202);
 });
+
 module.exports = router;
