@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Heart from './Heart'
 
-function ShopCard() {
+function ShopCard(props) {
   return (
     <>
       <div className="hover01 ps-6 mt-6 ">

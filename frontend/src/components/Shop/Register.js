@@ -20,6 +20,7 @@ function Register(props) {
     description: '',
     type_id: [],
     img: '',
+    banner: '',
     address: '',
   })
   const [validated, setValidated] = useState(false)
@@ -69,8 +70,9 @@ function Register(props) {
 
   //圖片用
   function handlePhoto(e) {
-    setshopMember({ ...shopMember, img: e.target.files[0] })
+    setshopMember({ ...shopMember, [e.target.name]: e.target.files[0] })
   }
+
   //看密碼
   const [passwordShown, setPasswordShown] = useState(false)
 
@@ -95,7 +97,11 @@ function Register(props) {
       return
     }
 
-    console.log(`店家名稱:${shopMember.name}`, `店家類別:${shopMember.type_id}`)
+    console.log(
+      `店家名稱:${shopMember.name}`,
+      `logo圖片:${shopMember.img}`,
+      `banner圖片:${shopMember.banner}`
+    )
     try {
       let formData = new FormData()
       formData.append('name', shopMember.name)
@@ -109,6 +115,7 @@ function Register(props) {
         formData.append('type_id', shopMember.type_id[i])
       }
       formData.append('img', shopMember.img)
+      formData.append('banner', shopMember.banner)
       let response = await axios.post(`${API_URL}/shop/register`, formData)
       console.log(response.data.result)
       await Swal.fire({
@@ -317,7 +324,7 @@ function Register(props) {
                   type="file"
                   name="banner"
                   className="mb-4"
-                  defaultValue={shopMember.img}
+                  defaultValue={shopMember.banner}
                   onChange={handlePhoto}
                 />
               </Form.Group>

@@ -10,7 +10,7 @@ function Heart() {
         <input
           type="radio"
           name=""
-          value={heartPoint}
+          defaultValue={heartPoint}
           onClick={() => {
             setHeart(!heart)
           }}
