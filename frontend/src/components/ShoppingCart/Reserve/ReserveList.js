@@ -93,8 +93,8 @@ const ReserveList = (props) => {
                         <td style={{ paddingTop: '14px' }}>
                           <img
                             style={{ width: '100px', height: '100px' }}
-                            className="logo py-4"
-                            src={`${IMAGE_URL}${data[i].img}`}
+                            className="logo py-4 img-fluid"
+                            src={`${IMAGE_URL}${item.img}`}
                             alt=""
                           />
                         </td>

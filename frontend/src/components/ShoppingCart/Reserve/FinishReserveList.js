@@ -1,8 +1,37 @@
 import React from 'react'
 import Header from '../../Header/Header'
 import Card from '../../Card/Card'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import { API_URL } from '../../../utils/config'
 
-const FinishReserveList = () => {
+const FinishReserveList = (props) => {
+  const [data, setData] = useState([])
+  const [para, setPara] = useState({
+    groups: props.groups,
+    userID: `${props.userID}`,
+  })
+  async function getApi() {
+    const res = await axios.post(
+      `${API_URL}/shoppingCart/confirmreservelist`,
+      para
+    )
+    setData(res.data.result)
+  }
+  useEffect((props) => {
+    if (!para) return
+    getApi()
+  }, [])
+  function getEatTimeString(item) {
+    if (item.eating_time === 1) {
+      return '午餐12:00'
+    } else if (item.eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
+
   return (
     <>
       <div className=" container my-6">
@@ -19,32 +48,37 @@ const FinishReserveList = () => {
             </div>
             {/* List */}
             <div className="bg-secondary d-flex flex-column align-items-center">
-              <div className="mt-8 mb-5">
+              <div className="mt-6 mb-5">
                 <img
                   style={{ width: '100px' }}
                   src={require('../../../image/shoppingCart/finish.png')}
                   alt=""
                 />
               </div>
-              <h3 className="pb-3 mb-5 border-bottom border-1 border-dark w-75 text-center">
-                已完成訂位
-              </h3>
+              <h3 className="pb-3 mb-5  w-75 text-center">已完成訂位</h3>
 
-              <div className="w-75">
-                <h6 className="">訂單編號：</h6>
-                <div className="d-flex mt-4 pb-4 border-bottom">
-                  <div className="ms-6">000001</div>
-                  <div className="ms-5">鼎泰豐 (2022/06/17)</div>
-                  <div className="ms-5">價格：$200</div>
-                  <div className="ms-4 text-danger">(已成團)</div>
-                </div>
-                <div className="d-flex mt-4 pb-4 border-bottom">
-                  <div className="ms-6">000002</div>
-                  <div className="ms-5">夏慕尼 (2022/06/18)</div>
-                  <div className="ms-5">價格：$200</div>
-                  <div className="ms-4 text-danger">(未成團)</div>
-                </div>
-              </div>
+              <table class="table w-75">
+                <thead class="">
+                  <tr>
+                    <th>訂單編號：</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="py-5">{item.group_id}</td>
+                      <td className="py-5">{item.name}</td>
+                      <td className="py-5">
+                        <div>({item.eating_date})</div>
+                        <div>({getEatTimeString(item)})</div>
+                      </td>
+                      <td className="py-5">價格：${item.price}</td>
+                      <td className="py-5 text-danger">(已成團)</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

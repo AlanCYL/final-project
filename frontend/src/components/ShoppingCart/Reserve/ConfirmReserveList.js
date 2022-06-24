@@ -85,7 +85,8 @@ const ConfirmReserveList = (props) => {
                       <tr className="tr-hover">
                         <td>
                           <img
-                            className="logo py-4"
+                            style={{ width: '100px', height: '100px' }}
+                            className="logo py-4 img-fluid"
                             src={`${IMAGE_URL}${item.img}`}
                             alt=""
                           />

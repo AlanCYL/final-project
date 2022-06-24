@@ -13,7 +13,7 @@ router.get('/search', async (req, res, next) => {
 router.get('/reservelist', async (req, res, next) => {
   const userID = req.query.userID;
   let [data] = await pool.execute(
-    `SELECT shoppingcart.*, groups.*, shop.img FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id JOIN shop ON groups.id = shop.id  WHERE shoppingcart.user_id=${userID}`
+    `SELECT shoppingcart.*, groups.*, shop.img FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id JOIN shop ON groups.shop_id = shop.id  WHERE shoppingcart.user_id=${userID}`
   );
   res.json({ result: data });
 });
@@ -25,5 +25,15 @@ router.post('/confirmreservelist', async (req, res, next) => {
   );
   //console.log(data);
   res.json({ result: data });
+});
+
+//finishreservelist
+router.post('/finishreservelist', async (req, res, next) => {
+  const { userID, groupID } = req.body;
+  for (let i = 0; i < groupID.length; i++) {
+    const group = groupID[i];
+    await pool.execute('INSERT INTO orders (user_id, groups_id) VALUES (?, ?)', [userID, group]);
+  }
+  res.json({});
 });
 module.exports = router;

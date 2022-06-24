@@ -8,6 +8,7 @@ import ConfirmPay from '../Pay/ConfirmPay'
 import FinishPay from '../Pay/FinishPay'
 import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../../utils/config'
+import axios from 'axios'
 
 const ReserveCart = (props) => {
   const { data } = props
@@ -46,6 +47,15 @@ const ReserveCart = (props) => {
     setStep(step + val)
   }
 
+  async function SubmitList() {
+    const params = {
+      userID: user,
+      groupID: groups,
+    }
+    await axios.post(`${API_URL}/shoppingCart/finishreservelist`, params)
+    toggleStep(1)
+    window.scrollTo(0, 0)
+  }
   return (
     <>
       <div>
@@ -106,7 +116,7 @@ const ReserveCart = (props) => {
               <div className="d-flex justify-content-around w-75">
                 <a
                   type="button"
-                  className="bg-info text-white px-4 py-2 mt-4"
+                  className="bg-info text-white px-4 py-2 mt-4 me-8"
                   onClick={() => {
                     toggleStep(-1)
                     window.scrollTo(0, 0)
@@ -118,8 +128,7 @@ const ReserveCart = (props) => {
                   type="button"
                   className="bg-primary text-white px-4 py-2 me-5 mt-4"
                   onClick={() => {
-                    toggleStep(1)
-                    window.scrollTo(0, 0)
+                    SubmitList()
                   }}
                 >
                   確定訂位
@@ -132,18 +141,18 @@ const ReserveCart = (props) => {
         )}
         {step === 3 ? (
           <>
-            <FinishReserveList />
-            <div className="d-flex flex-column align-items-center  w-100">
-              <Link
-                to="/memberCenter"
-                className="mb-5 bg-primary text-white  px-5 py-2 rounded ms-3"
+            <FinishReserveList groups={groups} userID={user} />
+            <div className="d-flex justify-content-center mb-5">
+              <a
+                href="/memberCenter"
+                type="button"
+                className="bg-info text-white px-4 py-2 mt-4"
                 onClick={() => {
-                  // toggleStep(1)
                   window.scrollTo(0, 0)
                 }}
               >
                 查看我的訂單
-              </Link>
+              </a>
             </div>
           </>
         ) : (
