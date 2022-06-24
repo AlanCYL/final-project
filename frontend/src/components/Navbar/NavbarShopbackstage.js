@@ -16,7 +16,7 @@ function NavbarShopbackstage(props) {
           <div className="d-flex mt-3 ms-auto">
             <h4 className="text-primary me-4">{props.shopBackstage.name}</h4>
             <h4 className="me-4">歡迎回來</h4>
-            <Link to="/shop">
+            <Link to="/shop" onClick={() => localStorage.removeItem('shopID')}>
               <FiLogOut className="text-primary ms-auto me-4 mt-1" size={25} />
             </Link>
           </div>

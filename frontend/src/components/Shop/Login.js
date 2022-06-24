@@ -56,6 +56,8 @@ function Login(props) {
         withCredentials: true,
       })
       console.log('登入成功', response.data.result)
+      //登入存入localStorage
+      localStorage.setItem('shopID', response.data.LoginShopMember.id)
       await Swal.fire({
         icon: 'success',
         title: response.data.result,
