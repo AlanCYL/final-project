@@ -7,7 +7,7 @@ const pool = require('../utils/db');
 //TODO: 取得 shop 的列表
 
 router.get('/', async (request, response, next) => {
-  let [data] = await pool.execute('SELECT * FROM shop');
+  let [data] = await pool.execute('SELECT id,name,img FROM shop');
   response.json(data);
 });
 

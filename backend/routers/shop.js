@@ -11,7 +11,11 @@ const path = require('path');
 const storage = multer.diskStorage({
   // 設定儲存的目的地 （檔案夾）
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '..', 'assets', 'shopImg'));
+    if (file.fieldname != 'img') {
+      cb(null, path.join(__dirname, '..', 'assets', 'shopBanner'));
+    } else {
+      cb(null, path.join(__dirname, '..', 'assets', 'shopImg'));
+    }
   },
   filename: function (req, file, cb) {
     let newFilename = file.originalname;
@@ -37,10 +41,16 @@ const uploader = multer({
   },
 });
 
+//多圖上傳方法
+const cpUpload = uploader.fields([
+  { name: 'img', maxCount: 1 },
+  { name: 'banner', maxCount: 1 },
+]);
+
 //註冊
-router.post('/register', uploader.single('img'), async (request, respond, next) => {
-  console.log('確認有拿到資料', request.body);
-  // console.log('上傳圖片', request.file);
+router.post('/register', cpUpload, async (request, respond, next) => {
+  console.log('註冊確認有拿到資料', request.body);
+  console.log('註冊上傳圖片', request.file);
 
   //確認 email 有沒有註冊過
   let [shopMember] = await pool.execute('SELECT id, account FROM shop WHERE account = ?', [request.body.account]);
@@ -55,9 +65,14 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
     return respond.status(400).json({ code: 3007, error: '密碼與確認密碼不一致' });
   }
 
+  //找到圖片的名字
+  console.log('查看圖片的資料', request.files['img'][0].filename, request.files['banner'][0]);
+  let img = request.files['img'] && request.files['img'].length > 0 ? '/shopImg/' + request.files['img'][0].filename : '';
+  let banner = request.files['banner'] && request.files['banner'].length > 0 ? '/shopBanner/' + request.files['banner'][0].filename : '';
+  console.log(banner, img);
+
   //存入shop資料表
-  let img = request.file ? '/shopImg/' + request.file.filename : '';
-  let [result] = await pool.execute('INSERT INTO shop (name,phone,account,password,description,address,img) VALUES (?, ?, ?, ?, ?,?,?)', [
+  let [result] = await pool.execute('INSERT INTO shop (name,phone,account,password,description,address,img,banner) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
     request.body.name,
     request.body.phone,
     request.body.account,
@@ -65,6 +80,7 @@ router.post('/register', uploader.single('img'), async (request, respond, next) 
     request.body.description,
     request.body.address,
     img,
+    banner,
   ]);
 
   //抓shop最後一筆資料
