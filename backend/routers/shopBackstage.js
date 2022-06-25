@@ -68,12 +68,42 @@ router.post('/opengroup', async (req, res, next) => {
   await res.json({ result: 'OK' });
 });
 //團單清單
+//全部開團
 router.get('/grouplist', async (req, res, next) => {
   const shopID = req.query.shopID;
   let [data] = await pool.execute(`SELECT * FROM groups WHERE shop_id=${shopID}`);
   // console.log('我要', data);
   res.json({ result: data });
 });
+//開團中
+router.get('/nowopen', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data] = await pool.execute(`SELECT DISTINCT groups.*, shop.name  FROM groups JOIN shop ON groups.shop_id=shop.id
+  WHERE now() >= start_time AND  now() <= end_time AND groups.shop_id=${shopID}`);
+  res.json({ result: data });
+});
+//已成團
+router.get('/coropen', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data] = await pool.execute(`SELECT DISTINCT groups.*, shop.name  FROM groups JOIN shop ON groups.shop_id=shop.id
+  WHERE now() < eating_date AND now_num>goal_num AND groups.shop_id=${shopID}`);
+  res.json({ result: data });
+});
+//未成團
+router.get('/noneopen', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data] = await pool.execute(`SELECT groups.*, shop.name  FROM groups JOIN shop ON groups.shop_id=shop.id
+  WHERE now() > eating_date AND now_num<goal_num AND groups.shop_id=${shopID}`);
+  res.json({ result: data });
+});
+//歷史開團
+router.get('/finishopen', async (req, res, next) => {
+  const shopID = req.query.shopID;
+  let [data] = await pool.execute(`SELECT groups.*, shop.name  FROM groups JOIN shop ON groups.shop_id=shop.id
+  WHERE now() > eating_date AND now_num>goal_num AND groups.shop_id=${shopID}`);
+  res.json({ result: data });
+});
+
 //上架菜色
 router.post('/opendish', uploader.single('photo'), async (req, res, next) => {
   console.log('dishName', req.body);

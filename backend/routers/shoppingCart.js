@@ -36,4 +36,15 @@ router.post('/finishreservelist', async (req, res, next) => {
   }
   res.json({});
 });
+
+//payList
+router.get('/paylist', async (req, res, next) => {
+  const groupID = req.query.groupID;
+  const userID = req.query.userID;
+  let [data] = await pool.execute(
+    `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.groups_id=${groupID}`
+  );
+  // console.log('我要', data);
+  res.json({ result: data });
+});
 module.exports = router;

@@ -1,14 +1,47 @@
-import React from 'react'
 import Header from '../../Header/Header'
+import { useState, useEffect } from 'react'
+import { API_URL } from '../../../utils/config'
 
-const PayList = () => {
+function PayList() {
+  localStorage.setItem('groupID', 2)
+  localStorage.setItem('userID', 2)
+  const groupID = localStorage.getItem('groupID')
+  const userID = localStorage.getItem('userID')
+  const [data, setData] = useState({})
+  useEffect(() => {
+    fetch(
+      `${API_URL}/shoppingcart/paylist?groupID=${groupID}&userID=${userID}`,
+      {
+        method: 'GET',
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res.result[0])
+        console.log(data)
+        debugger
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
+  function getEatTimeString() {
+    if (data.eating_time === 1) {
+      return '午餐12:00'
+    } else if (data.eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
   return (
     <>
       <div className=" container my-6">
         <Header />
         <div className="d-flex justify-content-center">
           <div>
-            <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
+            <div className="w-75 ms-6" style={{ marginRight: '80px' }}>
               <img
                 style={{ width: '500px' }}
                 className="mb-5"
@@ -17,16 +50,12 @@ const PayList = () => {
               />
             </div>
             {/* List */}
+
             <div className="bg-secondary p-4 ">
-              <div className="mb-4 pb-3 border-bottom w-100">
-                <th>
-                  <input type="checkbox" />
-                </th>
-                <th>全選</th>
-              </div>
-              <tr className="d-flex justify-content-between align-items-center border-bottom mb-4 pb-4">
+              <div className="mb-4 pb-3 w-100"></div>
+              <tr className="d-flex justify-content-between align-items-center mb-4 pb-4">
                 <td>
-                  <input type="checkbox" />
+                  <input type="checkbox" checked />
                 </td>
                 <td>
                   <img
@@ -36,37 +65,22 @@ const PayList = () => {
                   />
                 </td>
                 <td>
-                  <h6>鼎泰豐(復興店)</h6>
-                  <h6>2022/06/17 中午12:00</h6>
+                  <h6>{data.name}</h6>
+                  <h6>
+                    <div>{data.eating_date}</div>
+                    <div>{getEatTimeString()}</div>
+                  </h6>
                 </td>
-                <td>人數 : 1</td>
-                <td>NT$1280</td>
-              </tr>
-              {/* repeat */}
-              <tr className="d-flex justify-content-between align-items-center border-bottom mb-4 pb-4">
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>
-                  <img
-                    style={{ width: '90px' }}
-                    src={require('../../../image/shoppingCart/dSquare.png')}
-                    alt=""
-                  />
-                </td>
-                <td>
-                  <h6>鼎泰豐(復興店)</h6>
-                  <h6>2022/06/17 中午12:00</h6>
-                </td>
-                <td>人數 : 1</td>
-                <td>NT$1280</td>
+                <td>已成團</td>
+                <td>NT${data.price}</td>
               </tr>
             </div>
             {/* sale */}
+
             <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
               <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
                 <h6>商品金額：</h6>
-                <h6>NT$2280</h6>
+                <h6>NT${data.price}</h6>
               </div>
 
               <div className="d-flex mb-2">

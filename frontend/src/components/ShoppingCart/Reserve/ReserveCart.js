@@ -154,6 +154,19 @@ const ReserveCart = (props) => {
                 查看我的訂單
               </a>
             </div>
+            {/* 暫時放的button要跳去購物車 */}
+            <div className="d-flex justify-content-center mb-5">
+              <a
+                type="button"
+                className="bg-info text-white px-4 py-2 mt-4"
+                onClick={() => {
+                  toggleStep(1)
+                  window.scrollTo(0, 0)
+                }}
+              >
+                去購物車
+              </a>
+            </div>
           </>
         ) : (
           ''
