@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import { API_URL } from '../../utils/config'
 
 const SideBackstage = (props) => {
-  console.log(props)
+  //console.log(props)
   const [selectedKey, setSelectedKey] = useState('first')
   function handleGroupProps(key) {
     window.scrollTo(0, 0)

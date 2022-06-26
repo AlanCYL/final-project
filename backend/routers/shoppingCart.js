@@ -39,10 +39,10 @@ router.post('/finishreservelist', async (req, res, next) => {
 
 //payList
 router.get('/paylist', async (req, res, next) => {
-  const groupID = req.query.groupID;
+  const payGroup = req.query.payGroup;
   const userID = req.query.userID;
   let [data] = await pool.execute(
-    `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.groups_id=${groupID}`
+    `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.groups_id=${payGroup}`
   );
   res.json({ result: data });
 });
@@ -53,5 +53,15 @@ router.get('/coupon', async (req, res, next) => {
     `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID}`
   );
   res.json({ result: data });
+});
+//confirmUpdate
+router.post('/updatecoupay', async (req, res, next) => {
+  // console.log('呵呵呵', req.body);
+  const { selectCou, payGroup, user } = req.body;
+  const [pay] = await pool.execute(
+    `UPDATE orders JOIN user_and_coupon ON orders.user_id = user_and_coupon.user_id SET payable=1, valid=1 WHERE orders.user_id=${user} and orders.groups_id=${payGroup} and user_and_coupon.id=${selectCou}`
+  );
+  // console.log(dish);
+  res.json({ result: 'OK' });
 });
 module.exports = router;

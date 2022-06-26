@@ -17,7 +17,14 @@ const ReserveCart = (props) => {
   // 要抓使用者check的groupId
   const [groups, setGroups] = useState([])
   // 會員加入購物車，要抓到會員的id
-  const [user, setUser] = useState(1)
+  const user = localStorage.getItem('userID')
+  //要把paylist選到的couponID傳到ConfirmPay
+  const [selectCou, setSelectCou] = useState({})
+  //要確認結帳的payGroup
+  const payGroup = localStorage.getItem('payGroup')
+  //存確認結帳更新後的res
+  const [updateDate, setUpdateDate] = useState(0)
+
   useEffect(() => {
     fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
       .then((res) => res.json())
@@ -55,6 +62,21 @@ const ReserveCart = (props) => {
     await axios.post(`${API_URL}/shoppingCart/finishreservelist`, params)
     toggleStep(1)
     window.scrollTo(0, 0)
+  }
+  //
+  function handleCouponProps(coudata) {
+    setSelectCou(coudata)
+  }
+
+  //確認結帳後更新coupon已使用及已結帳
+  async function updateApi() {
+    // console.log(selectCou)
+    const param = {
+      selectCou: selectCou.id,
+      payGroup: payGroup,
+      user: user,
+    }
+    await axios.post(`${API_URL}/shoppingCart/updatecoupay`, param)
   }
   return (
     <>
@@ -173,7 +195,7 @@ const ReserveCart = (props) => {
         )}
         {step === 4 ? (
           <>
-            <PayList />
+            <PayList couponSelect={handleCouponProps} />
             <div className="d-flex justify-content-center mb-5">
               <div className="d-flex justify-content-around w-75">
                 <a
@@ -221,6 +243,7 @@ const ReserveCart = (props) => {
                   type="button"
                   className="bg-primary text-white px-4 py-2 me-5 mt-4"
                   onClick={() => {
+                    updateApi()
                     toggleStep(1)
                     window.scrollTo(0, 0)
                   }}
