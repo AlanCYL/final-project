@@ -5,12 +5,12 @@ import axios from 'axios'
 
 function PayList() {
   localStorage.setItem('groupID', 2)
-  localStorage.setItem('userID', 1)
   const groupID = localStorage.getItem('groupID')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
   const [coupon, setCoupon] = useState([])
-  const [getCou, setGetCou] = useState('')
+  // 選擇想使用的coupon
+  const [getCou, setGetCou] = useState(0)
 
   useEffect(() => {
     fetch(
@@ -29,13 +29,13 @@ function PayList() {
         console.log(e)
       })
   }, [])
-  // coupon
 
+  // coupon
   async function getCoupon() {
     const res = await axios.get(
       `${API_URL}/shoppingCart/coupon?userID=${userID}`
     )
-    console.log(res.data.result)
+    //console.log(res.data.result)
 
     setCoupon(res.data.result)
   }
@@ -111,10 +111,13 @@ function PayList() {
                 <select
                   class="form-select form-select-sm"
                   aria-label=".form-select-sm example"
-                  value={getCou}
+                  defaultValue={getCou}
+                  onClick={() => {
+                    getCoupon()
+                  }}
                   onChange={(e) => {
                     setGetCou(e.target.value)
-                    console.log('嗨嗨嗨', e.target.value)
+                    //console.log('嗨嗨嗨', e.target.value)
                   }}
                 >
                   <option disabled selected>
