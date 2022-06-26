@@ -6,9 +6,9 @@ function Nowgroups() {
       <div className="p-3 shadow-sm mb-5">
         <h4 className="fw-normal">目前人數:6人</h4>
         <h6 className="fw-normal mb-4">用餐時間:2022/06/17</h6>
-        <div class="progress">
+        <div className="progress">
           <div
-            class="progress-bar progress-bar-striped"
+            className="progress-bar progress-bar-striped"
             role="progressbar"
             style={{ width: '30%' }}
             aria-valuenow="10"

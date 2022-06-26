@@ -3,3 +3,16 @@
         width: 700px;
     }
 }
+
+.detailcover {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        left: 73%;
+        margin-left: -200px;
+        position: absolute;
+    }
+}

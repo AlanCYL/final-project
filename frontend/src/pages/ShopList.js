@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Pagination from 'react-bootstrap/Pagination'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../utils/config'
@@ -8,13 +8,39 @@ import Heart from '../components/ShopList/Heart'
 
 function ShopList() {
   const [shops, seShops] = useState([])
+  //目前第幾頁
+  const [page, setPage] = useState(1)
+  //總筆數
+  const [lastPage, setLastPage] = useState(1)
+  //資料
   useEffect(() => {
     let getShop = async () => {
-      let response = await axios.get(`${API_URL}/shoplist`)
-      seShops(response.data)
+      let response = await axios.get(`${API_URL}/shoplist`, {
+        params: { page: page },
+      })
+      seShops(response.data.data)
+      setLastPage(response.data.pagination.lastPage)
     }
     getShop()
-  }, [])
+  }, [page])
+
+  const getPages = () => {
+    let pages = []
+    for (let i = 1; i <= lastPage; i++) {
+      pages.push(
+        <Pagination.Item
+          key={i}
+          active={i === page}
+          onClick={(e) => {
+            setPage(i)
+          }}
+        >
+          {i}
+        </Pagination.Item>
+      )
+    }
+    return pages
+  }
 
   return (
     <>
@@ -23,7 +49,7 @@ function ShopList() {
           return (
             <div key={v.id} className="hover01 ps-6 mt-6 ">
               <div className="zoom-in">
-                <Link to="#/">
+                <Link to={`/shopDetail/${shops[i].id}`}>
                   <div className="piczoom">
                     <img
                       className="w-100"
@@ -41,6 +67,7 @@ function ShopList() {
           )
         })}
       </div>
+      <Pagination className="mx-auto mt-4 ps-6 mb-5">{getPages()}</Pagination>
     </>
   )
 }
