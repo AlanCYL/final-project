@@ -115,6 +115,8 @@ const Profile = () => {
             className="btn h6 btn-primary text-white"
             onClick={() => {
               logout()
+              // 會員id登出時清除localStorage
+              localStorage.removeItem('userID')
             }}
           >
             登出

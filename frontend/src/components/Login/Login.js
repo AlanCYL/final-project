@@ -53,7 +53,8 @@ const Login = (props) => {
         withCredentials: true,
       })
       console.log(response.data)
-
+      //會員登入id存入localStorage
+      localStorage.setItem('userID', response.data.member.id)
       await Swal.fire({
         icon: 'success',
         title: response.data.result,

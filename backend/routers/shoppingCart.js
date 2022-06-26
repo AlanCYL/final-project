@@ -44,7 +44,14 @@ router.get('/paylist', async (req, res, next) => {
   let [data] = await pool.execute(
     `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.groups_id=${groupID}`
   );
-  // console.log('我要', data);
+  res.json({ result: data });
+});
+//coupon
+router.get('/coupon', async (req, res, next) => {
+  const userID = req.query.userID;
+  let [data, fields] = await pool.execute(
+    `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID}`
+  );
   res.json({ result: data });
 });
 module.exports = router;

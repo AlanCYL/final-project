@@ -1,13 +1,17 @@
 import Header from '../../Header/Header'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../../../utils/config'
+import axios from 'axios'
 
 function PayList() {
   localStorage.setItem('groupID', 2)
-  localStorage.setItem('userID', 2)
+  localStorage.setItem('userID', 1)
   const groupID = localStorage.getItem('groupID')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
+  const [coupon, setCoupon] = useState([])
+  const [getCou, setGetCou] = useState('')
+
   useEffect(() => {
     fetch(
       `${API_URL}/shoppingcart/paylist?groupID=${groupID}&userID=${userID}`,
@@ -18,14 +22,24 @@ function PayList() {
       .then((res) => res.json())
       .then((res) => {
         setData(res.result[0])
-        console.log(data)
-        debugger
+        //console.log(data)
       })
       .catch((e) => {
         /*發生錯誤時要做的事情*/
         console.log(e)
       })
   }, [])
+  // coupon
+
+  async function getCoupon() {
+    const res = await axios.get(
+      `${API_URL}/shoppingCart/coupon?userID=${userID}`
+    )
+    console.log(res.data.result)
+
+    setCoupon(res.data.result)
+  }
+
   function getEatTimeString() {
     if (data.eating_time === 1) {
       return '午餐12:00'
@@ -35,6 +49,7 @@ function PayList() {
       return '晚餐18:00'
     }
   }
+
   return (
     <>
       <div className=" container my-6">
@@ -79,7 +94,7 @@ function PayList() {
 
             <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
               <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
-                <h6>商品金額：</h6>
+                <h6>商品金額：{data.price}</h6>
                 <h6>NT${data.price}</h6>
               </div>
 
@@ -96,11 +111,19 @@ function PayList() {
                 <select
                   class="form-select form-select-sm"
                   aria-label=".form-select-sm example"
+                  value={getCou}
+                  onChange={(e) => {
+                    setGetCou(e.target.value)
+                    console.log('嗨嗨嗨', e.target.value)
+                  }}
                 >
-                  <option selected>使用折價卷</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option disabled selected>
+                    請選擇折價卷
+                  </option>
+                  {/* map */}
+                  {coupon.map((item, i) => (
+                    <option value={item.id}>{item.reason}</option>
+                  ))}
                 </select>
               </div>
               <div className="d-flex justify-content-end mb-3">
