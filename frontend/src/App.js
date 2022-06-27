@@ -52,7 +52,8 @@ function App() {
       }
     })()
   }, [])
-  useEffect(() => {}, [isLogin])
+
+  //useEffect(() => {}, [isLogin])
 
   //切換Nav的會員中心首頁連向何處
   const [active, setActive] = useState('basic')
@@ -69,45 +70,45 @@ function App() {
       }}
     >
       <ActivePanelContext.Provider value={{ active, setActive }}>
-        <Router>
-          <Nav />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/login">
-              <MemberLogin />
-            </Route>
-            <Route path="/memberCenter">
-              <MemberCenter />
-            </Route>
-            <Route path="/shop">
-              <Shop />
-            </Route>
-            <Route path="/groups">
-              <Groups />
-            </Route>
-            <Route path="/groupDetail">
-              <GroupDetail />
-            </Route>
-            <Route path="/shoppingCart">
-              <ShoppingCart />
-            </Route>
-            <Route path="/shopBackstage">
-              <ShopBackstage />
-            </Route>
-            <Route path="/shopList">
-              <ShopList />
-            </Route>
-            <Route path="/shopDetail/:shopId">
-              <ShopListDetail />
-            </Route>
-            <Route path="*">
-              <NotFoundPage />
-            </Route>
-          </Switch>
-          <Footer />
-        </Router>
+        {/* <Router> */}
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <MemberLogin />
+          </Route>
+          <Route path="/memberCenter">
+            <MemberCenter />
+          </Route>
+          <Route path="/shop">
+            <Shop />
+          </Route>
+          <Route path="/groups">
+            <Groups />
+          </Route>
+          <Route path="/groupDetail">
+            <GroupDetail />
+          </Route>
+          <Route path="/shoppingCart">
+            <ShoppingCart />
+          </Route>
+          <Route path="/shopBackstage">
+            <ShopBackstage />
+          </Route>
+          <Route path="/shopList">
+            <ShopList />
+          </Route>
+          <Route path="/shopDetail/:shopId">
+            <ShopListDetail />
+          </Route>
+          <Route path="*">
+            <NotFoundPage />
+          </Route>
+        </Switch>
+        <Footer />
+        {/* </Router> */}
       </ActivePanelContext.Provider>
     </LoginContext.Provider>
   )

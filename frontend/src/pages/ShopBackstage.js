@@ -21,7 +21,7 @@ const ShopBackstage = () => {
     <>
       <NavbarShopbackstage shopBackstage={shopBackstage} />
       <div className="d-flex">
-        <SideBackstage />
+        <SideBackstage shopBackstage={shopBackstage}/>
         {/* <Opengroup /> */}
       </div>
     </>
