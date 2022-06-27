@@ -23,7 +23,7 @@ const UpdateProfile = () => {
     e.preventDefault()
     try {
       let response = await axios.post(`${API_URL}/member/update`, memberDetail)
-      console.log(response.data)
+      // console.log(response.data)
       await Swal.fire({
         icon: 'success',
         title: response.data.result,
@@ -38,7 +38,7 @@ const UpdateProfile = () => {
       })
       // setMemberDetail([...memberDetail], phone:phoneRef.current.value)
       setActive('basic')
-      console.log(active)
+      // console.log(active)
     } catch (e) {
       console.log(e.response.data.error)
     }
