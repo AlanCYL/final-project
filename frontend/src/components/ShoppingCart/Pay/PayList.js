@@ -3,18 +3,18 @@ import { useState, useEffect } from 'react'
 import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 
-function PayList() {
-  localStorage.setItem('groupID', 2)
-  const groupID = localStorage.getItem('groupID')
+function PayList(props) {
+  localStorage.setItem('payGroup', 1)
+  const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
   const [coupon, setCoupon] = useState([])
   // 選擇想使用的coupon
-  const [getCou, setGetCou] = useState(0)
+  const [getCou, setGetCou] = useState({})
 
   useEffect(() => {
     fetch(
-      `${API_URL}/shoppingcart/paylist?groupID=${groupID}&userID=${userID}`,
+      `${API_URL}/shoppingcart/paylist?payGroup=${payGroup}&userID=${userID}`,
       {
         method: 'GET',
       }
@@ -117,6 +117,8 @@ function PayList() {
                   }}
                   onChange={(e) => {
                     setGetCou(e.target.value)
+
+                    props.couponSelect(...coupon, e.target.value)
                     //console.log('嗨嗨嗨', e.target.value)
                   }}
                 >
@@ -130,7 +132,7 @@ function PayList() {
                 </select>
               </div>
               <div className="d-flex justify-content-end mb-3">
-                <h6>NT$-200</h6>
+                <h6>NT$-100</h6>
               </div>
               <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                 <h6>總計：</h6>
