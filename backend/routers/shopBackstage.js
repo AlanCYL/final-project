@@ -35,7 +35,10 @@ router.get('/', async (request, respond, next) => {
 //基本資料
 //拿到資料
 router.get('/:shopID', async (request, response, next) => {
-  let [data] = await pool.execute('SELECT * FROM shop WHERE id=?', [request.params.shopID]);
+  let [data] = await pool.execute(
+    'SELECT shop.*,type.name AS type_name FROM shop ,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND type.id=shop_and_type.type_id AND shop.id=?',
+    [request.params.shopID]
+  );
   response.json(data);
 });
 
