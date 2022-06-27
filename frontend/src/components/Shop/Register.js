@@ -118,7 +118,7 @@ function Register(props) {
       formData.append('banner', shopMember.banner)
       let response = await axios.post(`${API_URL}/shop/register`, formData)
       console.log(response.data.result)
-      await Swal.fire({
+      Swal.fire({
         icon: 'success',
         title: response.data.result,
         showConfirmButton: false,
@@ -130,8 +130,11 @@ function Register(props) {
         customClass: {
           popup: 'shadow-sm',
         },
+      }).then((result) => {
+        setIsShopLogin(true)
       })
-      // history.push('/')
+      // history.push('/shop')
+      //setIsShopLogin(true)
     } catch (e) {
       setError(e.response.data.error)
       console.error('請重新註冊', e.response.data)
