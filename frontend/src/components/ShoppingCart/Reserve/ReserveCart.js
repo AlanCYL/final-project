@@ -20,7 +20,7 @@ const ReserveCart = (props) => {
   // 會員加入購物車，要抓到會員的id
   const user = localStorage.getItem('userID')
   //要把paylist選到的couponID傳到ConfirmPay
-  const [selectCou, setSelectCou] = useState({})
+  const [selectCou, setSelectCou] = useState(0)
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
 

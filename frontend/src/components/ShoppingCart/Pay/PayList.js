@@ -9,6 +9,7 @@ function PayList(props) {
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
+  //存放這個使用者有哪些優惠卷
   const [coupon, setCoupon] = useState([])
   // 選擇想使用的coupon
   const [getCou, setGetCou] = useState({})
@@ -51,6 +52,16 @@ function PayList(props) {
     }
   }
 
+  function isEstablish() {
+    if (data.established === 0) {
+      return '未成團'
+    } else {
+      return '已成團'
+    }
+  }
+  useEffect(() => {
+    props.couponSelect(getCou)
+  }, [getCou])
   return (
     <>
       <div className=" container my-6">
@@ -87,7 +98,7 @@ function PayList(props) {
                     <div>{getEatTimeString()}</div>
                   </h6>
                 </td>
-                <td>已成團</td>
+                <td>{isEstablish()}</td>
                 <td>NT${data.price}</td>
               </tr>
             </div>
@@ -118,9 +129,6 @@ function PayList(props) {
                   }}
                   onChange={(e) => {
                     setGetCou(e.target.value)
-
-                    props.couponSelect(...coupon, e.target)
-                    //console.log('嗨嗨嗨', e.target.value)
                   }}
                 >
                   <option disabled selected>

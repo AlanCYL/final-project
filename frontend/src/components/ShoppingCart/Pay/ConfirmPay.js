@@ -1,11 +1,62 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../Header/Header'
-import { BsFillCaretDownFill } from 'react-icons/bs'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { API_URL } from '../../../utils/config'
+import axios from 'axios'
 
 const ConfirmPay = (props) => {
-  console.log('我要得到', props)
+  const { selectCou } = props
+  const payGroup = localStorage.getItem('payGroup')
+  const userID = localStorage.getItem('userID')
+  const [data, setData] = useState({})
+  //存放抓到的selectCou的詳細資料
+  const [detail, setDetail] = useState({})
+
+  useEffect(() => {
+    fetch(
+      `${API_URL}/shoppingcart/paylist?payGroup=${payGroup}&userID=${userID}`,
+      {
+        method: 'GET',
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res.result[0])
+        //console.log(data)
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+  }, [])
+
+  //抓選擇的selectCou去搜尋資料
+  // useEffect(() => {
+  //   const res = axios.get(
+  //     `${API_URL}/shoppingCart/selectcou?couID=${selectCou}`
+  //   )
+  //   console.log('我要得到', res.data)
+  //   debugger
+  //   setDetail(res.data)
+  // }, [])
+
+  function getEatTimeString() {
+    if (data.eating_time === 1) {
+      return '午餐12:00'
+    } else if (data.eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
+  function isEstablish() {
+    if (data.established === 0) {
+      return '未成團'
+    } else {
+      return '已成團'
+    }
+  }
   return (
     <>
       <div className=" container my-6">
@@ -35,12 +86,12 @@ const ConfirmPay = (props) => {
               </div>
 
               {/* sale */}
-              <div className="bg-secondary p-4 w-100">
-                <div className="mb-4 pb-3 border-bottom w-100"></div>
-                <tr className="d-flex justify-content-between align-items-center border-bottom mb-4 pb-4">
-                  <td>
-                    <input type="checkbox" />
-                  </td>
+              <div
+                className="bg-secondary p-4 w-100"
+                style={{ marginTop: '-10px' }}
+              >
+                <div className="mb-4 border-bottom w-100"></div>
+                <tr className="d-flex justify-content-around align-items-center mb-4 pb-4 pt-4">
                   <td>
                     <img
                       style={{ width: '90px' }}
@@ -49,11 +100,14 @@ const ConfirmPay = (props) => {
                     />
                   </td>
                   <td>
-                    <h6>鼎泰豐(復興店)</h6>
-                    <h6>2022/06/17 中午12:00</h6>
+                    <h6>{data.name}</h6>
+                    <h6>
+                      {data.eating_date} {getEatTimeString()}{' '}
+                    </h6>
                   </td>
-                  <td>人數 : 1</td>
-                  <td>NT$1280</td>
+                  {/* 已成團 */}
+                  <td>{isEstablish()}</td>
+                  <td>NT${data.price}</td>
                 </tr>
               </div>
 
@@ -61,12 +115,12 @@ const ConfirmPay = (props) => {
                 <Dropdown.Menu variant="secondary" className="w-100 py-0">
                   <Dropdown.Item
                     className="p-0 position-absolute"
-                    style={{ top: '201px' }}
+                    style={{ top: '193px' }}
                   >
                     <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
                       <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
                         <h6>商品金額：</h6>
-                        <h6>NT$2280</h6>
+                        <h6>NT${data.price}</h6>
                       </div>
 
                       <div className="d-flex mb-2">
@@ -75,22 +129,22 @@ const ConfirmPay = (props) => {
                           src={require('../../../image/shoppingCart/sale.png')}
                           alt=""
                         />
-                        <h6 className="ms-1">折價卷</h6>
+                        <h6 className="ms-1">您所選擇的折價卷：</h6>
                       </div>
 
                       <div className="mb-3">
-                        <select
-                          class="form-select form-select-sm"
-                          aria-label=".form-select-sm example"
+                        <div
+                          className="w-100 h-25 bg-light text-start py-1 ps-3
+                        "
+                          style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
                         >
-                          <option selected>使用折價卷</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
+                          <span className="text-danger">
+                            {/* {selectCou.reason} */}
+                          </span>
+                        </div>
                       </div>
                       <div className="d-flex justify-content-end mb-3">
-                        <h6>NT$-200</h6>
+                        <h6>NT$-{selectCou.price}</h6>
                       </div>
                       <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                         <h6>總計：</h6>
