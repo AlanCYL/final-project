@@ -32,6 +32,27 @@ router.get('/', async (request, respond, next) => {
   }
 });
 
+//基本資料
+//拿到資料
+router.get('/:shopID', async (request, response, next) => {
+  let [data] = await pool.execute('SELECT * FROM shop WHERE id=?', [request.params.shopID]);
+  response.json(data);
+});
+
+//修改
+router.post('/edit', async (request, response, next) => {
+  console.log(request.body);
+  let [data] = await pool.execute('UPDATE shop SET phone=?, password = ?, description = ?, address = ? WHERE id=?', [
+    request.body.phone,
+    request.body.password,
+    request.body.description,
+    request.body.address,
+    request.body.id,
+  ]);
+  console.log('基本資料', data);
+  response.json(data);
+});
+
 //查詢shopID的資料
 router.get('/search', async (req, res, next) => {
   const shopID = req.query.shopID;
