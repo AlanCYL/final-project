@@ -9,6 +9,7 @@ import FinishPay from '../Pay/FinishPay'
 import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../../utils/config'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const ReserveCart = (props) => {
   const { data } = props
@@ -22,8 +23,6 @@ const ReserveCart = (props) => {
   const [selectCou, setSelectCou] = useState({})
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
-  //存確認結帳更新後的res
-  const [updateDate, setUpdateDate] = useState(0)
 
   useEffect(() => {
     fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
@@ -216,7 +215,7 @@ const ReserveCart = (props) => {
                     window.scrollTo(0, 0)
                   }}
                 >
-                  確認結帳
+                  前往結帳
                 </a>
               </div>
             </div>
@@ -226,7 +225,7 @@ const ReserveCart = (props) => {
         )}
         {step === 5 ? (
           <>
-            <ConfirmPay />
+            <ConfirmPay selectCou={selectCou} />
             <div className="d-flex justify-content-center mb-5">
               <div className="d-flex justify-content-around w-75">
                 <a
@@ -244,11 +243,18 @@ const ReserveCart = (props) => {
                   className="bg-primary text-white px-4 py-2 me-5 mt-4"
                   onClick={() => {
                     updateApi()
+                    Swal.fire({
+                      position: 'center-center',
+                      icon: 'success',
+                      title: '結帳成功',
+                      showConfirmButton: false,
+                      timer: 1500,
+                    })
                     toggleStep(1)
                     window.scrollTo(0, 0)
                   }}
                 >
-                  前往結帳
+                  確認結帳
                 </a>
               </div>
             </div>

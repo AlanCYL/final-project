@@ -4,7 +4,8 @@ import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 
 function PayList(props) {
-  localStorage.setItem('payGroup', 1)
+  //暫時抓會員要付款的團單編號
+  localStorage.setItem('payGroup', 2)
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
@@ -118,7 +119,7 @@ function PayList(props) {
                   onChange={(e) => {
                     setGetCou(e.target.value)
 
-                    props.couponSelect(...coupon, e.target.value)
+                    props.couponSelect(...coupon, e.target)
                     //console.log('嗨嗨嗨', e.target.value)
                   }}
                 >

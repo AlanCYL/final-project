@@ -59,7 +59,7 @@ router.post('/updatecoupay', async (req, res, next) => {
   // console.log('呵呵呵', req.body);
   const { selectCou, payGroup, user } = req.body;
   const [pay] = await pool.execute(
-    `UPDATE orders JOIN user_and_coupon ON orders.user_id = user_and_coupon.user_id SET payable=1, valid=1 WHERE orders.user_id=${user} and orders.groups_id=${payGroup} and user_and_coupon.id=${selectCou}`
+    `UPDATE orders JOIN user_and_coupon ON orders.user_id = user_and_coupon.user_id SET payable=2, valid=1 WHERE orders.user_id=${user} and orders.groups_id=${payGroup} and user_and_coupon.id=${selectCou}`
   );
   // console.log(dish);
   res.json({ result: 'OK' });
