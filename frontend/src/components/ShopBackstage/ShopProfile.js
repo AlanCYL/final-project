@@ -25,6 +25,7 @@ function ShopProfile() {
   const [shopName, setShopName] = useState('')
   const [shopAccount, setShopAccount] = useState('')
   const [shopImg, setShopImg] = useState('')
+  const [shopType, setShopType] = useState('')
 
   //可修改
   const [shopPhone, setShopPhone] = useState('')
@@ -37,11 +38,25 @@ function ShopProfile() {
       let response = await axios.get(`${API_URL}/shopbackstage/${shopID}`)
 
       setData(response.data[0])
-      console.log('回傳的資料', `${API_URL}${response.data[0].img}`)
+
+      console.log(
+        '回傳的資料',
+        `${response.data.map((v, i) => {
+          return v.type_name
+        })}`,
+        `${response.data[1].type_name}`
+      )
+      console.log('長度', response.data.length)
 
       setShopName(response.data[0].name)
       setShopAccount(response.data[0].account)
       setShopImg(response.data[0].img)
+
+      setShopType(
+        response.data.map((v, i) => {
+          return v.type_name
+        })
+      )
 
       setShopPhone(response.data[0].phone)
       setShopDescription(response.data[0].description)
@@ -107,7 +122,12 @@ function ShopProfile() {
 
                 <Form.Group className="mb-3">
                   <Form.Label>店家類別</Form.Label>
-                  <Form.Control type="text" value={'中式'} disabled />
+                  <Form.Control
+                    type="text"
+                    value={shopType}
+                    onChange={(e) => setShopType(e.target.value)}
+                    disabled
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>店家帳號</Form.Label>
