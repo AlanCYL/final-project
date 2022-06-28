@@ -70,7 +70,17 @@ const AllBookingCard = () => {
                       </p>
                     </div>
                     <div className="d-flex justify-content-center">
-                      <Button variant="outline-warning">去付款</Button>
+                      {
+                        {
+                          0: (
+                            <Button variant="outline-warning">查看訂單</Button>
+                          ),
+                          1: <Button variant="outline-warning">去付款</Button>,
+                          2: (
+                            <Button variant="outline-warning">查看訂單</Button>
+                          ),
+                        }[v.payable]
+                      }
                     </div>
                   </div>
                 </div>
