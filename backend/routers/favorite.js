@@ -15,6 +15,7 @@ router.get('/list', async (req, res, next) => {
   return res.json({ favorite: favorite, count: howManyList });
 });
 
+// /api/favorite/delete
 router.get('/delete', async (req, res, next) => {
   await pool.execute('DELETE FROM user_shop WHERE `user_shop`.`user_id` = ? AND `user_shop`.`shop_id` = ? ', [req.query.userId, req.query.shopId]);
 
