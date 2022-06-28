@@ -30,10 +30,27 @@ router.post('/confirmreservelist', async (req, res, next) => {
 //finishreservelist
 router.post('/finishreservelist', async (req, res, next) => {
   const { userID, groupID } = req.body;
+  console.log(groupID);
+
+  //先新增order資料
   for (let i = 0; i < groupID.length; i++) {
     const group = groupID[i];
-    await pool.execute('INSERT INTO orders (user_id, groups_id) VALUES (?, ?)', [userID, group]);
+
+    await pool.execute('INSERT INTO orders (user_id, groups_id) VALUES (?, ?)', [userID, groupID[i]]);
+    //清除購物車
+    await pool.execute(`DELETE FROM shoppingcart WHERE shoppingcart.user_id=${userID} AND shoppingcart.group_id=${group};`);
+    //找出這個團現在有幾筆（有多少參加者）
+    const [res] = await pool.execute(`SELECT * FROM orders WHERE groups_id=${group}`);
+    //再更新目前人數及是否有成團
+    await pool.execute(`UPDATE groups SET now_num = ${res.length} WHERE id= ${group}`);
+    await pool.execute(`UPDATE groups SET established=1 WHERE now_num >= goal_num AND groups.id=${group}`);
+    //establish查詢，回傳
+    const update = await pool.execute(`SELECT groups.established FROM groups WHERE groups.id= ${group}`);
+    const established = update[0][0].established;
+    //更新再找到establish的值跟payable一樣
+    await pool.execute(`UPDATE orders SET payable = ${established} WHERE groups_id= ${group} AND user_id = ${userID}`);
   }
+
   res.json({});
 });
 

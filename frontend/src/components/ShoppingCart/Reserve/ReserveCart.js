@@ -54,15 +54,18 @@ const ReserveCart = (props) => {
   }
 
   async function SubmitList() {
+    //查詢資料
     const params = {
       userID: user,
       groupID: groups,
     }
+
+    //新增資料、更新目前參加人數
     await axios.post(`${API_URL}/shoppingCart/finishreservelist`, params)
     toggleStep(1)
     window.scrollTo(0, 0)
   }
-  //
+  //選到的優惠卷id
   function handleCouponProps(coudata) {
     setSelectCou(coudata)
   }
@@ -77,6 +80,7 @@ const ReserveCart = (props) => {
     }
     await axios.post(`${API_URL}/shoppingCart/updatecoupay`, param)
   }
+
   return (
     <>
       <div>
