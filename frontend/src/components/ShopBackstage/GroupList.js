@@ -18,6 +18,7 @@ function GroupList() {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.result)
         setData(res.result)
       })
       .catch((e) => {
@@ -138,6 +139,7 @@ function GroupList() {
             </thead>
             <tbody>
               {/* map */}
+
               {data.map((item, i) => (
                 <tr className="tr-hover">
                   <td className="text-center py-3">{data[i].id}</td>

@@ -156,7 +156,7 @@ const Opengroup = (props) => {
         <Form.Group className="mb-3" controlId="dish">
           <Form.Label>選擇菜色：</Form.Label>
           {/* map動態產生 */}
-          {checkList.map((item, i) => (
+          {/* {checkList.map((item, i) => (
             <InputGroup className="mb-3 bg-secondary" key={i}>
               <InputGroup.Checkbox
                 aria-label="Checkbox for following text input"
@@ -167,7 +167,7 @@ const Opengroup = (props) => {
               />
               <h6 className="mt-2 ms-3">{item.name}</h6>
             </InputGroup>
-          ))}
+          ))} */}
         </Form.Group>
         <div className="d-flex justify-content-end ">
           <Button

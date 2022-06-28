@@ -1,6 +1,9 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Side = () => {
+  const history = useHistory()
+
   return (
     <>
       <div className="side w-25 ms-3">
@@ -10,7 +13,14 @@ const Side = () => {
         </div>
         <div className="d-flex mt-5 ">
           <img src={require('../../image/shoppingCart/heart.png')} alt="" />
-          <h5 className="mx-1 side-hover">收藏清單</h5>
+          <h5
+            className="mx-1 side-hover"
+            onClick={() => {
+              history.push('/memberCenter')
+            }}
+          >
+            收藏清單
+          </h5>
         </div>
       </div>
     </>

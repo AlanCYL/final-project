@@ -30,7 +30,7 @@ router.post('/confirmreservelist', async (req, res, next) => {
 //finishreservelist
 router.post('/finishreservelist', async (req, res, next) => {
   const { userID, groupID } = req.body;
-  console.log(groupID);
+  // console.log(groupID);
 
   //先新增order資料
   for (let i = 0; i < groupID.length; i++) {
@@ -64,7 +64,7 @@ router.get('/paylist', async (req, res, next) => {
   res.json({ result: data });
 });
 //coupon
-router.get('/coupon', async (req, res, next) => {
+router.get('/cou', async (req, res, next) => {
   const userID = req.query.userID;
   let [data, fields] = await pool.execute(
     `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID}`

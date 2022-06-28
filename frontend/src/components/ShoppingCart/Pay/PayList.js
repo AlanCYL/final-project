@@ -34,9 +34,7 @@ function PayList(props) {
 
   // coupon
   async function getCoupon() {
-    const res = await axios.get(
-      `${API_URL}/shoppingCart/coupon?userID=${userID}`
-    )
+    const res = await axios.get(`${API_URL}/shoppingCart/cou?userID=${userID}`)
     //console.log(res.data.result)
 
     setCoupon(res.data.result)

@@ -32,16 +32,6 @@ router.get('/', async (request, respond, next) => {
   }
 });
 
-//基本資料
-//拿到資料
-router.get('/:shopID', async (request, response, next) => {
-  let [data] = await pool.execute(
-    'SELECT shop.*,type.name AS type_name FROM shop ,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND type.id=shop_and_type.type_id AND shop.id=?',
-    [request.params.shopID]
-  );
-  response.json(data);
-});
-
 //修改
 router.post('/edit', async (request, response, next) => {
   console.log(request.body);
@@ -95,8 +85,9 @@ router.post('/opengroup', async (req, res, next) => {
 //全部開團
 router.get('/grouplist', async (req, res, next) => {
   const shopID = req.query.shopID;
+
   let [data] = await pool.execute(`SELECT * FROM groups WHERE shop_id=${shopID}`);
-  // console.log('我要', data);
+  console.log('我要我要我要我要', data);
   res.json({ result: data });
 });
 //開團中
@@ -146,6 +137,16 @@ router.get('/dishlist', async (req, res, next) => {
   res.json({ result: data });
   // let [delete] = await pool.execute(`DELETE FROM dish WHERE dish.id =${dishID}`);
   // res.json({ delete: data });
+});
+
+//基本資料
+//拿到資料
+router.get('/:shopID', async (request, response, next) => {
+  let [data] = await pool.execute(
+    'SELECT shop.*,type.name AS type_name FROM shop ,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND type.id=shop_and_type.type_id AND shop.id=?',
+    [request.params.shopID]
+  );
+  response.json(data);
 });
 module.exports = router;
 
