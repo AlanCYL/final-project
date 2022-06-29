@@ -90,23 +90,24 @@ function App() {
           <Route path="/groups">
             <Groups />
           </Route>
-          <Route path="/groupDetail">
+          <Route path="/groupDetail/:groupId">
             <GroupDetail />
           </Route>
           <Route path="/shoppingCart">
             <ShoppingCart />
           </Route>
-          <ShoppingCartContext.Provider value={{ cart, setCart }}>
-            <Route path="/shopBackstage">
-              <ShopBackstage />
-            </Route>
-          </ShoppingCartContext.Provider>
           <Route path="/shopList">
             <ShopList />
           </Route>
           <Route path="/shopDetail/:shopId">
             <ShopListDetail />
           </Route>
+
+          <ShoppingCartContext.Provider value={{ cart, setCart }}>
+            <Route path="/shopBackstage">
+              <ShopBackstage />
+            </Route>
+          </ShoppingCartContext.Provider>
           <Route path="*">
             <NotFoundPage />
           </Route>

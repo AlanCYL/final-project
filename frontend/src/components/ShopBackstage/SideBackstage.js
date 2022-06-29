@@ -17,7 +17,6 @@ const SideBackstage = (props) => {
     setSelectedKey(key)
   }
   // shop登入存在localStorage
-  const [shopID, useShopID] = useState(1)
   const [data, setData] = useState('')
   useEffect(() => {
     const shopID = localStorage.getItem('shopID')
