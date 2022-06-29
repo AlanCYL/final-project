@@ -18,7 +18,7 @@ router.get('/allBooking', async (req, res, next) => {
     item.push(element);
   }
 
-  //   console.log(item);
+    // console.log(item);
 
   return res.json({ booking: item });
 });

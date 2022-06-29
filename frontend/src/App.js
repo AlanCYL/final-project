@@ -18,6 +18,7 @@ import axios from 'axios'
 import { API_URL } from './utils/config'
 import { ActivePanelContext } from './context/ActivePanel'
 import { ShoppingCartContext } from './context/ShoppingCartContext'
+import ResetPassword from './pages/ResetPassword'
 
 function App() {
   //存登入會員的資料
@@ -92,6 +93,9 @@ function App() {
           </Route>
           <Route path="/groupDetail/:groupId">
             <GroupDetail />
+          </Route>
+          <Route path="/resetPassword">
+            <ResetPassword />
           </Route>
           <Route path="/shoppingCart">
             <ShoppingCart />
