@@ -11,11 +11,10 @@ const FinishReserveList = (props) => {
     groups: props.groups,
     userID: `${props.userID}`,
   })
+
   async function getApi() {
-    const res = await axios.post(
-      `${API_URL}/shoppingCart/confirmreservelist`,
-      para
-    )
+    const res = await axios.post(`${API_URL}/shoppingCart/finishre`, para)
+
     setData(res.data.result)
   }
   useEffect((props) => {
@@ -67,7 +66,7 @@ const FinishReserveList = (props) => {
                   {/* map */}
                   {data.map((item, i) => (
                     <tr className="tr-hover">
-                      <td className="py-5">{item.group_id}</td>
+                      <td className="py-5">{item.groups_id}</td>
                       <td className="py-5">{item.name}</td>
                       <td className="py-5">
                         <div>({item.eating_date})</div>

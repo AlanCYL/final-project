@@ -139,7 +139,7 @@ function PayList(props) {
                 </select>
               </div>
               <div className="d-flex justify-content-end mb-3">
-                <h6>NT$-100</h6>
+                <h6>NT$-{}</h6>
               </div>
               <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                 <h6>總計：</h6>
