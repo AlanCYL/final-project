@@ -36,7 +36,7 @@ const ComBookingCard = () => {
                 <div className="little-card shadow-sm bg-white rounded main-hover">
                   <img
                     className="w-100 h-50 rounded-top border-bottom  "
-                    src={IMAGE_URL + `/shopImg/${v.img}`}
+                    src={IMAGE_URL + `${v.img}`}
                     alt={v.shopImg}
                   />
                   <div className="p-3">

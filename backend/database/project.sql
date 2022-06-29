@@ -322,7 +322,27 @@ INSERT INTO `type` (`id`, `name`) VALUES
 (13, '咖啡廳');
 
 -- --------------------------------------------------------
+--
+-- 資料表結構 `level_name`
+--
 
+DROP TABLE IF EXISTS `level_name`;
+CREATE TABLE `level_name` (
+  `id` int(2) UNSIGNED NOT NULL,
+  `name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `level_name`
+--
+
+INSERT INTO `level_name` (`id`, `name`) VALUES
+(1, '綠寶石'),
+(2, '藍寶石'),
+(3, '紅寶石'),
+(4, '鑽石');
+
+-- --------------------------------------------------------
 --
 -- 資料表結構 `user`
 --
