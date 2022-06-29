@@ -179,15 +179,7 @@ function GroupPages() {
                         ></div>
                       </div>
                       <div className="d-flex justify-content-between">
-                        <p className="progress-text mt-1">
-                          剩下
-                          {/* {dateCountdown(
-                            v.daysleft[0],
-                            v.daysleft[1],
-                            v.daysleft[2]
-                          )} */}
-                          天
-                        </p>
+   
                         <p className="progress-text mt-1">
                           目標人數:{v.goal_num}
                         </p>

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../utils/config'
 import { useParams } from 'react-router-dom'
+import dateCountdown from 'date-countdown'
 
 function GroupDetail() {
   const [data, setData] = useState([])
@@ -12,7 +13,7 @@ function GroupDetail() {
   useEffect(() => {
     let getDetail = async () => {
       let response = await axios.get(`${API_URL}/group/${groupId}`)
-      setData(response.data)
+      setData(response.data.data)
     }
     getDetail()
   }, [])
@@ -21,7 +22,7 @@ function GroupDetail() {
     <>
       {data.map((v, i) => {
         return (
-          <div className="groupdetail container mt-7 mb-7">
+          <div key={v.id} className="groupdetail container mt-7 mb-7">
             <div className="row">
               <div className="col-8 ">
                 <div className="img-box ms-auto">
@@ -68,7 +69,14 @@ function GroupDetail() {
                         alt=""
                       />
                       <h5 className="ms-2 mt-2">開團倒數</h5>
-                      <h2 className="ms-4">11天</h2>
+                      <h2 className="ms-4">
+                        {dateCountdown(
+                          v.daysleft[0],
+                          v.daysleft[1],
+                          v.daysleft[2]
+                        )}
+                        天
+                      </h2>
                     </div>
                   </div>
                   <div className="mt-4 mb-1">
