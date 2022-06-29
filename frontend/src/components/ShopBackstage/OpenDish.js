@@ -1,20 +1,21 @@
 // import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
-
+import Swal from 'sweetalert2'
+import { useShoppingCartContext } from '../../context/ShoppingCartContext'
 const OpenDish = (props) => {
   const { data } = props
-  const shopID = localStorage.getItem('shopID')
+  const { setCart } = useShoppingCartContext()
   const [upDish, setUpDish] = useState({
     dishName: '',
     dishPrice: '',
     dishDes: '',
     photo: '',
-    shopID: `${shopID}`,
+    shopID: '',
   })
 
   function handlePhoto(e) {
@@ -30,13 +31,14 @@ const OpenDish = (props) => {
       //   upDish
       // )
       // console.log(response.data)
+      const shopID = localStorage.getItem('shopID')
 
       let formData = new FormData()
       formData.append('name', upDish.dishName)
       formData.append('price', upDish.dishPrice)
       formData.append('description', upDish.dishDes)
       formData.append('photo', upDish.photo)
-      formData.append('shop_id', upDish.shopID)
+      formData.append('shop_id', shopID)
       let response = axios.post(`${API_URL}/shopbackstage/opendish`, formData)
       console.log(response.data)
       setUpDish({
@@ -45,11 +47,30 @@ const OpenDish = (props) => {
         dishDes: '',
         photo: '',
       })
+      await Toast.fire({
+        icon: 'success',
+        title: 'Success',
+      })
+      setCart(true)
+
       props.groupProps('fifth')
     } catch (e) {
       console.error(e)
     }
   }
+  //alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  })
+
   return (
     <>
       <Form>

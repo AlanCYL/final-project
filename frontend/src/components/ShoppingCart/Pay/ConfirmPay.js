@@ -31,15 +31,18 @@ const ConfirmPay = (props) => {
       })
   }, [])
 
-  //抓選擇的selectCou去搜尋資料
-  // useEffect(() => {
-  //   const res = axios.get(
-  //     `${API_URL}/shoppingCart/selectcou?couID=${selectCou}`
-  //   )
-  //   console.log('我要得到', res.data)
-  //   debugger
-  //   setDetail(res.data)
-  // }, [])
+  //抓選擇的selectCou去搜尋coupon資料
+  useEffect(() => {
+    getSelectedOption()
+  }, [])
+
+  async function getSelectedOption() {
+    const res = await axios.get(
+      `${API_URL}/shoppingCart/selectcou?couID=${selectCou}`
+    )
+    console.log('我要得到', res.data.result[0])
+    setDetail(res.data.result[0])
+  }
 
   function getEatTimeString() {
     if (data.eating_time === 1) {
@@ -90,7 +93,7 @@ const ConfirmPay = (props) => {
                 className="bg-secondary p-4 w-100"
                 style={{ marginTop: '-10px' }}
               >
-                <div className="mb-4 border-bottom w-100"></div>
+                <div className="mb-4 w-100"></div>
                 <tr className="d-flex justify-content-around align-items-center mb-4 pb-4 pt-4">
                   <td>
                     <img
@@ -138,17 +141,15 @@ const ConfirmPay = (props) => {
                         "
                           style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
                         >
-                          <span className="text-danger">
-                            {/* {selectCou.reason} */}
-                          </span>
+                          <span className="text-danger">{detail.reason}</span>
                         </div>
                       </div>
                       <div className="d-flex justify-content-end mb-3">
-                        <h6>NT$-{selectCou.price}</h6>
+                        <h6>NT$-{detail.price}</h6>
                       </div>
                       <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                         <h6>總計：</h6>
-                        <h6>NT$2080</h6>
+                        <h6>NT${`${data.price}` - `${detail.price}`}</h6>
                       </div>
                     </div>
                   </Dropdown.Item>

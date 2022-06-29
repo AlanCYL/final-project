@@ -6,6 +6,7 @@ const pool = require('../utils/db');
 //上架菜色圖片
 const multer = require('multer');
 const path = require('path');
+const { log } = require('console');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -30,16 +31,6 @@ router.get('/', async (request, respond, next) => {
     // 表示尚未登入
     return respond.status(403).json({ code: 2001, error: '尚未登入' });
   }
-});
-
-//基本資料
-//拿到資料
-router.get('/:shopID', async (request, response, next) => {
-  let [data] = await pool.execute(
-    'SELECT shop.*,type.name AS type_name FROM shop ,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND type.id=shop_and_type.type_id AND shop.id=?',
-    [request.params.shopID]
-  );
-  response.json(data);
 });
 
 //修改
@@ -96,7 +87,6 @@ router.post('/opengroup', async (req, res, next) => {
 router.get('/grouplist', async (req, res, next) => {
   const shopID = req.query.shopID;
   let [data] = await pool.execute(`SELECT * FROM groups WHERE shop_id=${shopID}`);
-  // console.log('我要', data);
   res.json({ result: data });
 });
 //開團中
@@ -133,6 +123,7 @@ router.post('/opendish', uploader.single('photo'), async (req, res, next) => {
   console.log('dishName', req.body);
   let photo = req.file ? '/shopbackstage/' + req.file.filename : '';
   const { name, price, description, shop_id } = req.body;
+  console.log('我', shop_id);
   const [dish] = await pool.execute('INSERT INTO dish (name, price, description, photo, shop_id) VALUES (?, ?, ?, ?, ?)', [name, price, description, photo, shop_id]);
   // console.log(dish);
   res.json({ result: 'OK' });
@@ -146,6 +137,23 @@ router.get('/dishlist', async (req, res, next) => {
   res.json({ result: data });
   // let [delete] = await pool.execute(`DELETE FROM dish WHERE dish.id =${dishID}`);
   // res.json({ delete: data });
+});
+
+//刪除菜色
+router.get('/dishdelete', async (req, res, next) => {
+  const dishID = req.query.dishID;
+  await pool.execute(`DELETE FROM dish WHERE id =${dishID}`);
+  res.json({ result: 'OK' });
+});
+
+//基本資料
+//拿到資料
+router.get('/:shopID', async (request, response, next) => {
+  let [data] = await pool.execute(
+    'SELECT shop.*,type.name AS type_name FROM shop ,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND type.id=shop_and_type.type_id AND shop.id=?',
+    [request.params.shopID]
+  );
+  response.json(data);
 });
 module.exports = router;
 

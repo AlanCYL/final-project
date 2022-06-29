@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import axios from 'axios'
+import { useShoppingCartContext } from '../../context/ShoppingCartContext'
 
 function GroupList() {
   const shopID = localStorage.getItem('shopID')
+  const { cart, setCart } = useShoppingCartContext()
   const [data, setData] = useState([])
   const [key, setKey] = useState(1)
 
@@ -18,13 +20,14 @@ function GroupList() {
     })
       .then((res) => res.json())
       .then((res) => {
+        // console.log(res.result)
         setData(res.result)
       })
       .catch((e) => {
         /*發生錯誤時要做的事情*/
         console.log(e)
       })
-  }, [])
+  }, [cart])
 
   function getEatTimeString(i) {
     if (data[i].eating_time === 1) {
@@ -37,7 +40,7 @@ function GroupList() {
   }
 
   useEffect(() => {
-    console.log('useEffect on key', key)
+    // console.log('useEffect on key', key)
     switch (key) {
       case '1':
         window.scrollTo(0, 0)
@@ -117,7 +120,7 @@ function GroupList() {
           eventKey="1"
           title="全部開團"
           onClick={() => {
-            console.log('allOpen')
+            // console.log('allOpen')
             allOpen()
           }}
         >
@@ -138,6 +141,7 @@ function GroupList() {
             </thead>
             <tbody>
               {/* map */}
+
               {data.map((item, i) => (
                 <tr className="tr-hover">
                   <td className="text-center py-3">{data[i].id}</td>

@@ -67,7 +67,8 @@ const Favorite = () => {
                     </div>
 
                     <img
-                      className="w-100 shadow-sm"
+                      className="w-100
+                       shadow-sm"
                       src={IMAGE_URL + `/shopImg/${v.shopImg}`}
                       alt={v.shopImg}
                     />

@@ -1,4 +1,3 @@
-import { BrowserRouter as Link } from 'react-router-dom'
 import EmptyReserveList from './EmptyReserveList'
 import ReserveList from './ReserveList'
 import ConfirmReserveList from './ConfirmReserveList'
@@ -10,11 +9,12 @@ import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { useHistory } from 'react-router-dom'
 
 const ReserveCart = (props) => {
+  const history = useHistory()
   const { data } = props
   const [step, setStep] = useState(0)
-  const [inputVal, setInputVal] = useState('')
   // 要抓使用者check的groupId
   const [groups, setGroups] = useState([])
   // 會員加入購物車，要抓到會員的id
@@ -54,15 +54,18 @@ const ReserveCart = (props) => {
   }
 
   async function SubmitList() {
+    //查詢資料
     const params = {
       userID: user,
       groupID: groups,
     }
+
+    //新增資料、更新目前參加人數
     await axios.post(`${API_URL}/shoppingCart/finishreservelist`, params)
     toggleStep(1)
     window.scrollTo(0, 0)
   }
-  //
+  //選到的優惠卷id
   function handleCouponProps(coudata) {
     setSelectCou(coudata)
   }
@@ -77,6 +80,7 @@ const ReserveCart = (props) => {
     }
     await axios.post(`${API_URL}/shoppingCart/updatecoupay`, param)
   }
+
   return (
     <>
       <div>
@@ -88,7 +92,7 @@ const ReserveCart = (props) => {
                 type="button"
                 className="mb-5 bg-primary px-5 py-2 rounded ms-9 text-dark"
                 onClick={() => {
-                  toggleStep(2)
+                  history.push('/groups')
                   window.scrollTo(0, 0)
                 }}
               >
@@ -150,6 +154,13 @@ const ReserveCart = (props) => {
                   className="bg-primary text-white px-4 py-2 me-5 mt-4"
                   onClick={() => {
                     SubmitList()
+                    Swal.fire({
+                      position: 'center-center',
+                      icon: 'success',
+                      title: '訂位成功',
+                      showConfirmButton: false,
+                      timer: 1500,
+                    })
                   }}
                 >
                   確定訂位

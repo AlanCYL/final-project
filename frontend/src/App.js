@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_URL } from './utils/config'
 import { ActivePanelContext } from './context/ActivePanel'
+import { ShoppingCartContext } from './context/ShoppingCartContext'
 
 function App() {
   //存登入會員的資料
@@ -57,6 +58,7 @@ function App() {
 
   //切換Nav的會員中心首頁連向何處
   const [active, setActive] = useState('basic')
+  const [cart, setCart] = useState(true)
 
   return (
     <LoginContext.Provider
@@ -94,9 +96,11 @@ function App() {
           <Route path="/shoppingCart">
             <ShoppingCart />
           </Route>
-          <Route path="/shopBackstage">
-            <ShopBackstage />
-          </Route>
+          <ShoppingCartContext.Provider value={{ cart, setCart }}>
+            <Route path="/shopBackstage">
+              <ShopBackstage />
+            </Route>
+          </ShoppingCartContext.Provider>
           <Route path="/shopList">
             <ShopList />
           </Route>
