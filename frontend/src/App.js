@@ -88,7 +88,7 @@ function App() {
           <Route path="/groups">
             <Groups />
           </Route>
-          <Route path="/groupDetail">
+          <Route path="/groupDetail/:groupId">
             <GroupDetail />
           </Route>
           <Route path="/shoppingCart">

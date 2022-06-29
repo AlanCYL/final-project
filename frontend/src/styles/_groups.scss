@@ -13,7 +13,8 @@
         scroll-behavior: smooth;
     }
 
-    .slider::-webkit-scrollbar,.sliderw::-webkit-scrollbar  {
+    .slider::-webkit-scrollbar,
+    .sliderw::-webkit-scrollbar {
         display: none;
     }
 
@@ -41,12 +42,12 @@
     width: 100%;
 
     .pic {
-        width: 700px;
+        max-width: 690px;
     }
 
     .filter-input {
         height: 350px;
-        width: 700px;
+        width: 690px;
 
         .bg {
             width: 85%;
@@ -83,4 +84,8 @@
 .container-md,
 .container-sm {
     padding-right: 0rem
+}
+
+.filter-all {
+    width: 100%;
 }
