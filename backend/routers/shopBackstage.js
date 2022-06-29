@@ -135,8 +135,6 @@ router.get('/dishlist', async (req, res, next) => {
   // const dishID = req.query.dishID;
   let [data] = await pool.execute(`SELECT * FROM dish WHERE shop_id=${shopID}`);
   res.json({ result: data });
-  // let [delete] = await pool.execute(`DELETE FROM dish WHERE dish.id =${dishID}`);
-  // res.json({ delete: data });
 });
 
 //刪除菜色
