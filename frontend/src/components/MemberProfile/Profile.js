@@ -67,6 +67,11 @@ const Profile = () => {
         },
       })
       setIsLogin(false)
+      setMember({
+        id: '',
+        identity_card: '',
+        password: '',
+      })
       history.push('/login')
     } catch (e) {
       console.log(e.response.data.error)

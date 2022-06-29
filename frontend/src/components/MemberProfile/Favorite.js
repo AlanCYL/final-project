@@ -74,7 +74,7 @@ const Favorite = () => {
                     />
                   </div>
                   <div className="shopLink">
-                    <Link to="/shopListDetail" className="d-block">
+                    <Link to={`/shopDetail/${v.shop_id}`} className="d-block">
                       <h5 className="my-2">{v.shopName}</h5>
                       {v.typeName.split(',').map((v, i) => {
                         return (

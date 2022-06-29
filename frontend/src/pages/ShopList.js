@@ -49,7 +49,7 @@ function ShopList() {
           return (
             <div key={v.id} className="hover01 ps-6 mt-6 ">
               <div className="zoom-in">
-                <Link to={`/shopDetail/${shops[i].id}`}>
+                <Link to={`/shopDetail/${v.id}`}>
                   <div className="piczoom">
                     <img
                       className="w-100"
@@ -60,7 +60,7 @@ function ShopList() {
                 </Link>
                 <div className=" d-flex mt-3">
                   <h5 className="me-auto">{v.name}</h5>
-                  <Heart className="ms-auto" />
+                  <Heart className="ms-auto" shopId={v.id} />
                 </div>
               </div>
             </div>

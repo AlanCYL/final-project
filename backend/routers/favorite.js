@@ -22,4 +22,18 @@ router.get('/delete', async (req, res, next) => {
   return res.json({ cancel: 'OK' });
 });
 
+// /api/favorite/shopList
+router.get('/shopList', async (req, res, next) => {
+  let [responseList] = await pool.execute('SELECT * FROM user_shop WHERE user_id = ? AND shop_id = ?', [req.query.userId, req.query.shopId]);
+  let count = responseList.length;
+  return res.json({ result: count });
+});
+
+// /api/favorite/shopLike
+router.get('/shopLike', async (req, res, next) => {
+  await pool.execute('INSERT INTO user_shop (user_id , shop_id ) VALUES (? , ? )', [req.query.userId, req.query.shopId]);
+
+  return res.json({ result: 'ok' });
+});
+
 module.exports = router;
