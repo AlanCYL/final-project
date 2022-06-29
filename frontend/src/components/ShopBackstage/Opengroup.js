@@ -6,11 +6,15 @@ import { API_URL } from '../../utils/config'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Swal from 'sweetalert2'
+import { useShoppingCartContext } from '../../context/ShoppingCartContext'
 
 const Opengroup = (props) => {
   const shopID = localStorage.getItem('shopID')
   // console.log(props)
   const { data } = props
+  const { setCart } = useShoppingCartContext()
+
   // const goPath = useHistory()
   const [group, setGroup] = useState({
     startTime: '',
@@ -70,11 +74,28 @@ const Opengroup = (props) => {
         price: '',
       })
       setDish([])
+      await Toast.fire({
+        icon: 'success',
+        title: 'Success',
+      })
+      setCart(true)
       props.groupProps('third')
     } catch (e) {
       console.error(e)
     }
   }
+  //alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  })
   return (
     <>
       <Form
@@ -156,7 +177,7 @@ const Opengroup = (props) => {
         <Form.Group className="mb-3" controlId="dish">
           <Form.Label>選擇菜色：</Form.Label>
           {/* map動態產生 */}
-          {/* {checkList.map((item, i) => (
+          {checkList.map((item, i) => (
             <InputGroup className="mb-3 bg-secondary" key={i}>
               <InputGroup.Checkbox
                 aria-label="Checkbox for following text input"
@@ -167,7 +188,7 @@ const Opengroup = (props) => {
               />
               <h6 className="mt-2 ms-3">{item.name}</h6>
             </InputGroup>
-          ))} */}
+          ))}
         </Form.Group>
         <div className="d-flex justify-content-end ">
           <Button
