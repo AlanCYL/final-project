@@ -48,6 +48,10 @@ app.get('/', (request, respond, next) => {
 const shopList = require('./routers/shopList');
 app.use('/api/shoplist', shopList);
 
+//開團列表
+const group = require('./routers/group');
+app.use('/api/group', group);
+
 //shopRegister & Login
 const shop = require('./routers/shop');
 app.use('/api/shop', shop);
