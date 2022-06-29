@@ -5,6 +5,7 @@ import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../../utils/config'
 import Pagination from 'react-bootstrap/Pagination'
 import { Link } from 'react-router-dom'
+import dateCountdown from 'date-countdown'
 
 function GroupPages() {
   const cate = [
@@ -155,9 +156,13 @@ function GroupPages() {
                     <div className="p-3">
                       <div className="d-flex justify-content-between">
                         <h4>{v.name}</h4>
-                        <span className="badge rounded-pill bg-primary">
-                          {/* {v.type_name} */}
-                        </span>
+                        {v.type_name.split(',').map((v, i) => {
+                          return (
+                            <span className="badge rounded-pill bg-primary">
+                              {v}
+                            </span>
+                          )
+                        })}
                       </div>
                       <h6 className="fw-normal">目前人數:{v.now_num}</h6>
                       <h6 className="fw-normal mb-4">
@@ -174,7 +179,15 @@ function GroupPages() {
                         ></div>
                       </div>
                       <div className="d-flex justify-content-between">
-                        <p className="progress-text mt-1">剩下天</p>
+                        <p className="progress-text mt-1">
+                          剩下
+                          {/* {dateCountdown(
+                            v.daysleft[0],
+                            v.daysleft[1],
+                            v.daysleft[2]
+                          )} */}
+                          天
+                        </p>
                         <p className="progress-text mt-1">
                           目標人數:{v.goal_num}
                         </p>
