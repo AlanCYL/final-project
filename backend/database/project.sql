@@ -1,21 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2022-06-29 15:05:28
--- 伺服器版本： 10.4.24-MariaDB
--- PHP 版本： 8.1.4
+-- 主機： localhost:8889
+-- 產生時間： 2022 年 06 月 29 日 23:39
+-- 伺服器版本： 5.7.34
+-- PHP 版本： 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- 資料庫: `project`
+-- 資料庫： `project`
 --
-CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `project`;
 
 -- --------------------------------------------------------
 
@@ -23,7 +27,6 @@ USE `project`;
 -- 資料表結構 `coupon`
 --
 
-DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
   `id` int(30) UNSIGNED NOT NULL,
   `reason` varchar(50) NOT NULL,
@@ -46,12 +49,12 @@ INSERT INTO `coupon` (`id`, `reason`, `price`) VALUES
 -- 資料表結構 `dish`
 --
 
-DROP TABLE IF EXISTS `dish`;
 CREATE TABLE `dish` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `image` varchar(100) DEFAULT NULL,
+  `price` varchar(25) NOT NULL,
   `description` text NOT NULL,
+  `photo` varchar(100) DEFAULT NULL,
   `shop_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,10 +62,11 @@ CREATE TABLE `dish` (
 -- 傾印資料表的資料 `dish`
 --
 
-INSERT INTO `dish` (`id`, `name`, `image`, `description`, `shop_id`) VALUES
-(2, '義大利麵', 'pasta.png', '爆多的蒜末爆炒\r\n再搭上完美的白酒提味\r\n', 2),
-(3, '炸雞', 'chicken.png', '多汁、酥脆、滑嫩、鹹香', 2),
-(5, '披薩', 'pizza.png', '薄皮酥脆餡料豐盛搭配餡料豐盛搭配夏威夷風味', 2);
+INSERT INTO `dish` (`id`, `name`, `price`, `description`, `photo`, `shop_id`) VALUES
+(1, '小籠包', '200', '麵皮均勻薄嫩，肉汁飽滿', '/shopbackstage/bow.png', 3),
+(2, '排骨蛋炒飯', '280', '每口咀嚼皆富含蛋香與蔥香，滋味極為鮮美爽口', '/shopbackstage/rice.png', 3),
+(3, '煲湯', '200', '鮮美 料豐富', '/shopbackstage/min1.png', 1),
+(4, '蘿蔔糕', '200', '糕體軟嫩', '/shopbackstage/min2.png', 1);
 
 -- --------------------------------------------------------
 
@@ -70,18 +74,17 @@ INSERT INTO `dish` (`id`, `name`, `image`, `description`, `shop_id`) VALUES
 -- 資料表結構 `groups`
 --
 
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(5) UNSIGNED NOT NULL,
   `start_time` date NOT NULL,
   `end_time` date NOT NULL,
   `eating_date` date NOT NULL,
   `eating_time` int(30) NOT NULL,
-  `now_num` int(30) NOT NULL,
-  `goal_num` int(30) DEFAULT 0,
+  `now_num` int(30) NOT NULL DEFAULT '0',
+  `goal_num` int(20) NOT NULL,
   `price` int(6) UNSIGNED NOT NULL,
   `shop_id` int(20) NOT NULL,
-  `established` int(3) NOT NULL DEFAULT 0
+  `established` int(3) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -89,33 +92,19 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_time`, `now_num`, `goal_num`, `price`, `shop_id`, `established`) VALUES
-(1, '2022-04-01', '2022-04-10', '2022-04-15', 1, 2, 5, 350, 2, 0),
-(2, '2022-04-02', '2022-04-15', '2022-07-28', 1, 8, 6, 200, 2, 1),
-(3, '2022-04-20', '2022-04-20', '2022-04-30', 2, 7, 6, 100, 3, 1),
-(4, '2022-04-11', '2022-04-16', '2022-04-19', 3, 4, 10, 1500, 4, 0),
-(5, '2022-04-01', '2022-04-11', '2022-05-12', 2, 4, 6, 600, 2, 0),
-(6, '2022-04-04', '2022-04-08', '2022-05-23', 150000, 4, 5, 50, 6, 0),
-(7, '2022-03-30', '2022-04-05', '2022-05-21', 150000, 2, 8, 400, 7, 0),
-(8, '2022-04-21', '2022-04-23', '2022-04-27', 201700, 2, 3, 200, 2, 0),
-(9, '2022-04-22', '2022-04-27', '2022-04-29', 174500, 5, 2, 250, 1, 0),
-(11, '2022-04-23', '2022-04-30', '2022-05-05', 180000, 6, 3, 250, 1, 0),
-(12, '2022-04-13', '2022-04-16', '2022-04-19', 173000, 10, 15, 200, 2, 0),
-(13, '2022-04-22', '2022-04-27', '2022-04-30', 175300, 2, 10, 200, 2, 0),
-(14, '2022-04-22', '2022-04-28', '2022-04-30', 210100, 4, 10, 300, 2, 0),
-(15, '2022-04-22', '2022-04-27', '2022-04-28', 150600, 3, 2, 200, 2, 0),
-(17, '2022-04-12', '2022-04-15', '2022-04-19', 173459, 4, 3, 200, 5, 0),
-(18, '2022-04-22', '2022-04-28', '2022-04-30', 183450, 3, 7, 150, 5, 0),
-(19, '2022-04-15', '2022-04-22', '2022-04-25', 180000, 4, 5, 200, 8, 0),
-(20, '2022-04-16', '2022-04-19', '2022-04-23', 183736, 3, 5, 250, 9, 0),
-(21, '2022-04-23', '2022-04-28', '2022-04-30', 183736, 5, 2, 200, 9, 0),
-(22, '2022-04-06', '2022-04-16', '2022-04-19', 183841, 3, 7, 250, 1, 0),
-(23, '2022-04-21', '2022-04-28', '2022-04-30', 183841, 3, 9, 350, 1, 0),
-(24, '2022-04-21', '2022-04-24', '2022-04-25', 121500, 3, 2, 350, 14, 0),
-(25, '2022-04-22', '2022-04-27', '2022-04-28', 111500, 3, 2, 200, 11, 0),
-(26, '2022-04-23', '2022-04-28', '2022-04-30', 100000, 5, 2, 200, 14, 0),
-(27, '2022-04-13', '2022-04-16', '2022-04-19', 173000, 10, 3, 200, 10, 0),
-(28, '2022-04-19', '2022-04-20', '2022-04-30', 92503, 7, 6, 100, 12, 0),
-(29, '2022-06-21', '2022-06-30', '2022-08-05', 2, 0, 8, 100, 2, 0);
+(1, '2022-04-13', '2022-04-18', '2022-04-20', 2, 5, 6, 250, 1, 0),
+(2, '2022-04-15', '2022-04-19', '2022-04-23', 1, 3, 6, 200, 2, 0),
+(3, '2022-04-10', '2022-04-20', '2022-04-26', 3, 2, 5, 300, 3, 0),
+(4, '2022-04-23', '2022-04-29', '2022-05-02', 3, 2, 5, 200, 6, 0),
+(5, '2022-05-02', '2022-05-12', '2022-05-20', 3, 5, 4, 250, 2, 0),
+(6, '2022-05-06', '2022-05-15', '2022-05-20', 3, 4, 6, 300, 6, 0),
+(7, '2022-05-12', '2022-05-20', '2022-05-27', 2, 5, 6, 350, 2, 0),
+(8, '2022-05-28', '2022-06-10', '2022-06-18', 3, 2, 5, 300, 3, 0),
+(9, '2022-06-10', '2022-06-19', '2022-06-26', 2, 5, 3, 300, 2, 0),
+(10, '2022-06-17', '2022-06-24', '2022-06-28', 2, 5, 3, 300, 1, 0),
+(11, '2022-06-28', '2022-07-10', '2022-07-16', 2, 4, 6, 300, 3, 0),
+(12, '2022-06-29', '2022-07-13', '2022-07-19', 2, 0, 4, 200, 5, 0),
+(13, '2022-06-29', '2022-07-13', '2022-07-20', 3, 0, 2, 200, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +112,6 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 -- 資料表結構 `groups_and_dish`
 --
 
-DROP TABLE IF EXISTS `groups_and_dish`;
 CREATE TABLE `groups_and_dish` (
   `id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
@@ -143,37 +131,14 @@ INSERT INTO `groups_and_dish` (`id`, `groups_id`, `dish_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `level_name`
---
-
-DROP TABLE IF EXISTS `level_name`;
-CREATE TABLE `level_name` (
-  `id` int(2) UNSIGNED NOT NULL,
-  `name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 傾印資料表的資料 `level_name`
---
-
-INSERT INTO `level_name` (`id`, `name`) VALUES
-(1, '綠寶石'),
-(2, '藍寶石'),
-(3, '紅寶石'),
-(4, '鑽石');
-
--- --------------------------------------------------------
-
---
 -- 資料表結構 `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
-  `payable` int(30) NOT NULL DEFAULT 0
+  `payable` int(30) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -182,12 +147,12 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `groups_id`, `payable`) VALUES
 (1, 3, 1, 0),
-(2, 4, 1, 0),
+(2, 4, 1, 1),
 (3, 5, 1, 0),
-(4, 14, 1, 0),
-(5, 14, 2, 1),
-(6, 14, 4, 0),
-(7, 14, 5, 0);
+(4, 6, 1, 1),
+(5, 2, 2, 1),
+(6, 1, 4, 0),
+(7, 2, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -195,12 +160,21 @@ INSERT INTO `orders` (`id`, `user_id`, `groups_id`, `payable`) VALUES
 -- 資料表結構 `receipt`
 --
 
-DROP TABLE IF EXISTS `receipt`;
 CREATE TABLE `receipt` (
   `id` int(11) NOT NULL,
   `orders_id` int(11) NOT NULL,
   `total` int(100) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `receipt`
+--
+
+INSERT INTO `receipt` (`id`, `orders_id`, `total`) VALUES
+(1, 1, 250),
+(2, 2, 250),
+(3, 3, 200),
+(4, 4, 250);
 
 -- --------------------------------------------------------
 
@@ -208,7 +182,6 @@ CREATE TABLE `receipt` (
 -- 資料表結構 `shop`
 --
 
-DROP TABLE IF EXISTS `shop`;
 CREATE TABLE `shop` (
   `id` int(3) NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -248,7 +221,6 @@ INSERT INTO `shop` (`id`, `name`, `account`, `password`, `phone`, `address`, `de
 -- 資料表結構 `shoppingcart`
 --
 
-DROP TABLE IF EXISTS `shoppingcart`;
 CREATE TABLE `shoppingcart` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -272,7 +244,6 @@ INSERT INTO `shoppingcart` (`id`, `user_id`, `group_id`) VALUES
 -- 資料表結構 `shop_and_type`
 --
 
-DROP TABLE IF EXISTS `shop_and_type`;
 CREATE TABLE `shop_and_type` (
   `id` int(100) NOT NULL,
   `shop_id` int(100) NOT NULL,
@@ -325,7 +296,6 @@ INSERT INTO `shop_and_type` (`id`, `shop_id`, `type_id`) VALUES
 -- 資料表結構 `type`
 --
 
-DROP TABLE IF EXISTS `type`;
 CREATE TABLE `type` (
   `id` int(3) NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -357,7 +327,6 @@ INSERT INTO `type` (`id`, `name`) VALUES
 -- 資料表結構 `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(30) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -367,8 +336,8 @@ CREATE TABLE `user` (
   `phone` varchar(100) NOT NULL,
   `bir` date NOT NULL,
   `mail` varchar(30) NOT NULL,
-  `img` int(1) UNSIGNED NOT NULL DEFAULT 1,
-  `level` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `img` int(1) UNSIGNED NOT NULL DEFAULT '1',
+  `level` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -400,12 +369,11 @@ INSERT INTO `user` (`id`, `name`, `identity_card`, `password`, `nick_name`, `pho
 -- 資料表結構 `user_and_coupon`
 --
 
-DROP TABLE IF EXISTS `user_and_coupon`;
 CREATE TABLE `user_and_coupon` (
   `id` int(30) NOT NULL,
   `coupon_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
-  `valid` tinyint(2) NOT NULL DEFAULT 1
+  `valid` tinyint(2) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -414,16 +382,16 @@ CREATE TABLE `user_and_coupon` (
 
 INSERT INTO `user_and_coupon` (`id`, `coupon_id`, `user_id`, `valid`) VALUES
 (1, 1, 3, 1),
-(2, 2, 2, 1),
+(2, 2, 2, 0),
 (3, 2, 10, 1),
-(4, 2, 13, 1),
+(4, 2, 13, 0),
 (7, 3, 1, 1),
 (8, 4, 3, 0),
 (9, 1, 1, 1),
-(80, 1, 14, 1),
-(81, 3, 14, 1),
-(82, 2, 14, 1),
-(83, 4, 14, 1);
+(10, 1, 14, 0),
+(11, 3, 14, 1),
+(12, 2, 14, 1),
+(13, 4, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -431,7 +399,6 @@ INSERT INTO `user_and_coupon` (`id`, `coupon_id`, `user_id`, `valid`) VALUES
 -- 資料表結構 `user_shop`
 --
 
-DROP TABLE IF EXISTS `user_shop`;
 CREATE TABLE `user_shop` (
   `id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
@@ -473,8 +440,7 @@ ALTER TABLE `dish`
 -- 資料表索引 `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shop_id` (`shop_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- 資料表索引 `groups_and_dish`
@@ -483,12 +449,6 @@ ALTER TABLE `groups_and_dish`
   ADD PRIMARY KEY (`id`),
   ADD KEY `groups_id` (`groups_id`),
   ADD KEY `dish_id` (`dish_id`);
-
---
--- 資料表索引 `level_name`
---
-ALTER TABLE `level_name`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- 資料表索引 `orders`
@@ -566,19 +526,13 @@ ALTER TABLE `dish`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups_and_dish`
 --
 ALTER TABLE `groups_and_dish`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `level_name`
---
-ALTER TABLE `level_name`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
@@ -590,13 +544,13 @@ ALTER TABLE `orders`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `receipt`
 --
 ALTER TABLE `receipt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shoppingcart`
@@ -608,13 +562,13 @@ ALTER TABLE `shoppingcart`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shop_and_type`
 --
 ALTER TABLE `shop_and_type`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `type`
 --
 ALTER TABLE `type`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
@@ -634,3 +588,7 @@ ALTER TABLE `user_and_coupon`
 ALTER TABLE `user_shop`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,6 +1,19 @@
 import React from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { API_URL } from '../../utils/config'
+import { imported as useSearchParams } from 'react-router-dom'
 
 function GroupContent() {
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // searchParams.get(`${searchParams}`)
+  // useEffect(() => {
+  //   let getDetail = async () => {
+  //     let response = await axios.get(`${API_URL}/shoplist/${shopId}`)
+  //     setData(response.data)
+  //   }
+  //   getDetail()
+  // }, [])
   return (
     <>
       <div className="mx-6">
