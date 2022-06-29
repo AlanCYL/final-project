@@ -1,9 +1,26 @@
 import React, { useState } from 'react'
 import { FaHeart } from 'react-icons/fa'
+import { useLogin } from '../../context/LoginStatus'
 
 function Heart() {
-  const [heart, setHeart] = useState(0)
+  const [heart, setHeart] = useState(false)
   const heartPoint = 1
+  const { member } = useLogin()
+
+  const inputFavorite = async () => {
+    if (member) {
+      if(heart === true){
+        setHeart(false)
+        // TODO:INSERT
+      }else{
+        setHeart(true)
+        // TODO:DELETE
+      }
+    } else {
+        // TODO:請登入，USELOCATON跳到登入畫面
+    }
+  }
+
   return (
     <>
       <label className="heart-input">
@@ -12,7 +29,8 @@ function Heart() {
           name=""
           defaultValue={heartPoint}
           onClick={() => {
-            setHeart(!heart)
+
+            inputFavorite()
           }}
         />
         <FaHeart
