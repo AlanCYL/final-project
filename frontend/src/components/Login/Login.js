@@ -52,7 +52,7 @@ const Login = (props) => {
       let response = await axios.post(`${API_URL}/member/login`, member, {
         withCredentials: true,
       })
-      console.log(response.data)
+      // console.log(response.data)
       //會員登入id存入localStorage
       localStorage.setItem('userID', response.data.member.id)
       await Swal.fire({
