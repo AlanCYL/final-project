@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2022 年 06 月 30 日 03:19
+-- 產生時間： 2022 年 06 月 30 日 03:28
 -- 伺服器版本： 5.7.34
 -- PHP 版本： 8.0.8
 
@@ -230,6 +230,7 @@ INSERT INTO `level_name` (`id`, `name`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(30) NOT NULL,
+  `orderlist_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
   `payable` int(30) NOT NULL DEFAULT '0'
@@ -239,14 +240,15 @@ CREATE TABLE `orders` (
 -- 傾印資料表的資料 `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `groups_id`, `payable`) VALUES
-(1, 3, 1, 0),
-(2, 4, 1, 1),
-(3, 5, 1, 0),
-(4, 6, 1, 1),
-(5, 2, 2, 1),
-(6, 1, 4, 0),
-(7, 2, 5, 0);
+INSERT INTO `orders` (`id`, `orderlist_id`, `user_id`, `groups_id`, `payable`) VALUES
+(1, 1, 3, 1, 0),
+(2, 2, 4, 1, 1),
+(3, 3, 5, 1, 0),
+(4, 4, 6, 1, 1),
+(5, 5, 2, 2, 0),
+(6, 6, 1, 4, 0),
+(7, 5, 2, 5, 0),
+(10, 6, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -632,7 +634,7 @@ ALTER TABLE `groups_and_dish`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `receipt`
