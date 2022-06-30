@@ -18,9 +18,7 @@ const transporter = nodemailer.createTransport({
 router.get('/', async (req, res, next) => {
   const json = req.query.mail;
   const mail = JSON.parse(json).mail;
-  // console.log(mail);
   let [data] = await pool.execute('SELECT mail FROM user WHERE mail = ?', [mail]);
-  console.log(data);
   if (data.length === 0) {
     // 這個 email 或 身分證字號沒有註冊過
     return res.status(400).json({ code: 3002, error: '這個email沒有註冊過' });
