@@ -2,13 +2,22 @@ import Header from '../../Header/Header'
 import Side from '../Side'
 import { API_URL, IMAGE_URL } from '../../../utils/config'
 import { useEffect, useState } from 'react'
+import { BsFillTrashFill } from 'react-icons/bs'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { useShoppingListContext } from '../../../context/ShoppingListContext'
 
 const ReserveList = (props) => {
   // console.log(props)
   // const { userID } = props
+  const { reser, setReser } = useShoppingListContext()
 
   const [data, setData] = useState([])
   useEffect(() => {
+    getList()
+  }, [reser])
+
+  function getList() {
     fetch(`${API_URL}/shoppingcart/reservelist?userID=${props.userID}`, {
       method: 'GET',
     })
@@ -22,7 +31,7 @@ const ReserveList = (props) => {
         /*發生錯誤時要做的事情*/
         console.log(e)
       })
-  }, [])
+  }
 
   function getEatTimeString(i) {
     if (data[i].eating_time === 1) {
@@ -46,6 +55,48 @@ const ReserveList = (props) => {
     }
     setList(copyList)
     props.setGroupsFunc(copyList)
+  }
+  //刪除
+  async function Delete(item) {
+    const shoppingcartID = item.id
+    await axios.get(
+      `${API_URL}/shoppingcart/redelete?shoppingcartID=${shoppingcartID}`
+    )
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    })
+    swalWithBootstrapButtons
+      .fire({
+        title: '確定刪除此菜色嗎？',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          getList()
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
   }
 
   return (
@@ -105,10 +156,11 @@ const ReserveList = (props) => {
                         <td className="py-5">{data[i].goal_num}</td>
                         <td className="py-5">${data[i].price}</td>
                         <td className="py-5">
-                          <img
-                            className="delete"
-                            src={require('../../../image/shoppingCart/delete.png')}
-                            alt=""
+                          <BsFillTrashFill
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                              Delete(item)
+                            }}
                           />
                         </td>
                       </tr>

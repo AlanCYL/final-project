@@ -13,9 +13,16 @@ router.get('/search', async (req, res, next) => {
 router.get('/reservelist', async (req, res, next) => {
   const userID = req.query.userID;
   let [data] = await pool.execute(
-    `SELECT shoppingcart.*, groups.*, shop.img FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id JOIN shop ON groups.shop_id = shop.id  WHERE shoppingcart.user_id=${userID}`
+    `SELECT shoppingcart.*, groups.start_time, groups.end_time, groups.eating_date, groups.eating_time, groups.now_num, groups.goal_num, groups.price, groups.shop_id, groups.established, shop.img FROM shoppingcart JOIN groups ON shoppingcart.group_id=groups.id JOIN shop ON groups.shop_id = shop.id  WHERE shoppingcart.user_id=${userID}`
   );
   res.json({ result: data });
+});
+
+//刪除reserve
+router.get('/redelete', async (req, res, next) => {
+  const shoppingcartID = req.query.shoppingcartID;
+  await pool.execute(`DELETE FROM shoppingcart WHERE shoppingcart.id =${shoppingcartID}`);
+  res.json({ result: 'OK' });
 });
 
 //confirmreservelist

@@ -12,6 +12,8 @@ const ConfirmPay = (props) => {
   const [data, setData] = useState({})
   //存放抓到的selectCou的詳細資料
   const [detail, setDetail] = useState({})
+  //存結帳後最終價格
+  const [finalPrice, setFinalPrice] = useState(0)
 
   useEffect(() => {
     fetch(
@@ -149,7 +151,10 @@ const ConfirmPay = (props) => {
                       </div>
                       <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                         <h6>總計：</h6>
-                        <h6>NT${`${data.price}` - `${detail.price}`}</h6>
+                        <h6>
+                          NT${`${data.price}` - `${detail.price}`}{' '}
+                          {/* {setFinalPrice(`${data.price}` - `${detail.price}`)} */}
+                        </h6>
                       </div>
                     </div>
                   </Dropdown.Item>
