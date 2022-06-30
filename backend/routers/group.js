@@ -8,7 +8,7 @@ const pool = require('../utils/db');
 router.get('/', async (request, response, next) => {
   // SELECT shop.name,shop.img,groups.end_time,groups.eating_date,groups.now_num,groups.goal_num FROM shop,groups WHERE shop.id=groups.shop_id
   let [data] = await pool.execute(
-    'SELECT shop.name,shop.img,groups.id,groups.end_time,groups.eating_date,groups.now_num,groups.goal_num,type.name AS type_name FROM shop ,groups,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND shop.id=groups.shop_id AND type.id=shop_and_type.type_id GROUP BY groups.id '
+    'SELECT shop.name,shop.img,groups.id,groups.end_time,groups.eating_date,groups.now_num,groups.goal_num,type.name AS type_name FROM shop ,groups,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND shop.id=groups.shop_id AND type.id=shop_and_type.type_id AND now() <= groups.end_time GROUP BY groups.id '
   );
 
   //全部資料筆數
@@ -38,7 +38,7 @@ router.get('/', async (request, response, next) => {
 
   //取得這頁資料
   let [pageResult] = await pool.execute(
-    'SELECT shop.name,shop.img,groups.id,groups.end_time,groups.eating_date,groups.now_num,groups.goal_num,type.name AS type_name FROM shop ,groups,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND shop.id=groups.shop_id AND type.id=shop_and_type.type_id GROUP BY groups.id ORDER BY groups.id ASC LIMIT ? OFFSET ?',
+    'SELECT shop.name,shop.img,groups.id,groups.end_time,groups.eating_date,groups.now_num,groups.goal_num,type.name AS type_name FROM shop ,groups,shop_and_type, type WHERE shop.id=shop_and_type.shop_id AND shop.id=groups.shop_id AND type.id=shop_and_type.type_id AND now() <= groups.end_time GROUP BY groups.id ORDER BY groups.eating_date ASC LIMIT ? OFFSET ?',
     [perPage, offset]
   );
 
@@ -87,7 +87,13 @@ router.get('/:groupId', async (request, response, next) => {
     'SELECT shop.name,shop.phone,shop.address,shop.description,shop.img,shop.banner,groups.* FROM shop,groups WHERE shop.id=groups.shop_id AND groups.id=?',
     [request.params.groupId]
   );
-  response.json(data);
+  let item = [];
+  for (let i = 0; i < data.length; i++) {
+    let element = data[i];
+    element = { ...element, daysleft: element.eating_date.split('-') };
+    item.push(element);
+  }
+  return response.json({ data: item });
 });
 module.exports = router;
 
