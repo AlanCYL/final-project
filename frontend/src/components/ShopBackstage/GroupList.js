@@ -167,7 +167,7 @@ function GroupList() {
                   </td>
                   <td className="text-center py-3">{data[i].goal_num}</td>
                   <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{data[i].established}</td>
+                  <td className="text-center py-3">{getIsGroup(i)}</td>
                   <td className="text-center py-3">{data[i].price}</td>
                   <td className="text-center py-3">
                     <a variant="outline-primary" className="group-look py-3">
@@ -213,7 +213,7 @@ function GroupList() {
                   </td>
                   <td className="text-center py-3">{data[i].goal_num}</td>
                   <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{data[i].established}</td>
+                  <td className="text-center py-3">{getIsGroup(i)}</td>
                   <td className="text-center py-3">{data[i].price}</td>
                   <td className="text-center py-3">
                     <a variant="outline-primary" className="group-look py-3">
@@ -253,7 +253,7 @@ function GroupList() {
                   </td>
                   <td className="text-center py-3">{data[i].goal_num}</td>
                   <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{data[i].established}</td>
+                  <td className="text-center py-3">{getIsGroup(i)}</td>
                   <td className="text-center py-3">{data[i].price}</td>
                   <td className="text-center py-3">
                     <a variant="outline-primary" className="group-look py-3">
@@ -293,7 +293,7 @@ function GroupList() {
                   </td>
                   <td className="text-center py-3">{data[i].goal_num}</td>
                   <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{data[i].established}</td>
+                  <td className="text-center py-3">{getIsGroup(i)}</td>
                   <td className="text-center py-3">{data[i].price}</td>
                   <td className="text-center py-3">
                     <a variant="outline-primary" className="group-look py-3">
@@ -333,7 +333,7 @@ function GroupList() {
                   </td>
                   <td className="text-center py-3">{data[i].goal_num}</td>
                   <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{data[i].established}</td>
+                  <td className="text-center py-3">{getIsGroup(i)}</td>
                   <td className="text-center py-3">{data[i].price}</td>
                   <td className="text-center py-3">
                     <a
