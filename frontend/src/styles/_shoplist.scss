@@ -30,8 +30,18 @@
     input[type="radio"] {
         display: none;
     }
-    .heart{
+
+    .heart {
         cursor: pointer;
         transition: color 200ms;
     }
+}
+
+.nowgroups_card {
+    cursor: pointer;
+}
+
+.nowgroups_card:hover {
+    -webkit-transform: scale(1.1);
+    transition: .4s ease-in-out;
 }

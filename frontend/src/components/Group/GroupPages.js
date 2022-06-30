@@ -179,7 +179,9 @@ function GroupPages() {
                         ></div>
                       </div>
                       <div className="d-flex justify-content-between">
-   
+                        <p className="progress-text mt-1">
+                          截止:{v.eating_date}
+                        </p>
                         <p className="progress-text mt-1">
                           目標人數:{v.goal_num}
                         </p>
