@@ -99,7 +99,7 @@ router.get('/:groupId', async (request, response, next) => {
   let item = [];
   for (let i = 0; i < data.length; i++) {
     let element = data[i];
-    element = { ...element, daysleft: element.eating_date.split('-') };
+    element = { ...element, daysleft: element.end_time.split('-') };
     item.push(element);
   }
   return response.json({ data: item });
