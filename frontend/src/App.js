@@ -100,18 +100,15 @@ function App() {
           <Route path="/resetPassword">
             <ResetPassword />
           </Route>
-          <ShoppingListContext.Provider value={{ reser, setReser }}>
-            <Route path="/shoppingCart">
-              <ShoppingCart />
-            </Route>
-          </ShoppingListContext.Provider>
           <Route path="/shopList">
             <ShopList />
           </Route>
           <Route path="/shopDetail/:shopId">
             <ShopListDetail />
           </Route>
-
+          <Route path="/shoppingCart">
+            <ShoppingCart />
+          </Route>
           <ShoppingCartContext.Provider value={{ cart, setCart }}>
             <Route path="/shopBackstage">
               <ShopBackstage />

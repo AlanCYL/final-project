@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react'
 import { BsFillTrashFill } from 'react-icons/bs'
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { useShoppingListContext } from '../../../context/ShoppingListContext'
+import { ShoppingListContext } from '../../../context/ShoppingListContext'
 
 const ReserveList = (props) => {
   // console.log(props)
   // const { userID } = props
-  const { reser, setReser } = useShoppingListContext()
+  const [reser, setReser] = useState(true)
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -101,78 +101,85 @@ const ReserveList = (props) => {
 
   return (
     <>
-      <div className=" container my-6">
-        <Header />
-        <div className="d-flex">
-          <Side />
-          <div>
-            <div className="w-75 ms-8 ">
-              <img
-                className="w-75 pb-5 ms-6"
-                src={require('../../../image/shoppingCart/icongroup01.png')}
-                alt=""
-              />
-            </div>
-            {/* List */}
-            <div className="list w-100">
-              <div class="show active" id="nav-home">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th></th>
-                      <th>開團店家</th>
-                      <th>參團時間</th>
-                      <th>現在人數</th>
-                      <th>目標人數</th>
-                      <th>價格</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* map */}
-                    {data.map((item, i) => (
-                      <tr className="tr-hover" key={i}>
-                        <td className="py-5">
-                          <input
-                            type="checkbox"
-                            value={data[i].group_id}
-                            onClick={(e) => {
-                              checkValue(e)
-                            }}
-                          />
-                        </td>
-                        <td style={{ paddingTop: '14px' }}>
-                          <img
-                            style={{ width: '100px', height: '100px' }}
-                            className="logo py-4 img-fluid"
-                            src={`${IMAGE_URL}${data[i].img}`}
-                            alt=""
-                          />
-                        </td>
-                        <td className="py-5">
-                          {data[i].eating_date} {getEatTimeString(i)}
-                        </td>
-                        <td className="py-5">{data[i].now_num}</td>
-                        <td className="py-5">{data[i].goal_num}</td>
-                        <td className="py-5">${data[i].price}</td>
-                        <td className="py-5">
-                          <BsFillTrashFill
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => {
-                              Delete(item)
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      <ShoppingListContext.Provider
+        value={{
+          reser,
+          setReser,
+        }}
+      >
+        <div className=" container my-6">
+          <Header />
+          <div className="d-flex">
+            <Side />
+            <div>
+              <div className="w-75 ms-8 ">
+                <img
+                  className="w-75 pb-5 ms-6"
+                  src={require('../../../image/shoppingCart/icongroup01.png')}
+                  alt=""
+                />
               </div>
-              {/* button */}
+              {/* List */}
+              <div className="list w-100">
+                <div class="show active" id="nav-home">
+                  <table class="table">
+                    <thead class="">
+                      <tr>
+                        <th></th>
+                        <th>開團店家</th>
+                        <th>參團時間</th>
+                        <th>現在人數</th>
+                        <th>目標人數</th>
+                        <th>價格</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {/* map */}
+                      {data.map((item, i) => (
+                        <tr className="tr-hover" key={i}>
+                          <td className="py-5">
+                            <input
+                              type="checkbox"
+                              value={data[i].group_id}
+                              onClick={(e) => {
+                                checkValue(e)
+                              }}
+                            />
+                          </td>
+                          <td style={{ paddingTop: '14px' }}>
+                            <img
+                              style={{ width: '100px', height: '100px' }}
+                              className="logo py-4 img-fluid"
+                              src={`${IMAGE_URL}${data[i].img}`}
+                              alt=""
+                            />
+                          </td>
+                          <td className="py-5">
+                            {data[i].eating_date} {getEatTimeString(i)}
+                          </td>
+                          <td className="py-5">{data[i].now_num}</td>
+                          <td className="py-5">{data[i].goal_num}</td>
+                          <td className="py-5">${data[i].price}</td>
+                          <td className="py-5">
+                            <BsFillTrashFill
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => {
+                                Delete(item)
+                              }}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {/* button */}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ShoppingListContext.Provider>
     </>
   )
 }
