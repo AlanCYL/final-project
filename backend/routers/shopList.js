@@ -47,4 +47,25 @@ router.get('/:shopId', async (request, response, next) => {
   response.json(data);
 });
 
+//開團資料
+router.get('/nowopen/:shopId', async (request, response, next) => {
+  console.log('開團', request.params);
+  let [data] = await pool.execute(
+    'SELECT groups.*,shop.id AS shop_id FROM groups,shop WHERE groups.shop_id=shop.id AND now() >= start_time AND  now() <= end_time AND groups.shop_id=?',
+    [request.params.shopId]
+  );
+
+  response.json(data);
+});
+
+//歷史資料
+router.get('/history/:shopId', async (request, response, next) => {
+  console.log('開團', request.params);
+  let [data] = await pool.execute(
+    'SELECT groups.*,shop.id AS shop_id FROM groups,shop WHERE groups.shop_id=shop.id AND now() > eating_date AND now_num>goal_num AND groups.shop_id=?',
+    [request.params.shopId]
+  );
+
+  response.json(data);
+});
 module.exports = router;

@@ -18,6 +18,8 @@ import axios from 'axios'
 import { API_URL } from './utils/config'
 import { ActivePanelContext } from './context/ActivePanel'
 import { ShoppingCartContext } from './context/ShoppingCartContext'
+import { ShoppingListContext } from './context/ShoppingListContext'
+
 import ResetPassword from './pages/ResetPassword'
 
 function App() {
@@ -60,6 +62,7 @@ function App() {
   //切換Nav的會員中心首頁連向何處
   const [active, setActive] = useState('basic')
   const [cart, setCart] = useState(false)
+  const [reser, setReser] = useState(false)
 
   return (
     <LoginContext.Provider
@@ -97,16 +100,15 @@ function App() {
           <Route path="/resetPassword/:mail">
             <ResetPassword />
           </Route>
-          <Route path="/shoppingCart">
-            <ShoppingCart />
-          </Route>
           <Route path="/shopList">
             <ShopList />
           </Route>
           <Route path="/shopDetail/:shopId">
             <ShopListDetail />
           </Route>
-
+          <Route path="/shoppingCart">
+            <ShoppingCart />
+          </Route>
           <ShoppingCartContext.Provider value={{ cart, setCart }}>
             <Route path="/shopBackstage">
               <ShopBackstage />

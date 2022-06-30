@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const ReserveCart = (props) => {
   const history = useHistory()
@@ -108,16 +108,16 @@ const ReserveCart = (props) => {
             <ReserveList userID={user} setGroupsFunc={setGroupsFunc} />
             <div className="d-flex justify-content-end">
               <div className="d-flex justify-content-between w-75">
-                <a
+                <Link
+                  to="/groups"
                   type="button"
                   className="bg-info text-white px-4 py-2 ms-6 mb-5"
                   onClick={() => {
-                    toggleStep(-1)
                     window.scrollTo(0, 0)
                   }}
                 >
                   想看更多
-                </a>
+                </Link>
                 <a
                   type="button"
                   className="bg-primary text-white px-4 py-2 me-8 mb-5"
@@ -161,6 +161,8 @@ const ReserveCart = (props) => {
                       showConfirmButton: false,
                       timer: 1500,
                     })
+                    toggleStep(1)
+                    window.scrollTo(0, 0)
                   }}
                 >
                   確定訂位

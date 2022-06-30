@@ -1,26 +1,47 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { API_URL, IMAGE_URL } from '../../utils/config'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function Historygroups() {
+  const [data, setData] = useState([])
+  const { shopId } = useParams()
+
+  useEffect(() => {
+    let getDetail = async () => {
+      let response = await axios.get(`${API_URL}/shoplist/history/${shopId}`)
+      setData(response.data)
+    }
+    getDetail()
+  }, [])
   return (
     <>
-      <div className="p-3 shadow-sm mb-5">
-        <h4 className="fw-normal">最後人數:6人</h4>
-        <h5 className="fmb-4">已用餐</h5>
-        <div class="progress">
-          <div
-            class="progress-bar progress-bar-striped"
-            role="progressbar"
-            style={{ width: '100%' }}
-            aria-valuenow="10"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-        <div className="d-flex justify-content-between mt-2">
-          <p className="progress-text mt-1">2022/06/11結團</p>
-          <p className="progress-text mt-1">最後人數:12人</p>
-        </div>
-      </div>
+      {data.map((v, i) => {
+        let percent = Math.round((v.now_num / v.goal_num) * 100)
+        return (
+          <Link to={`/groupDetail/${v.id}`}>
+            <div className="p-3 shadow-sm mb-5 nowgroups_card">
+              <div className="d-flex">
+                <h4 className="fw-normal">目前人數:{v.now_num}人</h4>
+                <h4 className="ms-auto text-danger">{v.end_time}截止</h4>
+              </div>
+              <h6 className="fw-normal mb-4">用餐時間:{v.eating_date}</h6>
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-striped"
+                  role="progressbar"
+                  style={{ width: `${percent}%` }}
+                  aria-valuenow="10"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </Link>
+        )
+      })}
     </>
   )
 }

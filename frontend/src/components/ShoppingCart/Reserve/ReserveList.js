@@ -2,13 +2,22 @@ import Header from '../../Header/Header'
 import Side from '../Side'
 import { API_URL, IMAGE_URL } from '../../../utils/config'
 import { useEffect, useState } from 'react'
+import { BsFillTrashFill } from 'react-icons/bs'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { ShoppingListContext } from '../../../context/ShoppingListContext'
 
 const ReserveList = (props) => {
   // console.log(props)
   // const { userID } = props
+  const [reser, setReser] = useState(true)
 
   const [data, setData] = useState([])
   useEffect(() => {
+    getList()
+  }, [reser])
+
+  function getList() {
     fetch(`${API_URL}/shoppingcart/reservelist?userID=${props.userID}`, {
       method: 'GET',
     })
@@ -22,7 +31,7 @@ const ReserveList = (props) => {
         /*發生錯誤時要做的事情*/
         console.log(e)
       })
-  }, [])
+  }
 
   function getEatTimeString(i) {
     if (data[i].eating_time === 1) {
@@ -47,80 +56,130 @@ const ReserveList = (props) => {
     setList(copyList)
     props.setGroupsFunc(copyList)
   }
+  //刪除
+  async function Delete(item) {
+    const shoppingcartID = item.id
+    await axios.get(
+      `${API_URL}/shoppingcart/redelete?shoppingcartID=${shoppingcartID}`
+    )
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    })
+    swalWithBootstrapButtons
+      .fire({
+        title: '確定刪除此菜色嗎？',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          getList()
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+  }
 
   return (
     <>
-      <div className=" container my-6">
-        <Header />
-        <div className="d-flex">
-          <Side />
-          <div>
-            <div className="w-75 ms-8 ">
-              <img
-                className="w-75 pb-5 ms-6"
-                src={require('../../../image/shoppingCart/icongroup01.png')}
-                alt=""
-              />
-            </div>
-            {/* List */}
-            <div className="list w-100">
-              <div class="show active" id="nav-home">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th></th>
-                      <th>開團店家</th>
-                      <th>參團時間</th>
-                      <th>現在人數</th>
-                      <th>目標人數</th>
-                      <th>價格</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* map */}
-                    {data.map((item, i) => (
-                      <tr className="tr-hover" key={i}>
-                        <td className="py-5">
-                          <input
-                            type="checkbox"
-                            value={data[i].group_id}
-                            onClick={(e) => {
-                              checkValue(e)
-                            }}
-                          />
-                        </td>
-                        <td style={{ paddingTop: '14px' }}>
-                          <img
-                            style={{ width: '100px', height: '100px' }}
-                            className="logo py-4 img-fluid"
-                            src={`${IMAGE_URL}${data[i].img}`}
-                            alt=""
-                          />
-                        </td>
-                        <td className="py-5">
-                          {data[i].eating_date} {getEatTimeString(i)}
-                        </td>
-                        <td className="py-5">{data[i].now_num}</td>
-                        <td className="py-5">{data[i].goal_num}</td>
-                        <td className="py-5">${data[i].price}</td>
-                        <td className="py-5">
-                          <img
-                            className="delete"
-                            src={require('../../../image/shoppingCart/delete.png')}
-                            alt=""
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      <ShoppingListContext.Provider
+        value={{
+          reser,
+          setReser,
+        }}
+      >
+        <div className=" container my-6">
+          <Header />
+          <div className="d-flex">
+            <Side />
+            <div>
+              <div className="w-75 ms-8 ">
+                <img
+                  className="w-75 pb-5 ms-6"
+                  src={require('../../../image/shoppingCart/icongroup01.png')}
+                  alt=""
+                />
               </div>
-              {/* button */}
+              {/* List */}
+              <div className="list w-100">
+                <div class="show active" id="nav-home">
+                  <table class="table">
+                    <thead class="">
+                      <tr>
+                        <th></th>
+                        <th>開團店家</th>
+                        <th>參團時間</th>
+                        <th>現在人數</th>
+                        <th>目標人數</th>
+                        <th>價格</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {/* map */}
+                      {data.map((item, i) => (
+                        <tr className="tr-hover" key={i}>
+                          <td className="py-5">
+                            <input
+                              type="checkbox"
+                              value={data[i].group_id}
+                              onClick={(e) => {
+                                checkValue(e)
+                              }}
+                            />
+                          </td>
+                          <td style={{ paddingTop: '14px' }}>
+                            <img
+                              style={{ width: '100px', height: '100px' }}
+                              className="logo py-4 img-fluid"
+                              src={`${IMAGE_URL}${data[i].img}`}
+                              alt=""
+                            />
+                          </td>
+                          <td className="py-5">
+                            {data[i].eating_date} {getEatTimeString(i)}
+                          </td>
+                          <td className="py-5">{data[i].now_num}</td>
+                          <td className="py-5">{data[i].goal_num}</td>
+                          <td className="py-5">${data[i].price}</td>
+                          <td className="py-5">
+                            <BsFillTrashFill
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => {
+                                Delete(item)
+                              }}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {/* button */}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ShoppingListContext.Provider>
     </>
   )
 }
