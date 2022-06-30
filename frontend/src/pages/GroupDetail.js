@@ -6,8 +6,13 @@ import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../utils/config'
 import { useParams } from 'react-router-dom'
 import dateCountdown from 'date-countdown'
+import { useLogin } from '../context/LoginStatus'
+import { useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 function GroupDetail() {
+  const { member } = useLogin()
+  const history = useHistory()
   const [data, setData] = useState([])
   const { groupId } = useParams()
   useEffect(() => {
@@ -17,7 +22,16 @@ function GroupDetail() {
     }
     getDetail()
   }, [])
-  console.log('資料', data.name)
+  // console.log('資料', data.name)
+  const addShoppingCart = async (groupId) => {
+    try {
+      await axios.get(
+        `${API_URL}/group/shoppingcart?userID=${member.id}&groupId=${groupId}`
+      )
+    } catch (e) {
+      console.log(e.response.data.error)
+    }
+  }
   return (
     <>
       {data.map((v, i) => {
@@ -90,8 +104,39 @@ function GroupDetail() {
                     </div>
                   </div>
                   <div className="ms-auto mt-5">
-                    <Link to="/ShoppingCart">
-                      <button type="button" className="add-group btn btn-info">
+                    <Link to="/groups">
+                      <button
+                        type="button"
+                        className="add-group btn btn-info"
+                        onClick={() => {
+                          if (member.id !== '') {
+                            addShoppingCart(groupId)
+                            Swal.fire({
+                              position: 'top-center',
+                              icon: 'success',
+                              title: '成功加入購物車',
+                              showConfirmButton: false,
+                              timer: 1500,
+                            })
+                          } else {
+                            Swal.fire({
+                              confirmButtonText: '去登入',
+                              icon: 'warning',
+                              title: '登入後才能使用此功能',
+                              backdrop: `rgba(255, 255, 255, 0.55)`,
+                              width: '35%',
+                              padding: '0 0 1.25em',
+                              customClass: {
+                                popup: 'shadow-sm',
+                                confirmButton: 'btn btn-primary h5',
+                                content: 'h5',
+                              },
+                              buttonsStyling: false,
+                            })
+                            history.push('/login')
+                          }
+                        }}
+                      >
                         我要參團
                       </button>
                     </Link>

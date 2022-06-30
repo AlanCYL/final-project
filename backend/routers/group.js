@@ -81,6 +81,15 @@ router.get('/grouplist', async (req, res, next) => {
   res.json({ result: data });
 });
 
+//我要參團
+router.get('/shoppingcart', async (req, res, next) => {
+  const userID = req.query.userID;
+  const groupId = req.query.groupId;
+  let data = await pool.execute(`INSERT INTO shoppingcart (shoppingcart.user_id, shoppingcart.group_id) VALUES (${userID}, ${groupId})`);
+  console.log(data);
+  res.json({ result: data });
+});
+
 //TODO: 取得單一 shop 詳細頁
 router.get('/:groupId', async (request, response, next) => {
   let [data] = await pool.execute(
