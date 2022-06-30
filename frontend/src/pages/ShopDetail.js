@@ -54,7 +54,7 @@ function ShopDetail() {
                 </div>
               </div>
               <div className="col-5">
-                <ShopListDetailPage />
+                <ShopListDetailPage data={data} />
               </div>
             </div>
           </div>

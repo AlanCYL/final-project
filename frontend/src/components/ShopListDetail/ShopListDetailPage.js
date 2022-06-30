@@ -2,7 +2,24 @@ import React from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
 import Nowgroups from './Nowgroups'
 import Historygroups from './Historygroups'
-function shopListDetailPage() {
+import { useState, useEffect } from 'react'
+import { API_URL, IMAGE_URL } from '../../utils/config'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+
+function ShopListDetailPage(props) {
+  console.log(props.data[0])
+
+  const [data, setData] = useState([])
+  const { shopId } = useParams()
+
+  useEffect(() => {
+    let getDetail = async () => {
+      let response = await axios.get(`${API_URL}/shoplist/group/${shopId}`)
+      setData(response.data)
+    }
+    getDetail()
+  }, [])
   return (
     <>
       <div className="container">
@@ -25,4 +42,4 @@ function shopListDetailPage() {
   )
 }
 
-export default shopListDetailPage
+export default ShopListDetailPage
