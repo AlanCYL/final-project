@@ -1,21 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2022 年 06 月 30 日 03:28
--- 伺服器版本： 5.7.34
--- PHP 版本： 8.0.8
+-- 主機： 127.0.0.1
+-- 產生時間： 2022-06-29 17:06:35
+-- 伺服器版本： 10.4.24-MariaDB
+-- PHP 版本： 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- 資料庫： `project`
@@ -91,11 +85,11 @@ CREATE TABLE `groups` (
   `end_time` date NOT NULL,
   `eating_date` date NOT NULL,
   `eating_time` int(30) NOT NULL,
-  `now_num` int(30) NOT NULL DEFAULT '0',
+  `now_num` int(30) NOT NULL DEFAULT 0,
   `goal_num` int(20) NOT NULL,
   `price` int(6) UNSIGNED NOT NULL,
   `shop_id` int(20) NOT NULL,
-  `established` int(3) NOT NULL DEFAULT '0'
+  `established` int(3) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -116,11 +110,11 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 (11, '2022-06-28', '2022-07-10', '2022-07-16', 2, 4, 6, 300, 3, 0),
 (12, '2022-06-29', '2022-07-13', '2022-07-19', 2, 0, 4, 200, 5, 0),
 (13, '2022-06-29', '2022-07-13', '2022-07-20', 3, 0, 2, 500, 1, 0),
-(14, '2022-06-15', '2022-06-30', '2022-07-10', 3, 2, 6, 500, 3, 0),
-(15, '2022-06-29', '2022-07-05', '2022-07-10', 2, 1, 9, 350, 2, 0),
-(16, '2022-06-25', '2022-07-07', '2022-07-12', 3, 2, 5, 580, 1, 0),
+(14, '2022-06-15', '2022-06-30', '2022-07-10', 3, 2, 6, 500, 11, 0),
+(15, '2022-06-29', '2022-07-05', '2022-07-10', 2, 12, 9, 350, 10, 0),
+(16, '2022-06-25', '2022-07-07', '2022-07-12', 3, 2, 5, 580, 15, 0),
 (17, '2022-06-27', '2022-07-08', '2022-07-14', 1, 2, 5, 350, 2, 0),
-(18, '2022-06-24', '2022-07-03', '2022-07-08', 3, 1, 7, 350, 3, 0),
+(18, '2022-06-24', '2022-07-03', '2022-07-08', 3, 4, 7, 350, 3, 0),
 (19, '2022-06-22', '2022-07-01', '2022-07-05', 2, 1, 4, 200, 2, 0),
 (20, '2022-06-30', '2022-07-09', '2022-07-13', 2, 1, 5, 560, 1, 0),
 (21, '2022-07-01', '2022-07-07', '2022-07-13', 3, 0, 7, 250, 8, 0),
@@ -133,8 +127,8 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 (28, '2022-06-28', '2022-07-08', '2022-07-14', 3, 0, 6, 350, 5, 0),
 (29, '2022-06-28', '2022-07-10', '2022-07-16', 2, 1, 6, 0, 6, 0),
 (30, '2022-06-29', '2022-07-09', '2022-07-14', 2, 0, 5, 300, 6, 0),
-(31, '2022-06-25', '2022-06-30', '2022-07-02', 2, 2, 6, 350, 6, 0),
-(32, '2022-06-27', '2022-07-04', '2022-07-09', 2, 1, 4, 300, 7, 0),
+(31, '2022-06-25', '2022-06-30', '2022-07-02', 2, 4, 6, 350, 6, 0),
+(32, '2022-06-27', '2022-07-04', '2022-07-09', 2, 3, 4, 300, 7, 0),
 (33, '2022-07-01', '2022-07-09', '2022-07-15', 3, 2, 6, 250, 8, 0),
 (34, '2022-07-02', '2022-07-16', '2022-07-19', 3, 2, 7, 350, 9, 0),
 (35, '2022-07-02', '2022-07-12', '2022-07-18', 3, 1, 6, 350, 9, 0),
@@ -148,7 +142,7 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 (43, '2022-07-04', '2022-07-14', '2022-07-20', 2, 0, 5, 300, 1, 0),
 (44, '2022-07-01', '2022-07-10', '2022-07-15', 3, 1, 8, 400, 5, 0),
 (45, '2022-07-02', '2022-07-19', '2022-07-23', 2, 0, 3, 350, 6, 0),
-(46, '2022-06-27', '2022-07-09', '2022-07-13', 3, 5, 3, 300, 2, 1),
+(46, '2022-06-27', '2022-07-09', '2022-07-13', 3, 5, 3, 300, 12, 1),
 (47, '2022-06-28', '2022-07-07', '2022-07-16', 1, 5, 3, 550, 1, 1),
 (48, '2022-06-29', '2022-07-08', '2022-07-11', 3, 0, 0, 550, 1, 0),
 (49, '2022-06-29', '2022-07-07', '2022-07-19', 1, 0, 4, 300, 6, 0),
@@ -159,7 +153,8 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 (54, '2022-07-04', '2022-07-14', '2022-07-20', 3, 0, 5, 400, 7, 0),
 (55, '2022-07-01', '2022-07-11', '2022-07-15', 3, 0, 5, 450, 8, 0),
 (56, '2022-07-03', '2022-07-16', '2022-07-22', 2, 0, 6, 400, 9, 0),
-(57, '2022-07-06', '2022-07-12', '2022-07-21', 2, 0, 3, 300, 10, 0);
+(57, '2022-07-06', '2022-07-12', '2022-07-21', 2, 0, 3, 300, 10, 0),
+(58, '2021-06-23', '2022-07-21', '2022-08-17', 2, 2, 4, 400, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -233,7 +228,7 @@ CREATE TABLE `orders` (
   `orderlist_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
   `groups_id` int(30) NOT NULL,
-  `payable` int(30) NOT NULL DEFAULT '0'
+  `payable` int(30) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -307,9 +302,8 @@ INSERT INTO `shop` (`id`, `name`, `account`, `password`, `phone`, `address`, `de
 (10, '點水樓', 'DianShuiLou@test.com', '123456', '03-222-7979', '338桃園市蘆竹區中正路1號5樓', '主打江南料理、點心，菜系遼闊又精緻，\r\n包含了杭幫、蘇幫、揚幫、滬幫、甬幫等菜\r\n式名餚。 目前已有多家分店。 南京店、\r\n懷寧店的空間尤其值得稱道，名家書畫、\r\n骨董藝品、木雕窗花和室內裝潢造景，都頗有品味。', '/shopImg/DianShuiLou.jpg', '/shopBanner/DianShuiLou.jpg'),
 (11, '肯德基 桃園', 'kfcclub@test.com', '123456', '03-336-0860', '330桃園市桃園區中山路444號446號', '肯德基是源自美國的速食連鎖店， 總部設於肯塔基州路易維爾市，以炸雞為主力產品。', '/shopImg/kfc.jpg', '/shopBanner/kfc.jpg'),
 (12, '漢來海港', 'Harbour@test.com', '123456', '07-412-8068', '338桃園市蘆竹區南崁路一段112號6樓', '1995年漢來美食在南台灣高雄隆重誕生，\n擁有專業的廚師與服務團隊、深厚的國際\n飯店及美食集團經營管理，堅持在地與優\n質進口食材，提供多元美食料理，以及最\n佳品質的專業服務。', '/shopImg/Harbour.jpg', '/shopBanner/Harbour.jpg'),
-(13, 'NINI 尼尼義大利餐廳', 'NINI@test.com', '123456', '03-222-3271', '桃園市蘆竹區南崁路一段112號', 'NINI《NATURAL自然、INITIAL獨創、NEAT純淨、IMPRESSIVE感動》我們相信用好的食材與料理方式，就能對自我和環境產生正向的改變；透過好的用餐環境，讓顧客們和我們一樣愛上這樣的生活方式。', '/shopImg/DinTaiFung.jpg', '/shopBanner/DinTaiFung.jpg'),
-(14, '王品牛排', 'wowprime@test.com', '123456', '03-356-1887', '330桃園市桃園區同德五街69號3F', '台灣經典牛排，最多華人肯定牛排餐廳，\r\n一頭牛，僅供6客王品牛小排，\r\n新鮮蔬果與特殊佐料醃浸2天2夜，\r\n經歷250℃高溫，慢火烘烤1.5小時，\r\n完美展現經典牛排的香嫩風華', '/shopImg/Wowprime.jpg', '/shopBanner/Wowprime.jpg'),
-(92, '123', '12@ee', '123456', '1123', '1234', '233tgtgfg', '/shopImg/DianShuiLou.jpg', '/shopBanner/DianShuiLou.jpg');
+(13, '尼尼義大利餐廳', 'NINI@test.com', '123456', '03-222-3271', '桃園市蘆竹區南崁路一段112號', 'NINI《NATURAL自然、INITIAL獨創、NEAT純淨、IMPRESSIVE感動》我們相信用好的食材與料理方式，就能對自我和環境產生正向的改變；透過好的用餐環境，讓顧客們和我們一樣愛上這樣的生活方式。', '/shopImg/NINI.jpg', '/shopBanner/NINI.jpg'),
+(14, '王品牛排', 'wowprime@test.com', '123456', '03-356-1887', '330桃園市桃園區同德五街69號3F', '台灣經典牛排，最多華人肯定牛排餐廳，\r\n一頭牛，僅供6客王品牛小排，\r\n新鮮蔬果與特殊佐料醃浸2天2夜，\r\n經歷250℃高溫，慢火烘烤1.5小時，\r\n完美展現經典牛排的香嫩風華', '/shopImg/Wowprime.jpg', '/shopBanner/Wowprime.jpg');
 
 -- --------------------------------------------------------
 
@@ -432,8 +426,8 @@ CREATE TABLE `user` (
   `phone` varchar(100) NOT NULL,
   `bir` date NOT NULL,
   `mail` varchar(30) NOT NULL,
-  `img` int(1) UNSIGNED NOT NULL DEFAULT '1',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `img` int(1) UNSIGNED NOT NULL DEFAULT 1,
+  `level` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `create_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -469,7 +463,7 @@ CREATE TABLE `user_and_coupon` (
   `id` int(30) NOT NULL,
   `coupon_id` int(30) NOT NULL,
   `user_id` int(30) NOT NULL,
-  `valid` tinyint(2) NOT NULL DEFAULT '1'
+  `valid` tinyint(2) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -622,7 +616,7 @@ ALTER TABLE `dish`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups_and_dish`
@@ -684,7 +678,3 @@ ALTER TABLE `user_and_coupon`
 ALTER TABLE `user_shop`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
