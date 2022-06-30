@@ -10,6 +10,7 @@ import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link, useHistory } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const ReserveCart = (props) => {
   const history = useHistory()
@@ -23,22 +24,32 @@ const ReserveCart = (props) => {
   const [selectCou, setSelectCou] = useState(0)
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
+  const location = useLocation()
+
+  const gotoId = location.state.groupId
+  const gotoStep = location.state.step
+
+  const [goStep, setGoStep] = useState(gotoStep)
 
   useEffect(() => {
-    fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
-      .then((res) => res.json())
-      .then((res) => {
-        /*接到response data後要做的事情*/
-        if (res.result.length === 0) {
-          setStep(0)
-        } else {
-          setStep(1)
-        }
-      })
-      .catch((e) => {
-        /*發生錯誤時要做的事情*/
-        console.log(e)
-      })
+    if (goStep === undefined) {
+      fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
+        .then((res) => res.json())
+        .then((res) => {
+          /*接到response data後要做的事情*/
+          if (res.result.length === 0) {
+            setStep(0)
+          } else {
+            setStep(1)
+          }
+        })
+        .catch((e) => {
+          /*發生錯誤時要做的事情*/
+          console.log(e)
+        })
+    } else {
+      setStep(4)
+    }
   }, [])
 
   // reserveList的checkbox
@@ -207,7 +218,7 @@ const ReserveCart = (props) => {
         )}
         {step === 4 ? (
           <>
-            <PayList couponSelect={handleCouponProps} />
+            <PayList couponSelect={handleCouponProps} gotoId={gotoId} />
             <div className="d-flex justify-content-center mb-5">
               <div className="d-flex justify-content-around w-75">
                 <a

@@ -76,7 +76,7 @@ router.get('/paylist', async (req, res, next) => {
   const payGroup = req.query.payGroup;
   const userID = req.query.userID;
   let [data] = await pool.execute(
-    `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.groups_id=${payGroup}`
+    `SELECT * FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id=${userID} AND orders.id=${payGroup}`
   );
   res.json({ result: data });
 });

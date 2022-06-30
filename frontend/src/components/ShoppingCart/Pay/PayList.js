@@ -1,11 +1,14 @@
 import Header from '../../Header/Header'
 import { useState, useEffect } from 'react'
-import { API_URL } from '../../../utils/config'
+import { API_URL, IMAGE_URL } from '../../../utils/config'
 import axios from 'axios'
 
 function PayList(props) {
+  console.log('我要', props)
+  const goGroup = props.gotoId
+
   //暫時抓會員要付款的團單編號
-  localStorage.setItem('payGroup', 2)
+  localStorage.setItem('payGroup', goGroup)
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
@@ -24,7 +27,6 @@ function PayList(props) {
       .then((res) => res.json())
       .then((res) => {
         setData(res.result[0])
-        //console.log(data)
       })
       .catch((e) => {
         /*發生錯誤時要做的事情*/
@@ -85,7 +87,7 @@ function PayList(props) {
                 <td>
                   <img
                     style={{ width: '90px' }}
-                    src={require('../../../image/shoppingCart/dSquare.png')}
+                    src={`${IMAGE_URL}${data.img}`}
                     alt=""
                   />
                 </td>
@@ -146,7 +148,6 @@ function PayList(props) {
                 <h6>NT$2080</h6>
               </div>
             </div>
-            {/* button */}
           </div>
         </div>
       </div>
