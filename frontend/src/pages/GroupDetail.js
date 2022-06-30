@@ -9,6 +9,7 @@ import dateCountdown from 'date-countdown'
 import { useLogin } from '../context/LoginStatus'
 import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { BsCaretRightSquare } from 'react-icons/bs'
 
 function GroupDetail() {
   const { member } = useLogin()
@@ -54,10 +55,19 @@ function GroupDetail() {
                       </div>
                     </div>
                     <div className="col-9 mb-5">
-                      <h4 className="mt-4">{v.name}</h4>
+                      <div className="d-flex">
+                        <h4 className="mt-4">{v.name}</h4>
+                      </div>
                       <h5 className="mt-4 fw-normal">{v.address}</h5>
                       <h5 className="fw-normal">{v.phone}</h5>
+                      <Link to={`/shopDetail/${v.shop_id}`}>
+                        <div className="d-flex mt-1 ">
+                          <BsCaretRightSquare className="mt-4 point" />
+                          <p className="mt-4">前往店家</p>
+                        </div>
+                      </Link>
                     </div>
+
                     <hr />
                     <h5 className="mt-4 fw-normal">{v.description}</h5>
                   </div>

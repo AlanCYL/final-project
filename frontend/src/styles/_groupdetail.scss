@@ -30,6 +30,13 @@
         border: none;
     }
 
+    .point {
+        cursor: pointer;
+    }
+
+    .point:hover {
+        color:#1E2188
+    }
 
 
     .nav-pills {
