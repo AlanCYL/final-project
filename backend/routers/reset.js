@@ -4,6 +4,7 @@ const router = express.Router();
 //db連線模組
 const pool = require('../utils/db');
 
+//寄信模組
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -17,7 +18,9 @@ const transporter = nodemailer.createTransport({
 // /api/reset/
 router.get('/', async (req, res, next) => {
   const json = req.query.mail;
+  console.log('json', json);
   const mail = JSON.parse(json).mail;
+  console.log('mail', mail);
   let [data] = await pool.execute('SELECT mail FROM user WHERE mail = ?', [mail]);
   if (data.length === 0) {
     // 這個 email 或 身分證字號沒有註冊過

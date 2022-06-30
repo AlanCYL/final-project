@@ -80,7 +80,7 @@ app.use('/api/coupon', coupon);
 const favorite = require('./routers/favorite');
 app.use('/api/favorite', favorite);
 
-//favorite
+//booking
 const booking = require('./routers/booking');
 app.use('/api/booking', booking);
 

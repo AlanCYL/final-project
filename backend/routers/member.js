@@ -95,6 +95,7 @@ router.post('/resetPassword', async (req, res, next) => {
 // /api/member/reset
 router.get('/reset', async (req, res, next) => {
   const mail = req.query.mail;
+  console.log(mail);
   let [userName] = await pool.execute(`SELECT name FROM user WHERE mail = ?`, [mail]);
 
   res.json({ result: userName });

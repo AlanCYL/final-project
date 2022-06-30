@@ -15,9 +15,7 @@ const Login = (props) => {
   const history = useHistory()
 
   //忘記密碼
-  const [mail, setMail] = useState({
-    mail: '',
-  })
+  const [mail, setMail] = useState('')
   function handleMail(e) {
     setMail({ ...mail, [e.target.name]: e.target.value })
   }
