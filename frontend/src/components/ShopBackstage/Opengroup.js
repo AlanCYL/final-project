@@ -13,7 +13,7 @@ const Opengroup = (props) => {
   const shopID = localStorage.getItem('shopID')
   // console.log(props)
   const { data } = props
-  const { setCart } = useShoppingCartContext()
+  const { cart, setCart } = useShoppingCartContext()
 
   // const goPath = useHistory()
   const [group, setGroup] = useState({
@@ -27,19 +27,22 @@ const Opengroup = (props) => {
   })
   // const checkList = ['小籠包', '酸辣湯', '炒飯', '炒手']
   const [checkList, setCheckList] = useState([])
+
   useEffect(() => {
+    setCart(true)
     fetch(`${API_URL}/shopbackstage/checklist?shopID=${shopID}`, {
       method: 'GET',
     })
       .then((res) => res.json())
       .then((res) => {
         setCheckList(res.result)
+        setCart(false)
       })
       .catch((e) => {
         /*發生錯誤時要做的事情*/
         console.log(e)
       })
-  }, [])
+  }, [cart])
 
   const [dish, setDish] = useState([])
 
@@ -56,6 +59,7 @@ const Opengroup = (props) => {
   }
 
   async function handleSubmit(e) {
+    setCart(false)
     e.preventDefault()
     try {
       const params = group

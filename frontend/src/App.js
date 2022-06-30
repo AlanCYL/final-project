@@ -59,7 +59,7 @@ function App() {
 
   //切換Nav的會員中心首頁連向何處
   const [active, setActive] = useState('basic')
-  const [cart, setCart] = useState(true)
+  const [cart, setCart] = useState(false)
 
   return (
     <LoginContext.Provider

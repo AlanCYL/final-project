@@ -23,6 +23,7 @@ const OpenDish = (props) => {
   }
 
   async function dishSubmit(e) {
+    setCart(false)
     e.preventDefault()
     try {
       // const params = upDish
