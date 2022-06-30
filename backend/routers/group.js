@@ -63,6 +63,24 @@ router.get('/', async (request, response, next) => {
   });
 });
 
+//開團詳細頁(菜色)
+router.get('/groupdish', async (req, res, next) => {
+  const groupId = req.query.groupId;
+  let data = await pool.execute(
+    `SELECT dish.name FROM groups JOIN groups_and_dish ON groups.id = groups_and_dish.groups_id JOIN dish ON groups_and_dish.dish_id = dish.id WHERE groups.id = ${groupId}`
+  );
+  console.log(data);
+  res.json({ result: data });
+});
+
+//開團詳細頁(團單內容)
+router.get('/grouplist', async (req, res, next) => {
+  const groupId = req.query.groupId;
+  let data = await pool.execute(`SELECT * FROM groups WHERE groups.id = ${groupId}`);
+  console.log(data);
+  res.json({ result: data });
+});
+
 //TODO: 取得單一 shop 詳細頁
 router.get('/:groupId', async (request, response, next) => {
   let [data] = await pool.execute(
@@ -71,7 +89,6 @@ router.get('/:groupId', async (request, response, next) => {
   );
   response.json(data);
 });
-
 module.exports = router;
 
 //sql 加上type
