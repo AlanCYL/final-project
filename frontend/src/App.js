@@ -94,7 +94,7 @@ function App() {
           <Route path="/groupDetail/:groupId">
             <GroupDetail />
           </Route>
-          <Route path="/resetPassword">
+          <Route path="/resetPassword/:mail">
             <ResetPassword />
           </Route>
           <Route path="/shoppingCart">

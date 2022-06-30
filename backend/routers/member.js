@@ -86,4 +86,17 @@ router.post('/update', async (req, res, next) => {
   res.json({ result: '更新資料成功' });
 });
 
+// /api/member/resetPassword
+router.post('/resetPassword', async (req, res, next) => {
+  await pool.execute('UPDATE user SET password = ? WHERE mail = ?', [req.body.password, req.body.mail]);
+  res.json({ result: '密碼重設成功，跳轉至登入頁面' });
+});
+
+// /api/member/reset
+router.get('/reset', async (req, res, next) => {
+  let [userName] = await pool.execute(`SELECT name FROM user WHERE mail = ?`, [req.query.mail]);
+
+  res.json({ result: userName });
+});
+
 module.exports = router;

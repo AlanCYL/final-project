@@ -11,6 +11,56 @@ import Swal from 'sweetalert2'
 import { useLogin } from '../../context/LoginStatus'
 
 const Login = (props) => {
+  //移動頁面
+  const history = useHistory()
+
+  //忘記密碼
+  const [mail, setMail] = useState({
+    mail: '',
+  })
+  function handleMail(e) {
+    setMail({ ...mail, [e.target.name]: e.target.value })
+  }
+
+  //送出忘記密碼
+  const handleMailReset = async () => {
+    try {
+      let response = await axios.get(`${API_URL}/reset`, {
+        params: {
+          mail: mail,
+        },
+      })
+      await Swal.fire({
+        icon: 'success',
+        title: response.data.result,
+        showConfirmButton: false,
+        timer: 2000,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      setShow(false)
+    } catch (e) {
+      Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
+      })
+      console.log(e.response.data.error)
+      return
+    }
+  }
+
   const { isLoginPage, setIsLoginPage } = props
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
@@ -18,8 +68,6 @@ const Login = (props) => {
   const [validated, setValidated] = useState(false)
 
   const { member, setMember, setIsLogin, isLogin } = useLogin()
-
-  const history = useHistory()
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value })
@@ -47,7 +95,6 @@ const Login = (props) => {
       return
     }
     setIsLogin(true)
-    // console.log('123', isLogin)
     try {
       let response = await axios.post(`${API_URL}/member/login`, member, {
         withCredentials: true,
@@ -210,7 +257,10 @@ const Login = (props) => {
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
+                name="mail"
+                value={mail.mail}
                 autoFocus
+                onChange={handleMail}
               />
             </Form.Group>
           </Modal.Body>
@@ -218,7 +268,7 @@ const Login = (props) => {
             <Button
               className="text-white"
               variant="primary"
-              onClick={handleClose}
+              onClick={handleMailReset}
             >
               送出
             </Button>

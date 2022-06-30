@@ -84,6 +84,10 @@ app.use('/api/favorite', favorite);
 const booking = require('./routers/booking');
 app.use('/api/booking', booking);
 
+//reset
+const reset = require('./routers/reset');
+app.use('/api/reset', reset);
+
 //===============================================================以下是錯誤處理
 //404
 app.use((req, res, next) => {
