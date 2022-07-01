@@ -8,10 +8,13 @@ import { API_URL, IMAGE_URL } from '../../../utils/config'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import dateCountdown from 'date-countdown'
+import { useHistory } from 'react-router-dom'
 
 const AllBookingCard = () => {
   const { member } = useLogin()
   const [booking, setBooking] = useState([])
+  let history = useHistory()
+
   useEffect(() => {
     ;(async () => {
       try {
@@ -26,6 +29,14 @@ const AllBookingCard = () => {
       }
     })()
   }, [member.id, booking])
+
+  //
+  function goToPage(id) {
+    history.push({
+      pathname: '/ShoppingCart',
+      state: { groupId: `${id}`, step: 4 },
+    })
+  }
   return (
     <>
       <Container className="my-3">
@@ -75,7 +86,17 @@ const AllBookingCard = () => {
                           0: (
                             <Button variant="outline-warning">查看訂單</Button>
                           ),
-                          1: <Button variant="outline-warning">去付款</Button>,
+                          1: (
+                            <Button
+                              variant="outline-warning"
+                              onClick={() => {
+                                goToPage(v.id)
+                                window.scrollTo(0, 0)
+                              }}
+                            >
+                              去付款
+                            </Button>
+                          ),
                           2: (
                             <Button variant="outline-warning">查看訂單</Button>
                           ),
