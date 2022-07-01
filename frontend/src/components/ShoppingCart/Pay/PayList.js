@@ -6,7 +6,7 @@ import axios from 'axios'
 function PayList(props) {
   const goGroup = props.gotoId
 
-  //暫時抓會員要付款的團單編號
+  //暫時抓會員要付款的訂單編號
   localStorage.setItem('payGroup', goGroup)
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
@@ -17,6 +17,8 @@ function PayList(props) {
   const [getCou, setGetCou] = useState('')
   //useCoupon data
   const [couData, setCouData] = useState({ price: 0 })
+  //存結帳後最終價格
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     getCoupon()
@@ -52,6 +54,8 @@ function PayList(props) {
     )
 
     setCouData(res.data.result[0])
+
+    setTotal(data.price - res.data.result[0].price)
   }
 
   function getEatTimeString() {
@@ -74,6 +78,10 @@ function PayList(props) {
   useEffect(() => {
     props.couponSelect(getCou)
   }, [getCou])
+
+  useEffect(() => {
+    props.finalTotal(total)
+  }, [total])
   return (
     <>
       <div className=" container my-6">
@@ -154,7 +162,7 @@ function PayList(props) {
               </div>
               <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                 <h6>總計：</h6>
-                <h6>NT${`${data.price}` - `${couData.price}`}</h6>
+                <h6>NT${total}</h6>
               </div>
             </div>
           </div>

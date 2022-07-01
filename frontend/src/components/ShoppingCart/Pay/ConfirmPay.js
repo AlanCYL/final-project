@@ -6,14 +6,12 @@ import { API_URL } from '../../../utils/config'
 import axios from 'axios'
 
 const ConfirmPay = (props) => {
-  const { selectCou } = props
+  const { selectCou, selectPri } = props
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
   const [data, setData] = useState({})
   //存放抓到的selectCou的詳細資料
   const [detail, setDetail] = useState({})
-  //存結帳後最終價格
-  const [finalPrice, setFinalPrice] = useState(0)
 
   useEffect(() => {
     fetch(
@@ -62,6 +60,7 @@ const ConfirmPay = (props) => {
       return '已成團'
     }
   }
+
   return (
     <>
       <div className=" container my-6">
@@ -151,10 +150,7 @@ const ConfirmPay = (props) => {
                       </div>
                       <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                         <h6>總計：</h6>
-                        <h6>
-                          NT${`${data.price}` - `${detail.price}`}{' '}
-                          {/* {setFinalPrice(`${data.price}` - `${detail.price}`)} */}
-                        </h6>
+                        <h6>NT${selectPri} </h6>
                       </div>
                     </div>
                   </Dropdown.Item>
