@@ -25,14 +25,17 @@ const ReserveCart = (props) => {
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
   const location = useLocation()
+  let gotoId = ''
+  let gotoStep = ''
+  let [goStep, setGoStep] = useState(gotoStep)
 
-  const gotoId = location.state.groupId
-  const gotoStep = location.state.step
-
-  const [goStep, setGoStep] = useState(gotoStep)
+  if (location.state !== undefined && location.state.gotoId !== undefined) {
+    gotoId = location.state.groupId
+    gotoStep = location.state.step
+  }
 
   useEffect(() => {
-    if (goStep === undefined) {
+    if (goStep === '') {
       fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
         .then((res) => res.json())
         .then((res) => {
