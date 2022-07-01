@@ -21,7 +21,7 @@ import { ShoppingCartContext } from './context/ShoppingCartContext'
 import { ShoppingListContext } from './context/ShoppingListContext'
 
 import ResetPassword from './pages/ResetPassword'
-
+import ScrollToTOP from './components/ScrollToTop'
 function App() {
   //存登入會員的資料
   const [member, setMember] = useState({
@@ -77,6 +77,7 @@ function App() {
     >
       <ActivePanelContext.Provider value={{ active, setActive }}>
         {/* <Router> */}
+        <ScrollToTOP />
         <Nav />
         <Switch>
           <Route exact path="/">
