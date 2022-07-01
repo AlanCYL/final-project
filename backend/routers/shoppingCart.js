@@ -38,7 +38,7 @@ router.post('/confirmreservelist', async (req, res, next) => {
 router.post('/finishre', async (req, res, next) => {
   const { userID, groups } = req.body;
   let [data] = await pool.execute(
-    `SELECT orders.*, groups.*, shop.name, shop.img FROM orders JOIN groups ON orders.groups_id=groups.id JOIN shop ON groups.shop_id = shop.id where groups.id in (${groups}) and user_id in (${userID})`
+    `SELECT orders.*, groups.eating_date, groups.eating_time, groups.price, groups.established, shop.name, shop.img FROM orders JOIN groups ON orders.groups_id=groups.id JOIN shop ON groups.shop_id = shop.id where groups.id in (${groups}) and user_id in (${userID})`
   );
   //console.log(data);
   res.json({ result: data });
@@ -88,6 +88,17 @@ router.get('/cou', async (req, res, next) => {
   );
   res.json({ result: data });
 });
+//get coupon price
+router.get('/couprice', async (req, res, next) => {
+  const couID = req.query.couID;
+  const userID = req.query.userID;
+
+  let [data, fields] = await pool.execute(
+    `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID} AND user_and_coupon.id =${couID}`
+  );
+  res.json({ result: data });
+});
+
 //confirmUpdate
 router.post('/updatecoupay', async (req, res, next) => {
   // console.log('呵呵呵', req.body);
