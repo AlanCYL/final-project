@@ -60,77 +60,12 @@ function GroupPages() {
 
   return (
     <>
-      {/* 篩選 */}
+      {/* 圖片 */}
       <div className="container-fluid bg-secondary group-fliter">
         <div className="row filter-all">
           <div className="col-6 d-none d-md-block ">
             <div className=" pic ps-3 ms-3 ">
               <img className="img-fluid mt-5 ms-5" src={fliterpic} alt="" />
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="ms-2 mt-6 ">
-              <div className="bg-primary filter-input">
-                <form>
-                  <div className="d-flex flex-column justify-content-center align-items-center py-3">
-                    <div className="bg-white bg mt-4 px-2">
-                      <div className="px-1 py-3">
-                        {cate.map((v, i) => {
-                          return (
-                            <div
-                              key={i}
-                              className="form-check form-check-inline"
-                            >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                defaultValue="option1"
-                              />
-                              <label className="form-check-label" htmlFor="">
-                                {v}
-                              </label>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                    <div className="bg-white bg mt-4">
-                      <div className="px-5 py-3 d-flex ">
-                        <div className="input-control">
-                          <label>用餐日期</label>
-                          <input type="date" className="form-control" />
-                        </div>
-                        <div className="input-control ms-6 ">
-                          <label>用餐時間</label>
-                          <select className="form-control">
-                            <option selected defaultValue="">
-                              午餐
-                            </option>
-                            <option defaultValue="">下午茶</option>
-                            <option selected defaultValue="">
-                              晚餐
-                            </option>
-                          </select>
-                        </div>
-                        <div className="input-control ms-6 ">
-                          <label>開團狀況</label>
-                          <select className="form-control">
-                            <option selected defaultValue="">
-                              確定開團
-                            </option>
-                            <option defaultValue="">開團中</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="search">
-                      <button type="button" className="btn btn-info mt-4 w-100">
-                        搜尋
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
             </div>
           </div>
         </div>

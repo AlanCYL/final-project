@@ -1,5 +1,5 @@
 import React from 'react'
-import bannertest02 from '../image/groups/bannertest02.jpg'
+import banner01 from '../image/groups/banner01.jpg'
 import FamousGroups from '../components/Group/FamousGroups'
 import Recommend from '../components/Group/Recommend'
 import GroupPages from '../components/Group/GroupPages'
@@ -11,18 +11,14 @@ function Groups() {
       {/* 輪播banner */}
       <Carousel className="mb-5">
         <Carousel.Item>
-          <img className="d-block w-100" src={bannertest02} alt="First slide" />
+          <img className="d-block w-100" src={banner01} alt="First slide" />
           {/* <Carousel.Caption>
             <h3>First slide label</h3>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={bannertest02}
-            alt="Second slide"
-          />
+          <img className="d-block w-100" src={banner01} alt="Second slide" />
 
           {/* <Carousel.Caption>
             <h3>Second slide label</h3>
@@ -30,7 +26,7 @@ function Groups() {
           </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={bannertest02} alt="Third slide" />
+          <img className="d-block w-100" src={banner01} alt="Third slide" />
 
           {/* <Carousel.Caption>
             <h3>Third slide label</h3>
