@@ -14,12 +14,12 @@ router.get('/', async (request, response, next) => {
   //全部資料筆數
   const total = data.length;
   console.log('總共幾筆', total);
-  console.log(
-    '最後日期',
-    data.map((v, i) => {
-      return v.end_time;
-    })
-  );
+  // console.log(
+  //   '最後日期',
+  //   data.map((v, i) => {
+  //     return v.end_time;
+  //   })
+  // );
   let todayDate = new Date();
   console.log('今天的日期', todayDate);
 
@@ -28,7 +28,7 @@ router.get('/', async (request, response, next) => {
   console.log('目前在第幾頁', page);
 
   //計算總共有幾頁
-  const perPage = 8;
+  const perPage = 12;
   const lastPage = Math.ceil(total / perPage);
   console.log('共幾頁', lastPage);
 
