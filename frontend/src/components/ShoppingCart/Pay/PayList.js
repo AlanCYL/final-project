@@ -4,7 +4,6 @@ import { API_URL, IMAGE_URL } from '../../../utils/config'
 import axios from 'axios'
 
 function PayList(props) {
-  console.log('我要', props)
   const goGroup = props.gotoId
 
   //暫時抓會員要付款的團單編號
@@ -15,9 +14,12 @@ function PayList(props) {
   //存放這個使用者有哪些優惠卷
   const [coupon, setCoupon] = useState([])
   // 選擇想使用的coupon
-  const [getCou, setGetCou] = useState({})
+  const [getCou, setGetCou] = useState('')
+  //useCoupon data
+  const [couData, setCouData] = useState({ price: 0 })
 
   useEffect(() => {
+    getCoupon()
     fetch(
       `${API_URL}/shoppingcart/paylist?payGroup=${payGroup}&userID=${userID}`,
       {
@@ -40,6 +42,16 @@ function PayList(props) {
     //console.log(res.data.result)
 
     setCoupon(res.data.result)
+  }
+  //coupon price
+  async function getCouPrice(id) {
+    setGetCou(id)
+
+    const res = await axios.get(
+      `${API_URL}/shoppingCart/couprice?couID=${id}&userID=${userID}`
+    )
+
+    setCouData(res.data.result[0])
   }
 
   function getEatTimeString() {
@@ -106,7 +118,7 @@ function PayList(props) {
 
             <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
               <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
-                <h6>商品金額：{data.price}</h6>
+                <h6>商品金額：</h6>
                 <h6>NT${data.price}</h6>
               </div>
 
@@ -124,14 +136,11 @@ function PayList(props) {
                   class="form-select form-select-sm"
                   aria-label=".form-select-sm example"
                   defaultValue={getCou}
-                  onClick={() => {
-                    getCoupon()
-                  }}
                   onChange={(e) => {
-                    setGetCou(e.target.value)
+                    getCouPrice(e.target.value)
                   }}
                 >
-                  <option disabled selected>
+                  <option value={0} disabled selected>
                     請選擇折價卷
                   </option>
                   {/* map */}
@@ -141,11 +150,11 @@ function PayList(props) {
                 </select>
               </div>
               <div className="d-flex justify-content-end mb-3">
-                <h6>NT$-{}</h6>
+                <h6>NT$-{couData.price}</h6>
               </div>
               <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
                 <h6>總計：</h6>
-                <h6>NT$2080</h6>
+                <h6>NT${`${data.price}` - `${couData.price}`}</h6>
               </div>
             </div>
           </div>

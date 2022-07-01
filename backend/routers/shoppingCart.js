@@ -88,6 +88,17 @@ router.get('/cou', async (req, res, next) => {
   );
   res.json({ result: data });
 });
+//get coupon price
+router.get('/couprice', async (req, res, next) => {
+  const couID = req.query.couID;
+  const userID = req.query.userID;
+
+  let [data, fields] = await pool.execute(
+    `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID} AND user_and_coupon.id =${couID}`
+  );
+  res.json({ result: data });
+});
+
 //confirmUpdate
 router.post('/updatecoupay', async (req, res, next) => {
   // console.log('呵呵呵', req.body);
