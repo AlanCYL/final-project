@@ -9,11 +9,17 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import dateCountdown from 'date-countdown'
 import { useHistory } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal'
 
 const AllBookingCard = () => {
   const { member } = useLogin()
   const [booking, setBooking] = useState([])
   let history = useHistory()
+  //查看訂單使用Model顯示訂單資訊
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const [detail, setDetail] = useState({})
 
   useEffect(() => {
     ;(async () => {
@@ -30,12 +36,38 @@ const AllBookingCard = () => {
     })()
   }, [member.id, booking])
 
-  //
+  //去結帳（導頁）
   function goToPage(id) {
     history.push({
       pathname: '/ShoppingCart',
       state: { groupId: `${id}`, step: 4 },
     })
+  }
+  //查看訂單的資訊
+  async function WatchList(v) {
+    const userId = member.id
+    const watchId = v.id
+    let response = await axios.get(
+      `${API_URL}/booking/watchList?userId=${userId}&watchId=${watchId}`
+    )
+    setDetail(response.data.result[0])
+  }
+  //顯示是否成團/吃飯時間
+  function getEatTimeString() {
+    if (detail.eating_time === 1) {
+      return '午餐12:00'
+    } else if (detail.eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
+  function isEstablish() {
+    if (detail.established === 0) {
+      return '未成團'
+    } else {
+      return '已成團'
+    }
   }
   return (
     <>
@@ -84,7 +116,63 @@ const AllBookingCard = () => {
                       {
                         {
                           0: (
-                            <Button variant="outline-warning">查看訂單</Button>
+                            <>
+                              <Button
+                                variant="outline-warning"
+                                onClick={() => {
+                                  handleShow()
+                                  WatchList(v)
+                                }}
+                              >
+                                查看訂單
+                              </Button>
+                              <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                  <Modal.Title>訂位詳情資訊</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <h5 className="text-danger">
+                                    恭喜您，已訂位成功
+                                  </h5>
+                                  <table className="border border-secondary w-75 mx-auto mt-3">
+                                    <tr>
+                                      <th className="ps-4">訂單編號：</th>
+                                      <td className="py-3">{detail.id}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐日期：</th>
+                                      <td className="py-3">
+                                        {detail.eating_date}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐時間：</th>
+                                      <td className="py-3">
+                                        {getEatTimeString()}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">目前人數：</th>
+                                      <td className="py-3">
+                                        {detail.now_num}人
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">達成人數：</th>
+                                      <td className="py-3">
+                                        {detail.goal_num}人
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">是否成團：</th>
+                                      <td className="py-3 text-primary">
+                                        {isEstablish()}
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </Modal.Body>
+                              </Modal>
+                            </>
                           ),
                           1: (
                             <Button

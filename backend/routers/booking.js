@@ -18,9 +18,17 @@ router.get('/allBooking', async (req, res, next) => {
     item.push(element);
   }
 
-    // console.log(item);
-
   return res.json({ booking: item });
+});
+
+// /api/booking/watchList
+router.get('/watchList', async (req, res, next) => {
+  const userId = req.query.userId;
+  const watchId = req.query.watchId;
+  let [detail] = await pool.execute(
+    `SELECT orders.*, shop.name, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id =${userId} AND orders.id=${watchId}`
+  );
+  res.json({ result: detail });
 });
 
 // /api/booking/okBooking
