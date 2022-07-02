@@ -83,13 +83,7 @@ const AllBookingCard = () => {
       return '已成團'
     }
   }
-  function isEstablishPay() {
-    if (payDetail.established === 1) {
-      return '未成團'
-    } else {
-      return '已成團'
-    }
-  }
+
   return (
     <>
       <Container className="my-3">
@@ -159,6 +153,10 @@ const AllBookingCard = () => {
                                     <tr>
                                       <th className="ps-4">訂單編號：</th>
                                       <td className="py-3">{detail.id}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">參團店家：</th>
+                                      <td className="py-3">{detail.name}</td>
                                     </tr>
                                     <tr>
                                       <th className="ps-4">用餐日期：</th>
