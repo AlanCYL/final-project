@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { API_URL } from '../../../utils/config'
 import axios from 'axios'
+import Accordion from 'react-bootstrap/Accordion'
 
 const ConfirmPay = (props) => {
   const { selectCou, selectPri } = props
@@ -12,6 +13,14 @@ const ConfirmPay = (props) => {
   const [data, setData] = useState({})
   //存放抓到的selectCou的詳細資料
   const [detail, setDetail] = useState({})
+  //信用卡
+  const [card1, setCard1] = useState('xxxx')
+  const [card2, setCard2] = useState('xxxx')
+  const [card3, setCard3] = useState('xxxx')
+  const [card4, setCard4] = useState('xxxx')
+  const [cardDate, setCardDate] = useState('xx')
+  const [cardTime, setCardTime] = useState('xx')
+  const [cardSafe, setCardSafe] = useState('xxx')
 
   useEffect(() => {
     fetch(
@@ -66,7 +75,7 @@ const ConfirmPay = (props) => {
       <div className=" container my-6">
         <Header />
         <div className="d-flex justify-content-center">
-          <div>
+          <div className="w-75">
             <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
               <img
                 style={{ width: '500px' }}
@@ -77,89 +86,73 @@ const ConfirmPay = (props) => {
             </div>
             {/* List */}
             {/* dropdown */}
-            <Dropdown className="d-flex flex-column justify-content-center">
-              <div className="d-flex justify-content-center">
-                <Dropdown.Toggle
-                  id="dropdown-button-dark-example1"
-                  variant="secondary"
-                  className="w-100 fs-6 pb-0 mb-0 rounded-0 position-relative"
-                  style={{ height: '38px' }}
+            <Accordion defaultActiveKey="0" flush>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>總計1件商品</Accordion.Header>
+                {/* sale */}
+                <div
+                  className="bg-secondary p-4 w-100"
+                  style={{ marginTop: '-10px' }}
                 >
-                  總計1件商品
-                </Dropdown.Toggle>
-              </div>
+                  <div className="mb-4 w-100"></div>
+                  <tr className="d-flex justify-content-around align-items-center mb-4 pb-4 pt-4">
+                    <td>
+                      <img
+                        style={{ width: '90px' }}
+                        src={require('../../../image/shoppingCart/dSquare.png')}
+                        alt=""
+                      />
+                    </td>
+                    <td>
+                      <h6>{data.name}</h6>
+                      <h6>
+                        {data.eating_date} {getEatTimeString()}{' '}
+                      </h6>
+                    </td>
+                    {/* 已成團 */}
+                    <td>{isEstablish()}</td>
+                    <td>NT${data.price}</td>
+                  </tr>
+                </div>
+                <Accordion.Body className="p-0">
+                  <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
+                    <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
+                      <h6>商品金額：</h6>
+                      <h6>NT${data.price}</h6>
+                    </div>
 
-              {/* sale */}
-              <div
-                className="bg-secondary p-4 w-100"
-                style={{ marginTop: '-10px' }}
-              >
-                <div className="mb-4 w-100"></div>
-                <tr className="d-flex justify-content-around align-items-center mb-4 pb-4 pt-4">
-                  <td>
-                    <img
-                      style={{ width: '90px' }}
-                      src={require('../../../image/shoppingCart/dSquare.png')}
-                      alt=""
-                    />
-                  </td>
-                  <td>
-                    <h6>{data.name}</h6>
-                    <h6>
-                      {data.eating_date} {getEatTimeString()}{' '}
-                    </h6>
-                  </td>
-                  {/* 已成團 */}
-                  <td>{isEstablish()}</td>
-                  <td>NT${data.price}</td>
-                </tr>
-              </div>
+                    <div className="d-flex mb-2">
+                      <img
+                        style={({ width: '20px' }, { height: '20px' })}
+                        src={require('../../../image/shoppingCart/sale.png')}
+                        alt=""
+                      />
+                      <h6 className="ms-1">您所選擇的折價卷：</h6>
+                    </div>
 
-              <div style={{ inset: '202px 16px auto -96px' }}>
-                <Dropdown.Menu variant="secondary" className="w-100 py-0">
-                  <Dropdown.Item
-                    className="p-0 position-absolute"
-                    style={{ top: '193px' }}
-                  >
-                    <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
-                      <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
-                        <h6>商品金額：</h6>
-                        <h6>NT${data.price}</h6>
-                      </div>
-
-                      <div className="d-flex mb-2">
-                        <img
-                          style={({ width: '20px' }, { height: '20px' })}
-                          src={require('../../../image/shoppingCart/sale.png')}
-                          alt=""
-                        />
-                        <h6 className="ms-1">您所選擇的折價卷：</h6>
-                      </div>
-
-                      <div className="mb-3">
-                        <div
-                          className="w-100 h-25 bg-light text-start py-1 ps-3
+                    <div className="mb-3">
+                      <div
+                        className="w-100 h-25 bg-light text-start py-1 ps-3
                         "
-                          style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
-                        >
-                          <span className="text-danger">{detail.reason}</span>
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-end mb-3">
-                        <h6>NT$-{detail.price}</h6>
-                      </div>
-                      <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
-                        <h6>總計：</h6>
-                        <h6>NT${selectPri} </h6>
+                        style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
+                      >
+                        <span className="text-danger">{detail.reason}</span>
                       </div>
                     </div>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </div>
-            </Dropdown>
+                    <div className="d-flex justify-content-end mb-3">
+                      <h6>NT$-{detail.price}</h6>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
+                      <h6>總計：</h6>
+                      <h6>NT${selectPri} </h6>
+                    </div>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
 
             {/* information */}
-            <div className="bg-secondary" style={{ marginTop: '350px' }}>
+            <div className="bg-secondary" style={{ marginTop: '20px' }}>
               <h5 className="p-3">帳單資訊：</h5>
               <Form>
                 <Form.Group className="mb-3 d-flex mx-3" controlId="name">
@@ -167,7 +160,7 @@ const ConfirmPay = (props) => {
                   <Form.Control
                     className="w-75 me-6"
                     type="email"
-                    placeholder=""
+                    placeholder="請輸入完整名字"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex mx-3" controlId="phone">
@@ -175,7 +168,7 @@ const ConfirmPay = (props) => {
                   <Form.Control
                     className="w-75 me-6"
                     type="email"
-                    placeholder=""
+                    placeholder="請輸入電話號碼"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex mx-3" controlId="email">
@@ -183,7 +176,7 @@ const ConfirmPay = (props) => {
                   <Form.Control
                     className="w-75 me-6"
                     type="email"
-                    placeholder=""
+                    placeholder="請輸入電子郵件"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex mx-3" controlId="addr">
@@ -209,19 +202,15 @@ const ConfirmPay = (props) => {
                   </Form.Select>
                 </Form.Group>
                 <Form.Group
-                  className="mb-3 d-flex me-5 justify-content-center"
+                  className="mb-3 d-flex mx-3  ms-7  justify-content-center"
+                  style={{ paddingLeft: '14px' }}
                   controlId="address"
                 >
-                  <Form.Select
-                    aria-label="Default select example"
-                    className="w-50 mb-4"
-                    style={{ marginLeft: '22px' }}
-                  >
-                    <option>街道地址</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </Form.Select>
+                  <Form.Control
+                    className="w-75 mb-4"
+                    type="text"
+                    placeholder="街道,巷弄,門號,樓層"
+                  />
                 </Form.Group>
               </Form>
             </div>
@@ -261,14 +250,18 @@ const ConfirmPay = (props) => {
                         class="card__front-logo card__logo"
                         src={require('../../../image/shoppingCart/card/master.png')}
                       />
-                      <p class="card_numer">1234 5678 7890 6258</p>
+                      <p class="card_numer">
+                        {card1} {card2} {card3} {card4}
+                      </p>
                       <div class="card__space-75">
                         <span class="card__label">Card holder</span>
                         <p class="card__info">Unii </p>
                       </div>
                       <div class="card__space-25">
                         <span class="card__label">Expires</span>
-                        <p class="card__info">10/25</p>
+                        <p class="card__info">
+                          {cardDate}/{cardTime}
+                        </p>
                       </div>
                     </div>
 
@@ -276,7 +269,7 @@ const ConfirmPay = (props) => {
                       <div class="card__black-line"></div>
                       <div class="card__back-content">
                         <div class="card__secret">
-                          <p class="card__secret--last">450</p>
+                          <p class="card__secret--last">{cardSafe}</p>
                         </div>
 
                         <img
@@ -295,38 +288,73 @@ const ConfirmPay = (props) => {
                     className="credit-number mx-3"
                     type="text"
                     maxLength="4"
+                    onChange={(e) => {
+                      setCard1(e.target.value)
+                    }}
                   />
                   -
                   <input
                     className="credit-number mx-2"
                     type="text"
                     maxLength="4"
+                    onChange={(e) => {
+                      setCard2(e.target.value)
+                    }}
                   />
                   -
                   <input
                     className="credit-number mx-2"
                     type="text"
                     maxLength="4"
+                    onChange={(e) => {
+                      setCard3(e.target.value)
+                    }}
                   />
                   -
                   <input
                     className="credit-number mx-2"
                     type="text"
                     maxLength="4"
+                    onChange={(e) => {
+                      setCard4(e.target.value)
+                    }}
                   />
                 </div>
               </div>
               <div className="d-flex mt-5">
                 <h6>到期日期：</h6>
                 <div>
-                  <input className="credit-date mx-3" type="text" />月
-                  <input className="credit-date mx-3" type="text" />年
+                  <input
+                    className="credit-date mx-3"
+                    type="text"
+                    maxLength="2"
+                    onChange={(e) => {
+                      setCardDate(e.target.value)
+                    }}
+                  />
+                  月
+                  <input
+                    className="credit-date mx-3"
+                    type="text"
+                    maxLength="2"
+                    onChange={(e) => {
+                      setCardTime(e.target.value)
+                    }}
+                  />
+                  年
                 </div>
               </div>
               <div className="d-flex mt-5">
                 <h6>安全碼：</h6>
                 <div className="m-13">
-                  <input className="credit-date mx-4" type="text" />
+                  <input
+                    className="credit-date mx-4"
+                    type="text"
+                    maxLength="3"
+                    onChange={(e) => {
+                      setCardSafe(e.target.value)
+                    }}
+                  />
                   末三碼
                 </div>
               </div>
