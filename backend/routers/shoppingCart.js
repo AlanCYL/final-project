@@ -107,7 +107,7 @@ router.post('/updatecoupay', async (req, res, next) => {
   await pool.execute(
     `UPDATE orders JOIN user_and_coupon ON orders.user_id = user_and_coupon.user_id SET orders.payable=2, user_and_coupon.valid=1 WHERE orders.user_id=${user} and orders.id=${payGroup} and user_and_coupon.id=${selectCou}`
   );
-  await pool.execute(`INSERT INTO receipt (receipt.orders_id, receipt.total) VALUES (${selectPri}, ${payGroup})`);
+  await pool.execute(`INSERT INTO receipt (receipt.orders_id, receipt.total) VALUES (${payGroup}, ${selectPri})`);
 
   res.json({ result: 'OK' });
 });
@@ -115,6 +115,16 @@ router.post('/updatecoupay', async (req, res, next) => {
 router.get('/selectcou', async (req, res, next) => {
   const couID = req.query.couID;
   let [detail] = await pool.execute(`SELECT * FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_and_coupon.id=${couID}`);
+  res.json({ result: detail });
+});
+
+//finishlist
+router.get('/finishlist', async (req, res, next) => {
+  const payGroup = req.query.payGroup;
+  const userID = req.query.userID;
+  let [detail] = await pool.execute(
+    `SELECT orders.id, groups.*, shop.name, shop.img, receipt.total FROM orders JOIN groups ON orders.groups_id = groups.id JOIN shop ON groups.shop_id = shop.id JOIN receipt ON orders.id = receipt.orders_id WHERE orders.id=${payGroup} AND orders.user_id=${userID}`
+  );
   res.json({ result: detail });
 });
 
