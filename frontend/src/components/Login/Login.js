@@ -1,5 +1,5 @@
 import { Link, useHistory } from 'react-router-dom'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -114,8 +114,11 @@ const Login = (props) => {
         },
       })
       setMember({ ...member, id: response.data.member.id })
-      // setIsLogin(true)
-      // console.log('123', isLogin)
+      if (checked === true) {
+        setRememberMe()
+      } else {
+        removeRememberMe()
+      }
       history.push('/memberCenter')
     } catch (e) {
       console.log(e.response.data.error)
@@ -140,6 +143,34 @@ const Login = (props) => {
       return
     }
   }
+
+  const setRememberMe = (e) => {
+    // console.log(123)
+    localStorage.setItem('remember', JSON.stringify(member))
+  }
+  const removeRememberMe = (e) => {
+    // console.log(456)
+    localStorage.removeItem('remember', JSON.stringify(member))
+  }
+
+  const [checked, setChecked] = useState(false)
+
+  const remember = JSON.parse(localStorage.getItem('remember'))
+  console.log(remember)
+  const [rememberMember, setRememberMember] = useState({})
+  useEffect(() => {
+    let remember = JSON.parse(localStorage.getItem('remember'))
+    if (remember) {
+      setChecked(true)
+      // setRememberMember(remember)
+      setMember({
+        ...member,
+        identity_card: remember.identity_card,
+        password: remember.password,
+      })
+    }
+  }, [])
+
   return (
     <>
       <div className="d-flex text-center align-items-center">
@@ -177,6 +208,7 @@ const Login = (props) => {
                       type="text"
                       placeholder="身分證字號"
                       name="identity_card"
+                      defaultValue={member.identity_card}
                       value={member.identity_card}
                       onChange={handleChange}
                     />
@@ -196,6 +228,7 @@ const Login = (props) => {
                       type="password"
                       placeholder="會員密碼"
                       name="password"
+                      defaultValue={member.password}
                       value={member.password}
                       onChange={handleChange}
                     />
@@ -213,7 +246,10 @@ const Login = (props) => {
                       className="form-check-input"
                       type="checkbox"
                       id="rememberPasswordCheck"
-                      defaultChecked
+                      checked={checked}
+                      onChange={() => {
+                        setChecked(!checked)
+                      }}
                     />
                     記住我
                   </label>
