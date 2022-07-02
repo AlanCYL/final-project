@@ -22,7 +22,7 @@ const ReserveCart = (props) => {
   const user = localStorage.getItem('userID')
   //要把paylist選到的couponID傳到ConfirmPay
   const [selectCou, setSelectCou] = useState(0)
-  //要把paylist選到的couponID傳到ConfirmPay
+  //要把paylist選到的總價格傳到ConfirmPay
   const [selectPri, setSelectPri] = useState(0)
 
   //要確認結帳的payGroup
@@ -94,7 +94,8 @@ const ReserveCart = (props) => {
   async function updateApi() {
     // console.log(selectCou)
     const param = {
-      selectCou: selectCou.id,
+      selectCou: selectCou,
+      selectPri: selectPri,
       payGroup: payGroup,
       user: user,
     }

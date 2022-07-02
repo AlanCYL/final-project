@@ -6,7 +6,7 @@ import axios from 'axios'
 function PayList(props) {
   const goGroup = props.gotoId
 
-  //暫時抓會員要付款的團單編號
+  //暫時抓會員要付款的訂單編號
   localStorage.setItem('payGroup', goGroup)
   const payGroup = localStorage.getItem('payGroup')
   const userID = localStorage.getItem('userID')
@@ -54,7 +54,8 @@ function PayList(props) {
     )
 
     setCouData(res.data.result[0])
-    setTotal(`${data.price}` - `${couData.price}`)
+
+    setTotal(data.price - res.data.result[0].price)
   }
 
   function getEatTimeString() {

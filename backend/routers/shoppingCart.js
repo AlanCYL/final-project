@@ -84,7 +84,7 @@ router.get('/paylist', async (req, res, next) => {
 router.get('/cou', async (req, res, next) => {
   const userID = req.query.userID;
   let [data, fields] = await pool.execute(
-    `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID}`
+    `SELECT user_and_coupon.*, coupon.reason, coupon.price FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_id =${userID} AND user_and_coupon.valid=0`
   );
   res.json({ result: data });
 });
@@ -102,10 +102,11 @@ router.get('/couprice', async (req, res, next) => {
 //confirmUpdate
 router.post('/updatecoupay', async (req, res, next) => {
   // console.log('呵呵呵', req.body);
-  const { selectCou, payGroup, user } = req.body;
-  const [pay] = await pool.execute(
+  const { selectCou, payGroup, user, selectPri } = req.body;
+  await pool.execute(
     `UPDATE orders JOIN user_and_coupon ON orders.user_id = user_and_coupon.user_id SET payable=2, valid=1 WHERE orders.user_id=${user} and orders.groups_id=${payGroup} and user_and_coupon.id=${selectCou}`
   );
+  await pool.execute(`INSERT INTO receipt (receipt.orders_id, receipt.total) VALUES (${selectPri}, ${payGroup})`);
 
   res.json({ result: 'OK' });
 });
@@ -115,4 +116,5 @@ router.get('/selectcou', async (req, res, next) => {
   let [detail] = await pool.execute(`SELECT * FROM user_and_coupon JOIN coupon ON user_and_coupon.coupon_id = coupon.id WHERE user_and_coupon.id=${couID}`);
   res.json({ result: detail });
 });
+
 module.exports = router;
