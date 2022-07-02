@@ -22,37 +22,39 @@ const ReserveCart = (props) => {
   const user = localStorage.getItem('userID')
   //要把paylist選到的couponID傳到ConfirmPay
   const [selectCou, setSelectCou] = useState(0)
+  //要把paylist選到的couponID傳到ConfirmPay
+  const [selectPri, setSelectPri] = useState(0)
+
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
   const location = useLocation()
-  let gotoId = ''
-  let gotoStep = ''
-  let [goStep, setGoStep] = useState(gotoStep)
-
-  if (location.state !== undefined && location.state.gotoId !== undefined) {
-    gotoId = location.state.groupId
-    gotoStep = location.state.step
-  }
-
-  useEffect(() => {
-    if (goStep === '') {
-      fetch(`${API_URL}/shoppingCart/search?userID=${user}`, { method: 'GET' })
-        .then((res) => res.json())
-        .then((res) => {
-          /*接到response data後要做的事情*/
-          if (res.result.length === 0) {
-            setStep(0)
-          } else {
-            setStep(1)
-          }
-        })
-        .catch((e) => {
-          /*發生錯誤時要做的事情*/
-          console.log(e)
-        })
+  let [gotoId, setGotoId] = useState('')
+  async function getApi() {
+    await fetch(`${API_URL}/shoppingCart/search?userID=${user}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        /*接到response data後要做的事情*/
+        if (res.result.length === 0) {
+          setStep(0)
+        } else {
+          setStep(1)
+        }
+      })
+      .catch((e) => {
+        /*發生錯誤時要做的事情*/
+        console.log(e)
+      })
+    if (location.state !== undefined && location.state.step !== undefined) {
+      setGotoId(location.state.groupId)
+      setStep(location.state.step)
     } else {
-      setStep(4)
+      setGotoId('')
     }
+  }
+  useEffect(() => {
+    getApi()
   }, [])
 
   // reserveList的checkbox
@@ -82,6 +84,10 @@ const ReserveCart = (props) => {
   //選到的優惠卷id
   function handleCouponProps(coudata) {
     setSelectCou(coudata)
+  }
+  //獲得總金額
+  function handleTotal(money) {
+    setSelectPri(money)
   }
 
   //確認結帳後更新coupon已使用及已結帳
@@ -221,7 +227,11 @@ const ReserveCart = (props) => {
         )}
         {step === 4 ? (
           <>
-            <PayList couponSelect={handleCouponProps} gotoId={gotoId} />
+            <PayList
+              couponSelect={handleCouponProps}
+              gotoId={gotoId}
+              finalTotal={handleTotal}
+            />
             <div className="d-flex justify-content-center mb-5">
               <div className="d-flex justify-content-around w-75">
                 <a
@@ -252,7 +262,7 @@ const ReserveCart = (props) => {
         )}
         {step === 5 ? (
           <>
-            <ConfirmPay selectCou={selectCou} />
+            <ConfirmPay selectCou={selectCou} selectPri={selectPri} />
             <div className="d-flex justify-content-center mb-5">
               <div className="d-flex justify-content-around w-75">
                 <a

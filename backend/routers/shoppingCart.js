@@ -38,7 +38,7 @@ router.post('/confirmreservelist', async (req, res, next) => {
 router.post('/finishre', async (req, res, next) => {
   const { userID, groups } = req.body;
   let [data] = await pool.execute(
-    `SELECT orders.*, groups.*, shop.name, shop.img FROM orders JOIN groups ON orders.groups_id=groups.id JOIN shop ON groups.shop_id = shop.id where groups.id in (${groups}) and user_id in (${userID})`
+    `SELECT orders.*, groups.eating_date, groups.eating_time, groups.price, groups.established, shop.name, shop.img FROM orders JOIN groups ON orders.groups_id=groups.id JOIN shop ON groups.shop_id = shop.id where groups.id in (${groups}) and user_id in (${userID})`
   );
   //console.log(data);
   res.json({ result: data });
