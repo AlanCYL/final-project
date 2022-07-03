@@ -389,6 +389,7 @@ function Register(props) {
             onClick={(e) => {
               e.preventDefault()
               setIsShopLogin(true)
+              window.scrollTo(0, 0)
             }}
           >
             立即登入

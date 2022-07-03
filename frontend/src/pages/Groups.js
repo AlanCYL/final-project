@@ -1,5 +1,7 @@
 import React from 'react'
 import banner01 from '../image/groups/banner01.jpg'
+import banner02 from '../image/groups/banner02.jpg'
+import banner04 from '../image/groups/banner04.jpg'
 import FamousGroups from '../components/Group/FamousGroups'
 import Recommend from '../components/Group/Recommend'
 import GroupPages from '../components/Group/GroupPages'
@@ -18,7 +20,7 @@ function Groups() {
           </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={banner01} alt="Second slide" />
+          <img className="d-block w-100" src={banner02} alt="Second slide" />
 
           {/* <Carousel.Caption>
             <h3>Second slide label</h3>
@@ -26,14 +28,7 @@ function Groups() {
           </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={banner01} alt="Third slide" />
-
-          {/* <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption> */}
+          <img className="d-block w-100" src={banner04} alt="Third slide" />
         </Carousel.Item>
       </Carousel>
       {/* 熱門開團 */}

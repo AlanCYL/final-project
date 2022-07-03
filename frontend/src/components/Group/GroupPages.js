@@ -1,28 +1,22 @@
-import fliterpic from '../../image/groups/fliterpic.png'
-import Card from './Card'
+import icon01 from '../../image/groups/icon01.png'
+import icon02 from '../../image/groups/icon02.png'
+import icon03 from '../../image/groups/icon03.png'
+import icon04 from '../../image/groups/icon04.png'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../../utils/config'
 import Pagination from 'react-bootstrap/Pagination'
 import { Link } from 'react-router-dom'
-import dateCountdown from 'date-countdown'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import ScrollToTOP from '../../components/ScrollToTop'
 
 function GroupPages() {
-  const cate = [
-    '中式',
-    '台式',
-    '港澳',
-    '日式',
-    '韓式',
-    '泰式',
-    '美式',
-    '法式',
-    '燒烤',
-    '火鍋',
-    '甜點',
-    '吃到飽',
-    '咖啡廳',
-  ]
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    })
+  }, [])
   const [groups, setGroups] = useState([])
   //目前第幾頁
   const [page, setPage] = useState(1)
@@ -61,14 +55,39 @@ function GroupPages() {
   return (
     <>
       {/* 圖片 */}
-      <div className="container-fluid bg-secondary group-fliter">
-        <div className="row filter-all">
-          <div className="col-6 d-none d-md-block ">
-            <div className=" pic ps-3 ms-3 ">
-              <img className="img-fluid mt-5 ms-5" src={fliterpic} alt="" />
-            </div>
-          </div>
-        </div>
+      <div className="text-center container-fluid bg-secondary group-fliter pt-5">
+        <img
+          src={icon01}
+          alt=""
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-delay="300"
+          data-aos-duration="1500"
+        />
+        <img
+          src={icon02}
+          alt=""
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-delay="700"
+          data-aos-duration="1500"
+        />
+        <img
+          src={icon03}
+          alt=""
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-delay="1100"
+          data-aos-duration="1500"
+        />
+        <img
+          src={icon04}
+          alt=""
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-delay="1500"
+          data-aos-duration="1500"
+        />
       </div>
       {/* 商品頁 */}
       <div className="mt-5 ">
@@ -131,7 +150,12 @@ function GroupPages() {
       </div>
       {/* 頁數 */}
       <div className="mt-6 d-flex justify-content-center">
-        <Pagination className="mx-auto mt-4 ps-6 mb-4">{getPages()}</Pagination>
+        <Pagination
+          className="mx-auto mt-4 ps-6 mb-4"
+          onClick={window.scrollTo(0, 0)}
+        >
+          {getPages()}
+        </Pagination>
       </div>
     </>
   )

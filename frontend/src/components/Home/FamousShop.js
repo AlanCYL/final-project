@@ -6,11 +6,11 @@ function FamousShop(props) {
   const cardWordSlider = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   const slideHomeLeft = () => {
     let slider = document.querySelector('.sliderHome')
-    slider.scrollLeft = slider.scrollLeft + 500
+    slider.scrollLeft = slider.scrollLeft - 500
   }
   const slideHomeRight = () => {
     let slider = document.querySelector('.sliderHome')
-    slider.scrollLeft = slider.scrollLeft - 500
+    slider.scrollLeft = slider.scrollLeft + 500
   }
 
   return (
@@ -23,10 +23,11 @@ function FamousShop(props) {
         />
         <div className="sliderHome d-flex">
           <img
-            className="pe-3"
+            className="pe-3 img-fluid"
             src={require('../../image/home/logo/Timhowan.jpg')}
             alt=""
           />
+
           <img
             className="pe-3"
             src={require('../../image/home/logo/siammore.jpg')}

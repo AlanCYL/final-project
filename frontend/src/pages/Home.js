@@ -1,13 +1,63 @@
 import React from 'react'
 import CardHome from '../components/Card/CardHome'
 import FamousShop from '../components/Home/FamousShop'
+import Motion from '../components/Home/Motion'
+import Intro from '../components/Home/Intro'
+import Join from '../components/Home/Join'
+import word01 from '../image/home/word01.png'
+import word02 from '../image/home/word02.png'
 
 function Home() {
   return (
     <>
-      <div className="container-fluid mt-6"></div>
-      {/* 熱門開團 */}
-      <div className="famous container mb-6">
+      <div className="container-fluid first ">
+        <Motion />
+      </div>
+      <div>
+        <h3 className="text-center mt-6" data-aos="fade-up">
+          在每天的生活中增加一點人情味，<span>Unii 友你</span> 因此誕生
+        </h3>
+      </div>
+      <div className="container-fluid mt-5 mb-2">
+        <Intro />
+      </div>
+      <div>
+        <h2
+          className="text-center mt-8 ms-9"
+          data-aos="fade-left"
+          data-aos-easing="linear"
+          data-aos-duration="1500"
+        >
+          <span>Unii 友你</span>為一揪團用餐平台
+        </h2>
+      </div>
+      <div className="container">
+        <div className="row d-flex">
+          <div
+            className="col-6 ms-8"
+            data-aos="fade-left"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+            data-aos-delay="500"
+          >
+            <img className="img-fluid ms-9 mt-4" src={word01} alt="" />
+          </div>
+          <div
+            className="col-6"
+            data-aos="fade-left"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+            data-aos-delay="800"
+          >
+            <img className="img-fluid ms-9 mt-4" src={word02} alt="" />
+          </div>
+        </div>
+      </div>
+      <div className="container-fluid">
+        <Join />
+      </div>
+
+      {/* <div className="famous container mb-6">
         <div className="row">
           <h3 className="ps-4">熱門開團</h3>
           <div className="col-md-6  col-12 px-6 mt-5">
@@ -23,9 +73,8 @@ function Home() {
             <CardHome />
           </div>
         </div>
-      </div>
-      {/* 熱門店家 */}
-      <div className="bg-secondary py-6">
+      </div> */}
+      {/* <div className="bg-secondary py-6">
         <div className="famous container">
           <h3 className="ps-4">熱門店家</h3>
           <div className=" px-6 mt-5">
@@ -33,6 +82,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <div className="container-fluid mt-6"></div> */}
     </>
   )
 }
