@@ -7,13 +7,17 @@ import axios from 'axios'
 import { useShoppingCartContext } from '../../context/ShoppingCartContext'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Swal from 'sweetalert2'
 
 function GroupList() {
   const shopID = localStorage.getItem('shopID')
   const { cart, setCart } = useShoppingCartContext()
   const [data, setData] = useState([])
   const [key, setKey] = useState(1)
-  const [editId, setEditId] = useState(0)
+
+  //切換檢視狀態
+  const [edit, setEdit] = useState(true)
+  const [view, setView] = useState({})
 
   //一開始的渲染
   useEffect(() => {
@@ -50,7 +54,6 @@ function GroupList() {
   }
 
   useEffect(() => {
-    // console.log('useEffect on key', key)
     switch (key) {
       case '1':
         window.scrollTo(0, 0)
@@ -115,247 +118,423 @@ function GroupList() {
     setData(res.data.result)
   }
 
+  //編輯開團送出（更改資料庫）
+  async function editSubmit() {
+    await axios.post(`${API_URL}/shopbackstage/editsubmit`, view)
+  }
+
+  //alert
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  })
   return (
     <>
-      {/* 編輯 */}
+      {edit === false ? (
+        <>
+          <h4 className="mb-6">編輯團單：</h4>
+          <div className="d-flex justify-content-center">
+            {/* 檢視畫面 */}
+            <Form
+              className="w-75"
+              onSubmit={(e) => {
+                e.preventDefault()
+              }}
+            >
+              <Form.Group className="mb-3" controlId="name">
+                <Form.Label>團單編號</Form.Label>
+                <div
+                  class="border border-dark"
+                  style={{
+                    height: '40px',
+                    paddingLeft: '10px',
+                    paddingTop: '5px',
+                  }}
+                >
+                  {view.id}
+                </div>
+              </Form.Group>
 
-      {/* 編輯 */}
+              <Form.Group className="mb-3" controlId="start">
+                <Form.Label>開團開始時間</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={view.start_time}
+                  onChange={(e) =>
+                    setView({ ...view, start_time: e.target.value })
+                  }
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="end">
+                <Form.Label>截止時間</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={view.end_time}
+                  onChange={(e) =>
+                    setView({ ...view, end_time: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="time">
+                <Form.Label>用餐時間</Form.Label>
+                <div className="d-flex">
+                  <Form.Control
+                    type="date"
+                    value={view.eating_date}
+                    onChange={(e) =>
+                      setView({ ...view, eating_date: e.target.value })
+                    }
+                  />
 
-      {/* 我是歷史開團 */}
-      <Tabs
-        id="controlled-tab-example"
-        activeKey={key}
-        onSelect={(k) => {
-          setKey(k)
-        }}
-        className="mb-3"
-      >
-        {/* 全部開團 */}
-        <Tab
-          eventKey="1"
-          title="全部開團"
-          onClick={() => {
-            // console.log('allOpen')
-            allOpen()
-          }}
-        >
-          {/* 內容 */}
-          <Table>
-            <thead>
-              <tr>
-                <th className="text-center py-3">團單編號</th>
-                <th className="text-center py-3">開團開始</th>
-                <th className="text-center py-3">截止時間</th>
-                <th className="text-center py-3">用餐時間</th>
-                <th className="text-center py-3">成團人數</th>
-                <th className="text-center py-3">目前人數</th>
-                <th className="text-center py-3">是否成團</th>
-                <th className="text-center py-3">價格</th>
-                <th className="text-center py-3">檢視</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* map */}
-
-              {data.map((item, i) => (
-                <tr className="tr-hover">
-                  <td className="text-center py-3">{data[i].id}</td>
-                  <td className="text-center py-3">{data[i].start_time}</td>
-                  <td className="text-center py-3">{data[i].end_time}</td>
-                  <td className="text-start py-3">
-                    {data[i].eating_date} {getEatTimeString(i)}
-                  </td>
-                  <td className="text-center py-3">{data[i].goal_num}</td>
-                  <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{getIsGroup(i)}</td>
-                  <td className="text-center py-3">{data[i].price}</td>
-                  <td className="text-center py-3">
-                    <a variant="outline-primary" className="group-look py-3">
-                      檢視
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Tab>
-        {/* 開團中 */}
-        <Tab
-          eventKey="2"
-          title="開團中"
-          onClick={() => {
-            nowOpen()
-          }}
-        >
-          <Table>
-            <thead>
-              <tr>
-                <th className="text-center py-3">團單編號</th>
-                <th className="text-center py-3">開團開始</th>
-                <th className="text-center py-3">截止時間</th>
-                <th className="text-center py-3">用餐時間</th>
-                <th className="text-center py-3">成團人數</th>
-                <th className="text-center py-3">目前人數</th>
-                <th className="text-center py-3">是否成團</th>
-                <th className="text-center py-3">價格</th>
-                <th className="text-center py-3">檢視</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* map */}
-              {data.map((item, i) => (
-                <tr className="tr-hover">
-                  <td className="text-center py-3">{data[i].id}</td>
-                  <td className="text-center py-3">{data[i].start_time}</td>
-                  <td className="text-center py-3">{data[i].end_time}</td>
-                  <td className="text-start py-3">
-                    {data[i].eating_date} {getEatTimeString(i)}
-                  </td>
-                  <td className="text-center py-3">{data[i].goal_num}</td>
-                  <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{getIsGroup(i)}</td>
-                  <td className="text-center py-3">{data[i].price}</td>
-                  <td className="text-center py-3">
-                    <a variant="outline-primary" className="group-look py-3">
-                      檢視
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Tab>
-        {/* 已成團 */}
-        <Tab eventKey="3" title="已成團">
-          <Table>
-            <thead>
-              <tr>
-                <th className="text-center py-3">團單編號</th>
-                <th className="text-center py-3">開團開始</th>
-                <th className="text-center py-3">截止時間</th>
-                <th className="text-center py-3">用餐時間</th>
-                <th className="text-center py-3">成團人數</th>
-                <th className="text-center py-3">目前人數</th>
-                <th className="text-center py-3">是否成團</th>
-                <th className="text-center py-3">價格</th>
-                <th className="text-center py-3">檢視</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* map */}
-              {data.map((item, i) => (
-                <tr className="tr-hover">
-                  <td className="text-center py-3">{data[i].id}</td>
-                  <td className="text-center py-3">{data[i].start_time}</td>
-                  <td className="text-center py-3">{data[i].end_time}</td>
-                  <td className="text-start py-3">
-                    {data[i].eating_date} {getEatTimeString(i)}
-                  </td>
-                  <td className="text-center py-3">{data[i].goal_num}</td>
-                  <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{getIsGroup(i)}</td>
-                  <td className="text-center py-3">{data[i].price}</td>
-                  <td className="text-center py-3">
-                    <a variant="outline-primary" className="group-look py-3">
-                      檢視
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Tab>
-        {/* 未成團 */}
-        <Tab eventKey="4" title="未成團">
-          <Table>
-            <thead>
-              <tr>
-                <th className="text-center py-3">團單編號</th>
-                <th className="text-center py-3">開團開始</th>
-                <th className="text-center py-3">截止時間</th>
-                <th className="text-center py-3">用餐時間</th>
-                <th className="text-center py-3">成團人數</th>
-                <th className="text-center py-3">目前人數</th>
-                <th className="text-center py-3">是否成團</th>
-                <th className="text-center py-3">價格</th>
-                <th className="text-center py-3">檢視</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* map */}
-              {data.map((item, i) => (
-                <tr className="tr-hover">
-                  <td className="text-center py-3">{data[i].id}</td>
-                  <td className="text-center py-3">{data[i].start_time}</td>
-                  <td className="text-center py-3">{data[i].end_time}</td>
-                  <td className="text-start py-3">
-                    {data[i].eating_date} {getEatTimeString(i)}
-                  </td>
-                  <td className="text-center py-3">{data[i].goal_num}</td>
-                  <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{getIsGroup(i)}</td>
-                  <td className="text-center py-3">{data[i].price}</td>
-                  <td className="text-center py-3">
-                    <a variant="outline-primary" className="group-look py-3">
-                      檢視
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Tab>
-        {/* 歷史開團 */}
-        <Tab eventKey="5" title="歷史開團">
-          <Table>
-            <thead>
-              <tr>
-                <th className="text-center py-3">團單編號</th>
-                <th className="text-center py-3">開團開始</th>
-                <th className="text-center py-3">截止時間</th>
-                <th className="text-center py-3">用餐時間</th>
-                <th className="text-center py-3">成團人數</th>
-                <th className="text-center py-3">目前人數</th>
-                <th className="text-center py-3">是否成團</th>
-                <th className="text-center py-3">價格</th>
-                <th className="text-center py-3">檢視</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* map */}
-              {data.map((item, i) => (
-                <tr className="tr-hover">
-                  <td className="text-center py-3">{data[i].id}</td>
-                  <td className="text-center py-3">{data[i].start_time}</td>
-                  <td className="text-center py-3">{data[i].end_time}</td>
-                  <td className="text-start py-3">
-                    {data[i].eating_date} {getEatTimeString(i)}
-                  </td>
-                  <td className="text-center py-3">{data[i].goal_num}</td>
-                  <td className="text-center py-3">{data[i].now_num}</td>
-                  <td className="text-center py-3">{getIsGroup(i)}</td>
-                  <td className="text-center py-3">{data[i].price}</td>
-                  <td className="text-center py-3">
-                    <a
-                      variant="outline-primary"
-                      className="group-look py-3"
-                      value={data[i].id}
-                      onClick={(e) => {
-                        console.log('我', e.target.value)
-                        debugger
-                        setEditId(e.target.value)
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={view.eating_time}
+                    onChange={(e) =>
+                      setView({ ...view, eating_time: e.target.value })
+                    }
+                  >
+                    <option>請選擇用餐時段</option>
+                    <option value="1">午餐 12:00</option>
+                    <option value="2">下午茶 15:00</option>
+                    <option value="3">晚餐 18:00</option>
+                  </Form.Select>
+                </div>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="amount">
+                <Form.Label>成團人數</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={view.goal_num}
+                  onChange={(e) =>
+                    setView({ ...view, goal_num: e.target.value })
+                  }
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="price">
+                <Form.Label>價格</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={view.price}
+                  onChange={(e) => setView({ ...view, price: e.target.value })}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="dish">
+                <Form.Label>選擇菜色：</Form.Label>
+                {/* map動態產生 */}
+                {/* {checkList.map((item, i) => (
+                  <InputGroup className="mb-3 bg-secondary" key={i}>
+                    <InputGroup.Checkbox
+                      aria-label="Checkbox for following text input"
+                      onChange={(e) => {
+                        checkValue(e)
                       }}
-                    >
-                      檢視
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Tab>
-      </Tabs>
-      {/* 我是歷史開團 */}
+                      value={i}
+                    />
+                    <h6 className="mt-2 ms-3">{item.name}</h6>
+                  </InputGroup>
+                ))} */}
+              </Form.Group>
+              <div className="d-flex justify-content-end ">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-25 mt-4"
+                  style={{ height: '40px', fontSize: '19px' }}
+                  onClick={() => {
+                    editSubmit()
+                    setEdit(true)
+                    Toast.fire({
+                      icon: 'success',
+                      title: '更新成功',
+                    })
+                    allOpen()
+                    window.scrollTo(0, 0)
+                  }}
+                >
+                  送出
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </>
+      ) : (
+        <>
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={key}
+            onSelect={(k) => {
+              setKey(k)
+            }}
+            className="mb-3"
+          >
+            {/* 全部開團 */}
+            <Tab
+              eventKey="1"
+              title="全部開團"
+              onClick={() => {
+                // console.log('allOpen')
+                allOpen()
+              }}
+            >
+              {/* 內容 */}
+              <Table>
+                <thead>
+                  <tr>
+                    <th className="text-center py-3">團單編號</th>
+                    <th className="text-center py-3">開團開始</th>
+                    <th className="text-center py-3">截止時間</th>
+                    <th className="text-center py-3">用餐時間</th>
+                    <th className="text-center py-3">成團人數</th>
+                    <th className="text-center py-3">目前人數</th>
+                    <th className="text-center py-3">是否成團</th>
+                    <th className="text-center py-3">價格</th>
+                    <th className="text-center py-3">檢視</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="text-center py-3">{data[i].id}</td>
+                      <td className="text-center py-3">{data[i].start_time}</td>
+                      <td className="text-center py-3">{data[i].end_time}</td>
+                      <td className="text-start py-3">
+                        {data[i].eating_date} {getEatTimeString(i)}
+                      </td>
+                      <td className="text-center py-3">{data[i].goal_num}</td>
+                      <td className="text-center py-3">{data[i].now_num}</td>
+                      <td className="text-center py-3">{getIsGroup(i)}</td>
+                      <td className="text-center py-3">{data[i].price}</td>
+                      <td className="text-center py-3">
+                        <a
+                          variant="outline-primary"
+                          className="group-look py-3"
+                          onClick={() => {
+                            setEdit(!edit)
+                            setView(item)
+                          }}
+                        >
+                          檢視
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+            {/* 開團中 */}
+            <Tab
+              eventKey="2"
+              title="開團中"
+              onClick={() => {
+                nowOpen()
+              }}
+            >
+              <Table>
+                <thead>
+                  <tr>
+                    <th className="text-center py-3">團單編號</th>
+                    <th className="text-center py-3">開團開始</th>
+                    <th className="text-center py-3">截止時間</th>
+                    <th className="text-center py-3">用餐時間</th>
+                    <th className="text-center py-3">成團人數</th>
+                    <th className="text-center py-3">目前人數</th>
+                    <th className="text-center py-3">是否成團</th>
+                    <th className="text-center py-3">價格</th>
+                    <th className="text-center py-3">檢視</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="text-center py-3">{data[i].id}</td>
+                      <td className="text-center py-3">{data[i].start_time}</td>
+                      <td className="text-center py-3">{data[i].end_time}</td>
+                      <td className="text-start py-3">
+                        {data[i].eating_date} {getEatTimeString(i)}
+                      </td>
+                      <td className="text-center py-3">{data[i].goal_num}</td>
+                      <td className="text-center py-3">{data[i].now_num}</td>
+                      <td className="text-center py-3">{getIsGroup(i)}</td>
+                      <td className="text-center py-3">{data[i].price}</td>
+                      <td className="text-center py-3">
+                        <a
+                          variant="outline-primary"
+                          className="group-look py-3"
+                          onClick={() => {
+                            setEdit(!edit)
+                            setView(item)
+                          }}
+                        >
+                          檢視
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+            {/* 已成團 */}
+            <Tab eventKey="3" title="已成團">
+              <Table>
+                <thead>
+                  <tr>
+                    <th className="text-center py-3">團單編號</th>
+                    <th className="text-center py-3">開團開始</th>
+                    <th className="text-center py-3">截止時間</th>
+                    <th className="text-center py-3">用餐時間</th>
+                    <th className="text-center py-3">成團人數</th>
+                    <th className="text-center py-3">目前人數</th>
+                    <th className="text-center py-3">是否成團</th>
+                    <th className="text-center py-3">價格</th>
+                    <th className="text-center py-3">檢視</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="text-center py-3">{data[i].id}</td>
+                      <td className="text-center py-3">{data[i].start_time}</td>
+                      <td className="text-center py-3">{data[i].end_time}</td>
+                      <td className="text-start py-3">
+                        {data[i].eating_date} {getEatTimeString(i)}
+                      </td>
+                      <td className="text-center py-3">{data[i].goal_num}</td>
+                      <td className="text-center py-3">{data[i].now_num}</td>
+                      <td className="text-center py-3">{getIsGroup(i)}</td>
+                      <td className="text-center py-3">{data[i].price}</td>
+                      <td className="text-center py-3">
+                        <a
+                          variant="outline-primary"
+                          className="group-look py-3"
+                          onClick={() => {
+                            setEdit(!edit)
+                            setView(item)
+                          }}
+                        >
+                          檢視
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+            {/* 未成團 */}
+            <Tab eventKey="4" title="未成團">
+              <Table>
+                <thead>
+                  <tr>
+                    <th className="text-center py-3">團單編號</th>
+                    <th className="text-center py-3">開團開始</th>
+                    <th className="text-center py-3">截止時間</th>
+                    <th className="text-center py-3">用餐時間</th>
+                    <th className="text-center py-3">成團人數</th>
+                    <th className="text-center py-3">目前人數</th>
+                    <th className="text-center py-3">是否成團</th>
+                    <th className="text-center py-3">價格</th>
+                    <th className="text-center py-3">檢視</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="text-center py-3">{data[i].id}</td>
+                      <td className="text-center py-3">{data[i].start_time}</td>
+                      <td className="text-center py-3">{data[i].end_time}</td>
+                      <td className="text-start py-3">
+                        {data[i].eating_date} {getEatTimeString(i)}
+                      </td>
+                      <td className="text-center py-3">{data[i].goal_num}</td>
+                      <td className="text-center py-3">{data[i].now_num}</td>
+                      <td className="text-center py-3">{getIsGroup(i)}</td>
+                      <td className="text-center py-3">{data[i].price}</td>
+                      <td className="text-center py-3">
+                        <a
+                          variant="outline-primary"
+                          className="group-look py-3"
+                          onClick={() => {
+                            setEdit(!edit)
+                            setView(item)
+                          }}
+                        >
+                          檢視
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+            {/* 歷史開團 */}
+            <Tab eventKey="5" title="歷史開團">
+              <Table>
+                <thead>
+                  <tr>
+                    <th className="text-center py-3">團單編號</th>
+                    <th className="text-center py-3">開團開始</th>
+                    <th className="text-center py-3">截止時間</th>
+                    <th className="text-center py-3">用餐時間</th>
+                    <th className="text-center py-3">成團人數</th>
+                    <th className="text-center py-3">目前人數</th>
+                    <th className="text-center py-3">是否成團</th>
+                    <th className="text-center py-3">價格</th>
+                    <th className="text-center py-3">檢視</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* map */}
+                  {data.map((item, i) => (
+                    <tr className="tr-hover">
+                      <td className="text-center py-3">{data[i].id}</td>
+                      <td className="text-center py-3">{data[i].start_time}</td>
+                      <td className="text-center py-3">{data[i].end_time}</td>
+                      <td className="text-start py-3">
+                        {data[i].eating_date} {getEatTimeString(i)}
+                      </td>
+                      <td className="text-center py-3">{data[i].goal_num}</td>
+                      <td className="text-center py-3">{data[i].now_num}</td>
+                      <td className="text-center py-3">{getIsGroup(i)}</td>
+                      <td className="text-center py-3">{data[i].price}</td>
+                      <td
+                        className="text-center py-3"
+                        onClick={() => {
+                          setEdit(!edit)
+                        }}
+                      >
+                        <a
+                          variant="outline-primary"
+                          className="group-look py-3"
+                          onClick={() => {
+                            setEdit(!edit)
+                            setView(item)
+                          }}
+                        >
+                          檢視
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+          </Tabs>
+          {/* 我是歷史開團 */}
+        </>
+      )}
     </>
   )
 }

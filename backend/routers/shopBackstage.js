@@ -118,6 +118,21 @@ router.get('/finishopen', async (req, res, next) => {
   res.json({ result: data });
 });
 
+//編輯開團
+router.post('/editsubmit', async (req, res, next) => {
+  const { id, start_time, end_time, eating_date, eating_time, goal_num, price } = req.body;
+  await pool.execute('UPDATE groups SET start_time=?, end_time=?, eating_date=?, eating_time=?, goal_num=?, price=? WHERE groups.id=?', [
+    start_time,
+    end_time,
+    eating_date,
+    eating_time,
+    goal_num,
+    price,
+    id,
+  ]);
+  res.json({ result: 'OK' });
+});
+
 //上架菜色
 router.post('/opendish', uploader.single('photo'), async (req, res, next) => {
   console.log('dishName', req.body);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../Header/Header'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { API_URL } from '../../../utils/config'
@@ -73,10 +72,9 @@ const ConfirmPay = (props) => {
   return (
     <>
       <div className=" container my-6">
-        <Header />
         <div className="d-flex justify-content-center">
           <div className="w-75">
-            <div className="w-75 ms-8" style={{ marginRight: '80px' }}>
+            <div className="w-75" style={{ marginLeft: '192px' }}>
               <img
                 style={{ width: '500px' }}
                 className="mb-5"

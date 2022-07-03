@@ -80,7 +80,7 @@ const Opengroup = (props) => {
       setDish([])
       await Toast.fire({
         icon: 'success',
-        title: 'Success',
+        title: '新增成功',
       })
       setCart(true)
       props.groupProps('third')

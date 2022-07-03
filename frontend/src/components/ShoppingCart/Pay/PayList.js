@@ -1,4 +1,3 @@
-import Header from '../../Header/Header'
 import { useState, useEffect } from 'react'
 import { API_URL, IMAGE_URL } from '../../../utils/config'
 import axios from 'axios'
@@ -85,7 +84,6 @@ function PayList(props) {
   return (
     <>
       <div className=" container my-6">
-        <Header />
         <div className="d-flex justify-content-center">
           <div>
             <div className="w-75 ms-6" style={{ marginRight: '80px' }}>
