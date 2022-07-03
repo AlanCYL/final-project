@@ -9,11 +9,22 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import dateCountdown from 'date-countdown'
 import { useHistory } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal'
+import { BsFillExclamationTriangleFill } from 'react-icons/bs'
 
 const AllBookingCard = () => {
   const { member } = useLogin()
   const [booking, setBooking] = useState([])
   let history = useHistory()
+  //查看訂單使用Model顯示訂單資訊
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const [show2, setShow2] = useState(false)
+  const handleClose2 = () => setShow2(false)
+  const handleShow2 = () => setShow2(true)
+  const [detail, setDetail] = useState({})
+  const [payDetail, setPayDetail] = useState({})
 
   useEffect(() => {
     ;(async () => {
@@ -30,13 +41,49 @@ const AllBookingCard = () => {
     })()
   }, [member.id, booking])
 
-  //
+  //去結帳（導頁）
   function goToPage(id) {
     history.push({
       pathname: '/ShoppingCart',
       state: { groupId: `${id}`, step: 4 },
     })
   }
+  //查看訂單的資訊
+  async function WatchList(v) {
+    const userId = member.id
+    const watchId = v.id
+    let response = await axios.get(
+      `${API_URL}/booking/watchList?userId=${userId}&watchId=${watchId}`
+    )
+    setDetail(response.data.result[0])
+  }
+  //結帳完成的查看訂單資訊
+  async function WatchListPay(v) {
+    const userId = member.id
+    const watchId = v.id
+    let response = await axios.get(
+      `${API_URL}/booking/watchListpay?userId=${userId}&watchId=${watchId}`
+    )
+    setPayDetail(response.data.result[0])
+  }
+  //顯示是否成團/吃飯時間
+  function getEatTimeString() {
+    if (detail.eating_time === 1) {
+      return '午餐12:00'
+    } else if (detail.eating_time === 2) {
+      return '下午茶15:00'
+    } else {
+      return '晚餐18:00'
+    }
+  }
+  function isEstablish() {
+    if (detail.established === 0) {
+      return '未成團'
+    } else {
+      return '已成團'
+    }
+  }
+
   return (
     <>
       <Container className="my-3">
@@ -84,7 +131,67 @@ const AllBookingCard = () => {
                       {
                         {
                           0: (
-                            <Button variant="outline-warning">查看訂單</Button>
+                            <>
+                              <Button
+                                variant="outline-warning"
+                                onClick={() => {
+                                  handleShow()
+                                  WatchList(v)
+                                }}
+                              >
+                                查看訂單
+                              </Button>
+                              <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                  <Modal.Title>訂位詳情資訊</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <h5 className="text-danger">
+                                    恭喜您，已訂位成功
+                                  </h5>
+                                  <table className="border border-secondary w-75 mx-auto mt-3">
+                                    <tr>
+                                      <th className="ps-4">訂單編號：</th>
+                                      <td className="py-3">{detail.id}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">參團店家：</th>
+                                      <td className="py-3">{detail.name}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐日期：</th>
+                                      <td className="py-3">
+                                        {detail.eating_date}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐時間：</th>
+                                      <td className="py-3">
+                                        {getEatTimeString()}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">目前人數：</th>
+                                      <td className="py-3">
+                                        {detail.now_num}人
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">達成人數：</th>
+                                      <td className="py-3">
+                                        {detail.goal_num}人
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">是否成團：</th>
+                                      <td className="py-3 text-primary">
+                                        {isEstablish()}
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </Modal.Body>
+                              </Modal>
+                            </>
                           ),
                           1: (
                             <Button
@@ -98,7 +205,80 @@ const AllBookingCard = () => {
                             </Button>
                           ),
                           2: (
-                            <Button variant="outline-warning">查看訂單</Button>
+                            <>
+                              <Button
+                                variant="outline-warning"
+                                onClick={() => {
+                                  handleShow2()
+                                  WatchListPay(v)
+                                }}
+                              >
+                                查看訂單
+                              </Button>
+                              <Modal show={show2} onHide={handleClose2}>
+                                <Modal.Header closeButton>
+                                  <Modal.Title>結帳詳情資訊</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <h5 className="text-danger">
+                                    恭喜您，已結帳成功
+                                  </h5>
+                                  <table className="border border-secondary w-75 mx-auto mt-3">
+                                    <tr>
+                                      <th className="ps-4">訂單編號：</th>
+                                      <td className="py-3">{payDetail.id}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">參團店家：</th>
+                                      <td className="py-3">{payDetail.name}</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐日期：</th>
+                                      <td className="py-3">
+                                        {payDetail.eating_date}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">用餐時間：</th>
+                                      <td className="py-3">
+                                        {getEatTimeString()}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">參團人數：</th>
+                                      <td className="py-3">
+                                        {payDetail.now_num}人
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">付款方式：</th>
+                                      <td className="py-3">信用卡支付</td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">商品原金額</th>
+                                      <td className="py-3">
+                                        ${payDetail.price}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th className="ps-4">總付款金額</th>
+                                      <td className="py-3 text-primary">
+                                        ${payDetail.total}
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <div className="w-75 mx-auto mt-3">
+                                    <div className="text-center text-danger">
+                                      <BsFillExclamationTriangleFill className="me-2" />
+                                      請當天務必準時抵達餐廳用餐
+                                    </div>
+                                    <div className="text-center text-danger mt-2 ">
+                                      帶著一顆愉悅的心，UNII一起吃飯吧～
+                                    </div>
+                                  </div>
+                                </Modal.Body>
+                              </Modal>
+                            </>
                           ),
                         }[v.payable]
                       }

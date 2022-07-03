@@ -53,7 +53,7 @@ const ConfirmReserveList = (props) => {
   }
   return (
     <>
-      <div className=" container my-6">
+      <div className=" container">
         <Header />
         <div className="d-flex ">
           <Side />

@@ -31,11 +31,11 @@ function GroupContent() {
 
   function getEatTimeString() {
     if (list.eating_date === 1) {
-      return '中午12:00'
+      return '中餐12:00'
     } else if (list.eating_date === 2) {
-      return '下午15:00'
+      return '下午茶15:00'
     } else {
-      return '晚上18:00'
+      return '晚餐18:00'
     }
   }
   return (
