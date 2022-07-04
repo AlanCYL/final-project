@@ -8,6 +8,7 @@ import { useShoppingCartContext } from '../../context/ShoppingCartContext'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Swal from 'sweetalert2'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 function GroupList() {
   const shopID = localStorage.getItem('shopID')
@@ -18,6 +19,7 @@ function GroupList() {
   //切換檢視狀態
   const [edit, setEdit] = useState(true)
   const [view, setView] = useState({})
+  const [dishes, setDishes] = useState([])
 
   //一開始的渲染
   useEffect(() => {
@@ -116,6 +118,14 @@ function GroupList() {
       `${API_URL}/shopbackstage/finishopen?shopID=${shopID}`
     )
     setData(res.data.result)
+  }
+
+  //檢視呈現菜色
+  async function watchDish(id) {
+    let res = await axios.get(
+      `${API_URL}/shopbackstage/watchdish?groupId=${id}`
+    )
+    setDishes(res.data.result[0])
   }
 
   //編輯開團送出（更改資料庫）
@@ -230,18 +240,20 @@ function GroupList() {
               <Form.Group className="mb-3" controlId="dish">
                 <Form.Label>選擇菜色：</Form.Label>
                 {/* map動態產生 */}
-                {/* {checkList.map((item, i) => (
+                {dishes.map((item, i) => (
                   <InputGroup className="mb-3 bg-secondary" key={i}>
-                    <InputGroup.Checkbox
+                    <h6 className="mt-2 ms-3">
+                      {item.name} - ${item.price}
+                    </h6>
+                    {/* <InputGroup.Checkbox
                       aria-label="Checkbox for following text input"
                       onChange={(e) => {
                         checkValue(e)
                       }}
                       value={i}
-                    />
-                    <h6 className="mt-2 ms-3">{item.name}</h6>
+                    /> */}
                   </InputGroup>
-                ))} */}
+                ))}
               </Form.Group>
               <div className="d-flex justify-content-end ">
                 <Button
@@ -322,6 +334,7 @@ function GroupList() {
                           onClick={() => {
                             setEdit(!edit)
                             setView(item)
+                            watchDish(item.id)
                           }}
                         >
                           檢視
@@ -375,6 +388,7 @@ function GroupList() {
                           onClick={() => {
                             setEdit(!edit)
                             setView(item)
+                            watchDish(item.id)
                           }}
                         >
                           檢視
@@ -422,6 +436,7 @@ function GroupList() {
                           onClick={() => {
                             setEdit(!edit)
                             setView(item)
+                            watchDish(item.id)
                           }}
                         >
                           檢視
@@ -469,6 +484,7 @@ function GroupList() {
                           onClick={() => {
                             setEdit(!edit)
                             setView(item)
+                            watchDish(item.id)
                           }}
                         >
                           檢視
@@ -521,6 +537,7 @@ function GroupList() {
                           onClick={() => {
                             setEdit(!edit)
                             setView(item)
+                            watchDish(item.id)
                           }}
                         >
                           檢視

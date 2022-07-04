@@ -57,7 +57,7 @@ router.get('/search', async (req, res, next) => {
 //開團先找dish
 router.get('/checklist', async (req, res, next) => {
   const shopID = req.query.shopID;
-  let [data, fields] = await pool.execute(`SELECT name from dish WHERE shop_id=${shopID}`);
+  let [data, fields] = await pool.execute(`SELECT name, price from dish WHERE shop_id=${shopID}`);
   res.json({ result: data });
 });
 //開團
@@ -118,7 +118,14 @@ router.get('/finishopen', async (req, res, next) => {
   res.json({ result: data });
 });
 
-//編輯開團
+//檢視的菜色呈現
+router.get('/watchdish', async (req, res, next) => {
+  const groupId = req.query.groupId;
+  let data = await pool.execute(`SELECT * FROM groups_and_dish JOIN dish ON groups_and_dish.dish_id = dish.id WHERE groups_and_dish.groups_id= ${groupId}`);
+  res.json({ result: data });
+});
+
+//編輯檢視開團
 router.post('/editsubmit', async (req, res, next) => {
   const { id, start_time, end_time, eating_date, eating_time, goal_num, price } = req.body;
   await pool.execute('UPDATE groups SET start_time=?, end_time=?, eating_date=?, eating_time=?, goal_num=?, price=? WHERE groups.id=?', [

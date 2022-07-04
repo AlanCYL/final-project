@@ -190,7 +190,9 @@ const Opengroup = (props) => {
                 }}
                 value={i}
               />
-              <h6 className="mt-2 ms-3">{item.name}</h6>
+              <h6 className="mt-2 ms-3">
+                {item.name} - ${item.price}
+              </h6>
             </InputGroup>
           ))}
         </Form.Group>

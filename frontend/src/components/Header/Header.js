@@ -1,21 +1,48 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Header = () => {
+  const history = useHistory()
+
   return (
     <>
       <div className="header container mt-3">
         <div className="pb-3">
           <ul className="d-flex">
             <li>
-              <a href="">首頁</a>
+              <a
+                style={{ cursor: 'pointer' }}
+                className="text-primary"
+                onClick={() => {
+                  history.push('/')
+                }}
+              >
+                首頁
+              </a>
             </li>
             <span className="mx-1">|</span>
             <li>
-              <a href="">會員</a>
+              <a
+                style={{ cursor: 'pointer' }}
+                className="text-primary"
+                onClick={() => {
+                  history.push('/memberCenter')
+                }}
+              >
+                會員
+              </a>
             </li>
             <span className="mx-1">|</span>
             <li>
-              <a href="">購物車</a>
+              <a
+                style={{ cursor: 'pointer' }}
+                className="text-primary"
+                onClick={() => {
+                  history.push('/ShoppingCart')
+                }}
+              >
+                購物車
+              </a>
             </li>
           </ul>
         </div>
