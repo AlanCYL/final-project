@@ -85,7 +85,7 @@ const FailBookingCard = () => {
   return (
     <>
       <Container className="my-3">
-        <Row className="justify-content-between gy-5" xs="auto">
+        <Row className="gy-5" xs="auto">
           {booking.map((v, i) => {
             return (
               <Col key={v.id}>
