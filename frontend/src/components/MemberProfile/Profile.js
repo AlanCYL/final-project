@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { API_URL } from '../../utils/config'
@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useLogin } from '../../context/LoginStatus'
 import { useActivePanel } from '../../context/ActivePanel'
 import { useCoupon } from '../../context/CouponContext'
+import { Placeholder } from 'react-bootstrap'
 
 const Profile = () => {
   const history = useHistory()
@@ -13,6 +14,7 @@ const Profile = () => {
   const { memberDetail, setMemberDetail } = useLogin()
   const { active } = useActivePanel()
   const { countCoupon } = useCoupon()
+  const [display, setDisplay] = useState(false)
 
   let getMemberDetail = async () => {
     try {
@@ -39,15 +41,20 @@ const Profile = () => {
     }
   }
 
+  //重新整理或換頁面的時候要重抓資料
   useEffect(() => {
     getMemberDetail()
-  }, [active])
 
-  useEffect(() => {
-    getMemberDetail()
-  }, [member])
+    //placeholder
+    setTimeout(() => {
+      setDisplay(true)
+    }, 1000)
+  }, [active, member])
 
+  //更新頁面更新後，可以即時在會員中心首頁顯示更新後的樣子
   useEffect(() => {}, [memberDetail])
+
+  //登出
   const logout = async () => {
     try {
       let response = await axios.get(`${API_URL}/member/logout`, {
@@ -77,59 +84,94 @@ const Profile = () => {
       console.log(e.response.data.error)
     }
   }
-
-  return (
-    <>
-      <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
-        <img
-          alt="10x10"
-          src={
-            memberDetail.img
-              ? require('../../image/memberProfile/' +
-                  memberDetail.img +
-                  '.png')
-              : require('../../image/memberProfile/1.png')
-          }
-          className="position-absolute top-50 start-50 translate-middle"
-        />
-      </div>
-      <div className="mb-3 text-center">
-        <img
-          src={require('../../image/memberProfile/line.png')}
-          alt=""
-          width={250}
-        />
-      </div>
-      <div className="my_context text-center">
-        <div className="mb-4">
-          <p>{memberDetail.nick_name}</p>
+  if (display) {
+    return (
+      <>
+        <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3">
+          <img
+            alt="10x10"
+            src={
+              memberDetail.img
+                ? require('../../image/memberProfile/' +
+                    memberDetail.img +
+                    '.png')
+                : require('../../image/memberProfile/1.png')
+            }
+            className="position-absolute top-50 start-50 translate-middle"
+          />
         </div>
-        <div className="mb-4">
-          <p>
-            LV.{memberDetail.level} {memberDetail.levelName}會員
-          </p>
+        <div className="mb-3 text-center">
+          <img
+            src={require('../../image/memberProfile/line.png')}
+            alt=""
+            width={250}
+          />
         </div>
-        <div className="mb-4">
-          <p>尚餘可用的優惠券{countCoupon}張</p>
+        <div className="my_context text-center">
+          <div className="mb-4">
+            <p>{memberDetail.nick_name}</p>
+          </div>
+          <div className="mb-4">
+            <p>
+              LV.{memberDetail.level} {memberDetail.levelName}會員
+            </p>
+          </div>
+          <div className="mb-4">
+            <p>尚餘可用的優惠券{countCoupon}張</p>
+          </div>
+          <div className="mb-4">
+            <p>{memberDetail.create_time[0]} 開始加入 Unii</p>
+          </div>
+          <div className="mb-4">
+            <button
+              className="btn h6 btn-primary text-white"
+              onClick={() => {
+                logout()
+                // 會員id登出時清除localStorage
+                localStorage.removeItem('userID')
+              }}
+            >
+              登出
+            </button>
+          </div>
         </div>
-        <div className="mb-4">
-          <p>{memberDetail.create_time[0]} 開始加入 Unii</p>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div className="rounded-circle overflow-hidden border border-3 rounded-2 avatar mx-auto mb-3 bg-light"></div>
+        <div className="mb-3 text-center">
+          <Placeholder xs={4} animation="glow" style={{ width: '250' }} />
         </div>
-        <div className="mb-4">
-          <button
-            className="btn h6 btn-primary text-white"
-            onClick={() => {
-              logout()
-              // 會員id登出時清除localStorage
-              localStorage.removeItem('userID')
-            }}
-          >
-            登出
-          </button>
+        <div className="my_context text-center">
+          <div className="mb-4">
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={4} size="sm" />
+            </Placeholder>
+          </div>
+          <div className="mb-4">
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={4} size="sm" />
+            </Placeholder>
+          </div>
+          <div className="mb-4">
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={5} size="sm" />
+            </Placeholder>
+          </div>
+          <div className="mb-4">
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={6} size="sm" />
+            </Placeholder>
+          </div>
+          <div className="mb-4">
+            <Placeholder.Button variant="primary" xs={1} />
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default Profile

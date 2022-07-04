@@ -11,6 +11,9 @@ import Swal from 'sweetalert2'
 import { useLogin } from '../../context/LoginStatus'
 
 const Login = (props) => {
+  //判定登入與否以及抓取各種會員資料
+  const { member, setMember, setIsLogin, isLogin } = useLogin()
+
   //移動頁面
   const history = useHistory()
 
@@ -59,13 +62,14 @@ const Login = (props) => {
     }
   }
 
+  //判定註冊還是登入畫面
   const { isLoginPage, setIsLoginPage } = props
+
+  //忘記密碼 Modal 以及 form 表單驗證等 功能函式
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [validated, setValidated] = useState(false)
-
-  const { member, setMember, setIsLogin, isLogin } = useLogin()
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value })
@@ -98,6 +102,7 @@ const Login = (props) => {
         withCredentials: true,
       })
       // console.log(response.data)
+
       //會員登入id存入localStorage
       localStorage.setItem('userID', response.data.member.id)
       await Swal.fire({
@@ -113,12 +118,15 @@ const Login = (props) => {
           popup: 'shadow-sm',
         },
       })
+      
       setMember({ ...member, id: response.data.member.id })
+
       if (checked === true) {
         setRememberMe()
       } else {
         removeRememberMe()
       }
+      //跳轉頁面至會員中心
       history.push('/memberCenter')
     } catch (e) {
       console.log(e.response.data.error)
@@ -155,14 +163,11 @@ const Login = (props) => {
 
   const [checked, setChecked] = useState(false)
 
-  const remember = JSON.parse(localStorage.getItem('remember'))
-  console.log(remember)
-  const [rememberMember, setRememberMember] = useState({})
   useEffect(() => {
     let remember = JSON.parse(localStorage.getItem('remember'))
     if (remember) {
       setChecked(true)
-      // setRememberMember(remember)
+
       setMember({
         ...member,
         identity_card: remember.identity_card,
