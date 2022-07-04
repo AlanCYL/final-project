@@ -11,6 +11,8 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link, useHistory } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { useActivePanel } from '../../../context/ActivePanel'
+import { useLogin } from '../../../context/LoginStatus'
 
 const ReserveCart = (props) => {
   const history = useHistory()
@@ -24,6 +26,26 @@ const ReserveCart = (props) => {
   const [selectCou, setSelectCou] = useState(0)
   //要把paylist選到的總價格傳到ConfirmPay
   const [selectPri, setSelectPri] = useState(0)
+  //導頁到會員我的訂單
+  const { setActive } = useActivePanel()
+  const { isLogin } = useLogin()
+  const loginAlert = async () => {
+    await Swal.fire({
+      confirmButtonText: '去登入',
+      icon: 'warning',
+      title: '登入後才能使用此功能',
+      backdrop: `rgba(255, 255, 255, 0.55)`,
+      width: '35%',
+      padding: '0 0 1.25em',
+      customClass: {
+        popup: 'shadow-sm',
+        confirmButton: 'btn btn-primary h5',
+        content: 'h5',
+      },
+      buttonsStyling: false,
+    })
+    await history.push('/login')
+  }
 
   //要確認結帳的payGroup
   const payGroup = localStorage.getItem('payGroup')
@@ -168,7 +190,7 @@ const ReserveCart = (props) => {
                     window.scrollTo(0, 0)
                   }}
                 >
-                  返回購物車
+                  重選訂位項目
                 </a>
                 <a
                   type="button"
@@ -199,11 +221,16 @@ const ReserveCart = (props) => {
             <FinishReserveList groups={groups} userID={user} />
             <div className="d-flex justify-content-center mb-5">
               <a
-                href="/memberCenter"
                 type="button"
                 className="bg-info text-white px-4 py-2 mt-6"
                 onClick={() => {
-                  window.scrollTo(0, 0)
+                  if (isLogin) {
+                    setActive('second')
+                    history.push('/memberCenter')
+                    window.scrollTo(0, 0)
+                  } else {
+                    loginAlert()
+                  }
                 }}
               >
                 查看我的訂單
@@ -229,7 +256,7 @@ const ReserveCart = (props) => {
                   window.scrollTo(0, 0)
                 }}
               >
-                前往結帳
+                前往填寫資料
               </a>
             </div>
           </>
@@ -249,7 +276,7 @@ const ReserveCart = (props) => {
                     window.scrollTo(0, 0)
                   }}
                 >
-                  重選結帳項目
+                  重選優惠
                 </a>
                 <a
                   type="button"
@@ -278,6 +305,23 @@ const ReserveCart = (props) => {
         {step === 6 ? (
           <>
             <FinishPay />
+            <div className="d-flex justify-content-center mb-5">
+              <a
+                type="button"
+                className="bg-info text-white px-4 py-2"
+                onClick={() => {
+                  if (isLogin) {
+                    setActive('second')
+                    history.push('/memberCenter')
+                    window.scrollTo(0, 0)
+                  } else {
+                    loginAlert()
+                  }
+                }}
+              >
+                查看我的訂單
+              </a>
+            </div>
           </>
         ) : (
           ''
