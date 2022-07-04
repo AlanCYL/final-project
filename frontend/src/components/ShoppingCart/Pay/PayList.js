@@ -158,10 +158,21 @@ function PayList(props) {
               <div className="d-flex justify-content-end mb-3">
                 <h6>NT$-{couData.price}</h6>
               </div>
-              <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
-                <h6>總計：</h6>
-                <h6>NT${total}</h6>
-              </div>
+              {total === 0 ? (
+                <>
+                  <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
+                    <h6>總計：</h6>
+                    <h6>NT${data.price}</h6>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
+                    <h6>總計：</h6>
+                    <h6>NT${total}</h6>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
