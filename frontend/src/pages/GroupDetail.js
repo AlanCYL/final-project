@@ -82,7 +82,7 @@ function GroupDetail() {
                         src={require('../image/groupdetail/icon7.png')}
                         alt=""
                       />
-                      <h5 className="ms-2 mt-2">目前人數</h5>
+                      <h5 className="ms-2 mt-2">目標人數</h5>
                       <h2 className="ms-4">{v.goal_num}人</h2>
                     </div>
                   </div>
