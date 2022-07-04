@@ -201,7 +201,7 @@ const ReserveCart = (props) => {
               <a
                 href="/memberCenter"
                 type="button"
-                className="bg-info text-white px-4 py-2 mt-4"
+                className="bg-info text-white px-4 py-2 mt-6"
                 onClick={() => {
                   window.scrollTo(0, 0)
                 }}
