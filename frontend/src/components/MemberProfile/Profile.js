@@ -147,26 +147,23 @@ const Profile = () => {
         <div className="my_context text-center">
           <div className="mb-4">
             <Placeholder as="p" animation="glow">
-              <Placeholder xs={4} size="sm" />
+              <Placeholder xs={4} />
             </Placeholder>
           </div>
           <div className="mb-4">
             <Placeholder as="p" animation="glow">
-              <Placeholder xs={4} size="sm" />
+              <Placeholder xs={4} />
             </Placeholder>
           </div>
           <div className="mb-4">
             <Placeholder as="p" animation="glow">
-              <Placeholder xs={5} size="sm" />
+              <Placeholder xs={4} />
             </Placeholder>
           </div>
           <div className="mb-4">
             <Placeholder as="p" animation="glow">
-              <Placeholder xs={6} size="sm" />
+              <Placeholder xs={4} />
             </Placeholder>
-          </div>
-          <div className="mb-4">
-            <Placeholder.Button variant="primary" xs={1} />
           </div>
         </div>
       </>
