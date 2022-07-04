@@ -64,14 +64,14 @@ const ReserveList = (props) => {
     )
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger',
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-info me-5',
       },
       buttonsStyling: false,
     })
     swalWithBootstrapButtons
       .fire({
-        title: '確定刪除此菜色嗎？',
+        title: '確定刪除這筆團單嗎？',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: '確定',
@@ -81,20 +81,11 @@ const ReserveList = (props) => {
       .then((result) => {
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            '刪除成功!',
+            '您已成功刪除此團單。',
             'success'
           )
           getList()
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
         }
       })
   }

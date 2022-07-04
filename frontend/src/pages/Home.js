@@ -10,79 +10,52 @@ import word02 from '../image/home/word02.png'
 function Home() {
   return (
     <>
-      <div className="container-fluid first ">
-        <Motion />
-      </div>
-      <div>
-        <h3 className="text-center mt-6" data-aos="fade-up">
-          在每天的生活中增加一點人情味，<span>Unii 友你</span> 因此誕生
-        </h3>
-      </div>
-      <div className="container-fluid mt-5 mb-2">
-        <Intro />
-      </div>
-      <div>
-        <h2
-          className="text-center mt-8 ms-9"
-          data-aos="fade-left"
-          data-aos-easing="linear"
-          data-aos-duration="1500"
-        >
-          <span>Unii 友你</span>為一揪團用餐平台
-        </h2>
-      </div>
-      <div className="container">
-        <div className="row d-flex">
-          <div
-            className="col-6 ms-8"
-            data-aos="fade-left"
-            data-aos-easing="linear"
-            data-aos-duration="1500"
-            data-aos-delay="500"
+      <div className="Home">
+        <div className="container-fluid first ">
+          <Motion />
+        </div>
+        <div>
+          <h3 className="text-center mt-6" data-aos="fade-up">
+            在每天的生活中增加一點人情味，<span>Unii 友你</span> 因此誕生
+          </h3>
+        </div>
+        <div className="container-fluid mt-5 mb-2">
+          <Intro />
+        </div>
+        <div>
+          <h2
+            className="text-center mt-8 ms-5"
+          
           >
-            <img className="img-fluid ms-9 mt-4" src={word01} alt="" />
-          </div>
-          <div
-            className="col-6"
-            data-aos="fade-left"
-            data-aos-easing="linear"
-            data-aos-duration="1500"
-            data-aos-delay="800"
-          >
-            <img className="img-fluid ms-9 mt-4" src={word02} alt="" />
+            <span>Unii 友你</span>為一揪團用餐平台
+          </h2>
+        </div>
+        <div className="container">
+          <div className="row d-flex">
+            <div
+              className="col-6 ms-8"
+              data-aos="fade-left"
+              data-aos-easing="linear"
+              data-aos-duration="1500"
+              data-aos-delay="500"
+            >
+              <img className="img-fluid ms-9 mt-4" src={word01} alt="" />
+            </div>
+            <div
+              className="col-6"
+              data-aos="fade-left"
+              data-aos-easing="linear"
+              data-aos-duration="1500"
+              data-aos-delay="800"
+            >
+              <img className="img-fluid ms-9 mt-4" src={word02} alt="" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="container-fluid">
-        <Join />
-      </div>
-
-      {/* <div className="famous container mb-6">
-        <div className="row">
-          <h3 className="ps-4">熱門開團</h3>
-          <div className="col-md-6  col-12 px-6 mt-5">
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
-          </div>
-          <div className="col-md-6 col-12 px-6 mt-5">
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="bg-secondary py-6">
-        <div className="famous container">
-          <h3 className="ps-4">熱門店家</h3>
-          <div className=" px-6 mt-5">
-            <FamousShop />
-          </div>
+        <div className="container-fluid">
+          <Join />
         </div>
       </div>
-      <div className="container-fluid mt-6"></div> */}
     </>
   )
 }

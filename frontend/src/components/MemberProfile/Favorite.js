@@ -10,6 +10,7 @@ import { useLogin } from '../../context/LoginStatus'
 import axios from 'axios'
 import { API_URL, IMAGE_URL } from '../../utils/config'
 import { useFavorite } from '../../context/FavoriteList'
+import Swal from 'sweetalert2'
 
 const Favorite = () => {
   const { member } = useLogin()
@@ -33,7 +34,7 @@ const Favorite = () => {
     })()
   }, [member.id, cancel])
 
-  const deleteFavorite = async (id) => {
+  const deleteFavoriteFunc = async (id) => {
     try {
       let response = await axios.get(`${API_URL}/favorite/delete`, {
         params: {
@@ -45,6 +46,41 @@ const Favorite = () => {
     } catch (e) {
       console.log(e.response.data.error)
     }
+  }
+
+  const deleteFavorite = (id) => {
+    Swal.fire({
+      title: '確定要將此餐廳移除收藏清單?',
+      text: '需前往店家列表才能再次加入',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#FFB901',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除',
+      cancelButtonText: '取消',
+      backdrop: `rgba(255, 255, 255, 0.55)`,
+      width: '35%',
+      padding: '0 0 1.25em',
+      customClass: {
+        popup: 'shadow-sm',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '移除成功',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: `rgba(255, 255, 255, 0.55)`,
+          width: '35%',
+          padding: '0 0 1.25em',
+          customClass: {
+            popup: 'shadow-sm',
+          },
+        })
+        deleteFavoriteFunc(id)
+      }
+    })
   }
 
   return (

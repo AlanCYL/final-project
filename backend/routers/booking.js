@@ -7,7 +7,7 @@ const pool = require('../utils/db');
 // /api/booking/allBooking
 router.get('/allBooking', async (req, res, next) => {
   let [booking] = await pool.execute(
-    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? ',
+    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? ORDER BY groups.eating_date DESC ',
     [req.query.userId]
   );
 
@@ -44,7 +44,7 @@ router.get('/watchListpay', async (req, res, next) => {
 // /api/booking/okBooking
 router.get('/okBooking', async (req, res, next) => {
   let [booking] = await pool.execute(
-    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? AND groups.established = 1',
+    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? AND groups.established = 1 ORDER BY groups.eating_date DESC ',
     [req.query.userId]
   );
 
@@ -63,7 +63,7 @@ router.get('/okBooking', async (req, res, next) => {
 // /api/booking/notOkBooking
 router.get('/notOkBooking', async (req, res, next) => {
   let [booking] = await pool.execute(
-    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? AND groups.established = 0',
+    'SELECT orders.*, shop.name, shop.img, groups.eating_date, groups.end_time, groups.now_num, groups.goal_num, groups.shop_id, groups.established FROM orders LEFT JOIN groups ON orders.groups_id = groups.id LEFT JOIN shop ON groups.shop_id = shop.id WHERE orders.user_id = ? AND groups.established = 0 ORDER BY groups.eating_date DESC ',
     [req.query.userId]
   );
 

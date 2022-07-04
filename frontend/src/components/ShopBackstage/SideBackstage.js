@@ -37,7 +37,7 @@ const SideBackstage = (props) => {
     <>
       <div className="w-100 h-100">
         <Tab.Container id="left-tabs-example" activeKey={selectedKey}>
-          <Row>
+          <Row className="w-100">
             <Col sm={3} className="bg-secondary py-3 pe-0">
               <Nav variant="pills" className="flex-column">
                 <h4 className="text-center my-4">
