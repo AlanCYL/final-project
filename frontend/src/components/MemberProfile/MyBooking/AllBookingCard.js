@@ -141,7 +141,12 @@ const AllBookingCard = () => {
                               >
                                 查看訂單
                               </Button>
-                              <Modal show={show} onHide={handleClose}>
+                              <Modal
+                                show={show}
+                                onHide={handleClose}
+                                backdropClassName="bg-white rounded"
+                                contentClassName="shadow-lg border-0"
+                              >
                                 <Modal.Header closeButton>
                                   <Modal.Title>訂位詳情資訊</Modal.Title>
                                 </Modal.Header>
@@ -215,7 +220,12 @@ const AllBookingCard = () => {
                               >
                                 查看訂單
                               </Button>
-                              <Modal show={show2} onHide={handleClose2}>
+                              <Modal
+                                show={show2}
+                                onHide={handleClose2}
+                                backdropClassName="bg-white rounded"
+                                contentClassName="shadow-lg border-0"
+                              >
                                 <Modal.Header closeButton>
                                   <Modal.Title>結帳詳情資訊</Modal.Title>
                                 </Modal.Header>
