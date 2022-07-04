@@ -27,7 +27,7 @@ function Motion() {
           <ScrollContainer>
             <ScrollPage page={0}>
               <Animator animation={batch(Fade(), Sticky(), MoveOut(0, 300))}>
-                <h1 className="title ">UII 結交新朋友</h1>
+                <h1 className="title ">Unii 結交新朋友</h1>
               </Animator>
             </ScrollPage>
           </ScrollContainer>
