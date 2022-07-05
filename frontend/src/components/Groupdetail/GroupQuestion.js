@@ -50,7 +50,7 @@ function GroupQuestion() {
               <CustomToggle eventKey="1">
                 <AiOutlineNotification className="ms-3 " />
 
-                <span className="ms-3 p-2">請問消費可以刷卡嗎？</span>
+                <span className="ms-3 p-2">何種情況才會出現付款呢？</span>
               </CustomToggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
@@ -58,7 +58,41 @@ function GroupQuestion() {
                 className="bg-secondary rounded mt-2"
                 style={{ marginLeft: '70px' }}
               >
+                當報名解止前，目標人數已達標，在會員中心的我的訂單中會自動更換成付款按鈕，結帳後即成立。
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card style={{ border: 'none' }}>
+            <Card.Header className="bg-white border-bottom-0">
+              <CustomToggle eventKey="2">
+                <AiOutlineNotification className="ms-3 " />
+
+                <span className="ms-3 p-2">請問消費可以刷卡嗎？</span>
+              </CustomToggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body
+                className="bg-secondary rounded mt-2"
+                style={{ marginLeft: '70px' }}
+              >
                 皆有提供刷卡服務。
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card style={{ border: 'none' }}>
+            <Card.Header className="bg-white border-bottom-0">
+              <CustomToggle eventKey="3">
+                <AiOutlineNotification className="ms-3 " />
+
+                <span className="ms-3 p-2">何種情況才會出現付款呢？</span>
+              </CustomToggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="3">
+              <Card.Body
+                className="bg-secondary rounded mt-2"
+                style={{ marginLeft: '70px' }}
+              >
+                當報名解止前，目標人數已達標，在會員中心的我的訂單中會自動更換成付款按鈕，結帳後即成立。
               </Card.Body>
             </Accordion.Collapse>
           </Card>

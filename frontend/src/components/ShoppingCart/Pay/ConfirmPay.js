@@ -177,28 +177,22 @@ const ConfirmPay = (props) => {
                     placeholder="請輸入電子郵件"
                   />
                 </Form.Group>
-                <Form.Group className="mb-3 d-flex mx-3" controlId="addr">
+                <Form.Group className="mb-3 d-flex mx-3" controlId="email">
                   <h6 className="w-25 ms-4">地址</h6>
-                  <Form.Select
-                    style={{ marginLeft: '22px' }}
-                    aria-label="Default select example"
-                    className="w-50"
-                  >
-                    <option>縣/市</option>
-                    <option value="1">台北市</option>
-                    <option value="2">新北市</option>
-                    <option value="3">桃園市</option>
-                  </Form.Select>
-                  <Form.Select
-                    aria-label="Default select example"
-                    className="w-50"
-                  >
-                    <option>鄉鎮市</option>
-                    <option value="1">台北市</option>
-                    <option value="2">新北市</option>
-                    <option value="3">桃園市</option>
-                  </Form.Select>
+                  <Form.Control
+                    className=""
+                    style={{ width: '308px' }}
+                    type="email"
+                    placeholder="縣/市"
+                  />
+                  <Form.Control
+                    className="me-6"
+                    style={{ width: '292px' }}
+                    type="email"
+                    placeholder="鄉鎮區"
+                  />
                 </Form.Group>
+
                 <Form.Group
                   className="mb-3 d-flex mx-3  ms-7  justify-content-center"
                   style={{ paddingLeft: '14px' }}
