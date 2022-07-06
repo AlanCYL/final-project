@@ -62,32 +62,37 @@ const ReserveList = (props) => {
     await axios.get(
       `${API_URL}/shoppingcart/redelete?shoppingcartID=${shoppingcartID}`
     )
-    const swalWithBootstrapButtons = Swal.mixin({
+    Swal.fire({
+      title: '確定刪除此團單嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#FFB901',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除',
+      cancelButtonText: '取消',
+      backdrop: `rgba(255, 255, 255, 0.55)`,
+      width: '35%',
+      padding: '0 0 1.25em',
       customClass: {
-        confirmButton: 'btn btn-danger',
-        cancelButton: 'btn btn-info me-5',
+        popup: 'shadow-sm',
       },
-      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '刪除成功',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: `rgba(255, 255, 255, 0.55)`,
+          width: '35%',
+          padding: '0 0 1.25em',
+          customClass: {
+            popup: 'shadow-sm',
+          },
+        })
+        getList()
+      }
     })
-    swalWithBootstrapButtons
-      .fire({
-        title: '確定刪除這筆團單嗎？',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-        cancelButtonText: '取消',
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            '刪除成功!',
-            '您已成功刪除此團單。',
-            'success'
-          )
-          getList()
-        }
-      })
   }
 
   return (

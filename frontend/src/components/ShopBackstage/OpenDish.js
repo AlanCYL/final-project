@@ -48,9 +48,18 @@ const OpenDish = (props) => {
         dishDes: '',
         photo: '',
       })
-      await Toast.fire({
+      await Swal.fire({
         icon: 'success',
-        title: 'Success',
+        title: '新增成功',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
       })
       setCart(true)
 
@@ -59,18 +68,6 @@ const OpenDish = (props) => {
       console.error(e)
     }
   }
-  //alert
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-right',
-    iconColor: 'white',
-    customClass: {
-      popup: 'colored-toast',
-    },
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  })
 
   return (
     <>

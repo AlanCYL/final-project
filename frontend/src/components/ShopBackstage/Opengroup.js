@@ -78,28 +78,27 @@ const Opengroup = (props) => {
         price: '',
       })
       setDish([])
-      await Toast.fire({
+      await Swal.fire({
         icon: 'success',
         title: '新增成功',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1500,
+        backdrop: `rgba(255, 255, 255, 0.55)`,
+        width: '35%',
+        padding: '0 0 1.25em',
+        customClass: {
+          popup: 'shadow-sm',
+        },
       })
       setCart(true)
       props.groupProps('third')
+      window.scrollTo(0, 0)
     } catch (e) {
       console.error(e)
     }
   }
-  //alert
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-right',
-    iconColor: 'white',
-    customClass: {
-      popup: 'colored-toast',
-    },
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  })
+
   return (
     <>
       <Form
@@ -190,7 +189,7 @@ const Opengroup = (props) => {
                 }}
                 value={i}
               />
-              <h6 className="mt-2 ms-3">
+              <h6 className="mt-2 ms-3 fw-normal">
                 {item.name} - ${item.price}
               </h6>
             </InputGroup>

@@ -133,18 +133,6 @@ function GroupList() {
     await axios.post(`${API_URL}/shopbackstage/editsubmit`, view)
   }
 
-  //alert
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-right',
-    iconColor: 'white',
-    customClass: {
-      popup: 'colored-toast',
-    },
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  })
   return (
     <>
       {edit === false ? (
@@ -264,9 +252,18 @@ function GroupList() {
                   onClick={() => {
                     editSubmit()
                     setEdit(true)
-                    Toast.fire({
+                    Swal.fire({
                       icon: 'success',
                       title: '更新成功',
+                      showConfirmButton: false,
+                      timerProgressBar: true,
+                      timer: 1500,
+                      backdrop: `rgba(255, 255, 255, 0.55)`,
+                      width: '35%',
+                      padding: '0 0 1.25em',
+                      customClass: {
+                        popup: 'shadow-sm',
+                      },
                     })
                     allOpen()
                     window.scrollTo(0, 0)

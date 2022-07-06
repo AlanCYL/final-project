@@ -16,33 +16,37 @@ const DishList = (props) => {
   async function Delete(item) {
     const dishID = item.id
     await axios.get(`${API_URL}/shopbackstage/dishdelete?dishID=${dishID}`)
-    const swalWithBootstrapButtons = Swal.mixin({
+    Swal.fire({
+      title: '確定刪除此菜色嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#FFB901',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除',
+      cancelButtonText: '取消',
+      backdrop: `rgba(255, 255, 255, 0.55)`,
+      width: '35%',
+      padding: '0 0 1.25em',
       customClass: {
-        confirmButton: 'btn btn-danger',
-        cancelButton: 'btn btn-info me-5',
+        popup: 'shadow-sm',
       },
-      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '刪除成功',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+          backdrop: `rgba(255, 255, 255, 0.55)`,
+          width: '35%',
+          padding: '0 0 1.25em',
+          customClass: {
+            popup: 'shadow-sm',
+          },
+        })
+        getDishList()
+      }
     })
-
-    swalWithBootstrapButtons
-      .fire({
-        title: '確定刪除此菜色嗎？',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-        cancelButtonText: '取消',
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            '刪除成功!',
-            '您已成功刪除此菜色。',
-            'success'
-          )
-          getDishList()
-        }
-      })
   }
   function getDishList() {
     const shopID = localStorage.getItem('shopID')
@@ -71,7 +75,7 @@ const DishList = (props) => {
             <Card.Body>
               <div className="d-flex align-items-baseline justify-content-between">
                 <Card.Title>{data[i].name}</Card.Title>
-                <p>價格：${data[i].price}</p>
+                <p className="fw-normal">價格：${data[i].price}</p>
               </div>
 
               <Card.Text style={{ height: '32px' }}>
