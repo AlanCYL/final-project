@@ -110,8 +110,8 @@ function PayList(props) {
                   />
                 </td>
                 <td>
-                  <h6>{data.name}</h6>
-                  <h6>
+                  <h6 className="fw-normal">{data.name}</h6>
+                  <h6 className="fw-normal">
                     <div>{data.eating_date}</div>
                     <div>{getEatTimeString()}</div>
                   </h6>
@@ -124,7 +124,7 @@ function PayList(props) {
 
             <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
               <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
-                <h6>商品金額：</h6>
+                <h6 className="fw-normal">商品金額：</h6>
                 <h6 className="fw-normal">NT${data.price}</h6>
               </div>
 
@@ -156,20 +156,20 @@ function PayList(props) {
                 </select>
               </div>
               <div className="d-flex justify-content-end mb-3">
-                <h6>NT$-{couData.price}</h6>
+                <h6 className="fw-normal">NT$-{couData.price}</h6>
               </div>
               {total === 0 ? (
                 <>
                   <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
-                    <h6>總計：</h6>
-                    <h6>NT${data.price}</h6>
+                    <h6 className="fw-normal">總計：</h6>
+                    <h6 className="fw-normal">NT${data.price}</h6>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
-                    <h6>總計：</h6>
-                    <h6>NT${total}</h6>
+                    <h6 className="fw-normal">總計：</h6>
+                    <h6 className="fw-normal">NT${total}</h6>
                   </div>
                 </>
               )}

@@ -206,7 +206,7 @@ const FinishPay = () => {
                       <span class="badge rounded-pill bg-primary">日式</span>
                     </div>
                     <h6 className="fw-normal">目前人數:0人</h6>
-                    <h6 className="fw-normal mb-4">用餐時間:2022/07/20</h6>
+                    <h6 className="fw-normal mb-4 ">用餐時間:2022/07/20</h6>
                     <div class="progress">
                       <div
                         class="progress-bar progress-bar-striped"

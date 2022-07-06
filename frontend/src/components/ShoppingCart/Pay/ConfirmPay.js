@@ -102,8 +102,8 @@ const ConfirmPay = (props) => {
                       />
                     </td>
                     <td>
-                      <h6>{data.name}</h6>
-                      <h6>
+                      <h6 className="fw-normal">{data.name}</h6>
+                      <h6 className="fw-normal">
                         {data.eating_date} {getEatTimeString()}{' '}
                       </h6>
                     </td>
@@ -115,8 +115,8 @@ const ConfirmPay = (props) => {
                 <Accordion.Body className="p-0">
                   <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
                     <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
-                      <h6>商品金額：</h6>
-                      <h6>NT${data.price}</h6>
+                      <h6 className="fw-normal">商品金額：</h6>
+                      <h6 className="fw-normal">NT${data.price}</h6>
                     </div>
 
                     <div className="d-flex mb-2">
@@ -138,11 +138,11 @@ const ConfirmPay = (props) => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-end mb-3">
-                      <h6>NT$-{detail.price}</h6>
+                      <h6 className="fw-normal">NT$-{detail.price}</h6>
                     </div>
                     <div className="d-flex justify-content-between align-items-center border-top border-dark pt-4 mt-2">
-                      <h6>總計：</h6>
-                      <h6>NT${selectPri} </h6>
+                      <h6 className="fw-normal">總計：</h6>
+                      <h6 className="fw-normal">NT${selectPri} </h6>
                     </div>
                   </div>
                 </Accordion.Body>
