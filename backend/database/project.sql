@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2022 年 07 月 05 日 22:26
+-- 產生時間： 2022 年 07 月 06 日 17:34
 -- 伺服器版本： 5.7.34
 -- PHP 版本： 8.0.8
 
@@ -161,8 +161,8 @@ CREATE TABLE `groups` (
 INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_time`, `now_num`, `goal_num`, `price`, `shop_id`, `established`) VALUES
 (1, '2022-04-13', '2022-04-18', '2022-04-20', 2, 9, 6, 500, 10, 1),
 (2, '2022-04-15', '2022-04-19', '2022-04-23', 1, 4, 2, 500, 2, 1),
-(3, '2022-04-10', '2022-04-20', '2022-04-26', 3, 2, 5, 350, 3, 0),
-(4, '2022-04-23', '2022-04-29', '2022-05-02', 3, 3, 2, 450, 6, 1),
+(3, '2022-04-10', '2022-04-20', '2022-04-26', 3, 6, 5, 350, 3, 1),
+(4, '2022-04-23', '2022-04-29', '2022-05-02', 3, 3, 2, 450, 3, 1),
 (5, '2022-05-02', '2022-05-12', '2022-05-20', 3, 1, 4, 350, 3, 0),
 (6, '2022-05-06', '2022-05-15', '2022-05-20', 3, 3, 2, 300, 14, 1),
 (7, '2022-05-12', '2022-05-20', '2022-05-27', 2, 4, 6, 450, 2, 0),
@@ -217,7 +217,8 @@ INSERT INTO `groups` (`id`, `start_time`, `end_time`, `eating_date`, `eating_tim
 (56, '2022-07-03', '2022-07-16', '2022-07-22', 2, 0, 6, 400, 9, 0),
 (57, '2022-07-06', '2022-07-12', '2022-07-21', 2, 0, 3, 300, 10, 0),
 (58, '2021-06-23', '2022-07-21', '2022-08-17', 2, 2, 4, 400, 4, 0),
-(59, '2022-07-06', '2022-07-15', '2022-07-23', 1, 2, 4, 600, 3, 0);
+(59, '2022-07-06', '2022-07-15', '2022-07-23', 1, 2, 4, 600, 3, 0),
+(60, '2022-06-29', '2022-07-14', '2022-07-18', 2, 4, 3, 500, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -406,7 +407,14 @@ INSERT INTO `groups_and_dish` (`id`, `groups_id`, `dish_id`) VALUES
 (180, 39, 46),
 (181, 39, 48),
 (182, 39, 50),
-(183, 39, 49);
+(183, 39, 49),
+(184, 60, 0),
+(185, 60, 2),
+(186, 60, 7),
+(187, 60, 5),
+(188, 60, 8),
+(189, 60, 9),
+(190, 60, 3);
 
 -- --------------------------------------------------------
 
@@ -508,8 +516,8 @@ INSERT INTO `orders` (`id`, `orderlist_id`, `user_id`, `groups_id`, `payable`) V
 (62, 0, 3, 15, 1),
 (63, 0, 5, 33, 0),
 (64, 0, 4, 33, 0),
-(65, 0, 8, 3, 0),
-(66, 0, 9, 3, 0),
+(65, 0, 8, 3, 1),
+(66, 0, 9, 3, 1),
 (67, 0, 4, 59, 0),
 (68, 0, 6, 59, 0),
 (69, 0, 3, 7, 0),
@@ -565,7 +573,15 @@ INSERT INTO `orders` (`id`, `orderlist_id`, `user_id`, `groups_id`, `payable`) V
 (119, 0, 12, 10, 2),
 (120, 0, 11, 10, 2),
 (121, 0, 9, 10, 2),
-(122, 0, 5, 10, 2);
+(122, 0, 5, 10, 2),
+(123, 0, 10, 60, 1),
+(124, 0, 9, 60, 1),
+(125, 0, 13, 60, 1),
+(126, 0, 6, 60, 1),
+(127, 0, 10, 3, 1),
+(128, 0, 11, 3, 1),
+(129, 0, 12, 3, 1),
+(130, 0, 13, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -713,16 +729,9 @@ INSERT INTO `shop_and_type` (`id`, `shop_id`, `type_id`) VALUES
 (27, 13, 11),
 (28, 14, 6),
 (29, 14, 11),
-(44, 90, 5),
-(45, 91, 0),
-(46, 91, 1),
-(47, 92, 0),
-(48, 92, 5),
-(49, 15, 0),
-(50, 16, 1),
-(51, 16, 2),
-(52, 17, 0),
-(53, 17, 4);
+(30, 15, 6),
+(31, 15, 11),
+(32, 15, 13);
 
 -- --------------------------------------------------------
 
@@ -959,19 +968,19 @@ ALTER TABLE `dish`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `groups_and_dish`
 --
 ALTER TABLE `groups_and_dish`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `receipt`
@@ -989,13 +998,13 @@ ALTER TABLE `shop`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shoppingcart`
 --
 ALTER TABLE `shoppingcart`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shop_and_type`
 --
 ALTER TABLE `shop_and_type`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `type`

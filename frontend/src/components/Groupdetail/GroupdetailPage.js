@@ -6,7 +6,7 @@ import { Container, Row, Tabs, Tab } from 'react-bootstrap'
 function GroupdetailPage() {
   return (
     <>
-      <Container className="py-5 page">
+      <Container className="page">
         <Row className="justicy-content-center">
           <Tabs
             justify

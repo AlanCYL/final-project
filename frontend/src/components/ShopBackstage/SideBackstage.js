@@ -100,7 +100,7 @@ const SideBackstage = (props) => {
                 </Tab.Pane>
                 <Tab.Pane
                   eventKey="third"
-                  style={{ marginLeft: '-50px', marginRight: '-50px' }}
+                  style={{ marginLeft: '-58px', marginRight: '-54px' }}
                 >
                   <GroupList />
                 </Tab.Pane>

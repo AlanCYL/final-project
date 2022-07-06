@@ -150,11 +150,12 @@ const ReserveCart = (props) => {
           <>
             <ReserveList userID={user} setGroupsFunc={setGroupsFunc} />
             <div className="d-flex justify-content-end">
-              <div className="d-flex justify-content-between w-75">
+              <div className="d-flex justify-content-around w-75">
                 <Link
                   to="/groups"
                   type="button"
                   className="bg-info text-white px-4 py-2 ms-6 mb-5"
+                  style={{ marginLeft: '-102px' }}
                   onClick={() => {
                     window.scrollTo(0, 0)
                   }}
@@ -164,6 +165,7 @@ const ReserveCart = (props) => {
                 <a
                   type="button"
                   className="bg-primary text-white px-4 py-2 me-8 mb-5"
+                  style={{ marginLeft: '301px' }}
                   onClick={() => {
                     toggleStep(1)
                     window.scrollTo(0, 0)
@@ -181,10 +183,13 @@ const ReserveCart = (props) => {
           <>
             <ConfirmReserveList groups={groups} userID={user} />
             <div className="d-flex justify-content-end mb-4">
-              <div className="d-flex justify-content-around w-75">
+              <div
+                className="d-flex justify-content-around w-75"
+                style={{ marginRight: '163px' }}
+              >
                 <a
                   type="button"
-                  className="bg-info text-white px-4 py-2 mt-4 me-8"
+                  className="bg-info text-white px-4 py-2 my-6"
                   onClick={() => {
                     toggleStep(-1)
                     window.scrollTo(0, 0)
@@ -194,7 +199,7 @@ const ReserveCart = (props) => {
                 </a>
                 <a
                   type="button"
-                  className="bg-primary text-white px-4 py-2 me-5 mt-4"
+                  className="bg-primary text-white px-4 py-2 my-6"
                   onClick={() => {
                     SubmitList()
                     Swal.fire({
