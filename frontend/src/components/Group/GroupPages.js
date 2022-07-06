@@ -89,9 +89,12 @@ function GroupPages() {
           data-aos-duration="1500"
         />
       </div>
+      <div className="container">
+        <h3 className=" titleH3 ps-4 mt-8">所有開團</h3>
+      </div>
       {/* 商品頁 */}
-      <div className="mt-5 ">
-        <div className="container d-flex mt-6 justify-content-center flex-wrap">
+      <div className="mt-5">
+        <div className="container d-flex justify-content-center flex-wrap">
           {groups.map((v, i) => {
             console.log('目標人數', v.goal_num)
             console.log('現在人數', Math.round((v.now_num / v.goal_num) * 100))
@@ -99,7 +102,7 @@ function GroupPages() {
             console.log(percent)
 
             return (
-              <div key={v.id} className="ms-5 mt-6">
+              <div key={v.id} className="ms-5 mb-6">
                 <Link to={`/groupDetail/${v.id}`}>
                   <div className="little-card shadow-sm bg-white rounded main-hover">
                     <img

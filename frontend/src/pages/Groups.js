@@ -6,6 +6,7 @@ import FamousGroups from '../components/Group/FamousGroups'
 import Recommend from '../components/Group/Recommend'
 import GroupPages from '../components/Group/GroupPages'
 import Carousel from 'react-bootstrap/Carousel'
+import { Link } from 'react-router-dom'
 
 function Groups() {
   return (
@@ -13,19 +14,12 @@ function Groups() {
       {/* 輪播banner */}
       <Carousel className="mb-5">
         <Carousel.Item>
-          <img className="d-block w-100" src={banner01} alt="First slide" />
-          {/* <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption> */}
+          <Link to="/login">
+            <img className="d-block w-100" src={banner01} alt="First slide" />
+          </Link>
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src={banner02} alt="Second slide" />
-
-          {/* <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src={banner04} alt="Third slide" />
@@ -37,7 +31,7 @@ function Groups() {
         <FamousGroups />
       </div>
       {/* 開團頁面*/}
-      <div className="container-fluid mb-6">
+      <div className="container-fluid mb-6 groups">
         <GroupPages />
       </div>
       {/* 為你推薦 */}
