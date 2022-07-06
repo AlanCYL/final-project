@@ -125,7 +125,7 @@ function PayList(props) {
             <div className="p-4" style={{ backgroundColor: '#FFE7A9' }}>
               <div className="d-flex justify-content-between align-items-center border-bottom border-dark my-4 pb-4">
                 <h6>商品金額：</h6>
-                <h6>NT${data.price}</h6>
+                <h6 className="fw-normal">NT${data.price}</h6>
               </div>
 
               <div className="d-flex mb-2">
@@ -134,7 +134,7 @@ function PayList(props) {
                   src={require('../../../image/shoppingCart/sale.png')}
                   alt=""
                 />
-                <h6 className="ms-1">折價卷</h6>
+                <h6 className="ms-1 fw-normal">折價卷</h6>
               </div>
 
               <div className="mb-3">
