@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2022 年 07 月 06 日 17:34
+-- 產生時間： 2022 年 07 月 06 日 18:16
 -- 伺服器版本： 5.7.34
 -- PHP 版本： 8.0.8
 
@@ -660,7 +660,7 @@ INSERT INTO `shop` (`id`, `name`, `account`, `password`, `phone`, `address`, `de
 (12, '漢來海港', 'Harbour@test.com', '123456', '07-412-8068', '338桃園市蘆竹區南崁路一段112號6樓', '1995年漢來美食在南台灣高雄隆重誕生，\n擁有專業的廚師與服務團隊、深厚的國際\n飯店及美食集團經營管理，堅持在地與優\n質進口食材，提供多元美食料理，以及最\n佳品質的專業服務。', '/shopImg/Harbour.jpg', '/shopBanner/Harbour.jpg'),
 (13, '尼尼義大利餐廳', 'NINI@test.com', '123456', '03-222-3271', '桃園市蘆竹區南崁路一段112號', 'NINI《NATURAL自然、INITIAL獨創、NEAT純淨、IMPRESSIVE感動》我們相信用好的食材與料理方式，就能對自我和環境產生正向的改變；透過好的用餐環境，讓顧客們和我們一樣愛上這樣的生活方式。', '/shopImg/NINI.jpg', '/shopBanner/NINI.jpg'),
 (14, '王品牛排', 'wowprime@test.com', '123456', '03-356-1887', '330桃園市桃園區同德五街69號3F', '台灣經典牛排，最多華人肯定牛排餐廳，\r\n一頭牛，僅供6客王品牛小排，\r\n新鮮蔬果與特殊佐料醃浸2天2夜，\r\n經歷250℃高溫，慢火烘烤1.5小時，\r\n完美展現經典牛排的香嫩風華', '/shopImg/Wowprime.jpg', '/shopBanner/Wowprime.jpg'),
-(15, '貳樓', '2floor@test.com', '123456', '02-2361-0861', '台北市中正區北平西路3號2樓', '貳樓就想帶給顧客最純粹的『家的感覺』，裡面有我們希望營造的溫暖自在氛圍以及用心、創意的新美式料理。\\r\\n在這裡，用料理分享愛、用愛創造人情味', '/shopImg/2floor.jpg', '/shopBanner/2floor.jpg');
+(15, '貳樓', '2floor@test.com', '123456', '02-2361-0861', '台北市中正區北平西路3號2樓', '貳樓就想帶給顧客最純粹的『家的感覺』，裡面有我們希望營造的溫暖自在氛圍以及用心、創意的新美式料理。在這裡，用料理分享愛、用愛創造人情味', '/shopImg/2floor.jpg', '/shopBanner/2floor.jpg');
 
 -- --------------------------------------------------------
 
@@ -679,9 +679,7 @@ CREATE TABLE `shoppingcart` (
 --
 
 INSERT INTO `shoppingcart` (`id`, `user_id`, `group_id`) VALUES
-(3, 2, 1),
-(6, 1, 54),
-(7, 1, 37);
+(3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -998,7 +996,7 @@ ALTER TABLE `shop`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shoppingcart`
 --
 ALTER TABLE `shoppingcart`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `shop_and_type`
