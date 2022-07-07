@@ -98,13 +98,13 @@ function GroupQuestion() {
           </Card>
           <Card style={{ border: 'none' }}>
             <Card.Header className="bg-white border-bottom-0">
-              <CustomToggle eventKey="2">
+              <CustomToggle eventKey="3">
                 <AiOutlineNotification className="ms-3 " />
 
                 <span className="ms-3 p-2">若會員忘記密碼怎麼辦？</span>
               </CustomToggle>
             </Card.Header>
-            <Accordion.Collapse eventKey="2">
+            <Accordion.Collapse eventKey="3">
               <Card.Body
                 className="bg-secondary rounded mt-2"
                 style={{ marginLeft: '70px' }}
