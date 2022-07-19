@@ -23,10 +23,7 @@ function Home() {
           <Intro />
         </div>
         <div>
-          <h2
-            className="text-center mt-8 ms-5"
-          
-          >
+          <h2 className="text-center mt-8 ms-5">
             <span>Unii 友你</span>為一揪團用餐平台
           </h2>
         </div>
